@@ -1,0 +1,1 @@
+// export const vlibras = new window.VLibras.Widget('http://localhost:8080/app')

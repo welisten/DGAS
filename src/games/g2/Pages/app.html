@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo 3</title>
+    <!-- phaser -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@v3.80.1/dist/phaser.min.js"></script>
+    <!-- font-awesome - 6.5.2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- JS -->
+    <script type="module" src="../Constants/gameData.js"></script>
+    <script type="module" src="../JavaScript/pre.js"></script>
+    <script src="../JavaScript/vlBeauty.js"></script>
+    <!-- <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script> -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="../Style/game2.css">
+    <link rel="stylesheet" href="../Style/preload.css">
+    <link rel="stylesheet" href="./../../../style/mediaQuery.css">
+    <style>
+                                                /* resolver aqui */
+        .access{
+            position: relative!important;
+            height: 100%;
+            width: 100%;
+        }
+        div[vw]{
+            position: absolute !important;
+            top: 0%!important;
+            right: 0%!important;
+            max-width: 100% !important;
+            width: 100%;
+            transform: translateY(0)!important;
+            transition: none !important;
+            z-index: 1000!important;
+        } 
+        div[vw] [vw-plugin-wrapper].active{
+            width: 100%!important;
+            height: 100%!important;
+            top: 0!important;
+            right: 0!important;
+            transform: translate(0%, 0%)!important;
+
+        } 
+        .vpw-header-btn-close{
+            background-color: red!important;
+        }
+        [vp] .vpw-box {
+            visibility: hidden;
+            pointer-events: none;
+
+            & .vpw-header-btn-close{
+                visibility: visible;
+                pointer-events: all;
+            }
+        }
+        [vp-change-avatar], [vp-additional-options] {
+            display: none!important;
+        }
+        [vp] [vp-controls].vpw-controls.vpw-selectText{
+            background-color: transparent !important;
+            visibility: visible;
+            pointer-events: all;
+        }
+        .vpw-selectTextLabel{
+            visibility: visible;
+            color: black!important;
+        }
+
+        [vp] [vp-rate-box].vp-enabled {
+            visibility: hidden !important;
+            pointer-events: none;
+        }
+
+        .vp-rate-box-header{
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .vp-rate-box-content{
+            visibility: hidden;
+            pointer-events: none;   
+        }
+        
+        .vpw-controls
+        {
+            visibility: hidden;
+            pointer-events: none;
+        }
+        /* .vpw-controls-subtitles.actived-subtitle{
+            visibility: visible;
+            pointer-events: all;
+        } */
+    </style>
+</head>
+<body>
+    <header><nav><button><a href="../../../index.html">Home</a></button></nav></header>
+    <main class="container">
+        <div id="logoContainer">
+            <div class="logo">
+                <img src="../Assets/imgs/general/char1.png" alt="logo" id="char_1" style="z-index: 2;">
+                <img src="../Assets/imgs/general/bg_ring.png" alt="background" id="bg_ring" style="z-index: 1;">
+           </div>
+        </div>
+        <div id="popUpMessage"><div class="popupText active"><p></p></div></div>
+        <div id="game_Container" class="inactive"> 
+            <div class="access" style="display: none;">
+                <div vw class="enabled" style="margin: 0!important; height: 100%!important;"">
+                    <div vw-access-button class="active" style="position: relative;"></div>
+                    <div vw-plugin-wrapper>
+                      <div class="vw-plugin-top-wrapper"></div>
+                    </div>
+                </div>      
+                <div class="accessible_text">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="gameControls container">
+            <button class="btn controls" id="muteBtn"><i class="fa-solid fa-volume-high"></i></button>
+            <button class="btn controls" id="lightBtn"><i class="fa-regular fa-sun"></i></button>
+        </div>
+    </main>
+    <footer></footer>
+    <script>
+        new window.VLibras.Widget('http://localhost:9999/app');
+    </script>
+</body>
+</html>

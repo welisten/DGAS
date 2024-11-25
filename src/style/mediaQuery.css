@@ -1,0 +1,16 @@
+@media (max-width: 1600px){
+    body{
+        & header{
+            height: 9vh;
+            & nav{
+                height: 9vh;
+            }
+        }
+        & main{
+            top: 9vh;
+        }
+        & footer{
+            height: 4vh;
+        }
+    }
+}

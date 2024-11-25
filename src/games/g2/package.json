@@ -1,0 +1,13 @@
+{
+  "name": "Jogo_2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js -c-1",
+    "dev": "nodemon index.js -c-1"
+  },
+  "keywords": [],
+  "author": "Wesley Welisten Rocha",
+  "license": "ISC"
+}

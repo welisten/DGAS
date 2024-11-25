@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desenvolvendo Guapi</title>
+    <!-- font-awesome - 6.5.2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- textFit -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/textfit/2.4.0/textFit.min.js"></script>
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/mediaQuery.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <button class="logoBtn" id="nav_logoBtn" title="logotipo">
+                <img src="./assets/DG_logo.png" alt="logo DG">
+            </button>
+            <div id="navbar"><div class="nb_group nb_group1">
+                    <a href="">projeto</a>
+                    <a href="">fotos</a>
+                    <a href="">depoimentos</a>
+                </div><div class="nb_group nb_group2">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                    <a href="">contatos</a>
+                    <a href="">equipe</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+        <div id="background">
+            <div class="sphere s1"><div class="sd1"></div><div class="sd2"></div><div class="sd3"></div></div>
+            <div class="sphere s2"><div class="sd1"></div><div class="sd2"></div><div class="sd3"></div></div>
+        </div>
+        <div id="background_img">
+            <img src="./assets/ddd_main1.png" alt="dedo de Deus">
+
+        </div>
+        <section id="theProject">
+            <h1 class="tp_title">Desenvolvendo Guapimirim: Através dos sentidos</h1>
+            <div class="tp_textArea">
+                <h2>O projeto</h2>
+                <p class="tp_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium nisi consequatur nam possimus placeat, ea incidunt vero quasi tempore itaque deserunt distinctio aliquam excepturi laborum sunt perferendis, similique corporis rem.
+                    Amet recusandae vero ducimus perspiciatis pariatur totam labore, perferendis ea optio soluta temporibus. Architecto, iste sapiente. Eos iste incidunt deserunt assumenda exercitationem. Nihil consequatur aspernatur officia sunt nisi eum quasi?
+                    Earum assumenda dolorum excepturi numquam ipsum, ut illo consequuntur doloribus molestias voluptatum perspiciatis nesciunt, maiores itaque quasi cumque at maxime veniam odio dolorem autem illum inventore. Cumque illo velit laborum.
+                    Odit. 
+                </p>    
+        </section>
+        <section id="games">
+            <h2>Os protótipos</h2>
+            <div class="gamesSection">
+                <button class="gs_controlBtn p_btn left"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="container gamesContainer">
+                    <button class="gameBtn active" id="game1El"><a href="./games/g1/Pages/app.html" >Jogo 1</a></button>
+                    <button class="gameBtn right" id="game2El"><a href="./games/g2/Pages/app.html" >Jogo 2</a></button>
+                    <button class="gameBtn right" id="game3El"><a href="./games/g3/public/app.html">Jogo 3</a></button>
+                    <button class="gameBtn right" id="game4El"><a href="./games/g4/Pages/app.html">Jogo 4</a></button>
+                    <button class="gameBtn left" id="game5El"><a href="./games/g5/src/app.html"   >Jogo 5</a></button>
+                </div>
+                <button class="gs_controlBtn p_btn right"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </section>
+        <section id="photos">
+            <h2>Fotos</h2>
+            <h3 class="h3_left">Desenvolvendo Experiências...</h3>
+            <h3 class="h3_right">...Marcando Histórias</h3>
+            <div class="polaroidsColumn left">
+                <div class="polaroid"><div class="pola_photo"></div></div>
+                <div class="polaroid"><div class="pola_photo"></div></div>
+                <div class="polaroid"><div class="pola_photo"></div></div>
+            </div>
+            <div class="projectPhotos_container container" id="projectPhotos_container">
+                <div class="photoScreen container">
+                    <button class="gs_controlBtn directionBtn left"><i class="fa-solid fa-chevron-left"></i></button>
+                    <img src="./assets/photos/1.jpg" alt="">
+                    <button class="gs_controlBtn directionBtn right"><i class="fa-solid fa-chevron-right"></i></button>
+                    <button class="closeBtn"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="galery">
+                    <div class="polaroid pola_main">
+                        <div class="pola_photo">
+                            <img src="./assets/photos/1.jpg" alt="">
+                        </div>
+                        <p class="photo_desc">Lucas Silva testando os jogos <br><br>10/11/24</p> 
+                    </div>
+                    <div class="polaroid pola_main">
+                        <div class="pola_photo">
+                            <img src="./assets/photos/2.jpg" alt="">
+                        </div>
+                        <p class="photo_desc">Inicio do periodo de desenvolvimento <br><br>02/05/24</p> 
+                    </div>
+                    <div class="polaroid pola_main">
+                        <div class="pola_photo">
+                            <img src="./assets/photos/3.jpg" alt="">
+                        </div>
+                        <p class="photo_desc">Primeira reunião <br><br>02/03/24</p> 
+                    </div>
+                    <div class="polaroid pola_main">
+                        <div class="pola_photo">
+                            <img src="./assets/photos/4.jpg" alt="">
+                        </div>
+                        <p class="photo_desc">Sara praticando sinais na plataforma <br><br>26/09/24</p> 
+                    </div>
+                    <div class="polaroid pola_main">
+                        <div class="pola_photo">
+                            <img src="./assets/photos/4.jpg" alt="">
+                        </div>
+                        <p class="photo_desc">Sara praticando sinais na plataforma <br><br>26/09/24</p> 
+                    </div>
+                    <div class="polaroid pola_main">
+                        <div class="pola_photo">
+                            <img src="./assets/photos/4.jpg" alt="">
+                        </div>
+                        <p class="photo_desc">Sara praticando sinais na plataforma <br><br>26/09/24</p> 
+                    </div>
+                    <div class="polaroid pola_main">
+                        <div class="pola_photo">
+                            <img src="./assets/photos/4.jpg" alt="">
+                        </div>
+                        <p class="photo_desc">Sara praticando sinais na plataforma <br><br>26/09/24</p> 
+                    </div>
+                    <div class="polaroid pola_main">
+                        <div class="pola_photo">
+                            <img src="./assets/photos/4.jpg" alt="">
+                        </div>
+                        <p class="photo_desc">Sara praticando sinais na plataforma <br><br>26/09/24</p> 
+                    </div>
+                </div>
+                <div class="custom-scrollbar"><div class="scrollbarThumb"></div></div>
+            </div>
+            <div class="polaroidsColumn right">
+                <div class="polaroid"><div class="pola_photo"></div></div>
+                <div class="polaroid"><div class="pola_photo"></div></div>
+                <div class="polaroid"><div class="pola_photo"></div></div>
+            </div>
+            <img src="./assets/backgrounds/ball_1.png" alt="background" class="photos_bg" id="photos_bg">
+        </section>
+    </main>
+    <footer></footer>
+    <script src="./javascript/plataform.js"></script>
+
+</body>
+</html>

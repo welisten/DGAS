@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tesouros Históricos</title>
+    <script type="module" src="./script.js"></script>
+    <!-- jquery-3.6.0 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- FitText.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FitText.js/1.2.0/jquery.fittext.min.js"></script>
+    <!-- font-awesome - 6.5.2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="./Style/game3.css">
+    <link rel="stylesheet" href="./../../../style/mediaQuery.css">
+    <!-- phaser -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@v3.80.1/dist/phaser.min.js"></script>
+    <!-- Vlibras -->
+     <script src="./js/librasBeauty.js"></script>
+    <!-- <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script> -->
+
+    <style>
+        .gameAccessibleContainer{
+            position: relative!important;
+            border: 1px solid var(--blue-baby)!important;
+            border-radius: 15px !important;
+            transition: width 1s ease, height 1s ease, opacity .95s ease !important;
+        }
+        div[vw]{
+            position: absolute;
+            top: 0%!important;
+            right: 0%!important;
+            max-width: 100% !important;
+            width: 100%;
+            min-height: 4vh;
+            min-width: 4vh;
+            transform: translateY(0)!important;
+            z-index: 10 !important;
+            transition: none !important;
+        } 
+        [vw] [vw-plugin-wrapper].active{
+            width: 100%!important;
+            height: 100% !important;
+            top: 0!important;
+            right: 0!important;
+            transform: translate(0%, 0%)!important;
+
+        } 
+        .vpw-header-btn-close{
+            background-color: red!important;
+        }
+        .vpw-controls-fullscreen{
+            display: none !important;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav><button><a href="./../../../index.html">Home</a></button></nav>
+    </header>
+    <main>
+        <div id="popUp">
+            <p class="popupText"></p>
+            <button class="popup_btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div id="toTextReader" class="toReader instructions" >
+            <p class="textToReader" aria-live="assertive"></p>
+        </div>
+        <div id="game_Container" class="mainContainer">
+            <section id="introFormContainer"></section> <!--Pq esse elemento não é da classe maincontainer ?-->
+            <section id="gameControls" tabindex="19" aria-label="opções">
+                <button class="controlBtn mute_btn" id="mute" title="Som do jogo" tabindex="20" aria-label="alternar som">
+                    <i class="fa-solid fa-volume-high" id="mute_icon"></i>
+                </button>
+                <button class="controlBtn libras_btn" id=""  title="Linguagem de sinais" tabindex="21" aria-label="libras">
+                    <i class="fa-solid fa-hands"></i>
+                </button>
+                <button class="controlBtn screenReader_btn" id="" title="Leitor de tela" tabindex="22" aria-label="leitor de tela">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+                <button class="controlBtn lightMode_btn active" id="lightMode" title="Modo de Iluminação" tabindex="23" aria-label="alternar iluminação">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+            </section>
+            <div id="horizontalRuler" class="ruler horizontalRuler">
+                <div class="identifier"><span>A</span></div>
+                <div class="identifier"><span>B</span></div>
+                <div class="identifier"><span>C</span></div>
+                <div class="identifier"><span>D</span></div>
+            </div>
+            <div id="verticalRuler" class="ruler verticalRuler">
+                <div class="identifier"><span>1</span></div>
+                <div class="identifier"><span>2</span></div>
+                <div class="identifier"><span>3</span></div>
+                <div class="identifier"><span>4</span></div>
+            </div>
+            <section id="gameBoard" class="mainContainer"></section>
+            <section id="gameBoard_aside">
+                <div id="gameDisplay"></div>
+                <div class="gameAccessibleContainer" id="vLibras_container">
+                    <div vw class="enabled" style="margin: 0!important; height: 100%!important; display: none !important;"">
+                        <div vw-access-button class="active" style="position: relative;"></div>
+                        <div vw-plugin-wrapper>
+                          <div class="vw-plugin-top-wrapper"></div>
+                        </div>
+                    </div>      
+                    <div class="accessible_text">
+                        
+                    </div>
+                </div>
+
+            </section>
+        </section>
+    </main>
+    <footer></footer>
+    <script>
+        new window.VLibras.Widget('http://localhost:9999/app')
+
+    </script>
+</body>
+</html>

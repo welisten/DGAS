@@ -1,0 +1,79 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --bg-dark--: #000000;
+}
+
+#loading{
+    position: relative;
+    border-radius: 50%px;
+
+    & img{
+        display: none;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+    & .leaves{
+        z-index: 3;
+    }
+    & .backgroundMountain{
+        z-index: 3;
+        bottom: 3%;
+    }
+    & .foreground{
+        border-radius: 13px;
+        display: none;
+        transform: scale(0.983, 0.97);
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        object-position: bottom;
+        width: calc(100% + 20px);
+    }
+
+    & .m_l{
+        height: 40%;
+        width: 40%;
+        top: 7px;
+        left: -39px;
+        z-index: 10;
+
+    }
+    & .m_r{
+        height: 30%;
+        width: 30%;
+        right: -56px;
+        top: 23px;
+        z-index: 10;
+
+    }
+    & .logo{
+        height: 49%;
+        width: 36%;
+        top: 49%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    & .frog{
+        height: 6%;
+        width: 6%;
+        transform: translate(-50%, -50%);
+        top: 45.8%;
+        left: 11%;
+        z-index: 4;
+    }
+}
+
+
+#loading.active img{
+    display: flex;
+}
+
+canvas{
+    position: relative;
+    z-index: 2;
+}
