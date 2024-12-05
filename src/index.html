@@ -302,12 +302,49 @@
             <button class="gs_controlBtn directionBtn right"><i class="fa-solid fa-chevron-right"></i></button>
 
         </section>
-        <section id="contact">
-
+        <section id="contact" class="container">
+            <div class="c_imgBG">
+                <img src="./assets/backgrounds/apaBG.jpg" alt="apa de guapimirim" class="">
+            </div>
+            <h2>Fale conosco !</h2>
+            <form action="#" class="container">
+                <div class="clm">
+                    <div class="container cn_container c_containers">
+                        <div class="fild_wrapper" fw_name>
+                            <label for="name">Nome<span class="colon">:</span></label>
+                            <input type="text" id="contact_name" class="contact_name c_input" name="name" placeholder="Digite seu nome" wrapper="fw_name">
+                        </div>
+                        <div class="fild_wrapper" fw_cell>
+                            <label for="cell">Celular<span class="colon">:</span></label>
+                            <input type="tel" id="contact_cell" class="contact_cell c_input" name="cell" placeholder="(xx) xxxxx-xxxx" wrapper="fw_cell">
+                        </div>
+                    </div>
+                    <div class="container ce_container c_containers">
+                        <div class="fild_wrapper" fw_email>
+                            <label for="email">Email<span class="colon">:</span></label>
+                            <input type="email" name="email" id="contact_email" placeholder="exemplo@paraseguir.com" class=" c_input" wrapper="fw_email">
+                        </div>
+                        <div class="fild_wrapper" fw_subject>
+                            <label for="subject">Assunto<span class="colon">:</span></label>
+                            <input type="text" id="contact_subject" class="contact_subject c_input" placeholder="Ideias para o DGAS" name="subject" wrapper="fw_subject">
+                        </div>
+                    </div>
+                </div>
+                <div class="clm">
+                    <div class="container cm_container c_containers">
+                        <div class="fild_wrapper" fw_message>
+                            <label for="message">Mensagem<span class="colon">:</span></label>
+                            <textarea name="message" id="contact_message" wrapper="fw_message"></textarea>
+                            <button class="formSub" id="formSub">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </section>
     </main>
-    <footer></footer>
+    <footer>
+        
+    </footer>
     <script src="./javascript/plataform.js"></script>
-
 </body>
 </html>
