@@ -14,30 +14,48 @@
 
 :root {
   /* green theme */
-  --green-border--: #228609; /* Jogo 1 color */
-  --green-deep--: #01261c;
-  --green-medium--: #025930;
-  --green-light--: #038c33;
-  --green-light-t5-: #038c3380;
-  --yellowG-light: #f2e205;
-  --yellowG-medium--: #f2cb05;
+  --main-light--: #228609;
+  --main-deep--: #01261c;
+  --main-dark--: #025930;
+  --main-soft-light: #038c33;
+  --main-soft-light-t5: #038c3380;
+  --main-p-bg: #008f00ad;
+  --main-g-bg: #00ca00;
+  --main-t-shadow1: #d8f7ca;
+  --main-t-shadow2: #68e32e;
+  --main-t-shadow3: #099f32;
+  --main-t-shadow4: #066529;
+  --main-t-shadow5: #063d17;
+  --main-tm-deep: #1e5004;
+  --bg--: #303030; 
+  /* --bg--: #FFF;  */
+
+  --s1--: #219e08;
+  --s2--: #db3434;
+  --s3--: #f2e204;
+
+
+  --sphere-01--: #f2e205;
 
   --yellow-border--: #f2dd04; /* Jogo 2 color */
   --lightblue-form-bg--: #3498db; /* Jogo 3 color */
   --purple-border--: #ca09e4; /* Jogo 5 color */
+  --red-border--: #db3434; /* Jogo 5 color */
 
-  --bg-dark--: #303030; /* Jogo 2 dark_BG*/
-  --bg-light--: #ddd; /* Jogo 2 dark_BG*/
-  --bg-white--: #fff; /* Jogo 2 dark_BG*/
-  --red-alert--: #ec0404; /* closeBtns */
-  --gray-dark--: #535353; /* point's letter */
-  --gray-dark-letter-: #161616; /* info's letter */
-  --white-t7--: #ffffffb3; /* intern containers background */
-  --white-t3--: #ffffff4d; /* spot background */
-  --white-t4--: #ffffff66; /* intern containers background */
-  --black-t3--: #0000004d; /* info's linearGradient */
-  --black-t5--: #00000080; /* shadow */
-  --black-t4--: #00000066; /* shadow */
+  --bg-dark--: #303030; 
+  --bg-light--: #ddd; 
+
+  --white--: #fff; 
+  --white-t3--: #ffffff4d; 
+  --white-t4--: #ffffff66; 
+  --black--: #000;
+
+  --letter--: #fff; 
+  --gray-dark-letter-: #161616;
+  --shadow--: #000;
+  --h3-color: #e3e3e3;
+
+  --red-alert--: #ec0404; 
 }
 
 html {
@@ -49,8 +67,7 @@ body {
   overflow-y: scroll;
   overflow-x: hidden;
   font-size: 1.6rem;
-  background-color: var(--bg-white--);
-  background-color: var(--bg-dark--);
+  background-color: var(--bg--);
   transition: all 1s ease;
   display: flex;
   flex-direction: column;
@@ -74,11 +91,11 @@ body {
     border-radius: 10px; 
     }
     ::-webkit-scrollbar-thumb {
-        background:var(--green-border--); 
+        background:var(--main-light--); 
     border-radius: 10px;
     }
     ::-webkit-scrollbar-thumb:hover {
-        background:var(--green-deep--); 
+        background:var(--main-deep--); 
     } */
 
   & header {
@@ -87,10 +104,11 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    background: var(--green-border--);
+    background: var(--main-light--);
     border-radius: 0 0 5px 5px;
-    filter: drop-shadow(2px 2px 4px #000000);
+    filter: drop-shadow(2px 2px 4px var(--shadow--));
     z-index: 10;
+    transition: all 1s ease;
 
     & nav {
       height: 12.5vh;
@@ -124,7 +142,7 @@ body {
           & a {
             display: inline-block;
             font-size: 3rem;
-            color: #ffffff;
+            color: var(--letter--);
             text-decoration: none;
             text-transform: capitalize;
             margin: 0 1%;
@@ -227,7 +245,8 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(16deg, transparent 20%, #008f00ad  70% 100%);
+      background: linear-gradient(16deg, transparent 20%, var(--main-p-bg)  70% 100%);
+      overflow: hidden;
 
 
       & .sphere {
@@ -239,23 +258,22 @@ body {
         font-size: 0;
         filter: blur(50px);
         animation: rotateBG 10s linear 0s infinite normal;
-        /* visibility: hidden; */
 
         & .sd1 {
           height: 100%;
           width: 50%;
-          background-color: #219e08;
+          background-color: var(--s1--);
           display: inline-block;
           border-radius: 125px 0 0px 125px;
-          box-shadow: -40px 0 100px 40px #219e0898;
+          box-shadow: -40px 0 100px 40px var(--s1--);
         }
         & .sd2 {
           height: 100%;
           width: 50%;
-          background-color: #038c33;
+          background-color: var(--s2--);
           display: inline-block;
           border-radius: 0 125px 125px 0;
-          box-shadow: 40px 0 100px 40px #038c3398;
+          box-shadow: 40px 0 100px 40px var(--s2--);
         }
         & .sd3 {
           position: absolute;
@@ -264,10 +282,10 @@ body {
           height: 53%;
           width: 53%;
           transform: rotate(45deg);
-          background-color: var(--yellowG-light);
+          background-color: var(--s3--);
           display: inline-block;
           border-radius: 0 0 125px;
-          box-shadow: 40px 40px 100px 40px #f2e20598;
+          box-shadow: 40px 40px 100px 40px var(--s3--);
         }
       }
     }
@@ -280,6 +298,7 @@ body {
       max-width: 100vw;
       z-index: -1;
 
+
       & img {
         position: relative;
         bottom: -2%;
@@ -289,6 +308,7 @@ body {
       }
     }
     & #background_img::after {
+
       content: "";
       position: absolute;
       bottom: calc(-9.5vh);
@@ -296,8 +316,7 @@ body {
       height: 10vh;
       width: 80vw;
       direction: rtl;
-      background: linear-gradient(270deg, var(--green-medium--) 90%, #ffffff00);
-      /* border: 4px solid green; */
+      background: linear-gradient(270deg, var(--main-dark--) 90%, #ffffff00);
     }
 
     & #theProject {
@@ -308,10 +327,10 @@ body {
 
       & .tp_title {
         font-size: 7rem;
-        color: white;
+        color: var(--letter--);
         margin: 3rem 3rem 2rem;
         width: 55%;
-        filter: drop-shadow(2px 2px 2px black);
+        filter: drop-shadow(2px 2px 2px var(--shadow--));
       }
 
       & .tp_textArea {
@@ -320,8 +339,8 @@ body {
         margin-left: 6rem;
         background: linear-gradient(
           90deg,
-          var(--green-light--),
-          var(--green-light-t5-) 20%,
+          var(--main-soft-light),
+          var(--main-soft-light-t5) 20%,
           rgba(255, 255, 255, 0) 65%
         );
         border-radius: 15px;
@@ -332,15 +351,15 @@ body {
         & h2 {
           text-transform: capitalize;
           font-size: 4rem;
-          color: #fefefe;
+          color:var(--letter--);
           margin-bottom: 2rem;
-          filter: drop-shadow(2px 2px 2px black);
+          filter: drop-shadow(2px 2px 2px var(--shadow--));
         }
         & .tp_text {
           font-size: 2rem;
           line-height: 2.9rem;
-          color: var(--green-deep--);
-          color: #eee;
+          color: var(--main-deep--);
+          color: var(--letter--);
 
         }
       }
@@ -354,13 +373,14 @@ body {
       align-items: center;
       justify-content: center;
 
+
       & h2 {
         position: absolute;
         text-transform: capitalize;
-        top: 0.5vh;
+        top: 1.5vh;
         font-size: 5rem;
-        color: white;
-        filter: drop-shadow(1px 1px 1px black);
+        color: var(--letter--);
+        filter: drop-shadow(1px 1px 1px var(--shadow--));
       }
       & .gamesSection {
         width: 100%;
@@ -376,7 +396,7 @@ body {
           border: 1px solid white;
           outline: none;
           background-color: var(--white-t4--);
-          filter: drop-shadow(2px 4px 6px black);
+          filter: drop-shadow(2px 4px 6px var(--shadow--));
 
           & i {
             font-size: 3rem;
@@ -405,7 +425,7 @@ body {
             transform: translate(-50%, -50%);
             top: 50%;
             left: 0;
-            filter: drop-shadow(2px 4px 6px black);
+            filter: drop-shadow(2px 4px 6px var(--shadow--) );
             border: none;
             margin: 0 2%;
             cursor: pointer;
@@ -420,7 +440,7 @@ body {
               font-weight: bold;
               text-decoration: none;
               filter: none;
-              color: white;
+              color: var(--letter--);
             }
           }
           & .gameBtn.active {
@@ -459,7 +479,7 @@ body {
       position: absolute;
       height: 100%;
       width: 100vw;
-      background: radial-gradient(circle, #00ca00 6%, transparent 72%);
+      background: radial-gradient(circle, var(--main-g-bg) 6%, transparent 72%);
       z-index: -2;
     }
     & #photos {
@@ -475,7 +495,7 @@ body {
         text-transform: capitalize;
         top: 0.6vh;
         font-size: 5rem;
-        color: white;
+        color: var(--letter--);
         z-index: 5;
         display: none;
       }
@@ -485,11 +505,10 @@ body {
         font-weight: 100;
         position: absolute;
         z-index: 3;
-        color: #676767;
+        color: var(--h3-color);
         & span {
           letter-spacing: 20px;
         }
-        /* color: var(--green-light--); */
       }
       & .h3_left {
         top: 1vh;
@@ -516,12 +535,11 @@ body {
           height: 40%;
           width: 80%;
           padding: 5% 6% 42%;
-          filter: drop-shadow(1px 2px 3px black);
+          filter: drop-shadow(1px 2px 3px var(--shadow--));
           overflow: hidden;
           background: linear-gradient(135deg, #edebeb, #dddcdc);
 
           & .pola_photo {
-            /* background-color:var(--bg-white--); */
             background-color: #f9f9f9;
             /* the size will be shaped by parent padding*/
             height: 100%;
@@ -563,7 +581,7 @@ body {
         width: 70vw;
         bottom: 5px;
         z-index: -1;
-        filter: drop-shadow(1px 1px 1px black);
+        filter: drop-shadow(1px 1px 1px var(--shadow--));
       }
 
       & .projectPhotos_container {
@@ -582,7 +600,7 @@ body {
           width: 75%;
           padding: 0 3vh;
           background-color: #00000094;
-          border: 1px solid var(--bg-white--);
+          border: 1px solid var(--white--);
           border-radius: 15px;
           z-index: 9;
           justify-content: space-between;
@@ -600,7 +618,7 @@ body {
             border: 1px solid white;
             outline: none;
             background-color: var(--white-t4--);
-            filter: drop-shadow(2px 4px 6px black);
+            filter: drop-shadow(2px 4px 6px var(--shadow--));
 
             & i {
               font-size: 3rem;
@@ -615,7 +633,7 @@ body {
             width: 3.5vh;
             border-radius: 50%;
             background-color: var(--red-alert--);
-            color: white;
+            color: var(--letter--);
             outline: none;
             border: 1px solid;
             font-size: 3rem;
@@ -641,7 +659,7 @@ body {
             height: 28rem;
             width: 60%;
             padding: 3% 3% 21%;
-            filter: drop-shadow(1px 2px 3px black);
+            filter: drop-shadow(1px 2px 3px var(--shadow--));
             overflow: hidden;
             background: linear-gradient(135deg, #edebeb, #dddcdc);
             transition: all 0.3s ease-in;
@@ -713,11 +731,12 @@ body {
           & .scrollbarThumb {
             width: 30px;
             height: 100%;
-            background-color: var(--green-medium--);
+            background-color: var(--main-dark--);
+            filter: drop-shadow(2px 2px 3px var(--main-g-bg)) drop-shadow(-2px -2px 3px var(--main-g-bg));
             z-index: 30;
           }
           & .scrollbarThumb:hover {
-            background-color: var(--green-border--);
+            background-color: var(--main-light--);
           }
         }
         & .custom-scrollbar::after {
@@ -750,8 +769,8 @@ body {
       background: linear-gradient(
         270deg,
         #ffffff00 0%,
-        var(--green-medium--) 10%,
-        var(--green-medium--) 90%,
+        var(--main-dark--) 10%,
+        var(--main-dark--) 90%,
         #ffffff00 100%
       );
     }
@@ -768,22 +787,25 @@ body {
         position: absolute;
         width: 68%;
         height: 66%;
-        background-color: #01261c;
+        background-color: var(--main-deep--);
         border-radius: 10px;
         top: 0px;
         left: 50%;
         transform: translateX(-50%);
         justify-content: center;
         align-items: center;
-        filter: drop-shadow(1px 2px 3px black);
+        filter: drop-shadow(1px 2px 3px var(--shadow--));
 
         & .neon_box {
           width: 93%;
           height: 85%;
-          background-color: var(--green-medium--); /* Tom final no centro */
+          background-color: var(--main-dark--); /* Tom final no centro */
           border-radius: 10px;
-          box-shadow: 0 0 5px #d8f7ca, 0 0 10px #68e32e, 0 0 15px #099f32,
-            0 0 20px #066529, 0 0 30px #063d17; /* Tom final no fim da transição */
+          box-shadow:  0 0 5px var(--main-t-shadow1),
+                       0 0 10px var(--main-t-shadow2),
+                       0 0 15px var(--main-t-shadow3),
+                       0 0 20px var(--main-t-shadow4),
+                       0 0 30px var(--main-t-shadow5); /* Tom final no fim da transição */
           transition: all 0.5s ease-in-out;
         }
 
@@ -807,9 +829,9 @@ body {
               transition: all 0.8s ease-out;
               position: absolute;
               padding: 20px;
-              background-color: var(--green-light--);
+              background-color: var(--main-light--);
               border-radius: 10px 10px 0 0;
-              color: white;
+              color: var(--letter--);
               width: calc(100% - 20px);
               height: calc(30% - 10px);
               bottom: 70%;
@@ -869,7 +891,7 @@ body {
               & .testimonial_text {
                 width: calc(100% - 10px);
                 font-size: 1.6rem;
-                color: #01261c;
+                color: var(--main-deep--);
               }
             }
           }
@@ -883,6 +905,7 @@ body {
             .t_context {
               opacity: 0.8;
               font-weight: 100;
+              filter: drop-shadow(1px 1px 1px var(--shadow--));
             }
           }
         }
@@ -894,7 +917,7 @@ body {
         left: 50%;
         transform: translateX(-50%) rotateX(180deg);
         z-index: -1;
-        filter: drop-shadow(1px -1px 0.5px black);
+        filter: drop-shadow(1px -1px 0.5px var(--shadow--));
       }
     }
     & #team {
@@ -912,9 +935,8 @@ body {
         transform: translate(-50%, -50%);
         width: 80%;
         height: 90%;
-        background-color: var(--green-light-t5-);
-        background-color: #1e5004;
-        border: 1px solid var(--green-deep--);
+        background-color: var(--main-tm-deep);
+        border: 1px solid var(--main-deep--);
         border-radius: 15px;
         padding: 20px;
         align-items: center;
@@ -928,7 +950,7 @@ body {
 
         & .tc_c1 {
           width: 40%;
-          color: #fff;
+          color: var(--letter--);
           flex-direction: column;
           align-items: center;
           justify-content: space-between;
@@ -940,9 +962,9 @@ body {
             align-items: center;
             margin-bottom: 15px;
             padding: 10px;
-            background-color: var(--green-border--);
+            background-color: var(--main-light--);
             border-radius: 15px;
-            filter: drop-shadow(1px 1px 4px black);
+            filter: drop-shadow(1px 1px 4px var(--shadow--) );
 
             & .dev_img {
               height: 100%;
@@ -950,7 +972,7 @@ body {
               overflow: hidden;
               border: 1px solid #ffffff6e;
               border-radius: 50%;
-              filter: drop-shadow(1px 1px 3px black);
+              filter: drop-shadow(1px 1px 3px var(--shadow--) );
 
               & img {
                 height: 100%;
@@ -968,7 +990,7 @@ body {
               & p {
                 font-size: 2.3rem;
                 padding: 5px;
-                filter: drop-shadow(1px 1px 1px black);
+                filter: drop-shadow(1px 1px 1px var(--shadow--) );
               }
             }
           }
@@ -976,9 +998,9 @@ body {
             height: calc(45%);
             width: 100%;
             text-align: end;
-            background-color: var(--green-border--);
+            background-color: var(--main-light--);
             border-radius: 15px;
-            filter: drop-shadow(1px 1px 3px black);
+            filter: drop-shadow(1px 1px 3px var(--shadow--) );
             padding-bottom: 10px;
             margin-bottom: 15px;
 
@@ -988,7 +1010,7 @@ body {
               font-weight: 600;
               line-height: 3.3rem;
               padding: 10px;
-              filter: drop-shadow(1px 1px 1px black);
+              filter: drop-shadow(1px 1px 1px var(--shadow--) );
             }
 
             & .q_container {
@@ -1014,7 +1036,7 @@ body {
                     left: 50%;
                     transform: translate(-50%, -50%);
                     padding: 5% 0;
-                    filter: drop-shadow(1px 1px 1px black);
+                    filter: drop-shadow(1px 1px 1px var(--shadow--) );
                   }
                 }
                 & .q_label {
@@ -1031,9 +1053,9 @@ body {
             width: 100%;
             overflow: hidden;
             text-align: center;
-            background-color: var(--green-border--);
+            background-color: var(--main-light--);
             border-radius: 15px;
-            filter: drop-shadow(1px 1px 3px black);
+            filter: drop-shadow(1px 1px 3px var(--shadow--) );
             padding-bottom: 5px;
 
             & .l_container {
@@ -1055,7 +1077,7 @@ body {
                 justify-content: center;
 
                 & i {
-                  filter: drop-shadow(1px 1px 1px black);
+                  filter: drop-shadow(1px 1px 1px var(--shadow--) );
                 }
               }
             }
@@ -1065,10 +1087,10 @@ body {
           width: 58%;
           height: calc(100% - 60px);
           padding: 30px;
-          background-color: #228609;
+          background-color: var(--main-light--);
           border-radius: 15px;
           color: #fff;
-          filter: drop-shadow(1px 1px 3px black);
+          filter: drop-shadow(1px 1px 3px var(--shadow--));
           margin-right: 10px;
 
           & .experience {
@@ -1081,7 +1103,7 @@ body {
               padding: 5px;
               font-size: 2rem;
               letter-spacing: 1px;
-              filter: drop-shadow(1px 1px 1px black);
+              filter: drop-shadow(1px 1px 1px var(--shadow--));
             }
           }
         }
@@ -1097,7 +1119,7 @@ body {
         border: 1px solid white;
         outline: none;
         background-color: var(--white-t4--);
-        filter: drop-shadow(2px 4px 6px black);
+        filter: drop-shadow(2px 4px 6px var(--shadow--) );
 
         & i {
           font-size: 3rem;
@@ -1114,7 +1136,7 @@ body {
       height: 81vh;
       width: 100%;
       margin-bottom: 8vh; /*pertence a ultima section do elemento main*/
-      color: #fff;
+      color: var(--letter--);
       flex-direction: column;
       justify-content: flex-start;
       align-items: flex-start;
@@ -1138,7 +1160,7 @@ body {
       & h2 {
         margin: 19vh 0 10px;
         font-size: 5rem;
-        filter: drop-shadow(1px 1px 1px black);
+        filter: drop-shadow(1px 1px 1px var(--shadow--));
       }
 
       & form {
@@ -1166,7 +1188,7 @@ body {
                 top: 50%;
                 left: 1%;
                 font-size: 2.5rem;
-                color: var(--green-medium--);
+                color: var(--main-dark--);
                 transform: translate(-50%, -50%);
                 width: 10px;
                 padding-left: 10px;
@@ -1178,8 +1200,8 @@ body {
                 width: 95%;
                 border-radius: 8px;
                 border: none;
-                outline: #038c33;
-                filter: drop-shadow(1px 2px 3px black);
+                outline: var(--main-soft-light);
+                filter: drop-shadow(1px 2px 3px var(--shadow--));
                 padding-left: 10px;
                 transition: all 0.5s ease;
               }
@@ -1216,7 +1238,7 @@ body {
                 height: 70%;
                 width: 90%;
                 border-radius: 8px;
-                filter: drop-shadow(1px 2px 3px black);
+                filter: drop-shadow(1px 2px 3px var(--shadow--));
                 resize: none;
                 padding: 10px;
                 color: #333;
@@ -1232,13 +1254,13 @@ body {
                 right: 10%;
                 padding: 8px 30px;
                 font-size: 2rem;
-                color: #fff;
-                background-color: var(--green-border--);
+                color: var(--letter--);
+                background-color: var(--main-light--);
                 border: none;
                 border-radius: 10px;
                 outline: none;
                 transition: all 0.7s ease;
-                filter: drop-shadow(1px 1px 2px black);
+                filter: drop-shadow(1px 1px 2px var(--shadow--));
                 margin: 10px;
               }
               & button.formSub:hover {
@@ -1259,7 +1281,7 @@ body {
       transform: translate(-50%, -50%);
       height: 87.5vh;
       width: 100vw;
-      background: linear-gradient(180deg, #303030 0% 5%, transparent 60%);
+      background: linear-gradient(180deg, var(--bg--) 0% 5%, transparent 60%);
       z-index: -1;
     }
   }
@@ -1268,9 +1290,10 @@ body {
     width: 100%;
     position: sticky;
     bottom: -20vh;
-    background: var(--green-medium--);
+    background: var(--main-dark--);
+    transition: all 1s ease;
     border-radius: 5px 5px 0 0;
-    filter: drop-shadow(-2px -2px 3px #000000);
+    filter: drop-shadow(-2px -2px 3px var(--shadow--));
     z-index: 50;
 
     & .f_relative_root {
@@ -1290,11 +1313,11 @@ body {
 
         & #pageDown {
           display: block;
-          background-color: var(--green-medium--);
+          background-color: var(--main-dark--);
           border-radius: 15px 15px 0 0;
           height: 100%;
           width: 100%;
-          color: white;
+          color: var(--letter--);
           font-size: 1.8rem;
           line-height: 2.8rem;
           border: none;
@@ -1318,7 +1341,7 @@ body {
           position: absolute;
           top: 10px;
           height: 13%;
-          filter: drop-shadow(2px 2px 2px black);
+          filter: drop-shadow(2px 2px 2px var(--shadow--) );
         }
         /* retirar depois */
         & .f_cl2 {
@@ -1328,7 +1351,7 @@ body {
           position: absolute;
           bottom: 10%;
           height: 15%;
-          filter: drop-shadow(2px 2px 2px black);
+          filter: drop-shadow(2px 2px 2px var(--shadow--) );
         }
         & .f_a1 {
           left: 10%;
@@ -1341,14 +1364,14 @@ body {
           bottom: 11%;
           left: 5%;
           height: 15%;
-          filter: drop-shadow(2px 2px 2px black);
+          filter: drop-shadow(2px 2px 2px var(--shadow--) );
         }
         & .f_c {
           position: absolute;
           bottom: 40%;
           right: 4%;
           height: 15%;
-          filter: drop-shadow(2px 2px 2px black);
+          filter: drop-shadow(2px 2px 2px var(--shadow--) );
         }
         & .f_l {
           position: absolute;
@@ -1373,7 +1396,7 @@ body {
 
           & .f_g {
             width: 3.3%;
-            filter: drop-shadow(2px 2px 2px black);
+            filter: drop-shadow(2px 2px 2px var(--shadow--) );
           }
         }
       }
@@ -1388,11 +1411,11 @@ body {
           height: 95%;
           width: 100%;
           border-radius: 15px;
-          filter: drop-shadow(2px 2px 2px black);
+          filter: drop-shadow(2px 2px 2px var(--shadow--) );
           position: relative;
           align-items: center;
           justify-content: space-around;
-          color: white;
+          color: var(--letter--);
           filter: none;
 
           & .container {
@@ -1401,13 +1424,13 @@ body {
             flex-direction: column;
             align-items: center;
             justify-content: flex-end;
-            color: white;
+            color: var(--letter--);
             margin: 0 20px;
             font-size: 2rem;
             list-style: none;
             & a {
               text-decoration: none;
-              color: white;
+              color: var(--letter--);
             }
 
             & a:hover {
@@ -1421,7 +1444,7 @@ body {
           padding: 5px 1%;
           background-color: #f2f2f2;
           border-radius: 15px;
-          filter: drop-shadow(2px 2px 2px black);
+          filter: drop-shadow(2px 2px 2px var(--shadow--) );
           justify-content: space-around;
           align-self: center;
 
@@ -1695,7 +1718,7 @@ body {
           border: 1px solid white;
           outline: none;
           background-color: var(--white-t4--);
-          filter: drop-shadow(2px 4px 6px black);
+          filter: drop-shadow(2px 4px 6px var(--shadow--) );
 
           & i {
             font-size: 3rem;
@@ -1726,18 +1749,6 @@ body {
             top: 0%;
           }
         }
-      }
-      & #contact::after {
-        content: "";
-        display: block;
-        position: absolute;
-        left: 50%;
-        top: 30%;
-        transform: translate(-50%, -50%);
-        height: 87.5vh;
-        width: 100vw;
-        background: linear-gradient(180deg, white 0% 5%, transparent 60%);
-        z-index: -1;
       }
     }
     & footer {

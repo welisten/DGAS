@@ -1,3 +1,4 @@
+import { palett } from "../constants/colors.js"
 let gameidx = 0
 
 let gameSectionBtns = document.querySelectorAll('.gameBtn')
@@ -5,8 +6,43 @@ let gsControls_prev = document.querySelector('.gs_controlBtn.left')
 let gsControls_next = document.querySelector('.gs_controlBtn.right')
 
 
+const root = document.documentElement
+let ph_bg, t_bg
+ph_bg = document.getElementById('photos_bg')
+t_bg = document.getElementById('testimonials_bg')
+
 gsControls_next.addEventListener('click', e => {
     gameidx >= 4 ? gameidx = 0 : gameidx++
+
+    root.style.setProperty('--main-light--', palett[`light_${gameidx + 1}`])
+    root.style.setProperty('--main-dark--', palett[`dark_${gameidx + 1}`])
+    root.style.setProperty('--main-deep--', palett[`deep_${gameidx + 1}`])
+    root.style.setProperty('--main-soft-light', palett[`soft_light_${gameidx + 1}`])
+    root.style.setProperty('--main-soft-light-t5', palett[`soft_light_t5_${gameidx + 1}`])
+    root.style.setProperty('--main-p-bg', palett[`p_bg_${gameidx + 1}`])
+    root.style.setProperty('--main-g-bg', palett[`g_bg_${gameidx + 1}`])
+
+    root.style.setProperty('--main-t-shadow1', palett[`t_shadow1_${gameidx + 1}`])
+    root.style.setProperty('--main-t-shadow2', palett[`t_shadow2_${gameidx + 1}`])
+    root.style.setProperty('--main-t-shadow3', palett[`t_shadow3_${gameidx + 1}`])
+    root.style.setProperty('--main-t-shadow4', palett[`t_shadow4_${gameidx + 1}`])
+    root.style.setProperty('--main-t-shadow5', palett[`t_shadow5_${gameidx + 1}`])
+    
+    root.style.setProperty('--main-t-shadow5', palett[`t_shadow5_${gameidx + 1}`])
+    root.style.setProperty('--main-t-shadow5', palett[`t_shadow5_${gameidx + 1}`])
+    root.style.setProperty('--main-t-shadow5', palett[`t_shadow5_${gameidx + 1}`])
+    
+    root.style.setProperty('--main-tm-deep', palett[`tm_deep_${gameidx + 1}`])
+    
+    root.style.setProperty('--s1--', palett[`s1_${gameidx + 1}`])
+    root.style.setProperty('--s2--', palett[`s2_${gameidx + 1}`])
+    root.style.setProperty('--s3--', palett[`s3_${gameidx + 1}`])
+    
+    ph_bg.setAttribute('src', `../assets/backgrounds/balls_${gameidx + 1}.png`)
+    t_bg.setAttribute('src', `../assets/backgrounds/balls_${gameidx + 1}.png`)
+
+
+
     gameSectionBtns.forEach((el, i) => {
         if(i === gameidx - 1 ){
             el.className = 'gameBtn left'
@@ -24,8 +60,32 @@ gsControls_next.addEventListener('click', e => {
     })
 })
 gsControls_prev.addEventListener('click', e => {
-    gameidx <= 0 ? gameidx = 4 : gameidx --
-    console.log(gameidx)
+    gameidx <= 0 ? gameidx = 4 : gameidx--
+    root.style.setProperty('--main-light--', palett[`light_${gameidx + 1}`])
+    root.style.setProperty('--main-dark--', palett[`dark_${gameidx + 1}`])
+    root.style.setProperty('--main-deep--', palett[`deep_${gameidx + 1}`])
+    root.style.setProperty('--main-soft-light', palett[`soft_light_${gameidx + 1}`])
+    root.style.setProperty('--main-soft-light-t5', palett[`soft_light_t5_${gameidx + 1}`])
+    root.style.setProperty('--main-p-bg', palett[`p_bg_${gameidx + 1}`])
+    root.style.setProperty('--main-g-bg', palett[`g_bg_${gameidx + 1}`])
+
+    root.style.setProperty('--main-t-shadow1', palett[`t_shadow1_${gameidx + 1}`])
+    root.style.setProperty('--main-t-shadow2', palett[`t_shadow2_${gameidx + 1}`])
+    root.style.setProperty('--main-t-shadow3', palett[`t_shadow3_${gameidx + 1}`])
+    root.style.setProperty('--main-t-shadow4', palett[`t_shadow4_${gameidx + 1}`])
+    root.style.setProperty('--main-t-shadow5', palett[`t_shadow5_${gameidx + 1}`])
+    
+    root.style.setProperty('--main-t-shadow5', palett[`t_shadow5_${gameidx + 1}`])
+    root.style.setProperty('--main-t-shadow5', palett[`t_shadow5_${gameidx + 1}`])
+    root.style.setProperty('--main-t-shadow5', palett[`t_shadow5_${gameidx + 1}`])
+    
+    root.style.setProperty('--main-tm-deep', palett[`tm_deep_${gameidx + 1}`])
+    
+    root.style.setProperty('--s1--', palett[`s1_${gameidx + 1}`])
+    root.style.setProperty('--s2--', palett[`s2_${gameidx + 1}`])
+    root.style.setProperty('--s3--', palett[`s3_${gameidx + 1}`])
+
+
     gameSectionBtns.forEach((el, i) => {
         if(i === gameidx - 1 ){
             el.className = 'gameBtn left'
@@ -57,7 +117,7 @@ cInputArr.forEach(i => {
         if(i.value){
             relatedLabel.style.top = '-2rem'
             relatedLabel.style.left = '-3%'
-            relatedLabel.style.color = 'white'
+            relatedLabel.style.color = 'var(--letter--)'
 
             i.style.border = 'none'
         } else {
@@ -68,7 +128,7 @@ cInputArr.forEach(i => {
             }
             relatedLabel.style.top = top
             relatedLabel.style.left = left
-            relatedLabel.style.color = 'var(--green-medium--)'
+            relatedLabel.style.color = 'var(--main-dark--)'
             relatedLabel.style.filter = 'none'
             i.style.outline = 'none'
             
@@ -77,10 +137,10 @@ cInputArr.forEach(i => {
     relatedWrapper.addEventListener('mouseover', (e) => {
         relatedLabel.style.top = '-40%'
         relatedLabel.style.left = '-3%'
-        relatedLabel.style.color  = 'white'
-        relatedLabel.style.filter = 'drop-shadow(1px 1px 1px black)'
+        relatedLabel.style.color  = 'var(--letter--)'
+        relatedLabel.style.filter = 'drop-shadow(1px 1px 1px var(--shadow--))'
 
-        i.style.outline = '3px solid var(--green-border--)'
+        i.style.outline = '3px solid var(--main-light--)'
     })
 
     i.addEventListener('focus', (e) => {
@@ -89,18 +149,18 @@ cInputArr.forEach(i => {
 
         relatedLabel.style.top = top
         relatedLabel.style.left = '-3%'
-        relatedLabel.style.color  = 'white'
-        relatedLabel.style.filter = 'drop-shadow(1px 1px 1px black)'
+        relatedLabel.style.color  = 'var(--letter--)'
+        relatedLabel.style.filter = 'drop-shadow(1px 1px 1px var(--shadow--))'
 
-        i.style.outline = '3px solid var(--green-border--)'
+        i.style.outline = '3px solid var(--main-light--)'
     })
     i.addEventListener('blur', (e) => {
         if(e.target.value){            
             relatedLabel.style.top = '-2rem'
             relatedLabel.style.left = '-3%'
-            relatedLabel.style.color = 'white'
+            relatedLabel.style.color = 'var(--letter--)'
 
-            i.style.color = `var(--green-medium--)`
+            i.style.color = `var(--main-dark--)`
             i.style.fontSize = `1.8rem`
         } else {
             let top = '50%', left = '1%'
@@ -111,7 +171,7 @@ cInputArr.forEach(i => {
             }
             relatedLabel.style.top = top
             relatedLabel.style.left = left
-            relatedLabel.style.color = 'var(--green-medium--)'
+            relatedLabel.style.color = 'var(--main-dark--)'
             relatedLabel.style.filter = 'none'
             
         }
@@ -127,22 +187,22 @@ function handleTextarea(){
     cTextAreaEl.addEventListener('mouseenter', (e) => {
         relatedLabel.style.top = '-6%'
         relatedLabel.style.left = '-3%'
-        relatedLabel.style.color  = 'white'
-        relatedLabel.style.filter = 'drop-shadow(1px 1px 1px black)'
+        relatedLabel.style.color  = 'var(--letter--)'
+        relatedLabel.style.filter = 'drop-shadow(1px 1px 1px var(--shadow--))'
 
-        cTextAreaEl.style.outline = '3px solid var(--green-border--)'
+        cTextAreaEl.style.outline = '3px solid var(--main-light--)'
     })
     cTextAreaEl.addEventListener('mouseleave', (e) => {
         if(e.target.value){
             relatedLabel.style.top = '-2rem'
             relatedLabel.style.left = '-3%'
-            relatedLabel.style.color = 'white'
+            relatedLabel.style.color = 'var(--letter--)'
 
             cTextAreaEl.style.border = 'none'
         } else {
             relatedLabel.style.top = '6%'
             relatedLabel.style.left = '10px'
-            relatedLabel.style.color = 'var(--green-medium--)'
+            relatedLabel.style.color = 'var(--main-dark--)'
             relatedLabel.style.filter = 'none'
             cTextAreaEl.style.outline = 'none'
         }
@@ -150,23 +210,23 @@ function handleTextarea(){
     cTextAreaEl.addEventListener('focus', (e) => {
         relatedLabel.style.top = '-6%'
         relatedLabel.style.left = '-3%'
-        relatedLabel.style.color  = 'white'
-        relatedLabel.style.filter = 'drop-shadow(1px 1px 1px black)'
+        relatedLabel.style.color  = 'var(--letter--)'
+        relatedLabel.style.filter = 'drop-shadow(1px 1px 1px var(--shadow--))'
 
-        cTextAreaEl.style.outline = '3px solid var(--green-border--)'
+        cTextAreaEl.style.outline = '3px solid var(--main-light--)'
     })
     cTextAreaEl.addEventListener('blur', (e) => {
         if(e.target.value){            
             relatedLabel.style.top = '-2rem'
             relatedLabel.style.left = '-3%'
-            relatedLabel.style.color = 'white'
+            relatedLabel.style.color = 'var(--letter--)'
 
-            cTextAreaEl.style.color = `var(--green-medium--)`
+            cTextAreaEl.style.color = `var(--main-dark--)`
             cTextAreaEl.style.fontSize = `1.8rem`
         } else {
             relatedLabel.style.top = '6%'
             relatedLabel.style.left = '10px'
-            relatedLabel.style.color = 'var(--green-medium--)'
+            relatedLabel.style.color = 'var(--main-dark--)'
             relatedLabel.style.filter = 'none'
             
         }
