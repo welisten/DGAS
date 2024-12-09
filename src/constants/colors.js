@@ -5,7 +5,10 @@ const general_colors = {
     black :     '#000000',
     shadow_l :     '#ffffff',
     shadow_d :     '#000000',
-    h3_color:      '#e3e3e3',
+    h3_color_light:      '#e3e3e3',
+    h3_color_dark:      '#303030',
+    bg_dark:        '#303030',
+    bg_light:        '#000000',
 
     white_t7 :  '#ffffffb3',
     white_t3 :  '#ffffff4d',
