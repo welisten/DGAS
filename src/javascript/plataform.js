@@ -1,4 +1,8 @@
 import { palett } from "../constants/colors.js"
+import { setNavigation } from "./navigation.js"
+
+setNavigation()
+
 let gameidx = 0
 
 let gameSectionBtns = document.querySelectorAll('.gameBtn')

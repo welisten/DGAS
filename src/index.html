@@ -13,26 +13,26 @@
 </head>
 <body>
     <header>
-        <nav>
+        <nav id="navEl">
             <button class="logoBtn" id="nav_logoBtn" title="logotipo">
                 <img src="./assets/logos/DG_logo.png" alt="logo DG">
             </button>
             <div id="navbar"><div class="nb_group nb_group1">
-                    <a href="">projeto</a>
-                    <a href="">fotos</a>
-                    <a href="">depoimentos</a>
+                    <button class="navBtn" sec_num="1">projeto</button>
+                    <button class="navBtn" sec_num="3">fotos</button>
+                    <button class="navBtn" sec_num="4">depoimentos</button>
                 </div><div class="nb_group nb_group2">
                     <label class="switch">
                         <input type="checkbox">
                         <span class="slider"></span>
                     </label>
-                    <a href="">contatos</a>
-                    <a href="">equipe</a>
+                    <button class="navBtn" sec_num="6">contatos</button>
+                    <button class="navBtn" sec_num="5">equipe</button>
                 </div>
             </div>
         </nav>
     </header>
-    <main class="container">
+    <main class="container" id="mainEl">
         <div id="background">
             <div class="sphere s1"><div class="sd1"></div><div class="sd2"></div><div class="sd3"></div></div>
         </div>
@@ -340,7 +340,7 @@
             </form>
         </section>
     </main>
-    <footer>
+    <footer id="footerEl">
         <div class="f_relative_root container">
             <p class="f_pd_owners">
                <button id="pageDown">

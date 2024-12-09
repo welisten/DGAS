@@ -139,18 +139,21 @@ body {
         & .nb_group {
           width: 100%;
 
-          & a {
+          & button.navBtn {
             display: inline-block;
             font-size: 3rem;
             color: var(--letter--);
+            background-color: transparent;
             text-decoration: none;
             text-transform: capitalize;
             margin: 0 1%;
             padding: 1%;
             transition: all 0.1s linear;
+            border: none;
+            outline: none;
           }
 
-          & a:hover,
+          & button.navBtn:hover,
           .switch:hover {
             transform: scale(1.1);
           }
@@ -291,7 +294,7 @@ body {
     }
     & #background_img {
       position: absolute;
-      bottom: calc((5 * 80vh) + 8.5vh);
+      bottom: calc((5 * 80vh) + .5vh);
       right: -2vw;
       height: 80vh;
       width: 100vw;
@@ -912,7 +915,7 @@ body {
       }
       & .testimonials_bg {
         position: absolute;
-        width: 80vw;
+        width: 70vw;
         top: 67%;
         left: 50%;
         transform: translateX(-50%) rotateX(180deg);
@@ -1135,7 +1138,6 @@ body {
       position: relative;
       height: 81vh;
       width: 100%;
-      margin-bottom: 8vh; /*pertence a ultima section do elemento main*/
       color: var(--letter--);
       flex-direction: column;
       justify-content: flex-start;
@@ -1491,7 +1493,7 @@ body {
 
       & #background_img {
         height: calc(100vh - 13vh);
-        bottom: calc((5 * 80vh) + 40vh);
+        bottom: calc((5 * 80vh) + 36vh);
 
         & img {
           bottom: -3%;
@@ -1522,7 +1524,7 @@ body {
         height: calc(100vh - 13vh);
         bottom: 0;
         & h2 {
-          top: 0.5vh;
+          top: 1vh;
         }
 
         & .gamesContainer {
@@ -1733,7 +1735,7 @@ body {
       & #contact {
         height: calc(100vh - 13vh);
         bottom: 0;
-        margin-bottom: 4vh;
+        /* margin-bottom: 4vh; */
 
         & .c_imgBG {
           position: absolute;
