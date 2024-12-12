@@ -27,12 +27,11 @@
   --main-t-shadow4: #066529;
   --main-t-shadow5: #063d17;
   --main-tm-deep: #1e5004;
-  --bg--: #303030; 
-  
+  --bg--: #303030;
+
   --s1--: #219e08;
   --s2--: #db3434;
   --s3--: #f2e204;
-
 
   --sphere-01--: #f2e205;
 
@@ -41,30 +40,32 @@
   --purple-border--: #ca09e4; /* Jogo 5 color */
   --red-border--: #db3434; /* Jogo 5 color */
 
-  --bg-dark--: #303030; 
-  --bg-light--: #ddd; 
+  --bg-dark--: #303030;
+  --bg-light--: #ddd;
 
-  --white--: #fff; 
-  --white-t3--: #ffffff4d; 
-  --white-t4--: #ffffff66; 
+  --white--: #fff;
+  --white-t3--: #ffffff4d;
+  --white-t4--: #ffffff66;
   --black--: #000;
 
-  --letter--: #fff; 
+  --letter--: #fff;
   --gray-dark-letter-: #161616;
   --shadow--: #000;
   --h3-color: #e3e3e3;
 
-  --red-alert--: #ec0404; 
+  --red-alert--: #ec0404;
 }
 
 html {
   font-size: 62.5%;
+  scrollbar-width: none; /* Firefox */
 }
 
 body {
   width: 100vw;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
+  scrollbar-width: none; /* Firefox */
   font-size: 1.6rem;
   background-color: var(--bg--);
   transition: all 1s ease;
@@ -80,23 +81,6 @@ body {
   & img {
     user-select: none;
   }
-  /* definir o scroll geral depois */
-  /* ::-webkit-scrollbar {
-        width: 8px; 
-        height: 8px;
-    }
-    ::-webkit-scrollbar-track {
-        background: rgb(90, 90, 90); 
-    border-radius: 10px; 
-    }
-    ::-webkit-scrollbar-thumb {
-        background:var(--main-light--); 
-    border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-        background:var(--main-deep--); 
-    } */
-
   & header {
     height: 12.5vh;
     width: 100%;
@@ -224,10 +208,6 @@ body {
       }
     }
   }
-  & section {
-    /* border: 1px solid red; */
-  }
-
   & main {
     position: relative;
     top: 12.5vh;
@@ -247,9 +227,12 @@ body {
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(16deg, transparent 20%, var(--main-p-bg)  70% 100%);
+      background: linear-gradient(
+        16deg,
+        transparent 20%,
+        var(--main-p-bg) 70% 100%
+      );
       overflow: hidden;
-
 
       & .sphere {
         position: relative;
@@ -293,13 +276,12 @@ body {
     }
     & #background_img {
       position: absolute;
-      bottom: calc((5 * 80vh) + .5vh);
+      bottom: calc((5 * 80vh) + 0.5vh);
       right: -2vw;
       height: 80vh;
       width: 100vw;
       max-width: 100vw;
       z-index: -1;
-
 
       & img {
         position: relative;
@@ -310,7 +292,6 @@ body {
       }
     }
     & #background_img::after {
-
       content: "";
       position: absolute;
       bottom: calc(-9.5vh);
@@ -346,23 +327,95 @@ body {
           rgba(255, 255, 255, 0) 65%
         );
         border-radius: 15px;
-        padding: 2%;
+        padding: 2% 0 2% 2%;
         max-height: 60%;
-        overflow: hidden;
+        position: relative;
 
-        & h2 {
-          text-transform: capitalize;
-          font-size: 4rem;
-          color:var(--letter--);
-          margin-bottom: 2rem;
-          filter: drop-shadow(2px 2px 2px var(--shadow--));
+        & .tp_scrollContent {
+          overflow: auto;
+          height: 100%;
+          width: 100%;
+          -ms-overflow-style: none;
+          margin: 0;
+          padding: 0;
+          & h2 {
+            text-transform: capitalize;
+            font-size: 4rem;
+            color: var(--letter--);
+            margin-bottom: 2rem;
+            filter: drop-shadow(2px 2px 2px var(--shadow--));
+          }
+          & .tp_text {
+            color: var(--letter--);
+            height: 75%;
+            width: 95%;
+
+            h3 {
+              font-size: 2.4rem;
+              line-height: 3.4rem;
+              margin: 20px 0 0 15px;
+              filter: drop-shadow(1px 1px 1px var(--shadow--));
+            }
+            & p {
+              font-size: 2rem;
+              line-height: 3rem;
+              margin: 1.5% 0;
+
+              & span {
+                display: block;
+                font-size: 2.2rem;
+                line-height: 3.2rem;
+                margin: 20px 0 0 30px;
+                font-weight: bold;
+                filter: drop-shadow(1px 1px 1px var(--shadow--));
+              }
+            }
+          }
         }
-        & .tp_text {
-          font-size: 2rem;
-          line-height: 2.9rem;
-          color: var(--main-deep--);
-          color: var(--letter--);
+        & .tp_scrollContent::-webkit-scrollbar {
+          display: none;
+        }
+        & .tp_scrollbar {
+          position: absolute;
+          top: 15%;
+          right: 0;
+          width: 2%;
+          height: 70%;
 
+          & .s_container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+
+            & .tp_scrollBar {
+              position: absolute;
+              opacity: 0;
+              top: 0;
+              left: 50%;
+              height: 100%;
+              width: 1px;
+              transform: translate(-50%);
+              transition: all .5s ease;
+              background-color: rgba(255, 255, 255, 0.363);
+            }
+
+            & .tp_scrollThumb {
+              position: absolute;
+              top: 0;
+              left: 0;
+              transform: translateX(-10%);
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              background-color: var(--main-g-bg);
+              z-index: 9;
+              filter: drop-shadow(1px 1px 1px var(--shadow--));
+            }
+            & .tp_scrollThumb.active ~ .tp_scrollBar{
+              transition: all .5s ease;
+              opacity: 1;
+            }
+          }
         }
       }
     }
@@ -374,7 +427,6 @@ body {
       flex-direction: column;
       align-items: center;
       justify-content: center;
-
 
       & h2 {
         position: absolute;
@@ -427,7 +479,7 @@ body {
             transform: translate(-50%, -50%);
             top: 50%;
             left: 0;
-            filter: drop-shadow(2px 4px 6px var(--shadow--) );
+            filter: drop-shadow(2px 4px 6px var(--shadow--));
             border: none;
             margin: 0 2%;
             cursor: pointer;
@@ -477,7 +529,7 @@ body {
       }
     }
     & #games::before {
-      content: '';
+      content: "";
       position: absolute;
       height: 100%;
       width: 100vw;
@@ -734,7 +786,8 @@ body {
             width: 30px;
             height: 100%;
             background-color: var(--main-dark--);
-            filter: drop-shadow(2px 2px 3px var(--main-g-bg)) drop-shadow(-2px -2px 3px var(--main-g-bg));
+            filter: drop-shadow(2px 2px 3px var(--main-g-bg))
+              drop-shadow(-2px -2px 3px var(--main-g-bg));
             z-index: 30;
           }
           & .scrollbarThumb:hover {
@@ -803,11 +856,9 @@ body {
           height: 85%;
           background-color: var(--main-dark--); /* Tom final no centro */
           border-radius: 10px;
-          box-shadow:  0 0 5px var(--main-t-shadow1),
-                       0 0 10px var(--main-t-shadow2),
-                       0 0 15px var(--main-t-shadow3),
-                       0 0 20px var(--main-t-shadow4),
-                       0 0 30px var(--main-t-shadow5); /* Tom final no fim da transição */
+          box-shadow: 0 0 5px var(--main-t-shadow1),
+            0 0 10px var(--main-t-shadow2), 0 0 15px var(--main-t-shadow3),
+            0 0 20px var(--main-t-shadow4), 0 0 30px var(--main-t-shadow5); /* Tom final no fim da transição */
           transition: all 0.5s ease-in-out;
         }
 
@@ -966,7 +1017,7 @@ body {
             padding: 10px;
             background-color: var(--main-light--);
             border-radius: 15px;
-            filter: drop-shadow(1px 1px 4px var(--shadow--) );
+            filter: drop-shadow(1px 1px 4px var(--shadow--));
 
             & .dev_img {
               height: 100%;
@@ -974,7 +1025,7 @@ body {
               overflow: hidden;
               border: 1px solid #ffffff6e;
               border-radius: 50%;
-              filter: drop-shadow(1px 1px 3px var(--shadow--) );
+              filter: drop-shadow(1px 1px 3px var(--shadow--));
 
               & img {
                 height: 100%;
@@ -992,7 +1043,7 @@ body {
               & p {
                 font-size: 2.3rem;
                 padding: 5px;
-                filter: drop-shadow(1px 1px 1px var(--shadow--) );
+                filter: drop-shadow(1px 1px 1px var(--shadow--));
               }
             }
           }
@@ -1002,7 +1053,7 @@ body {
             text-align: end;
             background-color: var(--main-light--);
             border-radius: 15px;
-            filter: drop-shadow(1px 1px 3px var(--shadow--) );
+            filter: drop-shadow(1px 1px 3px var(--shadow--));
             padding-bottom: 10px;
             margin-bottom: 15px;
 
@@ -1012,7 +1063,7 @@ body {
               font-weight: 600;
               line-height: 3.3rem;
               padding: 10px;
-              filter: drop-shadow(1px 1px 1px var(--shadow--) );
+              filter: drop-shadow(1px 1px 1px var(--shadow--));
             }
 
             & .q_container {
@@ -1038,7 +1089,7 @@ body {
                     left: 50%;
                     transform: translate(-50%, -50%);
                     padding: 5% 0;
-                    filter: drop-shadow(1px 1px 1px var(--shadow--) );
+                    filter: drop-shadow(1px 1px 1px var(--shadow--));
                   }
                 }
                 & .q_label {
@@ -1057,7 +1108,7 @@ body {
             text-align: center;
             background-color: var(--main-light--);
             border-radius: 15px;
-            filter: drop-shadow(1px 1px 3px var(--shadow--) );
+            filter: drop-shadow(1px 1px 3px var(--shadow--));
             padding-bottom: 5px;
 
             & .l_container {
@@ -1079,7 +1130,7 @@ body {
                 justify-content: center;
 
                 & i {
-                  filter: drop-shadow(1px 1px 1px var(--shadow--) );
+                  filter: drop-shadow(1px 1px 1px var(--shadow--));
                 }
               }
             }
@@ -1121,7 +1172,7 @@ body {
         border: 1px solid white;
         outline: none;
         background-color: var(--white-t4--);
-        filter: drop-shadow(2px 4px 6px var(--shadow--) );
+        filter: drop-shadow(2px 4px 6px var(--shadow--));
 
         & i {
           font-size: 3rem;
@@ -1342,7 +1393,7 @@ body {
           position: absolute;
           top: 10px;
           height: 13%;
-          filter: drop-shadow(2px 2px 2px var(--shadow--) );
+          filter: drop-shadow(2px 2px 2px var(--shadow--));
         }
         /* retirar depois */
         & .f_cl2 {
@@ -1352,7 +1403,7 @@ body {
           position: absolute;
           bottom: 10%;
           height: 15%;
-          filter: drop-shadow(2px 2px 2px var(--shadow--) );
+          filter: drop-shadow(2px 2px 2px var(--shadow--));
         }
         & .f_a1 {
           left: 10%;
@@ -1365,14 +1416,14 @@ body {
           bottom: 11%;
           left: 5%;
           height: 15%;
-          filter: drop-shadow(2px 2px 2px var(--shadow--) );
+          filter: drop-shadow(2px 2px 2px var(--shadow--));
         }
         & .f_c {
           position: absolute;
           bottom: 40%;
           right: 4%;
           height: 15%;
-          filter: drop-shadow(2px 2px 2px var(--shadow--) );
+          filter: drop-shadow(2px 2px 2px var(--shadow--));
         }
         & .f_l {
           position: absolute;
@@ -1397,7 +1448,7 @@ body {
 
           & .f_g {
             width: 3.3%;
-            filter: drop-shadow(2px 2px 2px var(--shadow--) );
+            filter: drop-shadow(2px 2px 2px var(--shadow--));
           }
         }
       }
@@ -1412,7 +1463,7 @@ body {
           height: 95%;
           width: 100%;
           border-radius: 15px;
-          filter: drop-shadow(2px 2px 2px var(--shadow--) );
+          filter: drop-shadow(2px 2px 2px var(--shadow--));
           position: relative;
           align-items: center;
           justify-content: space-around;
@@ -1445,7 +1496,7 @@ body {
           padding: 5px 1%;
           background-color: #f2f2f2;
           border-radius: 15px;
-          filter: drop-shadow(2px 2px 2px var(--shadow--) );
+          filter: drop-shadow(2px 2px 2px var(--shadow--));
           justify-content: space-around;
           align-self: center;
 
@@ -1461,6 +1512,9 @@ body {
   & .container {
     display: flex;
   }
+}
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
 }
 
 @media (max-width: 1600px) {
@@ -1511,11 +1565,27 @@ body {
           font-size: 7.5rem;
         }
         & .tp_textArea {
-          & h2 {
-            font-size: 5rem;
+          & .tp_scrollContent {
+            & h2 {
+              font-size: 5rem;
+            }
+            & .tp_text {
+              line-height: 4.9rem; /*alterar posteriormente*/
+            }
           }
-          & .tp_text {
-            line-height: 4.9rem; /*alterar posteriormente*/
+          & .tp_scrollbar {
+            & .s_container {
+              & .tp_scrollBar {
+                background-color: rgba(255, 255, 255, 0.177);
+              }
+
+              & .tp_scrollThumb {
+                height: 13px;
+                width: 13px;
+                transform: translateX(-5%);
+
+              }
+            }
           }
         }
       }
@@ -1719,7 +1789,7 @@ body {
           border: 1px solid white;
           outline: none;
           background-color: var(--white-t4--);
-          filter: drop-shadow(2px 4px 6px var(--shadow--) );
+          filter: drop-shadow(2px 4px 6px var(--shadow--));
 
           & i {
             font-size: 3rem;

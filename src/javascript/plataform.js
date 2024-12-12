@@ -1,7 +1,9 @@
 import { palett } from "../constants/colors.js"
 import { setNavigation } from "./navigation.js"
+import { setTheProjectTextScroll } from "./scroll.js"
 
 setNavigation()
+setTheProjectTextScroll()
 
 let gameidx = 0
 
