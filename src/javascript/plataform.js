@@ -2,12 +2,14 @@ import { palett } from "../constants/colors.js"
 import { setNavigation } from "./navigation.js"
 import { setTheProjectTextScroll, setPhotoScroll } from "./scroll.js"
 import { setGalery, setPhotoScreen } from "./galery.js"
+import { updateTestimonial } from "./automateTestimonials.js"
 
 setGalery()
 setNavigation()
 setTheProjectTextScroll()
 setPhotoScroll()
 setPhotoScreen()
+updateTestimonial()
 
 let gameidx = 0
 

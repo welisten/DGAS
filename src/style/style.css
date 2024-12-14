@@ -910,12 +910,16 @@ body {
               letter-spacing: 1px;
 
               & .t_name {
-                opacity: 0;
                 text-align: end;
+                transition: all 1 ease-in-out;
+                opacity: 0;
+
               }
               & .t_context {
-                opacity: 0;
                 text-align: end;
+                transition: all 1 ease-in-out;
+                opacity: 0;
+
               }
             }
             & .c_header::after {
@@ -933,10 +937,14 @@ body {
               position: absolute;
               top: 45%;
               height: 70%;
+              width: 95%;
               text-align: center;
               word-break: break-word;
               word-wrap: break-word;
               z-index: 2;
+              opacity: 1;
+              transition: all 2s ease-in-out;
+
 
               & .t_img {
                 height: 100px;
@@ -956,6 +964,7 @@ body {
                   top: 50%;
                   left: 50%;
                   transform: translate(-50%, -50%);
+
                 }
               }
               & .testimonial_text {
@@ -963,6 +972,12 @@ body {
                 font-size: 1.6rem;
                 color: var(--main-deep--);
               }
+            }
+          }
+          & .t_card.chaging{
+            & .c_body{
+              opacity: 0;
+              transition: all 2s ease-in-out;
             }
           }
           & .t_card:hover {
