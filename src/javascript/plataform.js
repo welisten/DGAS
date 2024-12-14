@@ -1,9 +1,13 @@
 import { palett } from "../constants/colors.js"
 import { setNavigation } from "./navigation.js"
-import { setTheProjectTextScroll } from "./scroll.js"
+import { setTheProjectTextScroll, setPhotoScroll } from "./scroll.js"
+import { setGalery, setPhotoScreen } from "./galery.js"
 
+setGalery()
 setNavigation()
 setTheProjectTextScroll()
+setPhotoScroll()
+setPhotoScreen()
 
 let gameidx = 0
 
@@ -14,6 +18,7 @@ let gsControls_next = document.querySelector('.gs_controlBtn.right')
 
 const root = document.documentElement
 let ph_bg, t_bg
+
 ph_bg = document.getElementById('photos_bg')
 t_bg = document.getElementById('testimonials_bg')
 

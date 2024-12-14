@@ -33,7 +33,7 @@
   --s2--: #db3434;
   --s3--: #f2e204;
 
-  --sphere-01--: #f2e205;
+  --scrollbar-color--:  #ffffff5d;
 
   --yellow-border--: #f2dd04; /* Jogo 2 color */
   --lightblue-form-bg--: #3498db; /* Jogo 3 color */
@@ -396,7 +396,7 @@ body {
               width: 1px;
               transform: translate(-50%);
               transition: all .5s ease;
-              background-color: rgba(255, 255, 255, 0.363);
+              background-color: var(--scrollbar-color--);
             }
 
             & .tp_scrollThumb {
@@ -411,7 +411,8 @@ body {
               z-index: 9;
               filter: drop-shadow(1px 1px 1px var(--shadow--));
             }
-            & .tp_scrollThumb.active ~ .tp_scrollBar{
+            & .tp_scrollThumb.active ~ .tp_scrollBar,
+              .tp_scrollThumb:hover ~ .tp_scrollBar{
               transition: all .5s ease;
               opacity: 1;
             }
@@ -629,13 +630,14 @@ body {
       }
 
       & .photos_bg {
-        /* ao ativar o container pai .GALERY e .PHOTO_BG ganham display none */
-        /* display: none; */
         position: absolute;
         width: 70vw;
         bottom: 5px;
         z-index: -1;
         filter: drop-shadow(1px 1px 1px var(--shadow--));
+      }
+      & .photos_bg.active{
+        opacity: 0;
       }
 
       & .projectPhotos_container {
@@ -673,6 +675,8 @@ body {
             outline: none;
             background-color: var(--white-t4--);
             filter: drop-shadow(2px 4px 6px var(--shadow--));
+            opacity: 1;
+            transition: opacity .5s ease;
 
             & i {
               font-size: 3rem;
@@ -701,12 +705,13 @@ body {
             transform: scale(1.05);
           }
         }
-        & .galery {
+        & .photoScreen.active{display: flex;}
+        & .galery.active {
           /* ao ativar o container pai .GALERY e .PHOTO_BG ganham display none */
-          display: none;
           display: grid;
           column-gap: 23%;
           grid-template-columns: repeat(4, 40rem);
+          overflow-x: auto;
 
           & .polaroid {
             position: relative;
@@ -728,7 +733,7 @@ body {
               overflow: hidden;
               line-height: 100%;
 
-              & img {
+              & .polaroid_img {
                 height: 100%;
                 cursor: pointer;
               }
@@ -770,42 +775,54 @@ body {
             border-left: solid 1px #ffffff;
           }
         }
-        & .custom-scrollbar {
-          /* ao ativar o container pai .GALERY e .PHOTO_BG ganham display none */
-          /* display: none;  */
+        & .galery{
+          display: none;
+        }
+        & .ph_scrollbar {
           position: absolute;
-          top: 10%;
+          top: 5%;
           left: 50%;
-          transform: translateX(-50%);
-          background-color: transparent;
-          height: 10px;
           width: 300px;
-          cursor: grab;
+          height: 10px;
+          transform: translateX(-50%);
 
-          & .scrollbarThumb {
-            width: 30px;
+          & .ph_s_container {
+            width: 100%;
             height: 100%;
-            background-color: var(--main-dark--);
-            filter: drop-shadow(2px 2px 3px var(--main-g-bg))
-              drop-shadow(-2px -2px 3px var(--main-g-bg));
-            z-index: 30;
-          }
-          & .scrollbarThumb:hover {
-            background-color: var(--main-light--);
+            position: relative;
+
+            & .ph_scrollBar {
+              position: absolute;
+              opacity: 0;
+              top: 50%;
+              left: 50%;
+              height: 1px;
+              width: 100%;
+              transform: translate(-50%, -50%);
+              transition: all .5s ease;
+              background-color: var(--scrollbar-color--);
+            }
+
+            & .ph_scrollbarThumb {
+              position: absolute;
+              top: 50%;
+              left: 0;
+              transform: translateY(-50%);
+              height: 20px;
+              width: 20px;
+              border-radius: 50%;
+              background-color: var(--main-g-bg);
+              z-index: 9;
+              filter: drop-shadow(1px 1px 1px var(--shadow--));
+            }
+            & .ph_scrollbarThumb.active ~ .ph_scrollBar,
+              .ph_scrollbarThumb:hover ~ .ph_scrollBar {
+              transition: all .5s ease;
+              opacity: 1;
+            }
           }
         }
-        & .custom-scrollbar::after {
-          content: "";
-          position: absolute;
-          top: 50%;
-          left: 0;
-          transform: translateY(-50%);
-          display: inline-block;
-          width: 100%;
-          height: 0.5px;
-          background-color: #b6b6b6;
-          z-index: -1;
-        }
+
       }
 
       ::-webkit-scrollbar {
@@ -1699,6 +1716,20 @@ body::-webkit-scrollbar {
             }
             & .polaroid:nth-child(even):hover {
               transform: translate(96%, -51%) rotate(0) scale(1.1);
+            }
+          }
+          & .ph_scrollbar {
+            & .ph_s_container {
+              & .ph_scrollBar {
+                background-color: rgba(255, 255, 255, 0.177);
+              }
+
+              & .ph_scrollbarThumb {
+                height: 13px;
+                width: 13px;
+                transform: translateY(-50%);
+
+              }
             }
           }
         }

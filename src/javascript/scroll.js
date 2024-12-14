@@ -1,4 +1,3 @@
-const tp_textAreaDiv = document.querySelector('.tp_textArea')/*container */
 const tp_scrollContent = document.querySelector('.tp_scrollContent')
 const tp_scrollbar = document.querySelector('.tp_scrollBar')
 const tp_scrollThumb = document.querySelector('.tp_scrollThumb')
@@ -90,7 +89,6 @@ const handleScrollbar = () => {
     })
 
 }
-
 const syncScrollThumb = (e) => {
     let content_height, scrollTop
 
@@ -99,22 +97,86 @@ const syncScrollThumb = (e) => {
 
     const thumbTop = (scrollTop / (content_height - e.target.clientHeight)) * 100
     
-    activeBar()
+    activeBar(tp_scrollThumb)
     tp_scrollThumb.style.top = `${thumbTop}%`
     
 }
-
-const activeBar = () => {
-    if(tp_scrollThumb.classList.contains('active'))
+const activeBar = (Thumb) => {
+    if(Thumb.classList.contains('active'))
         return;
         
-    console.log('Não esta ativo, estamos entrando')
-    tp_scrollThumb.classList.add('active')
-    setTimeout(() => tp_scrollThumb.classList.remove('active'), 750)
+    Thumb.classList.add('active')
+    setTimeout(() => Thumb.classList.remove('active'), 750)
 
 }
 
+const ph_scrollContent = document.querySelector('#galery')
+const ph_scroll_bar = document.querySelector('.ph_scrollBar')
+const ph_scrollThumb = document.querySelector('.ph_scrollbarThumb')
+
+function setPhotoScroll(){
+    handlePhScrollElm()
+
+    ph_scrollContent.addEventListener('scroll', (e) => {
+        syncPhContentScroll(e)
+    })
+}
+
+const handlePhScrollElm = () => {
+    const ph_scrollData = {
+        isDragging: false,
+        startX: 0,
+        startThumbLeft: 0
+    }
+
+    ph_scrollThumb.addEventListener('mousedown', (e) => {
+        ph_scrollData.isDragging = true
+        ph_scrollData.startX = e.clientX
+        ph_scrollData.startThumbLeft = e.target.offsetLeft
+
+        e.preventDefault()
+    })
+    document.addEventListener('mousemove', (e) => {
+        if(!ph_scrollData.isDragging)
+            return;
+        
+        let offsetX, newLeft, roof
+
+        offsetX = e.clientX - ph_scrollData.startX
+        newLeft = ph_scrollData.startThumbLeft + offsetX
+        roof = ph_scroll_bar.offsetWidth - ph_scrollThumb.offsetWidth
+
+        newLeft = Math.max(0, Math.min(newLeft, roof))
+        ph_scrollThumb.style.left = `${newLeft}px`
+
+        let new_content_left = (newLeft / ph_scroll_bar.offsetWidth)
+        let contentWidth = ph_scrollContent.scrollWidth - ph_scrollContent.offsetWidth
+        
+        ph_scrollThumb.classList.add('active')
+        ph_scrollContent.scrollTo({
+            left: new_content_left * contentWidth
+        })
+    })
+    document.addEventListener('mouseup', (e) => {
+        ph_scrollData.isDragging = false;
+        ph_scrollThumb.classList.remove('active')
+
+    })
+}
+const syncPhContentScroll = (e) => {
+    let content_width, scrollLeft
+
+    scrollLeft = e.target.scrollLeft
+    content_width = ph_scrollContent.scrollWidth
+    console.log(scrollLeft, content_width)
+    const thumbLeft = (scrollLeft / (content_width - e.target.clientWidth)) * 100
+    
+    activeBar(ph_scrollThumb)
+    ph_scrollThumb.style.left = `${thumbLeft}%`
+}
+
 export{
-    setTheProjectTextScroll
+    setTheProjectTextScroll,
+    setPhotoScroll
 }
 
