@@ -9,6 +9,9 @@ const tp_scrollThumb = document.querySelector('.tp_scrollThumb')
 //     - Acessibilidade A11y
 //     - Adicionar debounce para scroll
 //     - Otimizar eventos de "mousemove" e "touchemove"
+// FAZER:
+//     - perceber eventos iguais, como chamadas diferentes, e alterar para um evento com uma chamada que lide com tds as situações
+//     - Debounce
 
 function setTheProjectTextScroll(){
     handleScrollbar()
@@ -236,13 +239,39 @@ const syncMainElScroll = (e) => {
     const thumbTop = (scrollTop / (content_height - (.8 * window.innerHeight))) * 100
     
     activeBar(main_scrollThumb)
-    console.log(scrollTop , content_height, window.innerHeight)
     main_scrollThumb.style.top = `${thumbTop}%`
+}
+
+function setFooter(){
+    const footerRulesEl = document.querySelector('.f_r_top')
+    if (!footerRulesEl) {
+        console.warn("Elemento '.f_r_top' não encontrado.");
+    }
+    let isFooterShown = false
+    
+    const setScroll = () => {
+        // HANDLE FOOTER SCHEME
+        let screenHeight = document.documentElement.clientHeight
+        let currentScrollHeight = screenHeight + window.scrollY
+        let totalHeight = document.documentElement.scrollHeight
+        const STOP_POINT_RATE = 0.2
+        let stopPoint = totalHeight - (screenHeight * STOP_POINT_RATE)
+        
+        if(currentScrollHeight >= stopPoint && !isFooterShown){
+            footerRulesEl.classList.add('active')
+            isFooterShown = true
+        } else if(currentScrollHeight < stopPoint && isFooterShown){
+            footerRulesEl.classList.remove('active')
+            isFooterShown = false
+        }
+    }
+    document.addEventListener('scroll', setScroll)
 }
 
 export{
     setTheProjectTextScroll,
     setPhotoScroll,
-    setMainScroll
+    setMainScroll,
+    setFooter
 }
 

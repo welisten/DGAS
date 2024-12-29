@@ -1,6 +1,6 @@
 import { palett } from "../constants/colors.js"
 import { setNavigation } from "./navigation.js"
-import { setTheProjectTextScroll, setPhotoScroll, setMainScroll } from "./scroll.js"
+import { setTheProjectTextScroll, setPhotoScroll, setMainScroll, setFooter } from "./scroll.js"
 import { setGalery, setPhotoScreen } from "./galery.js"
 import { updateTestimonial } from "./automateTestimonials.js"
 import { handleForm } from "./handleForm.js"
@@ -13,6 +13,7 @@ setPhotoScreen()
 updateTestimonial()
 setMainScroll()
 handleForm()
+setFooter()
 
 let gameidx = 0
 
@@ -255,3 +256,15 @@ function handleCtTextarea(){
     })
 
 }
+
+window.onerror = function(message, source, lineno, colno, error){
+    const erroMessage = `
+    message: ${message}
+    fonte: ${source}
+    linha: ${lineno}
+    coluna: ${colno}
+    erro: ${error}
+    `
+    console.log(erroMessage)
+}
+

@@ -1648,8 +1648,9 @@ body {
         padding: 2px 0 0;
         flex-direction: column;
         justify-content: space-evenly;
+
         & .f_r_top {
-          visibility: hidden;
+          opacity: 0;
           height: 95%;
           width: 100%;
           border-radius: 15px;
@@ -1659,6 +1660,7 @@ body {
           justify-content: space-around;
           color: var(--letter--);
           filter: none;
+          transition: all .5s ease;
 
           & .container {
             height: 100%;
@@ -1679,6 +1681,10 @@ body {
               text-decoration: underline;
             }
           }
+        }
+        & .f_r_top.active {
+          opacity: 1;
+          transition: all 1s ease;
         }
         & .f_r_down {
           height: 60%;
