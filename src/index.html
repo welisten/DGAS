@@ -33,6 +33,19 @@
         </nav>
     </header>
     <main class="container" id="mainEl">
+        <div class="main_scrollbar">
+            <div class="s_container">
+                <div class="main_scrollThumb"></div>
+                <div class="main_scrollBar"></div>
+            </div>
+        </div> 
+        <div class="mainPopUpMessage" id="mainPopUp">
+            <div class="pp_container">
+                <button class="closeBtn" id="pp_closeBtn"><i class="fa-solid fa-xmark"></i></button>
+                <p class="Log"></p>
+                <p class="Message" id="popUpMessage"></p>
+            </div>
+        </div>
         <div id="background">
             <div class="sphere s1"><div class="sd1"></div><div class="sd2"></div><div class="sd3"></div></div>
         </div>
@@ -93,7 +106,7 @@
         <section id="games">
             <h2>Os protótipos</h2>
             <div class="gamesSection">
-                <button class="gs_controlBtn p_btn left"><i class="fa-solid fa-chevron-left"></i></button>
+                <button class="mainButton p_btn left" id="gm_controlBtnPrev"><i class="fa-solid fa-chevron-left"></i></button>
                 <div class="container gamesContainer">
                     <button class="gameBtn active" id="game1El"><a href="./games/g1/Pages/app.html" >Jogo 1</a></button>
                     <button class="gameBtn right" id="game2El"><a href="./games/g2/Pages/app.html" >Jogo 2</a></button>
@@ -101,7 +114,7 @@
                     <button class="gameBtn right" id="game4El"><a href="./games/g4/Pages/app.html">Jogo 4</a></button>
                     <button class="gameBtn left" id="game5El"><a href="./games/g5/src/app.html"   >Jogo 5</a></button>
                 </div>
-                <button class="gs_controlBtn p_btn right"><i class="fa-solid fa-chevron-right"></i></button>
+                <button class="mainButton p_btn right" id="gm_controlBtnNext"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
         </section>
         <section id="photos">
@@ -115,9 +128,9 @@
             </div>
             <div class="projectPhotos_container container" id="projectPhotos_container">
                 <div class="photoScreen container" id="photoScreen">
-                    <button class="gs_controlBtn directionBtn left"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="mainButton directionBtn left"><i class="fa-solid fa-chevron-left"></i></button>
                     <img src="" alt="" class="p_ps_photo" id="p_ps_photo" index="0">
-                    <button class="gs_controlBtn directionBtn right"><i class="fa-solid fa-chevron-right"></i></button>
+                    <button class="mainButton directionBtn right"><i class="fa-solid fa-chevron-right"></i></button>
                     <button class="closeBtn" id="p_ps_closeBtn"><i class="fa-solid fa-xmark"></i></button>
                 </div>
                 <div class="galery active" id="galery">
@@ -238,12 +251,12 @@
             <img src="./assets/backgrounds/balls_1.png" alt="background" class="testimonials_bg" id="testimonials_bg">
         </section>
         <section id="team" class="container">
-            <button class="gs_controlBtn directionBtn left"><i class="fa-solid fa-chevron-left"></i></button>
-            <div class="team_container container active">
+            <button class="mainButton directionBtn left" id="tt_controlBtn_prev"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="team_container ww_team container active">
                 <div class="tc_c1 tc container">
                     <div class="perfil container">
                         <div class="dev_img">
-                            <img src="./assets/perfil.jpeg" alt="foto de perfil">
+                            <img src="./assets/perfil_ww.jpeg" alt="foto de perfil">
                         </div>
                         <div class="dev_data">
                             <p class="dd_name">Wesley Welisten</p>
@@ -323,24 +336,67 @@
                     </div>
                     <div class="links">
                         <div class="l_container container">
-                            <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
-                            <a href="#"><i class="fa-solid fa-envelope"></i></a>
-                            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                            <a href="#"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://www.instagram.com/wwelisten/"><i class="fa-brands fa-square-instagram"></i></a>
+                            <a href="mailto:welistenw@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+                            <a href="https://www.linkedin.com/in/wesley-welisten-b850a2244/"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="https://github.com/welisten"><i class="fa-brands fa-github"></i></a>
                         </div>
                         <p>Nos adicione nas redes !</p>
                     </div>
                 </div>
                 <div class="tc_c2 tc">
                     <div class="experience container">
-                        <p>Creative and passionate developer with a strong foundation in modern programming technologies, specializing in building intuitive and visually appealing user interfaces. Proficient in JavaScript, with hands-on experience in front-end frameworks (e.g., Bootstrap, jQuery) and back-end development using Node.js.</p><p> Adept at solving complex problems, crafting innovative solutions, and ensuring accessibility and inclusivity in digital applications. Recent projects include creating accessible educational games for children with disabilities and developing a proxy server to overcome CORS restrictions.
-                            Committed to continuous learning, leveraging 3+ years of programming experience, and blending technical expertise with creativity to deliver impactful, user-centered solutions. Open to opportunities where innovation, collaboration, and inclusivity drive success.</p><p>
-                                Detail-oriented and innovative software developer with a passion for creating efficient, scalable, and user-friendly applications. Skilled in combining technical expertise with creative problem-solving to deliver impactful digital solutions. Strong background in modern programming languages and frameworks, with a proven ability to adapt to new tools and technologies.
-                        </p>
+                        <p>Desenvolvedor criativo e apaixonado, com uma sólida base em tecnologias modernas de programação, especializado em criar interfaces de usuário intuitivas e visualmente atraentes. Proficiente em JavaScript, com experiência prática em frameworks de front-end como Bootstrap e jQuery, além de desenvolvimento back-end utilizando Node.js e NestJS.</p>
+                        <p>Hábil em resolver problemas complexos, criar soluções inovadoras e garantir acessibilidade e inclusão em aplicações digitais. Entre os projetos recentes estão a criação de jogos educacionais acessíveis para crianças com deficiência, o desenvolvimento de um servidor proxy para superar restrições de CORS e a implementação de APIs RESTful integradas com React.</p>
+                        <p>Formando em Análise e Desenvolvimento de Sistemas, com mais de 4 anos de experiência em programação, e certificado pelo curso de Desenvolvimento Web Moderno da Cod3r. Comprometido com a melhoria contínua, combina criatividade com sólida expertise técnica para entregar soluções inovadoras, escaláveis e centradas no usuário. Aberto a oportunidades em ambientes que valorizem a colaboração, a inclusão e a inovação.</p>
                     </div>
                 </div>
             </div>
-            <button class="gs_controlBtn directionBtn right"><i class="fa-solid fa-chevron-right"></i></button>
+            <div class="team_container th_team container">
+                <div class="tc_c1 tc container">
+                    <div class="perfil container">
+                        <div class="dev_img">
+                            <img src="./assets/perfil_th.jpeg" alt="foto de perfil">
+                        </div>
+                        <div class="dev_data">
+                            <p class="dd_name">Thiago Godoy</p>
+                            <p class="dd_role">Produtor Cultural</p>
+                            <p class="dd_age">32 anos</p>
+                            <p class="dd_location">Brazil, Rio de Janeiro</p>
+                        </div>
+                    </div>
+                    <div class="qualifications">
+                        <span class="label">Qualificações</span>
+                        <div class="q_container th">
+                            <ul class="q_list">
+                                <li class="ql_item"><i class="fa-solid fa-clapperboard"></i>Produção cultural e Gestão de Eventos</li>
+                                <li class="ql_item"><i class="fa-solid fa-camera-retro"></i>Roteirismo e Produção Audiovisual</li>
+                                <li class="ql_item"><i class="fa-solid fa-pen-fancy"></i>Pesquisa e Curadoria Cultural</li>
+                                <li class="ql_item"><i class="fa-solid fa-person-chalkboard"></i>Mediação Cultural e Arte Educador</li>
+                                <li class="ql_item"><i class="fa-brands fa-connectdevelop"></i>Desenvolvimento e Direção de Projetos Culturais</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="links">
+                        <div class="l_container container">
+                            <a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+                            <a href="#"><i class="fa-solid fa-envelope"></i></a>
+                            <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="https://gamma.app/docs/Thiago-Godoy-6ef6nr4cii93jny?fbclid=PAY2xjawG354lleHRuA2FlbQIxMAABptiQqJNYARmqZ0SndMbW3HwUjpcI8zYSXxBgdD2Y8RKgDRlzwuEnUlODyg_aem_OBuB4ERwK0pFHZ49BADNZw"><i class="fa-regular fa-address-card"></i></a>
+                        </div>
+                        <p>Nos adicione nas redes !</p>
+                    </div>
+                </div>
+                <div class="tc_c2 tc">
+                    <div class="experience container">
+                        <p>Bacharelando em Produção Cultural pelo IFRJ e pós-graduando em Educação, Cultura e Comunicação em Periferias Urbanas pela UERJ. Sua trajetória combina a produção cultural com a educação, destacando projetos que promovem a valorização do patrimônio cultural, a inclusão social e o fortalecimento da identidade local.</p>
+                        <p>Um dos autores do livro "Guapimirim, a Cidade da Gente", que aborda a história do município desde os sambaquis até sua emancipação, também é responsável por iniciativas como a Rede Cine+ Guapimirim, um projeto de cinema itinerante e mediação cultural, e eventos de grande porte, como o Celebra Guapi e o Guapi Gospel Festival, que reuniram milhares de pessoas.</p>
+                        <p>Na área de patrimônio cultural, atuou na coordenação de projetos como a Folia de Reis Estrela do Oriente e o Passaporte Cultural, promovendo a preservação e valorização das tradições locais. Como roteirista, desenvolveu o curta "Cores do Autodescobrimento", aprovado pela Lei Paulo Gustavo, que explora temas de autoconhecimento e identidade.</p>
+                        <p>" Minha missão é transformar comunidades por meio da cultura, educação e criatividade, sempre buscando conectar histórias e fomentar pertencimento."</p>
+                    </div>
+                </div>
+            </div>
+            <button class="mainButton directionBtn right" id="tt_controlBtn_next"><i class="fa-solid fa-chevron-right"></i></button>
 
         </section>
         <section id="contact" class="container">
@@ -348,7 +404,7 @@
                 <img src="./assets/backgrounds/apaBG.jpg" alt="apa de guapimirim" class="">
             </div>
             <h2>Fale conosco !</h2>
-            <form action="#" class="container">
+            <form action="http://localhost:9999/send-email" method="POST" class="container" id="contactForm">
                 <div class="clm">
                     <div class="container cn_container c_containers">
                         <div class="fild_wrapper" fw_name>

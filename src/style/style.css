@@ -34,6 +34,7 @@
   --s3--: #f2e204;
 
   --scrollbar-color--:  #ffffff5d;
+  --main-scrollbar-color--:  #ffffff;
 
   --yellow-border--: #f2dd04; /* Jogo 2 color */
   --lightblue-form-bg--: #3498db; /* Jogo 3 color */
@@ -42,7 +43,19 @@
 
   --bg-dark--: #303030;
   --bg-light--: #ddd;
-
+  --btn-bg--: #303030;
+  --btn-cl--: #ffffff;
+  --btn-border--: #494949;
+  --btn-shadow-1--: #383838;
+  --btn-shadow-2--: #000000;
+  --btn-h-s-1--: #4d4c4c;
+  --btn-h-s-2--: #000000;
+  --btn-h-s-3--: #4d4c4c;
+  --btn-h-s-4--: #000000;
+  --btn-a-s-1--:   #4d4c4c;
+  --btn-a-s-2--:   #000000;
+  --btn-a-s-3--:   #4d4d4d;
+  --btn-a-s-4--:   #000000;
   --white--: #fff;
   --white-t3--: #ffffff4d;
   --white-t4--: #ffffff66;
@@ -51,6 +64,7 @@
   --letter--: #fff;
   --gray-dark-letter-: #161616;
   --shadow--: #000;
+  --passive-shadow--: #fff;
   --h3-color: #e3e3e3;
 
   --red-alert--: #ec0404;
@@ -63,8 +77,6 @@ html {
 
 body {
   width: 100vw;
-  overflow-y: auto;
-  overflow-x: hidden;
   scrollbar-width: none; /* Firefox */
   font-size: 1.6rem;
   background-color: var(--bg--);
@@ -74,9 +86,33 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow-x: clip;
 
   & button {
     cursor: pointer;
+  }
+  & .mainButton {
+    background-color: var(--btn-bg--);
+    border-radius: 50%;
+    box-shadow: inset 4px 4px 10px var(--btn-shadow-1--), inset -4px -4px 10px var(--btn-shadow-2--);
+    color: var(--btn-cl--);
+    cursor: pointer;
+    font-size: 18px;
+    padding: 15px 20px;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid var(--btn-border--);
+    filter: drop-shadow(1px 1px 1px var(--shadow--));
+    font-weight: 100;
+  }
+
+  & .mainButton:hover {
+    box-shadow: inset 2px 2px 5px var(--btn-h-s-1--), inset -2px -2px 10px var(--btn-h-s-2--), 2px 2px 5px var(--btn-h-s-3--), -2px -2px 5px var(--btn-h-s-4--);
+    transform: scale(1.05);
+  }
+
+  & .mainButton:active {
+    outline: none;
+    box-shadow: inset 2px 2px 10px var(--btn-a-s-1--), inset -2px -2px 10px var(--btn-a-s-2--), 2px 2px 10px var(--btn-a-s-3--), -2px -2px 10px var(--btn-a-s-4--);
   }
   & img {
     user-select: none;
@@ -108,6 +144,7 @@ body {
           position: relative;
           display: inline-block;
           height: 11vh;
+          filter: drop-shadow(1px 1px 1px var(--shadow--));
         }
       }
 
@@ -134,6 +171,8 @@ body {
             transition: all 0.1s linear;
             border: none;
             outline: none;
+          filter: drop-shadow(1px 1px 1px var(--shadow--));
+
           }
 
           & button.navBtn:hover,
@@ -217,7 +256,101 @@ body {
     width: 100%;
     max-width: 1920px;
     padding: 0px 100px;
+  
 
+    & .main_scrollbar {
+      position: fixed;
+      top: 15%;
+      right: 10px;
+      width: 20px;
+      height: 75%;
+      z-index: 10;
+
+      & .s_container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        & .main_scrollBar {
+          position: absolute;
+          opacity: 0;
+          top: 0;
+          left: 50%;
+          height: 100%;
+          width: 1px;
+          transform: translate(-50%);
+          transition: all .5s ease;
+          background-color: var(--main-scrollbar-color--);
+        }
+
+        & .main_scrollThumb {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 20px;
+          width: 20px;
+          border-radius: 50%;
+          background-color: var(--main-soft-light);
+          z-index: 9;
+          filter: drop-shadow(1px 1px 1px var(--shadow--));
+          cursor: grab;
+          transition: background-color .5s ease;
+        }
+        & .main_scrollThumb.active,
+          .main_scrollThumb:hover {
+            background-color: var(--main-g-bg);
+          transition: background-color .5s ease;
+
+          }
+        & .main_scrollThumb.active ~ .main_scrollBar,
+          .main_scrollThumb:hover ~ .main_scrollBar{
+          transition: all .5s ease;
+          opacity: 1;
+        }
+      }
+    }
+    & #mainPopUp.active{display: block;}
+    & #mainPopUp{
+      width: 300px;
+      border: 1px solid white;
+      border-radius: 10px;
+      position: fixed;
+      top: calc(12.5vh + 20px);
+      right: 20px;
+      display: none;
+      overflow: hidden;
+      z-index: 11;
+      background-color: var(--main-soft-light-t5);
+      filter: drop-shadow(1px 1px 1px var(--shadow--));
+
+      & .pp_container{
+        height: 100%;
+        width: 100%;
+        position: relative;
+        padding: 20px;
+        color: var(--letter--);
+        & #pp_closeBtn{
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          border-radius: 50%;
+          height: 3.9rem;
+          width: 4rem;
+          font-size: 3rem;
+          line-height: 4rem;
+          text-align: center;
+          border: none;
+          outline: none;
+          filter: drop-shadow(1px 1px 1px var(--shadow--));
+          background-color: var(--red-alert--);
+          color: var(--white--);
+        } 
+        & p {
+          font-size: 2.5rem;
+          filter: drop-shadow(1px 1px 1px var(--shadow--));
+        }
+      }
+    }
     & #background {
       height: calc(100vh - 20vh);
       width: 100vw;
@@ -407,9 +540,17 @@ body {
               height: 20px;
               width: 20px;
               border-radius: 50%;
-              background-color: var(--main-g-bg);
+              background-color: var(--main-soft-light);
               z-index: 9;
               filter: drop-shadow(1px 1px 1px var(--shadow--));
+              cursor: grab;
+              transition: background-color .5s ease;
+
+            }
+            & .tp_scrollThumb.active, .tp_scrollThumb:hover{
+              background-color: var(--main-g-bg);
+              transition: background-color .5s ease;
+
             }
             & .tp_scrollThumb.active ~ .tp_scrollBar,
               .tp_scrollThumb:hover ~ .tp_scrollBar{
@@ -667,22 +808,6 @@ body {
             max-width: 80%;
             border-radius: 15px;
           }
-          & .directionBtn {
-            height: 6vh;
-            width: 6vh;
-            border-radius: 50%;
-            border: 1px solid white;
-            outline: none;
-            background-color: var(--white-t4--);
-            filter: drop-shadow(2px 4px 6px var(--shadow--));
-            opacity: 1;
-            transition: opacity .5s ease;
-
-            & i {
-              font-size: 3rem;
-              color: var(--gray-dark-letter-);
-            }
-          }
           & .closeBtn {
             position: absolute;
             top: 2vh;
@@ -695,11 +820,6 @@ body {
             outline: none;
             border: 1px solid;
             font-size: 3rem;
-          }
-
-          & .directionBtn:hover {
-            background-color: var(--white-t3--);
-            transform: scale(1.05);
           }
           & .closeBtn:hover {
             transform: scale(1.05);
@@ -811,9 +931,18 @@ body {
               height: 20px;
               width: 20px;
               border-radius: 50%;
-              background-color: var(--main-g-bg);
+              background-color: var(--main-soft-light);
               z-index: 9;
               filter: drop-shadow(1px 1px 1px var(--shadow--));
+              transition: background-color .5s ease;
+
+
+            }
+            & .ph_scrollbarThumb.active,
+              .ph_scrollbarThumb:hover {
+                background-color: var(--main-g-bg);
+                transition: background-color .5s ease;
+
             }
             & .ph_scrollbarThumb.active ~ .ph_scrollBar,
               .ph_scrollbarThumb:hover ~ .ph_scrollBar {
@@ -1013,13 +1142,14 @@ body {
       align-items: center;
       justify-content: space-between;
 
-      & .team_container.active {
+      & .team_container {
         position: absolute;
+        left: 200%;
         top: 50%;
-        left: 50%;
         transform: translate(-50%, -50%);
         width: 80%;
         height: 90%;
+        max-height: 680px;
         background-color: var(--main-tm-deep);
         border: 1px solid var(--main-deep--);
         border-radius: 15px;
@@ -1027,6 +1157,12 @@ body {
         align-items: center;
         justify-content: space-between;
 
+        & .tc{
+          display: none;
+        }
+      }
+      & .team_container.active {
+        left: 50%;
         & .tc {
           padding: 10px;
           height: 100%;
@@ -1039,6 +1175,7 @@ body {
           flex-direction: column;
           align-items: center;
           justify-content: space-between;
+          display: flex;
 
           & .perfil {
             height: 19.1rem;
@@ -1133,6 +1270,28 @@ body {
                 }
               }
             }
+            & .q_container.th{
+              display: block;
+              text-align: center;
+              font-size: 1.8rem;
+              overflow: hidden;
+
+              & .q_list{
+                & .ql_item{
+                  text-decoration: none;
+                  word-wrap: break-word;
+                  word-break: keep-all;
+                  list-style: none;
+                  margin: 10px 0;
+                  font-size: 2rem;
+                  filter: drop-shadow(1px 1px 1px var(--shadow--));
+
+                  & i {
+                    margin:  0 10px;
+                  }
+                }
+              }
+            }
           }
           & .links {
             width: 100%;
@@ -1177,6 +1336,7 @@ body {
           color: #fff;
           filter: drop-shadow(1px 1px 3px var(--shadow--));
           margin-right: 10px;
+          display: block;
 
           & .experience {
             height: 100%;
@@ -1193,11 +1353,9 @@ body {
           }
         }
       }
-      & .team_container {
-        left: 150%;
-      }
 
-      & .directionBtn {
+
+      /* & .directionBtn {
         height: 7vh;
         width: 7vh;
         border-radius: 50%;
@@ -1214,7 +1372,7 @@ body {
       & .directionBtn:hover {
         background-color: var(--white-t3--);
         transform: scale(1.05);
-      }
+      } */
     }
     & #contact {
       position: relative;
@@ -1242,7 +1400,7 @@ body {
       }
 
       & h2 {
-        margin: 19vh 0 10px;
+        margin: 15vh 0 10px;
         font-size: 5rem;
         filter: drop-shadow(1px 1px 1px var(--shadow--));
       }
@@ -1545,9 +1703,9 @@ body {
     display: flex;
   }
 }
-body::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
-}
+/* body::-webkit-scrollbar {
+  display: none; 
+} */
 
 @media (max-width: 1600px) {
   html {
@@ -1566,7 +1724,32 @@ body::-webkit-scrollbar {
 
     & main {
       top: 9vh;
+      & .main_scrollbar {
+        & .s_container {
+          & .main_scroll_bar {
+            background-color: rgba(255, 255, 255, 0.177);
+          }
 
+          & .main_scrollThumb {
+            height: 13px;
+            width: 13px;
+            transform: translateX(25%);
+            
+
+          }
+        }
+      }
+      & #mainPopUp{
+        top: calc(9vh + 20px);
+        & .pp_container{
+          & #pp_closeBtn{
+            height: 2.75rem;
+            width: 3rem;
+            font-size: 2rem;
+            line-height: 3rem;
+          }
+        }
+      }
       & #background {
         height: calc(100vh - 13vh);
         top: 0;
@@ -1615,6 +1798,7 @@ body::-webkit-scrollbar {
                 height: 13px;
                 width: 13px;
                 transform: translateX(-5%);
+                
 
               }
             }
@@ -1774,6 +1958,9 @@ body::-webkit-scrollbar {
             }
           }
         }
+        & .testimonials_bg {
+          width: 80vw;
+        }
       }
       & #team {
         height: calc(100vh - 13vh);
@@ -1827,7 +2014,7 @@ body::-webkit-scrollbar {
         & .team_container {
           left: 150%;
         }
-
+/* 
         & .directionBtn {
           height: 7vh;
           width: 7vh;
@@ -1845,7 +2032,7 @@ body::-webkit-scrollbar {
         & .directionBtn:hover {
           background-color: var(--white-t3--);
           transform: scale(1.05);
-        }
+        } */
       }
       & #contact {
         height: calc(100vh - 13vh);

@@ -2,6 +2,8 @@ const express   = require('express')
 const cors      = require('cors')
 const path      = require('path')
 const {createProxyMiddleware} = require('http-proxy-middleware')
+const bodyParser = require('body-parser')
+const emailRoute = require('./src/javascript/routes/emailRoutes')
 
 const app = express()
 
@@ -11,6 +13,12 @@ app.use('/games/g1', express.static(path.join(__dirname, 'src/games/g1')))
 app.use('/games/g2', express.static(path.join(__dirname, 'src/games/g2')))
 app.use('/games/g3', cors(), express.static(path.join(__dirname, 'src/games/g3')))
 app.use('/games/g5', express.static(path.join(__dirname, 'src/games/g5')))
+
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
+// Usa as rotas de e-mail
+app.use(emailRoute)
 
 const proxyMiddleware = createProxyMiddleware({
     target: 'https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev', // URL do servidor externo
@@ -53,16 +61,5 @@ app.use('/app', createProxyMiddleware({
         }
     }
 }))
-
-
-// app.use( createProxyMiddleware({
-//     target: 'https://vlibras.gov.br',
-//     changeOrigin: true,
-//     on: {
-//         proxyReq: (proxyReq, req) => {
-//             // tentar ver o resutado por aqui e depois descartar a callback
-//         }
-//     }
-// }))
 
 app.listen(9999, () => console.log('plataforma teste sendo ouvida na porta 9999'))

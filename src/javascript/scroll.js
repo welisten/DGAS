@@ -87,7 +87,6 @@ const handleScrollbar = () => {
     document.addEventListener('touchend', () => {
         scrollDataControl.isDragging = false
     })
-
 }
 const syncScrollThumb = (e) => {
     let content_height, scrollTop
@@ -168,15 +167,82 @@ const syncPhContentScroll = (e) => {
 
     scrollLeft = e.target.scrollLeft
     content_width = ph_scrollContent.scrollWidth
-    console.log(scrollLeft, content_width)
     const thumbLeft = (scrollLeft / (content_width - e.target.clientWidth)) * 100
     
     activeBar(ph_scrollThumb)
     ph_scrollThumb.style.left = `${thumbLeft}%`
 }
 
+const main_scrollContent = document.querySelector('#mainEl')
+const main_scroll_bar = document.querySelector('.main_scrollBar')
+const main_scrollThumb = document.querySelector('.main_scrollThumb')
+const footer = document.querySelector('#footerEl')
+
+function setMainScroll(){
+    handleMainScrollEl()
+    window.addEventListener('scroll', (e) => {
+        syncMainElScroll(e)
+    })
+
+}
+
+const handleMainScrollEl = () => {
+    const mainScrollDataControl = {
+        isDragging: false,
+        startY: undefined,
+        startThumbTop: undefined
+    }
+    main_scrollThumb.addEventListener('mousedown', (e) => {
+        mainScrollDataControl.isDragging = true
+        mainScrollDataControl.startY = e.clientY
+        mainScrollDataControl.startThumbTop = main_scrollThumb.offsetTop
+
+        e.target.classList.toggle('active')
+
+        e.preventDefault()
+    })
+    document.addEventListener('mousemove', (e) => {
+        if(!mainScrollDataControl.isDragging)
+            return;
+
+        let offsetY = e.clientY - mainScrollDataControl.startY
+        let newTop = mainScrollDataControl.startThumbTop + offsetY
+        let roof = main_scroll_bar.offsetHeight - main_scrollThumb.offsetHeight
+
+        newTop = Math.max(0, Math.min(newTop, roof))
+        main_scrollThumb.style.top = `${newTop}px`
+
+        let new_content_top = (newTop / main_scroll_bar.offsetHeight)
+        let main_screen_height = 0.8 * window.innerHeight
+        let footerHeight = footer.scrollHeight
+        let content_height = (main_scrollContent.scrollHeight) - main_screen_height
+
+        window.scrollTo({
+            top: new_content_top * content_height,
+        })
+    })
+    document.addEventListener('mouseup', () => {
+        mainScrollDataControl.isDragging = false
+        main_scrollThumb.classList.toggle('active')
+
+    })
+}
+const syncMainElScroll = (e) => {
+    let content_height, scrollTop, footerHeight
+
+    scrollTop = window.scrollY
+    content_height = main_scrollContent.scrollHeight
+
+    const thumbTop = (scrollTop / (content_height - (.8 * window.innerHeight))) * 100
+    
+    activeBar(main_scrollThumb)
+    console.log(scrollTop , content_height, window.innerHeight)
+    main_scrollThumb.style.top = `${thumbTop}%`
+}
+
 export{
     setTheProjectTextScroll,
-    setPhotoScroll
+    setPhotoScroll,
+    setMainScroll
 }
 

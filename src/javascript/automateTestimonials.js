@@ -32,7 +32,6 @@ const handleTestimonialsChange = () => {
     testimonialsCards.forEach((card, cardIdx) => {
 
         card.classList.add("chaging")
-        console.log(card.classList)
 
         // aguardar o termino da animação css
         setTimeout(() => {
@@ -45,7 +44,6 @@ const handleTestimonialsChange = () => {
 
             currentTestimonials[cardIdx] = nextIndex(currentTestimonials[cardIdx])
             card.classList.remove("chaging")
-            console.log(card.classList)
         } ,2000)
 
         

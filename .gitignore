@@ -12,3 +12,6 @@ src/games/g4/package.json
 # Ignorar arquivos de build específicos (se padrões forem inconsistentes)
 src/games/g5/dist
 
+# Ignorar variaveis de ambiente
+.env
+

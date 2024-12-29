@@ -7,8 +7,6 @@ const general_colors = {
     shadow_d :     '#000000',
     h3_color_light:      '#e3e3e3',
     h3_color_dark:      '#303030',
-    bg_dark:        '#303030',
-    bg_light:        '#000000',
 
     white_t7 :  '#ffffffb3',
     white_t3 :  '#ffffff4d',
@@ -17,7 +15,23 @@ const general_colors = {
     black_t5 :  '#00000080',
     black_t4 :  '#00000066',
     bg_light :  '#dddddd',
-    bg_dark :   '#000000'
+    bg_dark  :  '#303030',
+    btn_bg_light: '#cdcdcd',
+    btn_bg_dark: '#303030',
+    btn_cl_light: '#4d4d4d',
+    btn_cl_dark: '#ffffff',
+    btn_border_dark: '#494949',
+    btn_border_light: '#bfbfbf',
+    btn_shadow_light_1: '#bcbcbc',
+    btn_shadow_dark_1: '#383838',
+
+    btn_hover_shadow_dark_1_3: '#4d4c4c',
+    btn_hover_shadow_light_1: '#bcbcbc',
+    btn_hover_shadow_light_3: '#797979',
+
+    scrollbar_general_light: '#000000',
+    scrollbar_main_light:'#000000',
+    scrollbar_general_dark: '#ffffff5d',
 }
 
 const colors_j1 = {

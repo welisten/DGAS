@@ -1,8 +1,9 @@
 import { palett } from "../constants/colors.js"
 import { setNavigation } from "./navigation.js"
-import { setTheProjectTextScroll, setPhotoScroll } from "./scroll.js"
+import { setTheProjectTextScroll, setPhotoScroll, setMainScroll } from "./scroll.js"
 import { setGalery, setPhotoScreen } from "./galery.js"
 import { updateTestimonial } from "./automateTestimonials.js"
+import { handleForm } from "./handleForm.js"
 
 setGalery()
 setNavigation()
@@ -10,13 +11,18 @@ setTheProjectTextScroll()
 setPhotoScroll()
 setPhotoScreen()
 updateTestimonial()
+setMainScroll()
+handleForm()
 
 let gameidx = 0
 
-let gameSectionBtns = document.querySelectorAll('.gameBtn')
-let gsControls_prev = document.querySelector('.gs_controlBtn.left')
-let gsControls_next = document.querySelector('.gs_controlBtn.right')
+const gameSectionBtns = document.querySelectorAll('.gameBtn')
+const gmControls_prev = document.querySelector('#gm_controlBtnPrev')
+const gmControls_next = document.querySelector('#gm_controlBtnNext')
 
+const teamContainers  = document.querySelectorAll('.team_container') 
+const ttControls_prev = document.querySelector('#tt_controlBtn_prev')
+const ttControls_next = document.querySelector('#tt_controlBtn_next')
 
 const root = document.documentElement
 let ph_bg, t_bg
@@ -24,7 +30,7 @@ let ph_bg, t_bg
 ph_bg = document.getElementById('photos_bg')
 t_bg = document.getElementById('testimonials_bg')
 
-gsControls_next.addEventListener('click', e => {
+gmControls_next.addEventListener('click', e => {
     gameidx >= 4 ? gameidx = 0 : gameidx++
 
     root.style.setProperty('--main-light--', palett[`light_${gameidx + 1}`])
@@ -72,7 +78,7 @@ gsControls_next.addEventListener('click', e => {
         }
     })
 })
-gsControls_prev.addEventListener('click', e => {
+gmControls_prev.addEventListener('click', e => {
     gameidx <= 0 ? gameidx = 4 : gameidx--
     root.style.setProperty('--main-light--', palett[`light_${gameidx + 1}`])
     root.style.setProperty('--main-dark--', palett[`dark_${gameidx + 1}`])
@@ -119,6 +125,10 @@ gsControls_prev.addEventListener('click', e => {
     })
 })
 
+ttControls_prev.addEventListener('click', () => teamContainers.forEach(c => c.classList.toggle('active')))
+ttControls_next.addEventListener('click', () => teamContainers.forEach(c => c.classList.toggle('active')))
+
+// contact inputs e label JS
 let cInputArr = document.querySelectorAll('.c_input')
 let cTextAreaEl = document.querySelector('#contact_message')
 
@@ -192,9 +202,8 @@ cInputArr.forEach(i => {
 
 })
 
-handleTextarea()
-
-function handleTextarea(){
+handleCtTextarea()
+function handleCtTextarea(){
     let relatedLabel = document.querySelector('label[for=message]')
 
     cTextAreaEl.addEventListener('mouseenter', (e) => {
