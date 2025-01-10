@@ -57,7 +57,26 @@
 </head>
 <body>
     <header>
-        <nav><button><a href="./../../../index.html">Home</a></button></nav>
+        <nav id="navEl">
+            <button class="logoBtn navBtn" sec_num="2" id="nav_logoBtn" title="logotipo">
+                <a href="./../../../index.html">
+                    <img src="./../../../assets/logos/DG_logo_light.png" alt="logo DG">
+                </a>
+            </button>
+            <div id="navbar"><div class="nb_group nb_group1">
+                    <button class="navBtn" sec_num="1">
+                    <a href="./../../../index.html">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </a>    
+                    </button>
+                </div><div class="nb_group nb_group2">
+                    <label class="switch">
+                        <input type="checkbox" id="slider" checked="true">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </nav>
     </header>
     <main>
         <div id="popUp">
@@ -113,7 +132,24 @@
             </section>
         </section>
     </main>
-    <footer></footer>
+    <footer id="footerEl">
+        <div class="f_relative_root container">
+            <div id="footer_bg">
+                <img src="./../../../assets/imgs/c1.png" alt="nuvem" class="f_cl1 f_cl">
+                <img src="./../../../assets/imgs/c2.png" alt="nuvem" class="f_cl2 f_cl">
+                <img src="./../../../assets/imgs/a1.png" alt="arbusto" class="f_a1 f_a">
+                <img src="./../../../assets/imgs/a2.png" alt="arbusto" class="f_a2 f_a">
+            </div>
+            <div class="footer_rules container">
+            <div class="f_r_down container">
+                <img src="./../../../assets/logos/r1.png" alt="régua" class="ruler_pg r1">
+                <img src="./../../../assets/logos/r2.png" alt="régua" class="ruler_pg r2">
+                <img src="./../../../assets/logos/r3.png" alt="régua" class="ruler_pg r3">
+                <img src="./../../../assets/logos/r4.png" alt="régua" class="ruler_pg r4">
+            </div>
+            </div>
+        </div>
+    </footer>
     <script>
         new window.VLibras.Widget('http://localhost:9999/app')
 

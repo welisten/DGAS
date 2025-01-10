@@ -1,0 +1,590 @@
+
+html {
+  font-size: 62.5%;
+  scrollbar-width: none; /* Firefox */
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+:root {
+  --main-light--: #228609;
+  --main-deep--: #01261c;
+  --main-dark--: #025930;
+  --main-soft-light: #038c33;
+  --main-soft-light-t5: #038c3380;
+  --main-p-bg: #008f00ad;
+  --main-g-bg: #00ca00;
+  --main-t-shadow1: #d8f7ca;
+  --main-t-shadow2: #68e32e;
+  --main-t-shadow3: #099f32;
+  --main-t-shadow4: #066529;
+  --main-t-shadow5: #063d17;
+  --main-tm-deep: #1e5004;
+  --bg--: #303030;
+
+  --scrollbar-color--: #ffffff5d;
+  --main-scrollbar-color--: #ffffff;
+  --white--: #fff;
+  --black--: #000;
+
+  --letter--: #fff;
+  --gray-dark-letter-: #161616;
+  --shadow--: #000;
+  --passive-shadow--: #fff;
+  --h3-color: #e3e3e3;
+
+  --red-alert--: #ec0404;
+}
+
+body {
+  width: 100vw;
+  /* height: 100%; */
+  scrollbar-width: none; /* Firefox */
+  font-size: 1.6rem;
+  background-color: var(--bg--);
+  transition: all 1s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow-x: clip;
+  font-family: monospace;
+
+
+  & button {
+    cursor: pointer;
+  }
+  & img {
+    user-select: none;
+  }
+  & header {
+    height: 12.5vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--main-light--);
+    border-radius: 0 0 5px 5px;
+    filter: drop-shadow(2px 2px 4px var(--shadow--));
+    z-index: 10;
+    transition: all 1s ease;
+
+    & nav {
+      height: 12.5vh;
+      width: 100%;
+      display: flex;
+
+      & .logoBtn {
+        background-color: transparent;
+        outline: none;
+        border: none;
+        cursor: pointer;
+
+        & img {
+          position: relative;
+          display: inline-block;
+          height: 11vh;
+          filter: drop-shadow(1px 1px 1px var(--shadow--));
+        }
+      }
+
+      & #navbar {
+        width: 100%;
+        height: 100%;
+        padding: 0px 2%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        & .nb_group {
+          width: 100%;
+
+          & button.navBtn {
+            display: inline-block;
+            font-size: 4rem;
+            color: white;
+            background-color: transparent;
+            text-decoration: none;
+            text-transform: capitalize;
+            margin: 0 1%;
+            padding: 1%;
+            transition: all 0.1s linear;
+            border: none;
+            outline: none;
+            filter: drop-shadow(1px 1px 1px var(--shadow--));
+            & a {
+              text-decoration: none;
+              color: white;
+            }
+          }
+
+          & button.navBtn:hover,
+          .switch:hover {
+            transform: scale(1.1);
+          }
+        }
+
+        & .nb_group2 {
+          direction: rtl;
+          display: flex;
+          align-items: center;
+
+          /* From Uiverse.io by satyamchaudharydev */
+          /* The switch - the box around the slider */
+          & .switch {
+            margin-left: 5%;
+            display: inline-block;
+            --width-of-switch: 5rem;
+            --height-of-switch: 3rem;
+            /* size of sliding icon -- sun and moon */
+            --size-of-icon: 2.4rem;
+            /* it is like a inline-padding of switch */
+            --slider-offset: 1.8rem;
+            position: relative;
+            width: var(--width-of-switch);
+            height: var(--height-of-switch);
+          }
+          /* Hide default HTML checkbox */
+          & .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+          }
+          /* The slider */
+          & .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #f4f4f5;
+            transition: 0.4s;
+            border-radius: 30px;
+          }
+          & .slider:before {
+            position: absolute;
+            content: "";
+            height: var(--size-of-icon, 1.4em);
+            width: var(--size-of-icon, 1.4em);
+            border-radius: 20px;
+            left: var(--slider-offset, 0.3em);
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(40deg, #ff0080, #ff8c00 70%);
+            transition: 0.4s;
+          }
+          & input:checked + .slider {
+            background-color: #303136;
+          }
+          & input:checked + .slider:before {
+            left: calc(
+              100% - (var(--size-of-icon, 1.4em) + var(--slider-offset, 0.3em))
+            );
+            background: #303136;
+            /* change the value of second inset in box-shadow to change the angle and direction of the moon  */
+            box-shadow: inset -3px -2px 5px -2px #8983f7,
+              inset -4px -2px 0 0 #a3dafb;
+          }
+        }
+      }
+    }
+  }
+
+  & main {
+    height: calc(100% - 12.5vh);
+    width: 100vw;
+    position: relative;
+    overflow-y: scroll;
+    top: 12.5vh;
+    -ms-overflow-style: none;
+    padding-bottom: 20vh;
+    & .main_scrollbar {
+      position: fixed;
+      top: 15%;
+      right: 10px;
+      width: 20px;
+      height: 75%;
+      z-index: 10;
+
+      & .s_container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+
+        & .main_scrollBar {
+          position: absolute;
+          opacity: 0;
+          top: 0;
+          left: 50%;
+          height: 75%;
+          width: 1px;
+          transform: translate(-50%);
+          transition: all 0.5s ease;
+          background-color: var(--main-scrollbar-color--);
+        }
+
+        & .main_scrollThumb {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 20px;
+          width: 20px;
+          border-radius: 50%;
+          background-color: var(--main-soft-light);
+          z-index: 9;
+          filter: drop-shadow(1px 1px 1px var(--shadow--));
+          cursor: grab;
+          transition: background-color 0.5s ease;
+        }
+        & .main_scrollThumb.active,
+        .main_scrollThumb:hover {
+          background-color: var(--main-g-bg);
+          transition: background-color 0.5s ease;
+        }
+        & .main_scrollThumb.active ~ .main_scrollBar,
+        .main_scrollThumb:hover ~ .main_scrollBar {
+          transition: all 0.5s ease;
+          opacity: 1;
+        }
+      }
+    }
+    & #mainPopUp.active {
+      display: block;
+    }
+    & #mainPopUp {
+      width: 300px;
+      border: 1px solid white;
+      border-radius: 10px;
+      position: fixed;
+      top: calc(12.5vh + 20px);
+      right: 20px;
+      display: none;
+      overflow: hidden;
+      z-index: 11;
+      background-color: var(--main-soft-light-t5);
+      filter: drop-shadow(1px 1px 1px var(--shadow--));
+
+      & .pp_container {
+        height: 100%;
+        width: 100%;
+        position: relative;
+        padding: 20px;
+        color: var(--letter--);
+        & #pp_closeBtn {
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          border-radius: 50%;
+          height: 3.9rem;
+          width: 4rem;
+          font-size: 3rem;
+          line-height: 4rem;
+          text-align: center;
+          border: none;
+          outline: none;
+          filter: drop-shadow(1px 1px 1px var(--shadow--));
+          background-color: var(--red-alert--);
+          color: var(--white--);
+        }
+        & p {
+          font-size: 2.5rem;
+          filter: drop-shadow(1px 1px 1px var(--shadow--));
+        }
+      }
+    }
+
+    & .containerText{
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      height: fit-content;
+      font-size: 2.2rem;
+      color: var(--letter--);
+
+      & h1, h2 {
+        filter: drop-shadow(1px 1px 1px var(--shadow--));
+        color: #62f93d;
+        
+      }
+      
+      & h3{
+        color: var(--main-g-bg);
+        font-size: 3rem;
+        filter: drop-shadow(1px 1px 1px var(--shadow--));
+
+      }
+      em{
+        width: 100%;
+        display: inline-block;
+        text-align: center;
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+      }
+      & h1 {
+          font-size: 5rem;
+          text-align: center;
+      }
+      & h2 {
+          font-size: 3.5rem;
+          margin-top: 20px;
+      }
+      & p {
+          margin: 10px 0;
+      }
+      & ul {
+          margin: 10px 0;
+          padding-left: 20px;
+      }
+      & ul li {
+          margin: 5px 0;
+      }
+      & a {
+          color: #0066cc;
+          text-decoration: none;
+      }
+      & a:hover {
+          text-decoration: underline;
+      }
+      section {
+        margin: 20px 0;
+      }
+      section h2 {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  & main::-webkit-scrollbar {
+    display: none;
+  }
+
+  & footer {
+    height: 27.5vh;
+    width: 100%;
+    position: sticky;
+    bottom: 0vh;
+    left: 0px;
+    background: var(--main-dark--);
+    transition: all 1s ease;
+    border-radius: 5px 5px 0 0;
+    filter: drop-shadow(-2px -2px 3px var(--shadow--));
+    z-index: 50;
+
+    & .f_relative_root {
+      display: flex;
+      position: relative;
+      height: 100%;
+      width: 100vw;
+      z-index: 100;
+      justify-content: center;
+
+      & .f_pd_owners {
+        position: absolute;
+        top: 1px;
+        left: 50%;
+        transform: translate(-50%, -100%);
+        height: 4vh;
+        width: 500px;
+
+        & #pageDown {
+          display: block;
+          background-color: var(--main-dark--);
+          border-radius: 15px 15px 0 0;
+          height: 100%;
+          width: 100%;
+          color: white;
+          font-size: 1.8rem;
+          line-height: 2.8rem;
+          border: none;
+          outline: none;
+          & i,
+          span {
+            color: var(--red-alert--);
+          }
+        }
+      }
+      & #footer_bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 100;
+        overflow: hidden;
+
+        & .f_cl {
+          position: absolute;
+          top: 10px;
+          height: 13%;
+          filter: drop-shadow(2px 2px 2px var(--shadow--));
+        }
+        /* retirar depois */
+        & .f_cl2 {
+          right: 20px;
+        }
+        & .f_a {
+          position: absolute;
+          bottom: 10%;
+          height: 15%;
+          filter: drop-shadow(2px 2px 2px var(--shadow--));
+        }
+        & .f_a1 {
+          left: 10%;
+        }
+        & .f_a2 {
+          right: 10%;
+        }
+        & .f_s {
+          position: absolute;
+          bottom: 11%;
+          left: 5%;
+          height: 15%;
+          filter: drop-shadow(2px 2px 2px var(--shadow--));
+        }
+        & .f_c {
+          position: absolute;
+          bottom: 40%;
+          right: 4%;
+          height: 15%;
+          filter: drop-shadow(2px 2px 2px var(--shadow--));
+        }
+        & .f_ground {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          height: 10%;
+          width: 100%;
+          align-items: center;
+          justify-content: center;
+
+          & .f_g {
+            width: 3.3%;
+            filter: drop-shadow(2px 2px 2px var(--shadow--));
+          }
+        }
+      }
+      & .footer_rules {
+        height: 87%;
+        width: 65%;
+        padding: 2px 0 0;
+        flex-direction: column;
+        justify-content: space-evenly;
+
+        & .f_r_top {
+          opacity: 0;
+          height: 40%;
+          width: 100%;
+          border-radius: 15px;
+          filter: drop-shadow(2px 2px 2px var(--shadow--));
+          position: relative;
+          align-items: center;
+          justify-content: space-around;
+          color: white;
+          filter: none;
+          transition: all 0.5s ease;
+
+          & .container {
+            height: 100%;
+            z-index: 100;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            color: white;
+            margin: 0 20px;
+            font-size: 2rem;
+            list-style: none;
+            & a {
+              text-decoration: none;
+              color: white;
+            }
+
+            & a:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+        & .f_r_top.active {
+          opacity: 1;
+          transition: all 1s ease;
+        }
+        & .f_r_down {
+          height: 60%;
+          width: fit-content;
+          min-width: 115%;
+          padding: 5px 1%;
+          background-color: #f2f2f2;
+          border-radius: 15px;
+          filter: drop-shadow(2px 2px 2px var(--shadow--));
+          justify-content: space-around;
+          align-self: center;
+          position: relative;
+          & .f_l {
+            position: absolute;
+            bottom: 0%;
+            height: 100%;
+          }
+          & .f_l1 {
+            left: 0px;
+          }
+          & .f_l2 {
+            right: 0px;
+          }
+          & .r_wrapper {
+            height: 100%;
+            width: 98%;
+            justify-content: space-around;
+            align-items: center;
+            & .ruler_pg {
+              height: 80%;
+              filter: drop-shadow(1px 1px 1px #202020);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  & .container {
+    display: flex;
+  }
+}
+
+@media (max-width: 1600px) {
+  body{
+    &   main {
+      height: calc(100% - 9vh);
+      & .main_scrollbar {
+        & .s_container {
+          & .main_scroll_bar {
+            background-color: rgba(255, 255, 255, 0.177);
+          }
+  
+          & .main_scrollThumb {
+            height: 13px;
+            width: 13px;
+            transform: translateX(25%);
+            
+  
+          }
+        }
+      }
+      & #mainPopUp {
+        top: calc(9vh + 20px);
+        & .pp_container {
+          & #pp_closeBtn {
+            height: 2.75rem;
+            width: 3rem;
+            font-size: 2rem;
+            line-height: 3rem;
+          }
+        }
+      }
+    }
+  }
+
+}

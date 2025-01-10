@@ -5,6 +5,24 @@
 }
 
 :root{
+    /* Plataforma */
+    --main-light--: #ca09e4;
+    --main-deep--: #4d0476;
+    --main-dark--: #a307bb;
+    --main-soft-light: #d73af0;
+    --main-soft-light-t5: #d73af080;
+    --main-p-bg: #4307bbad;
+    --main-g-bg: #a36aff;
+    --main-t-shadow1: #fbd2fe;
+    --main-t-shadow2: #ec95f8;
+    --main-t-shadow3: #b66bd3;
+    --main-t-shadow4: #7a45a5;
+    --main-t-shadow5: #4d0476;
+    --main-tm-deep: #6e0c9e;
+    --bg--: #303030;
+    --letter--: #fff;
+    --shadow--: #000;
+    /* Jogo */
     --main-color-: #ca09e4;
     --main-color-dark: #a200ff;
 
@@ -23,38 +41,136 @@ body {
     justify-content: center;
     flex-direction: column;
     overflow: hidden;
-
-    & header{
-        height: 10%;
+    
+    & header {
+        height: 12.5vh;
         width: 100%;
-
-        & nav{
-            height: 100%;
-            width: 100%;
-            background: var(--main-color-);
-            border-radius: 0 0 5px 5px;
-            z-index: 100;
-            top: 0;
-            filter: drop-shadow(2px 2px 4px var(--BG-shadow));
-
-            & button{
-                height: 100%;
-                padding: 0 30px;
-                background: none;
-                border: none;
-                color: var(--white--);
-                font-size: 2rem;
-
-                & a{
-                    text-decoration: none;
-                    height: 100%;
-                    width: 100%;
-                    color: var(--white--);
-                }
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: var(--main-light--);
+        border-radius: 0 0 5px 5px;
+        filter: drop-shadow(2px 2px 4px var(--shadow--));
+        z-index: 10;
+        transition: all 1s ease;
+    
+        & nav {
+          height: 12.5vh;
+          width: 100%;
+          display: flex;
+    
+          & .logoBtn {
+            background-color: transparent;
+            outline: none;
+            border: none;
+            cursor: pointer;
+    
+            & img {
+              position: relative;
+              display: inline-block;
+              height: 11vh;
+              filter: drop-shadow(1px 1px 1px var(--shadow--));
             }
+          }
+    
+          & #navbar {
+            width: 100%;
+            height: 100%;
+            padding: 0px 2%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+    
+            & .nb_group {
+              width: 100%;
+    
+              & button.navBtn {
+                display: inline-block;
+                font-size: 3rem;
+                color: var(--letter--);
+                background-color: transparent;
+                text-decoration: none;
+                text-transform: capitalize;
+                margin: 0 1%;
+                padding: 1%;
+                transition: all 0.1s linear;
+                border: none;
+                outline: none;
+                filter: drop-shadow(1px 1px 1px var(--shadow--));
+              }
+    
+              & button.navBtn:hover,
+              .switch:hover {
+                transform: scale(1.1);
+              }
+            }
+    
+            & .nb_group2 {
+              direction: rtl;
+              display: flex;
+              align-items: center;
+    
+              /* From Uiverse.io by satyamchaudharydev */
+              /* The switch - the box around the slider */
+              & .switch {
+                margin-left: 5%;
+                display: inline-block;
+                --width-of-switch: 3.5em;
+                --height-of-switch: 2em;
+                /* size of sliding icon -- sun and moon */
+                --size-of-icon: 1.4em;
+                /* it is like a inline-padding of switch */
+                --slider-offset: 0.3em;
+                position: relative;
+                width: var(--width-of-switch);
+                height: var(--height-of-switch);
+              }
+              /* Hide default HTML checkbox */
+              & .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+              }
+              /* The slider */
+              & .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #f4f4f5;
+                transition: 0.4s;
+                border-radius: 30px;
+              }
+              & .slider:before {
+                position: absolute;
+                content: "";
+                height: var(--size-of-icon, 1.4em);
+                width: var(--size-of-icon, 1.4em);
+                border-radius: 20px;
+                left: var(--slider-offset, 0.3em);
+                top: 50%;
+                transform: translateY(-50%);
+                background: linear-gradient(40deg, #ff0080, #ff8c00 70%);
+                transition: 0.4s;
+              }
+              & input:checked + .slider {
+                background-color: #303136;
+              }
+              & input:checked + .slider:before {
+                left: calc(
+                  100% - (var(--size-of-icon, 1.4em) + var(--slider-offset, 0.3em))
+                );
+                background: #303136;
+                /* change the value of second inset in box-shadow to change the angle and direction of the moon  */
+                box-shadow: inset -3px -2px 5px -2px #8983f7,
+                  inset -10px -4px 0 0 #a3dafb;
+              }
+            }
+          }
         }
     }
-
     & main{
         display: flex;
         align-items: center;
@@ -167,16 +283,127 @@ body {
             
         }
     }
-
-    & footer{
-        height: 10%;
+    & footer {
+        height: 12vh;
+        height: 9vh;
         width: 100%;
+        position: fixed;
         bottom: 0;
-        background-color: var(--main-color-);
+        background: var(--main-dark--);
+        transition: all 1s ease;
         border-radius: 5px 5px 0 0;
-        filter: drop-shadow(-2px -2px 3px var(--BG-shadow));
+        filter: drop-shadow(-2px -2px 3px var(--shadow--));
+        z-index: 50;
+    
+        & .f_relative_root {
+          display: flex;
+          position: relative;
+          height: 100%;
+          width: 100vw;
+          z-index: 100;
+          justify-content: center;
+    
+          & .f_pd_owners {
+            position: absolute;
+            top: 1px;
+            left: 50%;
+            transform: translate(-50%, -100%);
+            height: 4vh;
+            width: 500px;
+    
+            & #pageDown {
+              display: block;
+              background-color: var(--main-dark--);
+              border-radius: 15px 15px 0 0;
+              height: 100%;
+              width: 100%;
+              color: var(--letter--);
+              font-size: 1.8rem;
+              line-height: 2.8rem;
+              border: none;
+              outline: none;
+              & i,
+              span {
+                color: var(--red-alert--);
+              }
+            }
+          }
+          & #footer_bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            z-index: 100;
+            overflow: hidden;
+    
+            & .f_cl {
+              position: absolute;
+              top: 0px;
+              height: 33%;
+              filter: drop-shadow(2px 2px 2px var(--shadow--));
+            }
+            /* retirar depois */
+            & .f_cl2 {
+              right: 20px;
+            }
+            & .f_a {
+              position: absolute;
+              bottom: 0;
+              height: 33%;
+              filter: drop-shadow(2px 2px 2px var(--shadow--));
+            }
+            & .f_a1 {
+              left: 10%;
+            }
+            & .f_a2 {
+              right: 10%;
+            }
+            & .f_s {
+              position: absolute;
+              bottom: 11%;
+              left: 5%;
+              height: 33%;
+              filter: drop-shadow(2px 2px 2px var(--shadow--));
+            }
+            & .f_c {
+              position: absolute;
+              bottom: 24%;
+              right: 4%;
+              height: 30%;
+              filter: drop-shadow(2px 2px 2px var(--shadow--));
+            }
+            & .f_l {
+              position: absolute;
+              bottom: 10%;
+              height: 55%;
+            }
+            & .f_l1 {
+              left: 17%;
+            }
+            & .f_l2 {
+              right: 17%;
+            }
+          }
+          & .footer_rules {
+            height: 100%;
+            width: 60%;
+            padding: 2px 0 0;
+            & .f_r_down {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+    
+            & .ruler_pg {
+              height: 100%;
+              filter: drop-shadow(1px 1px 1px #202020);
+            }
+        }
+        }
     }
-
 }
 
 @media screen and (max-width: 1600px ) {

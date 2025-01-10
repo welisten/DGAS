@@ -1,12 +1,12 @@
 import { palett } from "../constants/colors.js"
-import { setNavigation } from "./navigation.js"
+import { setPlataformHeader } from "./navigation.js"
 import { setTheProjectTextScroll, setPhotoScroll, setMainScroll, setFooter } from "./scroll.js"
 import { setGalery, setPhotoScreen } from "./galery.js"
 import { updateTestimonial } from "./automateTestimonials.js"
 import { handleForm } from "./handleForm.js"
 
 setGalery()
-setNavigation()
+setPlataformHeader()
 setTheProjectTextScroll()
 setPhotoScroll()
 setPhotoScreen()

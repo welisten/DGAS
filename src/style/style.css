@@ -139,7 +139,7 @@ body {
         outline: none;
         border: none;
         cursor: pointer;
-
+        
         & img {
           position: relative;
           display: inline-block;
@@ -162,17 +162,16 @@ body {
           & button.navBtn {
             display: inline-block;
             font-size: 3rem;
-            color: var(--letter--);
             background-color: transparent;
             text-decoration: none;
             text-transform: capitalize;
+            color: var(--letter--);
             margin: 0 1%;
             padding: 1%;
             transition: all 0.1s linear;
             border: none;
             outline: none;
-          filter: drop-shadow(1px 1px 1px var(--shadow--));
-
+            filter: drop-shadow(1px 1px 1px var(--shadow--));
           }
 
           & button.navBtn:hover,
@@ -191,12 +190,12 @@ body {
           & .switch {
             margin-left: 5%;
             display: inline-block;
-            --width-of-switch: 3.5em;
-            --height-of-switch: 2em;
+            --width-of-switch: 5rem;
+            --height-of-switch: 3rem;
             /* size of sliding icon -- sun and moon */
-            --size-of-icon: 1.4em;
+            --size-of-icon: 2.4rem;
             /* it is like a inline-padding of switch */
-            --slider-offset: 0.3em;
+            --slider-offset: 1.8rem;
             position: relative;
             width: var(--width-of-switch);
             height: var(--height-of-switch);
@@ -241,7 +240,7 @@ body {
             background: #303136;
             /* change the value of second inset in box-shadow to change the angle and direction of the moon  */
             box-shadow: inset -3px -2px 5px -2px #8983f7,
-              inset -10px -4px 0 0 #a3dafb;
+              inset -4px -2px 0 0 #a3dafb;
           }
         }
       }
@@ -1539,7 +1538,8 @@ body {
     z-index: 50;
 
     & .f_relative_root {
-      display: relative;
+      display: flex;
+      position: relative;
       height: 100%;
       width: 100vw;
       z-index: 100;
@@ -1615,18 +1615,6 @@ body {
           height: 15%;
           filter: drop-shadow(2px 2px 2px var(--shadow--));
         }
-        & .f_l {
-          position: absolute;
-          bottom: 10%;
-          height: 55%;
-        }
-        & .f_l1 {
-          left: 17%;
-        }
-        & .f_l2 {
-          right: 17%;
-        }
-
         & .f_ground {
           position: absolute;
           bottom: 0;
@@ -1688,17 +1676,30 @@ body {
         }
         & .f_r_down {
           height: 60%;
-          width: 100%;
+          width: fit-content;
+          min-width: 115%;
           padding: 5px 1%;
           background-color: #f2f2f2;
           border-radius: 15px;
           filter: drop-shadow(2px 2px 2px var(--shadow--));
           justify-content: space-around;
           align-self: center;
+          position: relative;
 
           & .ruler_pg {
             height: 100%;
             filter: drop-shadow(1px 1px 1px #202020);
+          }
+          & .f_l {
+            position: absolute;
+            bottom: 0%;
+            height: 100%;
+          }
+          & .f_l1 {
+            left: 0px;
+          }
+          & .f_l2 {
+            right: 0px;
           }
         }
       }
@@ -1850,6 +1851,7 @@ body {
         }
         & .h3_right {
           right: -10rem;
+          bottom: 6vh;
         }
         & .polaroidsColumn {
           top: 10vh;

@@ -12,6 +12,7 @@ const tp_scrollThumb = document.querySelector('.tp_scrollThumb')
 // FAZER:
 //     - perceber eventos iguais, como chamadas diferentes, e alterar para um evento com uma chamada que lide com tds as situações
 //     - Debounce
+//     - A Função setMainScroll precisa ser ajustada para que sejá mais acertiva, escalavel, e mais modularizada.
 
 function setTheProjectTextScroll(){
     handleScrollbar()
@@ -176,70 +177,101 @@ const syncPhContentScroll = (e) => {
     ph_scrollThumb.style.left = `${thumbLeft}%`
 }
 
-const main_scrollContent = document.querySelector('#mainEl')
-const main_scroll_bar = document.querySelector('.main_scrollBar')
-const main_scrollThumb = document.querySelector('.main_scrollThumb')
-const footer = document.querySelector('#footerEl')
+// const main_scrollContent = document.querySelector('#mainEl')
+// const main_scroll_bar = document.querySelector('.main_scrollBar')
+// const main_scrollThumb = document.querySelector('.main_scrollThumb')
+// const footer = document.querySelector('#footerEl')
 
 function setMainScroll(){
-    handleMainScrollEl()
-    window.addEventListener('scroll', (e) => {
-        syncMainElScroll(e)
-    })
+    // vamos declarar novas variaveis aqui pois.. essa função será chamada para toda pagina.
+    let content, bar, thumb;
 
+    content = document.querySelector('#mainEl')
+    bar = document.querySelector('.main_scrollBar')
+    thumb = document.querySelector('.main_scrollThumb')
+
+    handleMainScrollEl(thumb, bar, content)
+
+    window.addEventListener('scroll', (e) => {
+        let content, thumb;
+        content = document.querySelector('#mainEl')
+        thumb = document.querySelector('.main_scrollThumb')
+
+        syncMainElScroll(e, content, thumb)
+    })
 }
 
-const handleMainScrollEl = () => {
+const handleMainScrollEl = (thumb, bar, content) => {
     const mainScrollDataControl = {
         isDragging: false,
         startY: undefined,
         startThumbTop: undefined
     }
-    main_scrollThumb.addEventListener('mousedown', (e) => {
-        mainScrollDataControl.isDragging = true
-        mainScrollDataControl.startY = e.clientY
-        mainScrollDataControl.startThumbTop = main_scrollThumb.offsetTop
-
-        e.target.classList.toggle('active')
-
-        e.preventDefault()
-    })
-    document.addEventListener('mousemove', (e) => {
+    const onMouseUp = () => {
+        mainScrollDataControl.isDragging = false
+        thumb.classList.remove('active')
+        document.removeEventListener('mousemove', onMouseMove)
+        document.removeEventListener('mouseup', onMouseUp)
+    }
+    const onMouseMove = (e) => {
         if(!mainScrollDataControl.isDragging)
             return;
 
         let offsetY = e.clientY - mainScrollDataControl.startY
         let newTop = mainScrollDataControl.startThumbTop + offsetY
-        let roof = main_scroll_bar.offsetHeight - main_scrollThumb.offsetHeight
-
+        let roof = bar.offsetHeight - thumb.offsetHeight
+        
         newTop = Math.max(0, Math.min(newTop, roof))
-        main_scrollThumb.style.top = `${newTop}px`
+        console.log(roof)
+        thumb.style.top = `${newTop}px`
 
-        let new_content_top = (newTop / main_scroll_bar.offsetHeight)
-        let main_screen_height = 0.8 * window.innerHeight
-        let footerHeight = footer.scrollHeight
-        let content_height = (main_scrollContent.scrollHeight) - main_screen_height
+        let headerHeight = document.querySelector('header').clientHeight
+        let footerHeight = document.querySelector('footer').clientHeight
 
+        let headerAndFooterHeightPercentual = (headerHeight + footerHeight)/ window.innerHeight
+        let mainHeightPercentual = 1.0 - headerAndFooterHeightPercentual
+
+        let new_content_top = (newTop / bar.offsetHeight)
+        let main_screen_height = mainHeightPercentual * window.innerHeight
+        let content_height = (content.scrollHeight) - main_screen_height
+        
+        let top = new_content_top * content_height
         window.scrollTo({
-            top: new_content_top * content_height,
+            top: top
         })
-    })
-    document.addEventListener('mouseup', () => {
-        mainScrollDataControl.isDragging = false
-        main_scrollThumb.classList.toggle('active')
+    }
 
+    thumb.addEventListener('mousedown', (e) => {
+        mainScrollDataControl.isDragging = true
+        mainScrollDataControl.startY = e.clientY
+        mainScrollDataControl.startThumbTop = thumb.offsetTop
+        e.target.classList.add('active')
+
+        document.addEventListener('mousemove', onMouseMove)
+        document.addEventListener('mouseup', onMouseUp)
+        
+        e.preventDefault()
     })
 }
-const syncMainElScroll = (e) => {
-    let content_height, scrollTop, footerHeight
-
-    scrollTop = window.scrollY
-    content_height = main_scrollContent.scrollHeight
-
-    const thumbTop = (scrollTop / (content_height - (.8 * window.innerHeight))) * 100
+const syncMainElScroll = (e, content, thumb) => {
+    let content_height, windowScrollY;
+    let headerAndFooterHeightPercentual, mainHeightPercentual;
     
-    activeBar(main_scrollThumb)
-    main_scrollThumb.style.top = `${thumbTop}%`
+    windowScrollY = window.scrollY
+    content_height =content.scrollHeight
+
+    let headerHeight = document.querySelector('header').clientHeight
+    let footerHeight = document.querySelector('footer').clientHeight
+
+    headerAndFooterHeightPercentual = (headerHeight + footerHeight) / window.innerHeight
+    mainHeightPercentual = 1.0 - headerAndFooterHeightPercentual
+
+    let PADDING = 250
+    const thumbTop = (windowScrollY / ((content_height + PADDING) - (mainHeightPercentual * window.innerHeight))) * 100
+    
+    activeBar(thumb)
+    thumb.style.top = `${thumbTop}%`
+
 }
 
 function setFooter(){
@@ -272,6 +304,7 @@ export{
     setTheProjectTextScroll,
     setPhotoScroll,
     setMainScroll,
-    setFooter
+    setFooter,
+    syncMainElScroll
 }
 

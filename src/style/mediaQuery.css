@@ -1,16 +1,39 @@
+html{
+    font-size: 62.5%;
+}
 @media (max-width: 1600px){
+    html {
+        font-size: 42.5%;
+    }
     body{
         & header{
             height: 9vh;
             & nav{
                 height: 9vh;
+                & .switch{
+                    font-size: 150%;
+                }
+                & .logoBtn {
+                    & img {
+                      height: 9vh;
+                    }
+                  }
             }
         }
         & main{
             top: 9vh;
         }
         & footer{
-            height: 24vh;
+            /* height: 24vh; */
+            & .f_relative_root {
+                & .f_pd_owners {
+                  width: 400px;
+                  & #pageDown {
+                    font-size: 2rem;
+                    line-height: 3rem;
+                  }
+                }
+              }
         }
     }
 }

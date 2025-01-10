@@ -1,6 +1,6 @@
 import { general_colors, palett } from "../constants/colors.js"
 
-function setNavigation(){
+function setNavigationClick(){
     const anySection = document.querySelector('#theProject')
     let navBtns = document.querySelectorAll('.navBtn')
     
@@ -16,10 +16,16 @@ function setNavigation(){
             })
         })
     })
+}
 
+function setLightModeSlider(){
     const slider = document.querySelector('input#slider')
+    const INITIAL_URL = 'localhost:9999'
+
     slider.addEventListener('click', () => {
         let root = document.documentElement
+        let urlLastTerm = document.URL.split('/').filter(str => str !== '').pop()
+        let isPlatformDoc = urlLastTerm === 'index.html' || urlLastTerm === INITIAL_URL
         
         if(slider.checked){
             root.style.setProperty('--bg--', general_colors.bg_dark)
@@ -39,7 +45,9 @@ function setNavigation(){
             root.style.setProperty('--btn-a-s-4--', general_colors.black)
             root.style.setProperty('--scrollbar-color--', general_colors.scrollbar_general_dark)
             root.style.setProperty('--main-scrollbar-color--', general_colors.white)
-
+            if(!isPlatformDoc){
+                root.style.setProperty('--letter--', general_colors.letter_l)
+            }
         }else{
             root.style.setProperty('--bg--', general_colors.bg_light)  
             root.style.setProperty('--h3-color', general_colors.h3_color_dark)
@@ -58,10 +66,20 @@ function setNavigation(){
             root.style.setProperty('--btn-a-s-4--', general_colors.white)
             root.style.setProperty('--scrollbar-color--', general_colors.scrollbar_general_light)
             root.style.setProperty('--main-scrollbar-color--', general_colors.scrollbar_main_light)
+            if(!isPlatformDoc) {
+                root.style.setProperty('--letter--', general_colors.letter_d)
+            }
         }
     })
 }
 
+function setPlataformHeader(){
+    setNavigationClick()
+    setLightModeSlider()
+}
+
 export{
-    setNavigation
+    setNavigationClick,
+    setLightModeSlider,
+    setPlataformHeader
 }
