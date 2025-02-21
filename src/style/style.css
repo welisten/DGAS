@@ -14,13 +14,14 @@
 
 :root {
   /* green theme */
-  --main-light--: #228609;
+  --main-light--: rgb(34, 134, 9);
   --main-deep--: #01261c;
   --main-dark--: #025930;
-  --main-soft-light: #038c33;
+  --main-soft-light: rgb(3, 140, 51);
+  --main-soft-light: #269e08;
   --main-soft-light-t5: #038c3380;
   --main-p-bg: #008f00ad;
-  --main-g-bg: #00ca00;
+  --main-g-bg: rgb(0, 202, 0);
   --main-t-shadow1: #d8f7ca;
   --main-t-shadow2: #68e32e;
   --main-t-shadow3: #099f32;

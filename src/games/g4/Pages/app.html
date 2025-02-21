@@ -8,11 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/phaser@v3.80.1/dist/phaser.min.js"></script>
     <!-- font-awesome - 6.5.2 -->
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
-    <!-- textFit -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/textfit/2.4.0/textFit.min.js"></script>
+      rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
     <!-- JS -->
     <script type="module" src="./../Js/pre.js"></script>
     <!-- CSS -->
@@ -23,54 +19,85 @@
   <body>
     <header>
       <nav id="navEl">
-        <button
+        <div
           class="logoBtn navBtn"
           sec_num="2"
           id="nav_logoBtn"
-          title="logotipo"
+          title="Logotipo"
+          tabindex="50"
+          aria-hidden="false"
+          role="img"
         >
-          <a href="./../../../index.html">
-            <img
-              src="./../../../assets/logos/DG_logo_light.png"
-              alt="logo DG"
-            />
-          </a>
-        </button>
+          <img
+            src="./../../../assets/logos/DG_logo_light.png"
+            class="dgLogo"
+            alt="Desenvolvendo Guapimirim Atravéz dos Sentidos logotipo"
+            title="Logotipo"
+            aria-label="Desenvolvendo guapimirim atravéz dos Sentidos"
+          />
+      </div>
         <div id="navbar">
           <div class="nb_group nb_group1">
-            <button class="navBtn" sec_num="1">
-              <a href="./../../../index.html">
-                <i class="fa-solid fa-arrow-left"></i>
-              </a>
+            <button 
+            class="navBtn" 
+            sec_num="1"
+            title="Clique para voltar para plataforma de jogos"
+            tabindex="51"
+            aria-label="Voltar a plataforma de Jogos"
+            onclick="window.location.href = './../../../index.html'"
+            >
+              <i class="fa-solid fa-home"></i>
             </button>
           </div>
           <div class="nb_group nb_group2">
-            <label class="switch">
-              <input type="checkbox" id="slider" checked="true" />
+            <label class="switch" for="iluminação" title="alternat iluminação" aria-label="Modo noturno" aria-describedby="slider">
+              <input type="checkbox"
+                     tabindex="52"
+                     id="slider" 
+                     checked="true" 
+                     name="iluminação"
+                     title="Clique para alternar a iluminação"
+                     aria-checked="true"
+                     aria-pressed="true"
+                     aria-label="Modo noturno"
+                     accesskey="l" 
+                     role="switch"
+                     />
+
               <span class="slider"></span>
             </label>
           </div>
         </div>
       </nav>
     </header>
-    <main class="container">
+    <main class="container" role="main">
+      <div id="popUpMessage" role="alertdialog" hidden>
+        <button class="popup_btn"   
+                id="popUpBtn" 
+                title="Clique para fechar o alerta" 
+                aria-label="Fechar alerta">
+                  <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="popupText active" aria-live="polite"><p role="alertdialog"></p></div>
+      </div>
       <div class="boundary container">
         <div class="loading" id="loading">
-          <!-- preload here ! -->
           <div class="wrapper">
             <div class="container">
               <img
                 src="./../Assets/imgs/preguica_pre.png"
                 class="preguica right"
                 alt="Bicho preguiça ouvindo música"
+                aria-hidden="true"
               />
               <img
                 src="./../Assets/imgs/preguica_pre.png"
                 class="preguica left"
                 alt="Bicho preguiça ouvindo música"
+                aria-hidden="true"
               />
               <div class="ld_group">
-                <p>Carregando...</p>
+                <p aria-busy="true" id="p-carregando">Carregando...</p>
                 <img
                   src="./../Assets/imgs/loading_gif.gif"
                   class="loading_gif"
@@ -82,32 +109,26 @@
         </div>
 
         <div id="toTextReader" class="toReader">
-          <p class="textToReader" aria-live="assertive"></p>
+          <p class="textToReader" id="textToReader" aria-live="assertive"></p>
         </div>
 
-        <div id="game_container" class="inactive">
+        <div id="game_container" class="inactive">  
           <div class="gameControls container">
             <button
               class="btn controls"
               id="muteBtn"
               title="Som do jogo"
               aria-label="alternar som"
+              tabindex="47"
             >
               <i class="fa-solid fa-volume-high"></i>
-            </button>
-            <button
-              class="btn controls"
-              id="lightBtn"
-              title="Modo de iluminação"
-              aria-label="alternar iluminação"
-            >
-              <i class="fa-regular fa-sun"></i>
             </button>
             <button
               class="btn controls"
               id="infoBtn"
               title="Instruções"
               aria-label="instruções"
+              tabindex="48"
             >
               <i class="fa-solid fa-circle-info"></i>
             </button>
@@ -116,14 +137,95 @@
               id="accessBtn"
               title="Acessibilidade"
               aria-label="alternar accessibilidade"
+              tabindex="49"
             >
               <i class="fa-regular fa-eye"></i>
             </button>
           </div>
+          <div class="instructions container" id="info" aria-expanded="false" role="region">
+                <div class="title container">
+                    <p class="t-text" tabindex="1">Bem-vindo à plataforma: <span class="g4-name">Sons do Rio</span> !</p>
+                    <!-- <p class="sub-text" tabindex="2">Nesta plataforma, você poderá se divertir explorando os diferentes sons presentes em Guapimirim.<br> misturando sons e batidas, você será o DJ dessa festa.<br></p> -->
+                </div>
+                <div class="body-g container i-body" role="contentinfo" id="gameInformation">
+                    <p class="i-b0" tabindex="2" aria-labelledby="gameInformation">Como funciona:</p>
+                    <div class="board i-b1">
+                        <p tabindex="3">
+                            <span class="board-points">1</span> - <span class="board-p-title">Explorando os lugares.</span><br>Você vai começar escolhendo um local da lista de lugares em Guapimirim. Cada lugar é único e possui sons característicos.
+                        </p>
+                        <p tabindex="4">
+                            <span class="board-points">2</span> - <span class="board-p-title">Escolhendo as faixas.</span><br>Dentro de cada local, existe uma mesa de som, com uma lista de faixas. Use o mouse ou a navegação do teclado para escolher no máximo cinco delas.
+                        </p>
+                        <p tabindex="5">
+                            <span class="board-points">3</span> - <span class="board-p-title">Dando PLAY na mixagem.</span><br>Tendo escolhido a faixas desejada para a mixagem, a imagen relativa ao som irá aparecer na tela para que você perceba com mais detalhes a sua escolhas. Agora só basta apertar o botão  de PLAY e PAUSE.
+                        </p>
+                        <p tabindex="6">
+                          <span class="board-points">4</span> - <span class="board-p-title">Leitor de tela.</span><br>
+                          Se você estiver usando um leitor de tela, ou seja, o botão de accessibilidade estiver ativo, o jogo irá se integrar ao leitor proporcionando uma experiência mais acessível
+                      </p>
+                    </div>
+                    <div class="board i-b2">
+                        <p tabindex="7">
+                           <span class="board-points">5</span> - <span class="board-p-title">Botões de controle.</span><br> Na parte inferior do estudio de mixagem há 3 botões:<br>
+                           <div class="list">
+                            <p tabindex="8" class="listItems">1º <strong>Pagina principal</strong> - Que te faz retornar ao menu.</p>
+                            <p tabindex="9" class="listItems">2º <strong>Play e Pause (juntos)</strong> - te permite dar play e pause na mixagem.</p>
+                            <p tabindex="10" class="listItems last_p">3º <strong>Lixeira</strong> - permite você apagar suas escolhar, para fazer novas.</p>
+                        </div>
+                        </p>
+                        <p tabindex="11"><span class="board-points">6</span> - <span class="board-p-title">Atalhos.</span><br>
+                            <div class="list">
+                                <p tabindex="12" class="listItems">1º - <strong>Para voltar ou sair de uma seção da tela, use o botão "ESC" como atalho rápido</strong>.</p>
+                                <p tabindex="13" class="listItems">2º - <strong>Para navegar entre os elementos, use o botão “TAB” ou as "SETAS" como atalho rápido</strong>.</p>
+                                <p tabindex="14" class="listItems last_p">3º - <strong>Para selecionar um elemento em foco, aperte o botão "ENTER"</strong>.</p>
+                                <p tabindex="15" class="listItems last_p">3º - <strong>Para redefinir suas escolhas, aperte o botão "BACKSPACE"</strong>.</p>
+                            </div>
+                        </p>
+                    </div>
+                </div>
+                <div class="body-p container i-body active" role="contentinfo" id="proposalInformations">
+                    <p class="i-b0" tabindex="2" aria-labelledby="proposalInformations">Sobre o Jogo:</p>
+                    <div class="board i-b1">
+                        <p tabindex="3">
+                            Este jogo foi feito para ajudar as crianças a explorar a natureza e seus sons de forma divertida e fácil. Aqui você vai poder misturar diferentes sons naturais de uma região e adiciona-los a um ambiente !
+                        </p>
+                        <p tabindex="4">
+                            Com sons e usabilidade simples e intuitiva, você vai descobrir que a imaginação nãotem limites, e com ela podemos ir longe. O jogo foi criado pensando em todo mundo, para que todas as crianças, mesmo aquelas que possuem limitações para enxergar, possam aprender, se conectar, brincar e se divertir muito de maneira especial.
+                        </p>
+                        <p tabindex="5">
+                            Para os usuários que precisam de uma experiência ainda mais acessível, existe um <em>botão de acessibilidade</em>. Quando esse botão está ativado, ele ajusta o volume dos sons para se encaixar bem com o leitor de tela, proporciona orientações e descrições mais detalhadas, e ainda oferece atalhos fáceis para navegar pelo jogo dentre outras funcionalidades. Para aproveitar essas melhorias, basta ativar no início do jogo o botão de acessibilidade que fica a direita da tela, e tudo será ajustado para que você possa explorar os sons da natureza com toda a ajuda necessária!
+                        </p>
+                    </div>
+                    <div class="board i-b2">
+                        <p tabindex="6">
+                            Na parte à direita da tela do jogo, você encontrará alguns botões que ajudam a controlar diferentes funções do jogo. Aqui está uma explicação de cada um deles:
+                        </p>
+                        <p tabindex="7">
+                            <span class="controls"><i class="fa-solid fa-volume-high"></i></span><strong class="controls-title">Som do Jogo.</strong><br>Esse botão permite ativar ou desativar o som do jogo. Se quiser ajustar o nível do volume, será preciso alterar o volume diretamente no seu computador.
+                        </p>
+                        <!-- <p tabindex="9">
+                            <span class="controls"><i class="fa-regular fa-sun"></i></span> - <strong>Modo de Iluminação.</strong><br>Com esse botão, você pode mudar a aparência do jogo de modo claro para modo escuro. 
+                        </p> -->
+                        <p tabindex="8">
+                            <span class="controls"><i class="fa-solid fa-circle-info"></i></span><strong class="controls-title">Instruções.</strong><br>Ao clicar nesse botão, você verá informações importantes sobre como jogar e descobrir mais sobre o jogo.
+                        </p>
+                        <p tabindex="9" class="last_p">
+                            <span class="controls"><i class="fa-regular fa-eye"></i></span><strong class="controls-title">Modo de Acessibilidade.</strong><br>Esse botão ativa o modo de acessibilidade, que oferece ajustes especiais para tornar o jogo mais fácil de usar, como sons adequados para leitores de tela e descrições detalhadas dos elementos do jogo.
+                        </p>
+                    </div>
+                </div>
+                <img src="./../Assets/imgs/sttcloud.png" class="static-cloud sc1" alt="nuvem">
+                <img src="./../Assets/imgs/sttcloud.png" class="static-cloud sc2" alt="nuvem">
+                <img src="./../Assets/imgs/sttcloud.png" class="static-cloud sc3" alt="nuvem">
+                <img src="./../Assets/imgs/sttcloud.png" class="static-cloud sc4" alt="nuvem">
+                <button class="closeBtn btn" id="info-close" tabindex="16" aria-label="Fechar instruções" title="Fechar instruções"><i class="fa-solid fa-xmark"></i></button>
+                <button class="prevBtn btn i-navBtn" id="i-prev" tabindex="18" aria-label="próximo" title="Instruções anteriores"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="nextBtn btn i-navBtn" id="i-next" tabindex="16" aria-label="anterior" title="Próximas instruções"><i class="fa-solid fa-arrow-right"></i></button>
+          </div>
         </div>
       </div>
     </main>
-    <footer id="footerEl">
+    <footer id="footerEl" aria-hidden="true" role="contentinfo">
       <div class="f_relative_root container">
         <div id="footer_bg">
           <img
@@ -173,5 +275,6 @@
         </div>
       </div>
     </footer>
+    <script src="./../Js/script.js" type="module"></script>
   </body>
-</html>
+</h

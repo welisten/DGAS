@@ -3,83 +3,117 @@ const sightsData = {
         bgUrl: './../Assets/imgs/Rio_Soberbo_IMG.jpg',
         mainSampleName: 'cachoeira',
         samples: {
-            Cigarra: {
+            cigarra: {
                 alt:'cigarra',
-                img_src:'./../Assets/imgs/block_ex.png',
+                img_src:'./../Assets/imgs/animals/cigarraG4.png',
                 sound_src:'./../Assets/songs/',
                 soundName:'cigarra',
-                volume: 0.5
+                objName:'cigarra',
+                volume: 0.1,
+                delay: 0,
+                loop: true,
+                
             },
-            Sapo_Martelo: {
+            sapo_martelo: {
                 alt:'sapo martelo',
-                img_src:'./../Assets/imgs/block_ex.png',
+                img_src:'./../Assets/imgs/animals/sapomarteloG4.png',
                 sound_src:'./../Assets/songs/',
                 soundName:'sapomartelo',
-                volume: 0.5
+                objName:'sapo_martelo',
+                volume: 0.1,
+                delay: 10,
+                loop: true
             },
-            Ra_Assobiadora: {
+            ra_assobiadora: {
                 alt:'rã assobiadora',
-                img_src:'./../Assets/imgs/block_ex.png',
+                img_src:'./../Assets/imgs/animals/raassobiadoraG4.png',
                 sound_src:'./../Assets/songs/',
                 soundName:'raassobiadora',
-                volume: 0.5
+                objName:'raassobiadora',
+                volume: 0.05,
+                delay: 0,
+                loop: true
             },
-            Bemtevi: {
+            bemtevi: {
                 alt:'bem-te-vi',
-                img_src:'./../Assets/imgs/block_ex.png',
+                img_src:'./../Assets/imgs/animals/bemteviG4.png',
                 sound_src:'./../Assets/songs/',
                 soundName:'bemtevi',
-                volume: 0.5
+                objName:'bemtevi',
+                volume: 0.5,
+                delay: 10,
+                loop: true
             },
             sagui: {
                 alt:'sagui',
-                img_src:'./../Assets/imgs/block_ex.png',
+                img_src:'./../Assets/imgs/animals/saguiG4.png',
                 sound_src:'./../Assets/songs/',
                 soundName:'sagui',
-                volume: 0.5
+                objName:'sagui',
+                volume: 0.8,
+                delay: 0,
+                loop: true
             },
             pedras: {
                 alt:'pedras',
-                img_src:'./../Assets/imgs/block_ex.png',
+                img_src:'./../Assets/imgs/animals/pedraG4.png',
                 sound_src:'./../Assets/songs/',
                 soundName:'pedras',
-                volume: 0.5
+                objName:'pedras',
+                volume: 0.5,
+                delay: 0,
+                loop: true
             },
             pessoas: {
                 alt:'pessoas',
-                img_src:'./../Assets/imgs/block_ex.png',
+                img_src:'./../Assets/imgs/animals/pessoasG4.png',
                 sound_src:'./../Assets/songs/',
                 soundName:'pessoas',
-                volume: 0.5
+                objName:'pessoas',
+                volume: 0.1,
+                delay: 0,
+                loop: true
             },
-            Bugio: {
+            bugio: {
                 alt:'bugio',
-                img_src:'./../Assets/imgs/block_ex.png',
+                img_src:'./../Assets/imgs/animals/bugioG4.png',
                 sound_src:'./../Assets/songs/',
                 soundName:'bugio',
-                volume: 0.5
+                objName:'bugio',
+                volume: 0.15,
+                delay: 15,
+                loop: true
             },
-            sabia_Laranjeira: {
+            sabia_laranjeira: {
                 alt:'sabiá laranjeira',
-                img_src:'./../Assets/imgs/block_ex.png',
+                img_src:'./../Assets/imgs/animals/sabialaranjeiraG4.png',
                 sound_src:'./../Assets/songs/',
                 soundName:'sabialaranjeira',
-                volume: 0.5
+                objName:'sabia_laranjeira',
+                volume: 0.8,
+                delay: 0,
+                loop: true
             },
             grilo: {
                 alt:'grilo',
-                img_src:'./../Assets/imgs/block_ex.png',
+                img_src:'./../Assets/imgs/animals/griloG4.png',
                 sound_src:'./../Assets/songs/',
                 soundName:'grilo',
-                volume: 0.5
+                objName:'grilo',
+                volume: 0.1,
+                delay: 0,
+                loop: true
             },
             gaviao_carijo: {
                 alt:'gavião carijó',
-                img_src:'./../Assets/imgs/block_ex.png',
+                img_src:'./../Assets/imgs/animals/gaviaocarijoG4.png',
                 sound_src:'./../Assets/songs/',
                 soundName:'gaviaocarijo',
-                volume: 0.5
-            },
+                objName:'gaviao_carijo',
+                volume: 1,
+                delay: 0,
+                loop: true
+            }
         }
     },
     Centro: {

@@ -72,7 +72,7 @@ class Preloader{
         })
 
         this.load.on('complete',  () => {
-            let textToReaderEl
+            let textToReaderEl, pElemCarregando
 
             audioDataArray.forEach( dataObj => saveOnStore(store, dataObj.name, getAudio(dataObj.name)))
             
@@ -81,7 +81,10 @@ class Preloader{
             }
 
             textToReaderEl = document.querySelector('.textToReader')
+            pElemCarregando = document.querySelector('#p-carregando')
+
             textToReaderEl.textContent = "carregamento concluido"
+            pElemCarregando.setAttribute('aria-buzy', false)
             
             this.time.delayedCall(1000, () => {
                 loadingContainer.classList.remove('active')

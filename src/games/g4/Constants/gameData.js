@@ -2,10 +2,10 @@ import { plataformData } from "../../../constants/plataformData.js"
 
 const gameData = {
     app: undefined, 
-    isMute: false,
+    isMute: true,
     isDarkMode: plataformData.isDarkMode,
     isPaused: false,
-    isAccess: false,
+    isAccess: true,
     isClickable: false,
     isPlayingSound: false,
     lastAccText: '',
