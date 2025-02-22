@@ -278,6 +278,7 @@ function setFooter(){
     const footerRulesEl = document.querySelector('.f_r_top')
     if (!footerRulesEl) {
         console.warn("Elemento '.f_r_top' não encontrado.");
+        return
     }
     let isFooterShown = false
     

@@ -94,6 +94,8 @@ class App {
         
         hmLamp_IMG.setAttribute('alt', 'Lampada de teto')
         menu_icon_IMG.setAttribute('alt', 'Gatinho')
+        hmLamp_IMG.setAttribute('inert', '')
+        menu_icon_cont.setAttribute('inert', '')
         invitation.textContent = 'Vamos fazer um som ?'
         menuTitle.textContent = 'Escolha uma base:'
         menu_opt1.textContent = 'Rio soberbo'
@@ -102,7 +104,7 @@ class App {
         invitation.setAttribute('tabindex', 4)
         invitation.setAttribute('role', 'paragraph')
         menuTitle.setAttribute('tabindex', 5)
-        menuTitle.setAttribute('aria-label', 'Escolha uma opção do menu')
+        menuTitle.setAttribute('aria-label', 'Escolha uma base dentre as opções do menu')
         menuTitle.setAttribute('role', 'paragraph')
         hm_Menu.setAttribute('aria-labelledly', 'hm_menuTitle')
         menu_opt1.setAttribute('tabindex', 6)
@@ -165,7 +167,7 @@ class App {
             const hm_IntroMessage = this.createNewElement('p', 'hm_message')
             const skipButton = this.createNewElement('button', 'hm_msg_skip')
 
-            const message = `Olá, Amiguinho!<br>Aqui, você vai descobrir muitos sons incríveis! Cada clique pode trazer uma surpresa. será o som de um animal? De um instrumento? Ou de algo que você conhece muito bem? <br>Este jogo foi feito para todos! Se você não pode ver tão bem, não se preocupe! Os sons vão te guiar nessa aventura.<br>Pronto para começar? Então, abra bem os ouvidos e divirta-se!`
+            const message = `Olá Amiguinho!<br>Aqui você vai descobrir muitos sons incríveis! Cada clique pode trazer uma surpresa. será o som de um animal? De um instrumento? Ou de algo que você conhece muito bem? <br>Este jogo foi feito para todos! Se você não pode ver tão bem, não se preocupe! Os sons vão te guiar nessa aventura.<br>Pronto para começar? Então, abra bem os ouvidos e divirta-se!`
 
             welcomeTxt.textContent = 'Bemvindos ao'
             gameName.textContent = 'Sons do Rio.'
@@ -173,7 +175,7 @@ class App {
             skipButton.textContent = 'Pular >'
             
             initialMessage.setAttribute('title','mensagem inicial')
-            skipButton.setAttribute('aria-label', 'pular instruções')
+            skipButton.setAttribute('aria-label', 'pular introdução')
 
             title.append(welcomeTxt, gameName)
 

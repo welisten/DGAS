@@ -78,7 +78,14 @@ const activeGameInformationBoard = () => {
     
     if(gameData.mainScene === 'Game' ){
         body_iProposal.classList.add('active')
-        body_iGame.classList.remove('active')  
+        body_iGame.classList.remove('active')
+        
+        const introBoard = document.querySelector('#hm_initialMessage')
+        const samplesBoard = document.querySelector('.hm_sampleTable')
+
+        if(introBoard)  introBoard.setAttribute('inert', '')
+        if(samplesBoard) samplesBoard.setAttribute('inert', '')
+
     } else {
         body_iProposal.classList.remove('active')
         body_iGame.classList.add('active') 
@@ -98,13 +105,19 @@ const closeInformationBoard = () => {
 
     let choiceReq = document.querySelector('.hm-b-title')
     if(gameData.isAccess){
-        document.querySelector("#textToReader").textContent = "Intruções fechadas"
+        document.querySelector("#textToReader").textContent = "Instruções fechadas"
         if(choiceReq) setTimeout(() => choiceReq.focus(), 50)
     }
     
     const info = document.querySelector('#info')
+    const introBoard = document.querySelector('#hm_initialMessage')
+    const samplesBoard = document.querySelector('.hm_sampleTable')
+    
     info.classList.toggle('active')
     info.setAttribute('aria-expanded', false)
+
+    if(introBoard)  introBoard.removeAttribute('inert')
+    if(samplesBoard) samplesBoard.removeAttribute('inert')
 }
 const toggleInfoSections = () => {
     if(!info.classList.contains('active')){

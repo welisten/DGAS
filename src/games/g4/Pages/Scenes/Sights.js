@@ -105,7 +105,8 @@ class Sights{
         const choicesAmount = 5
 
         setting_board_img.setAttribute('alt', 'ilustração do menu')
-        // setting_board_img.setAttribute('tabindex', 0)
+        setting_board_img.setAttribute('tabindex', 1)
+        setting_board_img.setAttribute('aria-label', 'Essa é sua mesa de som')
         setting_board_img_control.setAttribute('alt', 'Mixando audio')
 
         const sgh_menu_body = this.createNewElement('tbody','sgh_menu_body')
@@ -113,7 +114,7 @@ class Sights{
         const sgh_thead_row = this.createNewElement('tr','sgh_thead_row' )
         const table_header_data = this.createNewElement('th', 'sgh_thead_data')
 
-        table_header_data.textContent = `Escolha ${choicesAmount} faixas para tocar`
+        table_header_data.textContent = `Escolha até ${choicesAmount} faixas para tocar`
         table_header_data.setAttribute('tabindex', 1)
 
         sgh_thead_row.append(table_header_data)

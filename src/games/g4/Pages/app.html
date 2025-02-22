@@ -142,13 +142,12 @@
               <i class="fa-regular fa-eye"></i>
             </button>
           </div>
-          <div class="instructions container" id="info" aria-expanded="false" role="region">
+          <div class="instructions container" id="info" aria-expanded="false" role="complementary" aria-labelledby="gameInformation">
                 <div class="title container">
                     <p class="t-text" tabindex="1">Bem-vindo à plataforma: <span class="g4-name">Sons do Rio</span> !</p>
-                    <!-- <p class="sub-text" tabindex="2">Nesta plataforma, você poderá se divertir explorando os diferentes sons presentes em Guapimirim.<br> misturando sons e batidas, você será o DJ dessa festa.<br></p> -->
                 </div>
-                <div class="body-g container i-body" role="contentinfo" id="gameInformation">
-                    <p class="i-b0" tabindex="2" aria-labelledby="gameInformation">Como funciona:</p>
+                <div class="body-g container i-body" role="region">
+                    <p class="i-b0" tabindex="2" id="gameInformation">Instruções sobre como o Jogo funciona:</p>
                     <div class="board i-b1">
                         <p tabindex="3">
                             <span class="board-points">1</span> - <span class="board-p-title">Explorando os lugares.</span><br>Você vai começar escolhendo um local da lista de lugares em Guapimirim. Cada lugar é único e possui sons característicos.
@@ -157,7 +156,7 @@
                             <span class="board-points">2</span> - <span class="board-p-title">Escolhendo as faixas.</span><br>Dentro de cada local, existe uma mesa de som, com uma lista de faixas. Use o mouse ou a navegação do teclado para escolher no máximo cinco delas.
                         </p>
                         <p tabindex="5">
-                            <span class="board-points">3</span> - <span class="board-p-title">Dando PLAY na mixagem.</span><br>Tendo escolhido a faixas desejada para a mixagem, a imagen relativa ao som irá aparecer na tela para que você perceba com mais detalhes a sua escolhas. Agora só basta apertar o botão  de PLAY e PAUSE.
+                            <span class="board-points">3</span> - <span class="board-p-title">Dando PLAY na mixagem.</span><br>Tendo escolhido as faixas desejada para a mixagem, a imagen relativa ao som irá aparecer na tela para que você perceba com mais detalhes as sua escolhas. Agora só basta apertar o botão  de PLAY e PAUSE.
                         </p>
                         <p tabindex="6">
                           <span class="board-points">4</span> - <span class="board-p-title">Leitor de tela.</span><br>
@@ -168,9 +167,9 @@
                         <p tabindex="7">
                            <span class="board-points">5</span> - <span class="board-p-title">Botões de controle.</span><br> Na parte inferior do estudio de mixagem há 3 botões:<br>
                            <div class="list">
-                            <p tabindex="8" class="listItems">1º <strong>Pagina principal</strong> - Que te faz retornar ao menu.</p>
-                            <p tabindex="9" class="listItems">2º <strong>Play e Pause (juntos)</strong> - te permite dar play e pause na mixagem.</p>
-                            <p tabindex="10" class="listItems last_p">3º <strong>Lixeira</strong> - permite você apagar suas escolhar, para fazer novas.</p>
+                            <p tabindex="8" class="listItems">1º <strong>Página principal</strong> - Que te faz retornar ao menu.</p>
+                            <p tabindex="9" class="listItems">2º <strong lang="en">Play</strong> e <strong lang="en">Pause</strong> - te permite reproduzir e pausar a mixagem.</p>
+                            <p tabindex="10" class="listItems last_p">3º <strong>Lixeira</strong> - permite você apagar suas escolhas, para fazer novas.</p>
                         </div>
                         </p>
                         <p tabindex="11"><span class="board-points">6</span> - <span class="board-p-title">Atalhos.</span><br>
@@ -183,14 +182,14 @@
                         </p>
                     </div>
                 </div>
-                <div class="body-p container i-body active" role="contentinfo" id="proposalInformations">
-                    <p class="i-b0" tabindex="2" aria-labelledby="proposalInformations">Sobre o Jogo:</p>
+                <div class="body-p container i-body active" role="region"  aria-describedby="proposalInformation">
+                    <p class="i-b0" tabindex="2"  id="proposalInformations">Proposta do Jogo:</p>
                     <div class="board i-b1">
                         <p tabindex="3">
-                            Este jogo foi feito para ajudar as crianças a explorar a natureza e seus sons de forma divertida e fácil. Aqui você vai poder misturar diferentes sons naturais de uma região e adiciona-los a um ambiente !
+                            Este jogo foi feito para ajudar as crianças a explorar a natureza e seus sons de forma divertida e fácil. Aqui você vai poder misturar diferentes sons naturais de uma região e adicionar eles a um ambiente da nossa cidade !
                         </p>
                         <p tabindex="4">
-                            Com sons e usabilidade simples e intuitiva, você vai descobrir que a imaginação nãotem limites, e com ela podemos ir longe. O jogo foi criado pensando em todo mundo, para que todas as crianças, mesmo aquelas que possuem limitações para enxergar, possam aprender, se conectar, brincar e se divertir muito de maneira especial.
+                            Com sons simples e jogabilidade intuitiva, você vai descobrir que a imaginação não tem limites, e com ela podemos ir longe. O jogo foi criado pensando em todo mundo, para que todas as crianças, mesmo aquelas que possuem limitações para enxergar, possam; aprender, se conectar, brincar e se divertir muito e de maneira especial.
                         </p>
                         <p tabindex="5">
                             Para os usuários que precisam de uma experiência ainda mais acessível, existe um <em>botão de acessibilidade</em>. Quando esse botão está ativado, ele ajusta o volume dos sons para se encaixar bem com o leitor de tela, proporciona orientações e descrições mais detalhadas, e ainda oferece atalhos fáceis para navegar pelo jogo dentre outras funcionalidades. Para aproveitar essas melhorias, basta ativar no início do jogo o botão de acessibilidade que fica a direita da tela, e tudo será ajustado para que você possa explorar os sons da natureza com toda a ajuda necessária!
@@ -218,9 +217,9 @@
                 <img src="./../Assets/imgs/sttcloud.png" class="static-cloud sc2" alt="nuvem">
                 <img src="./../Assets/imgs/sttcloud.png" class="static-cloud sc3" alt="nuvem">
                 <img src="./../Assets/imgs/sttcloud.png" class="static-cloud sc4" alt="nuvem">
-                <button class="closeBtn btn" id="info-close" tabindex="16" aria-label="Fechar instruções" title="Fechar instruções"><i class="fa-solid fa-xmark"></i></button>
-                <button class="prevBtn btn i-navBtn" id="i-prev" tabindex="18" aria-label="próximo" title="Instruções anteriores"><i class="fa-solid fa-arrow-left"></i></button>
-                <button class="nextBtn btn i-navBtn" id="i-next" tabindex="16" aria-label="anterior" title="Próximas instruções"><i class="fa-solid fa-arrow-right"></i></button>
+                <button class="closeBtn btn" id="info-close" tabindex="18" aria-label="Fechar instruções" title="Fechar instruções"><i class="fa-solid fa-xmark"></i></button>
+                <button class="prevBtn btn i-navBtn" id="i-prev" tabindex="17" aria-label="instruções anteriores" title="Instruções anteriores"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="nextBtn btn i-navBtn" id="i-next" tabindex="16" aria-label="próximas instruções" title="Próximas instruções"><i class="fa-solid fa-arrow-right"></i></button>
           </div>
         </div>
       </div>
