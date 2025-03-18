@@ -10,6 +10,10 @@
     <link
       rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
     <!-- JS -->
+     <script type="module">
+        import { updateGameData } from './../Js/script.js'
+        updateGameData()
+     </script>
     <script type="module" src="./../Js/pre.js"></script>
     <!-- CSS -->
     <link rel="stylesheet" href="./../Style/game4.css" />
@@ -71,14 +75,14 @@
       </nav>
     </header>
     <main class="container" role="main">
-      <div id="popUpMessage" role="alertdialog" hidden>
+      <div id="popUpMessage" hidden>
         <button class="popup_btn"   
                 id="popUpBtn" 
                 title="Clique para fechar o alerta" 
                 aria-label="Fechar alerta">
                   <i class="fa-solid fa-xmark"></i>
         </button>
-        <div class="popupText active" aria-live="polite"><p role="alertdialog"></p></div>
+        <p class="popupText active"></p>
       </div>
       <div class="boundary container">
         <div class="loading" id="loading">
@@ -150,22 +154,22 @@
                     <p class="i-b0" tabindex="2" id="gameInformation">Instruções sobre como o Jogo funciona:</p>
                     <div class="board i-b1">
                         <p tabindex="3">
-                            <span class="board-points">1</span> - <span class="board-p-title">Explorando os lugares.</span><br>Você vai começar escolhendo um local da lista de lugares em Guapimirim. Cada lugar é único e possui sons característicos.
+                            <span class="board-points">1</span> - <span class="board-p-title">Explorando os lugares.</span><br>Você vai começar escolhendo um local da lista de lugares de Guapimirim no menu. Cada lugar é único e possui sons característicos.
                         </p>
                         <p tabindex="4">
                             <span class="board-points">2</span> - <span class="board-p-title">Escolhendo as faixas.</span><br>Dentro de cada local, existe uma mesa de som, com uma lista de faixas. Use o mouse ou a navegação do teclado para escolher no máximo cinco delas.
                         </p>
                         <p tabindex="5">
-                            <span class="board-points">3</span> - <span class="board-p-title">Dando PLAY na mixagem.</span><br>Tendo escolhido as faixas desejada para a mixagem, a imagen relativa ao som irá aparecer na tela para que você perceba com mais detalhes as sua escolhas. Agora só basta apertar o botão  de PLAY e PAUSE.
+                            <span class="board-points">3</span> - <span class="board-p-title">Dando <span lang="en">PLAY</span> na mixagem.</span><br>Tendo escolhido as faixas desejadas para a mixagem, a imagen relativa ao som irá aparecer na tela para que você perceba com mais detalhes as sua escolhas. Agora só basta apertar o botão  de <SPAN lang="en">PLAY</SPAN> e <SPAN lang="en">PAUSE</SPAN> .
                         </p>
                         <p tabindex="6">
                           <span class="board-points">4</span> - <span class="board-p-title">Leitor de tela.</span><br>
-                          Se você estiver usando um leitor de tela, ou seja, o botão de accessibilidade estiver ativo, o jogo irá se integrar ao leitor proporcionando uma experiência mais acessível
+                          Se você estiver usando um leitor de tela,ative o botão de accessibilidade a direita da tela, dentre os botões de configuração. Assim o jogo irá se integrar ao leitor proporcionando uma experiência mais acessível
                       </p>
                     </div>
                     <div class="board i-b2">
                         <p tabindex="7">
-                           <span class="board-points">5</span> - <span class="board-p-title">Botões de controle.</span><br> Na parte inferior do estudio de mixagem há 3 botões:<br>
+                           <span class="board-points">5</span> - <span class="board-p-title">Botões de controle.</span><br> Na parte inferior do estudio de mixagem, dentro do jogo, há 3 botões:<br>
                            <div class="list">
                             <p tabindex="8" class="listItems">1º <strong>Página principal</strong> - Que te faz retornar ao menu.</p>
                             <p tabindex="9" class="listItems">2º <strong lang="en">Play</strong> e <strong lang="en">Pause</strong> - te permite reproduzir e pausar a mixagem.</p>
@@ -175,7 +179,7 @@
                         <p tabindex="11"><span class="board-points">6</span> - <span class="board-p-title">Atalhos.</span><br>
                             <div class="list">
                                 <p tabindex="12" class="listItems">1º - <strong>Para voltar ou sair de uma seção da tela, use o botão "ESC" como atalho rápido</strong>.</p>
-                                <p tabindex="13" class="listItems">2º - <strong>Para navegar entre os elementos, use o botão “TAB” ou as "SETAS" como atalho rápido</strong>.</p>
+                                <p tabindex="13" class="listItems">2º - <strong>Para navegar entre os elementos, use o botão “TAB”, ou caso a acessibilidade esteja <em>desativada</em> use as "SETAS" como atalho rápido</strong>.</p>
                                 <p tabindex="14" class="listItems last_p">3º - <strong>Para selecionar um elemento em foco, aperte o botão "ENTER"</strong>.</p>
                                 <p tabindex="15" class="listItems last_p">3º - <strong>Para redefinir suas escolhas, aperte o botão "BACKSPACE"</strong>.</p>
                             </div>
@@ -197,7 +201,7 @@
                     </div>
                     <div class="board i-b2">
                         <p tabindex="6">
-                            Na parte à direita da tela do jogo, você encontrará alguns botões que ajudam a controlar diferentes funções do jogo. Aqui está uma explicação de cada um deles:
+                            Na parte à direita da tela do jogo, você encontrará alguns botões que ajudam a configurar diferentes funções do jogo. Aqui está uma explicação de cada um deles:
                         </p>
                         <p tabindex="7">
                             <span class="controls"><i class="fa-solid fa-volume-high"></i></span><strong class="controls-title">Som do Jogo.</strong><br>Esse botão permite ativar ou desativar o som do jogo. Se quiser ajustar o nível do volume, será preciso alterar o volume diretamente no seu computador.

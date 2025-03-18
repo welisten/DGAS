@@ -2,6 +2,7 @@ const sightsData = {
     Rio_Soberbo: {
         bgUrl: './../Assets/imgs/Rio_Soberbo_IMG.jpg',
         mainSampleName: 'cachoeira',
+        mainSampleVolume: .05,
         samples: {
             cigarra: {
                 alt:'cigarra',

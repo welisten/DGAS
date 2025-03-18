@@ -1,10 +1,11 @@
 // configurar os controles  aqui!
-
+import { plataformData } from "../../../constants/plataformData.js"
 import { gameData } from "../Constants/gameData.js"
 import { colors } from "../Constants/Colors.js"
+import { setLightModeSlider } from "../../../javascript/navigation.js"
+
 
 const muteBtn = document.querySelector('#muteBtn')
-// const lightBtn = document.querySelector('#lightBtn')
 const accessBtn = document.querySelector('#accessBtn')
 
 const popUp = document.querySelector('#popUpMessage')
@@ -14,7 +15,7 @@ const infoCloseBtn = document.querySelector('#info-close')
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)() //rever propriedade do obj
 const gainNode = audioContext.createGain()
-const currentAudio = {config:{startTime: 0, pausedAt: 0}}
+const currentAudios = {}
 
 const info = document.querySelector('#info') //container com as informações   
 const i_body = document.querySelectorAll('.i-body') // quadros de informação
@@ -23,46 +24,63 @@ const i_navBtns = document.querySelectorAll('.i-navBtn') // botões de navegaç�
 
 
 
-// const toggleLightMode = () => {
-//     document.body.style.background =  gameData.isDarkMode ? colors.bg_light : colors.bg_dark
-
-//     lightBtn.children[0].classList.toggle('fa-sun')
-//     lightBtn.children[0].classList.toggle('fa-moon')
-
-//     gameData.isDarkMode = ! gameData.isDarkMode
-
-//     console.log('Iluminação alternada')
-// }
 const toggleVolume = () => {
-    let originalVolume = gainNode.gain.value
     gameData.isMute = !gameData.isMute
-
-    gainNode.gain.value = gameData.isMute ? 0 : 1
-    // if(gameData.isMute){
-    //     originalVolume = gainNode.gain.value
-    //     gainNode.gain.value = 0 
-    // } else {
-    //     gainNode.gain.value = originalVolume
-    // }
-        
+    console.log(currentAudios)
+    
+    if(gameData.isMute){
+      for(let key in currentAudios){
+        currentAudios[key].config.gainNode.gain.value = 0
+      }  
+    } else {
+        for(let key in currentAudios){
+            let audioVolume = currentAudios[key].config.volume
+            currentAudios[key].config.gainNode.gain.value = audioVolume
+        }
+    }
+    
     muteBtn.children[0].classList.toggle('fa-volume-xmark')
     muteBtn.children[0].classList.toggle('fa-volume-high')
 
     console.log('Volume alternado')
 }
-const toggleAccessibility = () =>{
+
+const updateAccessibility = () =>{
     const rootStyle = document.documentElement.style
-    const styleSheet = document.styleSheets[0]
+
+    const popUpContainer = document.querySelector('#popUpMessage')
 
     gameData.isAccess = !gameData.isAccess 
 
     if(gameData.isAccess){
         accessBtn.children[0].classList.toggle('fa-eye', gameData.isAccess)
+        accessBtn.children[0].classList.toggle('fa-eye-slash', !gameData.isAccess)
         rootStyle.setProperty('--yellow-focus--', colors.yellowFocus)
-
+        
+        const popUpBtn = document.querySelector('#popUpBtn')
+        if(popUpBtn) popUpBtn.remove();
+        
     } else {
         rootStyle.setProperty('--yellow-focus--', colors.transparent)
         accessBtn.children[0].classList.toggle('fa-eye-slash', !gameData.isAccess)
+        accessBtn.children[0].classList.toggle('fa-eye', gameData.isAccess)
+
+       
+        let popUpBtn  = document.querySelector('#popUpBtn')
+        if(!popUpBtn){
+            popUpBtn= document.createElement('button')
+            const btnIcon = document.createElement('i')
+    
+            popUpBtn.className = 'popup_btn'
+            popUpBtn.id = 'popUpBtn'
+            popUpBtn.setAttribute('title', 'Clique para fechar o alerta')
+            popUpBtn.setAttribute('aria-label', 'Fechar alerta');
+            btnIcon.className = 'fa-solid fa-xmark'
+            
+            popUpBtn.append(btnIcon)
+            popUpContainer.append(popUpBtn)
+            popUpBtn.addEventListener('click', handleClosePopUp)
+        }
     }
     console.log('Acessibilidade alternada')
 }
@@ -103,21 +121,20 @@ const closeInformationBoard = () => {
         return
     }
 
-    let choiceReq = document.querySelector('.hm-b-title')
-    if(gameData.isAccess){
-        document.querySelector("#textToReader").textContent = "Instruções fechadas"
-        if(choiceReq) setTimeout(() => choiceReq.focus(), 50)
-    }
-    
-    const info = document.querySelector('#info')
     const introBoard = document.querySelector('#hm_initialMessage')
     const samplesBoard = document.querySelector('.hm_sampleTable')
-    
-    info.classList.toggle('active')
-    info.setAttribute('aria-expanded', false)
+    const hm_initialFocus = document.querySelector('[hm-initialFocus]')
 
     if(introBoard)  introBoard.removeAttribute('inert')
     if(samplesBoard) samplesBoard.removeAttribute('inert')
+    if(gameData.isAccess){
+        document.querySelector("#textToReader").textContent = "Instruções fechadas"
+        if(hm_initialFocus) setTimeout(() => hm_initialFocus.focus(), 50)
+    }
+    
+    const info = document.querySelector('#info')
+    info.classList.toggle('active')
+    info.setAttribute('aria-expanded', false)
 }
 const toggleInfoSections = () => {
     if(!info.classList.contains('active')){
@@ -137,15 +154,14 @@ const handleClosePopUp = () => {
     popUp.style.opacity = 0
     console.log('dentro')
     popUp.classList.toggle('animated', !popUp.classList.contains('animated'))
-    popUp.setAttribute('hidden')
+    popUp.setAttribute('hidden', '')
         
 }
 
 setIcons()
-
+setLightModeSlider()
 muteBtn?.addEventListener('click', toggleVolume)
-// lightBtn?.addEventListener('click', toggleLightMode)
-accessBtn?.addEventListener('click', toggleAccessibility)
+accessBtn?.addEventListener('click', updateAccessibility)
 infoBtn.addEventListener('click', activeGameInformationBoard)
 infoCloseBtn.addEventListener('click', closeInformationBoard)
 i_navBtns.forEach(btn => {
@@ -172,7 +188,24 @@ function setIcons(){
     accessBtn.children[0].classList.toggle('fa-eye', gameData.isAccess)
 }
 
+function updateGameData(){
+    gameData.isAccess = plataformData.isAccess
+    gameData.isDarkMode = plataformData.isDarkMode
+    console.log(plataformData.isDarkMode)
+    
+    const rootStyle = document.documentElement.style
+
+    rootStyle.setProperty('--yellow-focus--', gameData.isAccess ? colors.yellowFocus : colors.transparent)
+    rootStyle.setProperty('--bg--', gameData.isDarkMode ? colors.bg_dark : colors.bg_light)
+
+    const accessBtn = document.querySelector('#accessBtn')
+    accessBtn.children[0].className = gameData.isAccess ? 'fa-regular fa-eye' : 'fa-regular fa-eye-slash'
+
+}
+
 export{
     gainNode,
     audioContext,
+    currentAudios,
+    updateGameData
 }

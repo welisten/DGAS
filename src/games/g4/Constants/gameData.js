@@ -5,7 +5,7 @@ const gameData = {
     isMute: false,
     isDarkMode: plataformData.isDarkMode,
     isPaused: false,
-    isAccess: true,
+    isAccess: false,
     isClickable: false,
     isPlayingSound: false,
     lastAccText: '',

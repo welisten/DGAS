@@ -1,7 +1,8 @@
 import { gameData } from "../../Constants/gameData.js";
 import { colors } from "../../Constants/Colors.js";
 import { Sights } from "./Sights.js";
-import { gainNode, audioContext } from "./../../Js/script.js"
+import { gainNode, audioContext, currentAudios } from "./../../Js/script.js"
+import { audioDataArray } from "../../Constants/songsData.js";
 
 class App {
     constructor(isInitMsgAlreadySkipped = false){
@@ -9,7 +10,7 @@ class App {
         this.element = document.querySelector('#game_container')
         this.element.classList.add('hm')
        
-        this.currentAudio = {config:{startTime: 0, pausedAt: 0}}
+        this.currentAudios =  currentAudios
         this.audioContext = audioContext //rever propriedade do obj
         this.gainNode = gainNode
         
@@ -35,16 +36,17 @@ class App {
         console.clear()
         this.buildContainer()
         this.setContainersElms()
-        this.playAudio(gameAssets['positiveBlipEffect'])
+        this.playGameAudio('positiveBlipEffect', 1, false)
         setTimeout(() =>{
-            this.stopCurrentAudio()
-            this.playAudio(gameAssets['mainTheme'], .5, true)
+            this.stopAllCurrentAudios()
+            this.playGameAudio('mainTheme', .5, true)
             gameData.isClickable = true
             if(gameData.isAccess){
                 let firstElemToFocus
                 if(this.isInitMsgAlreadySkipped){
                     firstElemToFocus = document.querySelector('.invitation')
-                    firstElemToFocus.focus()
+                    setTimeout(() => firstElemToFocus.focus(), 1500)
+                    
                 } else {
                     firstElemToFocus = document.querySelector('.hm_h1')
                     firstElemToFocus.focus()
@@ -109,8 +111,14 @@ class App {
         hm_Menu.setAttribute('aria-labelledly', 'hm_menuTitle')
         menu_opt1.setAttribute('tabindex', 6)
         menu_opt1.setAttribute('role', 'menuitem')
+        menu_opt1.setAttribute('title', 'Clique para escolher a opção de base musical')
         menu_opt2.setAttribute('tabindex', 7)
         menu_opt2.setAttribute('role', 'menuitem')
+        menu_opt2.setAttribute('title', 'Clique para escolher a opção de base musical')
+
+        if(this.isInitMsgAlreadySkipped){
+            invitation.setAttribute('hm-initialFocus', '')
+        }
         
         bgImgContainer.appendChild(studioImg)
         
@@ -167,25 +175,24 @@ class App {
             const hm_IntroMessage = this.createNewElement('p', 'hm_message')
             const skipButton = this.createNewElement('button', 'hm_msg_skip')
 
-            const message = `Olá Amiguinho!<br>Aqui você vai descobrir muitos sons incríveis! Cada clique pode trazer uma surpresa. será o som de um animal? De um instrumento? Ou de algo que você conhece muito bem? <br>Este jogo foi feito para todos! Se você não pode ver tão bem, não se preocupe! Os sons vão te guiar nessa aventura.<br>Pronto para começar? Então, abra bem os ouvidos e divirta-se!`
+            const message = `Olá Amiguinho!<br>Aqui você vai descobrir muitos sons incríveis! Cada clique pode trazer uma surpresa. será o som de um animal? De um instrumento? Ou de algo que você conhece muito bem? <br>Este jogo foi feito para todos! Se você não pode ver tão bem, não se preocupe! Os sons vão te guiar nessa aventura.<br>Pronto para começar? Então abra bem os ouvidos e divirta-se!`
 
             welcomeTxt.textContent = 'Bemvindos ao'
             gameName.textContent = 'Sons do Rio.'
             hm_IntroMessage.innerHTML = message
             skipButton.textContent = 'Pular >'
             
-            initialMessage.setAttribute('title','mensagem inicial')
-            skipButton.setAttribute('aria-label', 'pular introdução')
-
             title.append(welcomeTxt, gameName)
-
-            initialMessage.append(title, hm_IntroMessage, skipButton)
+            
             title.setAttribute('tabindex', 1)
+            title.setAttribute('hm-initialFocus', '')
             title.setAttribute('role', 'paragraph')
             hm_IntroMessage.setAttribute('tabindex', 2)
             skipButton.setAttribute('tabindex', 3)
-            skipButton.setAttribute('title', 'Pular introdução')
-
+            skipButton.setAttribute('aria-label', 'pular introdução')
+            skipButton.setAttribute('title', 'Clique para pular a introdução')
+            
+            initialMessage.append(title, hm_IntroMessage, skipButton)
             mainContainer.appendChild(initialMessage)
         } else {
             
@@ -196,7 +203,7 @@ class App {
                 if(sampleBoard) sampleBoard.style.opacity = 1;
             },500)
             
-            this.playAudio(gameAssets['btn_select'], 1)
+            this.playGameAudio('btn_select', 1, false)
             document.addEventListener('keydown', this.handleChooseOption)
         }
     }
@@ -214,10 +221,8 @@ class App {
         option.parentElement.append(icon)
 
         this.currentIndex = currentIndex
-        console.log(currentIndex)
     }
     chooseOpt (e){
-        console.log('Função chooseOpt')
         const menuOptions = document.querySelectorAll('.mn_option')
         const menuRow = document.querySelectorAll('.mn_row')
         const menu_icon_cont = document.querySelector('.mn_opt_icon')
@@ -237,7 +242,7 @@ class App {
             
             menuOptions[this.currentIndex].classList.add('selected')
             menuRow[this.currentIndex].appendChild(menu_icon_cont)
-            this.playAudio(gameAssets['btn_select'], 1)
+            this.playGameAudio('btn_select', 1, false)
             
             if(gameData.isAccess)
                 menuOptions[this.currentIndex].focus();
@@ -263,13 +268,18 @@ class App {
         } else if(isKeyOrClickEvent){
             e.preventDefault()
             const bgImgContainer = document.querySelector('.hm_bgImgContainer')
-            
+            const hm_initialFocus = document.querySelector('[hm-initialFocus]')
+
             document.removeEventListener('keydown', this.handleIntroSkip)
             skipButton.removeEventListener('click', this.handleIntroSkip)
 
             initialMessage.style.opacity = 0
             bgImgContainer.style.left = '2%'
 
+            if(hm_initialFocus){
+                hm_initialFocus.removeAttribute('hm-initialFocus')
+                document.querySelector('.invitation').setAttribute('hm-initialFocus', '')
+            }
             mainContainer.classList.add('skipped')
 
             setTimeout(() => {
@@ -278,33 +288,115 @@ class App {
                     document.querySelector('.invitation').focus();
             },500)
 
-            this.playAudio(gameAssets['btn_select'], 1)
+            this.playGameAudio('btn_select', 1, false)
             document.addEventListener('keydown', this.handleChooseOption)
         }
     }
-    playAudio(audioBuffer, volume = 1.0, loop = false){   
-            const src = this.audioContext.createBufferSource()
+
+    playGameAudio(audioKey, volume = 1.0, loop = false){  
+        let gainNode, src;
+
+        // Verifica se o áudio já está sendo reproduzido
+        if(audioKey in this.currentAudios){
+            // nos diz se o audio foi pausado ou é apenas um audio curto sendo tocado consecutivamente
+            let pausedAt = this.currentAudios[audioKey].config.pausedAt || 0
+            
+            src = this.audioContext.createBufferSource() 
+            gainNode = this.currentAudios[audioKey].config.gainNode
+            
+            const audioBuffer = gameAssets[audioKey] 
+            src.buffer = audioBuffer 
+            src.loop = loop
+
+            // Ajusta o volume com base no mute e no volume armazenado
+            let currentVolume = this.currentAudios[audioKey].config.volume || volume
+            gainNode.gain.value = gameData.isMute ? 0 : currentVolume
+
+            src.connect(gainNode)
+            gainNode.connect(this.audioContext.destination)
+
+            // Inicia a reprodução com o delay e o ponto de pausa
+            src.start(0, pausedAt)
+
+            // Atualiza o estado do áudio dado a condição dele ser persistente (loop = true)
+            if(this.currentAudios[audioKey].config.loop === true){
+                //loop = true => audio persiste
+                this.currentAudios[audioKey] = {
+                    config: {
+                        startTime: 0,
+                        gainNode: gainNode,
+                        volume: currentVolume,
+                        loop: loop
+                    },
+                    audio: src
+                };
+            }else if (this.currentAudios[audioKey].config.loop === false){
+                this.currentAudios[audioKey] = {
+                    config: {
+                        startTime: 0,
+                        gainNode: gainNode,
+                        volume: currentVolume,
+                    },
+                    audio: src
+                };
+                setTimeout(() => {
+                    delete this.currentAudios[audioKey]
+                }, audioBuffer.duration * 1000)
+            }
+        } else {
+            src = this.audioContext.createBufferSource()
+            gainNode = this.audioContext.createGain()
+
+            const audioBuffer = gameAssets[audioKey]
             src.buffer = audioBuffer
             src.loop = loop
-    
-            volume = gameData.isMute === true ? 0 : 1
-            this.gainNode.gain.value = volume 
-            
-            src.connect(this.gainNode)
-            this.gainNode.connect(this.audioContext.destination)
-            if(loop !== true){
-                src.start()
-    
-            } else {
-                src.start(0, this.currentAudio.config.startTime)
-                this.currentAudio.audio = src
+
+            let audioData = audioDataArray.find(obj => obj.name === audioKey)
+            let audioVolume = audioData.volume || volume
+            gainNode.gain.value = gameData.isMute ? 0 : audioVolume
+
+            src.connect(gainNode)
+            gainNode.connect(this.audioContext.destination)
+            src.start(0, 0)
+
+            if(loop === true){
+                this.currentAudios[audioKey] = {
+                    config: {
+                        startTime: 0,
+                        pausedAt: undefined,
+                        gainNode: gainNode,
+                        volume: audioVolume,
+                        loop: loop
+                    },
+                    audio: src
+                };
+            }else{
+                if(audioBuffer.duration < 3.5) return // não armazenar audios muito curtos
+
+                this.currentAudios[audioKey] = {
+                    config: {
+                        startTime: 0,
+                        pausedAt: undefined,
+                        gainNode: gainNode,
+                        volume: volume
+                    },
+                    audio: src
+                };
+                setTimeout(() => {
+                    delete this.currentAudios[audioKey]
+                }, audioBuffer.duration * 1000)
             }
+
+            // Retorna o source e o gainNode para manipulação futura
+            return { source: src, gainNode: gainNode };
+        }
     }
-    stopCurrentAudio(){
-        if(this.currentAudio.audio) {
-            this.currentAudio.config.startTime = this.audioContext.currentTime
-            this.currentAudio.audio.stop()
-            this.currentAudio.audio = null
+
+    // Para definitivamente os audios rastreados em currentAudios
+    stopAllCurrentAudios(){
+        for(let key in this.currentAudios){
+            this.currentAudios[key].audio.stop()
+            delete this.currentAudios[key]
         }
     }
 
@@ -321,7 +413,7 @@ class App {
         this.removeBtnEvents()
     }
     callNewScene = (e) => {
-        this.stopCurrentAudio()
+        this.stopAllCurrentAudios()
         this.removeAllElementsEvents()
         this.resetContainerToNewScene(e.target.textContent)
     }
@@ -332,7 +424,7 @@ class App {
         classNm += ' container'
         mainC.className = classNm
         
-        new Sights(classNm.split(' ')[0])
+        new Sights(classNm.split(' ')[0], this.currentAudios)
 
         function capitalize(str) {
             if (!str) return "";
@@ -350,7 +442,7 @@ class App {
             btn.addEventListener('mouseenter', () => {
                 if(!h_aux){
                     h_aux = !h_aux
-                   if(element === document) this.playAudio(gameAssets['btn_select'])
+                   if(element === document) this.playGameAudio('btn_select')
                 }
             })
 
@@ -366,7 +458,7 @@ class App {
             btn.removeEventListener('mouseenter', () => {
                 if(!h_aux){
                     h_aux = !h_aux
-                   if(element === document) this.playAudio(gameAssets['btn_select'])
+                   if(element === document) this.playGameAudio('btn_select')
                 }
             })
 

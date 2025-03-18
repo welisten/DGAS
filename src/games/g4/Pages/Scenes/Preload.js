@@ -92,7 +92,7 @@ class Preloader{
                 gameCanvas.remove()
                 
                 gameData.mainScene = 'Game'
-                console.clear()
+                // console.clear()
                 gameData.app = new App()
             })
         })
