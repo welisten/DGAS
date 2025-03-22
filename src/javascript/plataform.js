@@ -4,6 +4,7 @@ import { setTheProjectTextScroll, setPhotoScroll, setMainScroll, setFooter } fro
 import { setGalery, setPhotoScreen } from "./galery.js"
 import { updateTestimonial } from "./automateTestimonials.js"
 import { handleForm } from "./handleForm.js"
+import { loadMappedImagesByEscope } from "./loadMappedImagesByEscope.js"
 
 setGalery()
 setPlataformHeader()
@@ -14,6 +15,7 @@ updateTestimonial()
 setMainScroll()
 handleForm()
 setFooter()
+
 
 let gameidx = 0
 
@@ -31,8 +33,15 @@ let ph_bg, t_bg
 ph_bg = document.getElementById('photos_bg')
 t_bg = document.getElementById('testimonials_bg')
 
+let backgroundImages
+loadMappedImagesByEscope('plataforma', 'backgrounds')
+    .then( resp => backgroundImages = resp)
+    
 gmControls_next.addEventListener('click', e => {
     gameidx >= 4 ? gameidx = 0 : gameidx++
+    
+    ph_bg.setAttribute('src', backgroundImages.find(img => img.fileName === `balls_${gameidx + 1}.png`).cloud_path)
+    t_bg.setAttribute('src', backgroundImages.find(img => img.fileName === `balls_${gameidx + 1}.png`).cloud_path)
 
     root.style.setProperty('--main-light--', palett[`light_${gameidx + 1}`])
     root.style.setProperty('--main-dark--', palett[`dark_${gameidx + 1}`])
@@ -58,10 +67,6 @@ gmControls_next.addEventListener('click', e => {
     root.style.setProperty('--s2--', palett[`s2_${gameidx + 1}`])
     root.style.setProperty('--s3--', palett[`s3_${gameidx + 1}`])
     
-    ph_bg.setAttribute('src', `../assets/backgrounds/balls_${gameidx + 1}.png`)
-    t_bg.setAttribute('src', `../assets/backgrounds/balls_${gameidx + 1}.png`)
-
-
 
     gameSectionBtns.forEach((el, i) => {
         if(i === gameidx - 1 ){
@@ -81,6 +86,10 @@ gmControls_next.addEventListener('click', e => {
 })
 gmControls_prev.addEventListener('click', e => {
     gameidx <= 0 ? gameidx = 4 : gameidx--
+
+    ph_bg.setAttribute('src', backgroundImages.find(img => img.fileName === `balls_${gameidx + 1}.png`).cloud_path)
+    t_bg.setAttribute('src', backgroundImages.find(img => img.fileName === `balls_${gameidx + 1}.png`).cloud_path)
+
     root.style.setProperty('--main-light--', palett[`light_${gameidx + 1}`])
     root.style.setProperty('--main-dark--', palett[`dark_${gameidx + 1}`])
     root.style.setProperty('--main-deep--', palett[`deep_${gameidx + 1}`])
@@ -267,4 +276,3 @@ window.onerror = function(message, source, lineno, colno, error){
     `
     console.log(erroMessage)
 }
-

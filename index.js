@@ -12,6 +12,7 @@ app.use(express.static('src'))
 app.use('/games/g1', express.static(path.join(__dirname, 'src/games/g1')))
 app.use('/games/g2', express.static(path.join(__dirname, 'src/games/g2')))
 app.use('/games/g3', cors(), express.static(path.join(__dirname, 'src/games/g3')))
+app.use('/games/g4', express.static(path.join(__dirname, 'src/games/g4')))
 app.use('/games/g5', express.static(path.join(__dirname, 'src/games/g5')))
 
 app.use(express.json())

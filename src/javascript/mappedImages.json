@@ -1,0 +1,352 @@
+{
+  "sol.jpg": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615171/DGAS-Plataforma/game1/jvinuiwjzj1wjkguwcxk.jpg",
+    "fileName": "sol.jpg",
+    "escope": "game1",
+    "src_folder": "game1",
+    "relative_path": "game1"
+  },
+  "sol.webp": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615172/DGAS-Plataforma/game1/b4pkdwrtqs1ooe1fzjmj.webp",
+    "fileName": "sol.webp",
+    "escope": "game1",
+    "src_folder": "game1",
+    "relative_path": "game1"
+  },
+  "apaBG.jpg": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615173/DGAS-Plataforma/plataforma/backgrounds/gzmqmnh5r6gh6poqlfa1.jpg",
+    "fileName": "apaBG.jpg",
+    "escope": "plataforma",
+    "src_folder": "backgrounds",
+    "relative_path": "plataforma/backgrounds"
+  },
+  "balls_1.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615173/DGAS-Plataforma/plataforma/backgrounds/jxtwqbcl6lreb3vqbvip.png",
+    "fileName": "balls_1.png",
+    "escope": "plataforma",
+    "src_folder": "backgrounds",
+    "relative_path": "plataforma/backgrounds"
+  },
+  "balls_2.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615174/DGAS-Plataforma/plataforma/backgrounds/tclaenfhgv0qsg2yr8mq.png",
+    "fileName": "balls_2.png",
+    "escope": "plataforma",
+    "src_folder": "backgrounds",
+    "relative_path": "plataforma/backgrounds"
+  },
+  "balls_3.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615175/DGAS-Plataforma/plataforma/backgrounds/uqdgflkshvclhnvimjji.png",
+    "fileName": "balls_3.png",
+    "escope": "plataforma",
+    "src_folder": "backgrounds",
+    "relative_path": "plataforma/backgrounds"
+  },
+  "balls_4.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615176/DGAS-Plataforma/plataforma/backgrounds/xxgj0cs0yshhmc4hknrc.png",
+    "fileName": "balls_4.png",
+    "escope": "plataforma",
+    "src_folder": "backgrounds",
+    "relative_path": "plataforma/backgrounds"
+  },
+  "balls_5.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615176/DGAS-Plataforma/plataforma/backgrounds/vgsw3vsf7wwhatq6yw0w.png",
+    "fileName": "balls_5.png",
+    "escope": "plataforma",
+    "src_folder": "backgrounds",
+    "relative_path": "plataforma/backgrounds"
+  },
+  "ddd_main1.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615177/DGAS-Plataforma/plataforma/zizwznkcbficripxxidf.png",
+    "fileName": "ddd_main1.png",
+    "escope": "plataforma",
+    "src_folder": "plataforma",
+    "relative_path": "plataforma"
+  },
+  "bootstrap.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615178/DGAS-Plataforma/plataforma/icons/s7malce2c1bioi5w0el2.png",
+    "fileName": "bootstrap.png",
+    "escope": "plataforma",
+    "src_folder": "icons",
+    "relative_path": "plataforma/icons"
+  },
+  "c.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615179/DGAS-Plataforma/plataforma/icons/tbmbijlrbk5vakwylxls.png",
+    "fileName": "c.png",
+    "escope": "plataforma",
+    "src_folder": "icons",
+    "relative_path": "plataforma/icons"
+  },
+  "css3.svg": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615179/DGAS-Plataforma/plataforma/icons/f2d2ugwikzkbimyablmd.svg",
+    "fileName": "css3.svg",
+    "escope": "plataforma",
+    "src_folder": "icons",
+    "relative_path": "plataforma/icons"
+  },
+  "html5.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615181/DGAS-Plataforma/plataforma/icons/fwencrrrzyrov6qxmpnb.png",
+    "fileName": "html5.png",
+    "escope": "plataforma",
+    "src_folder": "icons",
+    "relative_path": "plataforma/icons"
+  },
+  "js.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615182/DGAS-Plataforma/plataforma/icons/mscqeqdeicwtc2bbts8q.png",
+    "fileName": "js.png",
+    "escope": "plataforma",
+    "src_folder": "icons",
+    "relative_path": "plataforma/icons"
+  },
+  "node-js.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615183/DGAS-Plataforma/plataforma/icons/akkzcnm10otj6rx9dbmy.png",
+    "fileName": "node-js.png",
+    "escope": "plataforma",
+    "src_folder": "icons",
+    "relative_path": "plataforma/icons"
+  },
+  "react.svg": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615185/DGAS-Plataforma/plataforma/icons/zbs8xs9tdjwrknpo6mbe.svg",
+    "fileName": "react.svg",
+    "escope": "plataforma",
+    "src_folder": "icons",
+    "relative_path": "plataforma/icons"
+  },
+  "web.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615190/DGAS-Plataforma/plataforma/icons/bnmc2lxsygpych2qkhps.png",
+    "fileName": "web.png",
+    "escope": "plataforma",
+    "src_folder": "icons",
+    "relative_path": "plataforma/icons"
+  },
+  "a1.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615192/DGAS-Plataforma/plataforma/imgs/n33rmitrvkkxonn5rbfk.png",
+    "fileName": "a1.png",
+    "escope": "plataforma",
+    "src_folder": "imgs",
+    "relative_path": "plataforma/imgs"
+  },
+  "a2.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615192/DGAS-Plataforma/plataforma/imgs/psem4jeotyzvsrxsa6uz.png",
+    "fileName": "a2.png",
+    "escope": "plataforma",
+    "src_folder": "imgs",
+    "relative_path": "plataforma/imgs"
+  },
+  "c1.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615193/DGAS-Plataforma/plataforma/imgs/dnd2fmsjnngj0w09qpxr.png",
+    "fileName": "c1.png",
+    "escope": "plataforma",
+    "src_folder": "imgs",
+    "relative_path": "plataforma/imgs"
+  },
+  "c2.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615194/DGAS-Plataforma/plataforma/imgs/u0as8xzlv6hwn2idc6v9.png",
+    "fileName": "c2.png",
+    "escope": "plataforma",
+    "src_folder": "imgs",
+    "relative_path": "plataforma/imgs"
+  },
+  "coin.gif": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615196/DGAS-Plataforma/plataforma/imgs/udbad0bv8un5ymm5jpng.gif",
+    "fileName": "coin.gif",
+    "escope": "plataforma",
+    "src_folder": "imgs",
+    "relative_path": "plataforma/imgs"
+  },
+  "g.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615197/DGAS-Plataforma/plataforma/imgs/s1kdvo6dvwxkaesrnupj.png",
+    "fileName": "g.png",
+    "escope": "plataforma",
+    "src_folder": "imgs",
+    "relative_path": "plataforma/imgs"
+  },
+  "g1.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615198/DGAS-Plataforma/plataforma/imgs/gamesLogo/ltss7i4nkzghxpqysvr4.png",
+    "fileName": "g1.png",
+    "escope": "plataforma",
+    "src_folder": "gamesLogo",
+    "relative_path": "plataforma/imgs/gamesLogo"
+  },
+  "g2.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615199/DGAS-Plataforma/plataforma/imgs/gamesLogo/fytcq3slmycd3vs7ab4c.png",
+    "fileName": "g2.png",
+    "escope": "plataforma",
+    "src_folder": "gamesLogo",
+    "relative_path": "plataforma/imgs/gamesLogo"
+  },
+  "g3.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615199/DGAS-Plataforma/plataforma/imgs/gamesLogo/rkdj6nxjbikoc2g2b3pc.png",
+    "fileName": "g3.png",
+    "escope": "plataforma",
+    "src_folder": "gamesLogo",
+    "relative_path": "plataforma/imgs/gamesLogo"
+  },
+  "g4.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615200/DGAS-Plataforma/plataforma/imgs/gamesLogo/g0kf5nfjhev5zcuyps6o.png",
+    "fileName": "g4.png",
+    "escope": "plataforma",
+    "src_folder": "gamesLogo",
+    "relative_path": "plataforma/imgs/gamesLogo"
+  },
+  "g5.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615201/DGAS-Plataforma/plataforma/imgs/gamesLogo/jvhlwdlmpqmkb60dlixe.png",
+    "fileName": "g5.png",
+    "escope": "plataforma",
+    "src_folder": "gamesLogo",
+    "relative_path": "plataforma/imgs/gamesLogo"
+  },
+  "g_grass.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615201/DGAS-Plataforma/plataforma/imgs/pjiveuaaytc0jgaqeqb6.png",
+    "fileName": "g_grass.png",
+    "escope": "plataforma",
+    "src_folder": "imgs",
+    "relative_path": "plataforma/imgs"
+  },
+  "g_mountains.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615202/DGAS-Plataforma/plataforma/imgs/rsp9fcs2rrc2dcto8i9e.png",
+    "fileName": "g_mountains.png",
+    "escope": "plataforma",
+    "src_folder": "imgs",
+    "relative_path": "plataforma/imgs"
+  },
+  "ladder.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615203/DGAS-Plataforma/plataforma/imgs/qmm1gfn7ohq3hdvmv196.png",
+    "fileName": "ladder.png",
+    "escope": "plataforma",
+    "src_folder": "imgs",
+    "relative_path": "plataforma/imgs"
+  },
+  "star.gif": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615204/DGAS-Plataforma/plataforma/imgs/zgmxuwrp6y12hykozvva.gif",
+    "fileName": "star.gif",
+    "escope": "plataforma",
+    "src_folder": "imgs",
+    "relative_path": "plataforma/imgs"
+  },
+  "sttcloud.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615204/DGAS-Plataforma/plataforma/imgs/jxn9mlb9ss2tiww4pb2t.png",
+    "fileName": "sttcloud.png",
+    "escope": "plataforma",
+    "src_folder": "imgs",
+    "relative_path": "plataforma/imgs"
+  },
+  "DG_logo_light.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615205/DGAS-Plataforma/plataforma/logos/tfvzp42yba2y5wam9ghc.png",
+    "fileName": "DG_logo_light.png",
+    "escope": "plataforma",
+    "src_folder": "logos",
+    "relative_path": "plataforma/logos"
+  },
+  "r1.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615206/DGAS-Plataforma/plataforma/logos/eaofwqphe01vazcakhwo.png",
+    "fileName": "r1.png",
+    "escope": "plataforma",
+    "src_folder": "logos",
+    "relative_path": "plataforma/logos"
+  },
+  "r2.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615207/DGAS-Plataforma/plataforma/logos/jnavwayjrh7bk92skbuz.png",
+    "fileName": "r2.png",
+    "escope": "plataforma",
+    "src_folder": "logos",
+    "relative_path": "plataforma/logos"
+  },
+  "r3.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615207/DGAS-Plataforma/plataforma/logos/yl44kzzoakshw0xkrecl.png",
+    "fileName": "r3.png",
+    "escope": "plataforma",
+    "src_folder": "logos",
+    "relative_path": "plataforma/logos"
+  },
+  "r4.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615208/DGAS-Plataforma/plataforma/logos/b3ewy7qsccfvt1saea4o.png",
+    "fileName": "r4.png",
+    "escope": "plataforma",
+    "src_folder": "logos",
+    "relative_path": "plataforma/logos"
+  },
+  "perfil_th.jpeg": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615209/DGAS-Plataforma/plataforma/c3ruvvk6ibakimfjzsmu.jpg",
+    "fileName": "perfil_th.jpeg",
+    "escope": "plataforma",
+    "src_folder": "plataforma",
+    "relative_path": "plataforma"
+  },
+  "perfil_ww.jpeg": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615209/DGAS-Plataforma/plataforma/wm5awe3jxrpdsfd0gzrr.jpg",
+    "fileName": "perfil_ww.jpeg",
+    "escope": "plataforma",
+    "src_folder": "plataforma",
+    "relative_path": "plataforma"
+  },
+  "1.jpg": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615211/DGAS-Plataforma/plataforma/photos/ncvkofjj0afsk3inku2r.jpg",
+    "fileName": "1.jpg",
+    "escope": "plataforma",
+    "src_folder": "photos",
+    "relative_path": "plataforma/photos"
+  },
+  "2.jpg": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615213/DGAS-Plataforma/plataforma/photos/nvqnrsr878kavbmmxobw.jpg",
+    "fileName": "2.jpg",
+    "escope": "plataforma",
+    "src_folder": "photos",
+    "relative_path": "plataforma/photos"
+  },
+  "3.jpg": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615215/DGAS-Plataforma/plataforma/photos/oan2zdkehxvgl8brypxf.jpg",
+    "fileName": "3.jpg",
+    "escope": "plataforma",
+    "src_folder": "photos",
+    "relative_path": "plataforma/photos"
+  },
+  "4.jpg": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615216/DGAS-Plataforma/plataforma/photos/vflosppinnecbhj1oxtb.jpg",
+    "fileName": "4.jpg",
+    "escope": "plataforma",
+    "src_folder": "photos",
+    "relative_path": "plataforma/photos"
+  },
+  "t_user_1.jpg": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615218/DGAS-Plataforma/plataforma/testimonial/jghntt86bqldgbtogdas.jpg",
+    "fileName": "t_user_1.jpg",
+    "escope": "plataforma",
+    "src_folder": "testimonial",
+    "relative_path": "plataforma/testimonial"
+  },
+  "t_user_2.jpg": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615219/DGAS-Plataforma/plataforma/testimonial/kij9p3h1cc5aidmu0kbu.jpg",
+    "fileName": "t_user_2.jpg",
+    "escope": "plataforma",
+    "src_folder": "testimonial",
+    "relative_path": "plataforma/testimonial"
+  },
+  "t_user_3.jpg": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615219/DGAS-Plataforma/plataforma/testimonial/rifcsh8hyni59vtitqc8.jpg",
+    "fileName": "t_user_3.jpg",
+    "escope": "plataforma",
+    "src_folder": "testimonial",
+    "relative_path": "plataforma/testimonial"
+  },
+  "t_user_4.jpg": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615220/DGAS-Plataforma/plataforma/testimonial/tptmpnzpjrldmykoimau.jpg",
+    "fileName": "t_user_4.jpg",
+    "escope": "plataforma",
+    "src_folder": "testimonial",
+    "relative_path": "plataforma/testimonial"
+  },
+  "t_user_5.jpg": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615221/DGAS-Plataforma/plataforma/testimonial/v4ivmnz1eh381emj23p3.jpg",
+    "fileName": "t_user_5.jpg",
+    "escope": "plataforma",
+    "src_folder": "testimonial",
+    "relative_path": "plataforma/testimonial"
+  },
+  "t_user_6.jpg": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615223/DGAS-Plataforma/plataforma/testimonial/mai3gvp9vdiu6reqtl09.jpg",
+    "fileName": "t_user_6.jpg",
+    "escope": "plataforma",
+    "src_folder": "testimonial",
+    "relative_path": "plataforma/testimonial"
+  }
+}
