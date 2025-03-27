@@ -73,12 +73,12 @@ const generalImagesDataArr = [
         src: './Assets/imgs/steelStar.png',
         class: 'LevelScore'
     },
-    {
-        name: 'treasure',
-        description: 'treasure image',
-        src: './Assets/imgs/treasure.png',
-        class: 'LevelScore'
-    },
+    // {
+    //     name: 'treasure',
+    //     description: 'treasure image',
+    //     src: "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1743020777/DGAS-Plataforma/game3/general/roy5gguau9x7utyszcyb.png",
+    //     class: 'LevelScore'
+    // },
     {
         name: 'trophy',
         description: 'trophy image',

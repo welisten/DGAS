@@ -1,25 +1,16 @@
 import { Preloader } from './Scenes/Preload.js';
 import { getDeviceSice } from '../../g1/JavaScript/getDeviceSize.js';
 import { colors } from './Consts/Colors.js';
+import { gameData } from './Consts/gameData.js';
+import { plataformData } from '../../../constants/plataformData.js';
+import { setLightModeSlider } from '../../../javascript/navigation.js';
 
-
-const gameData = {
-  isPreloadComplete: false,
-  intro: undefined, 
-  score: undefined,
-  isMute: false,
-  isDarkMode: true,
-  isScreenReaderActive: false,
-  isLibrasActive: false,
-  lastAccText: '',
-  isPaused: false,
-  lastLevel: 1,
-  class: 'Preload'
-} 
-
-window.gameData = gameData // RETIRAR DEPOIS // arquivo emoutro módulo é melhor
+window.gameData = gameData // RETIRAR DEPOIS arquivo em outro módulo é melhor
 
 new Preloader()
+
+setLightModeSlider(updateGame3Colors)
+updateDarkModeSwitch()
 
 const accessibleContainer = document.querySelector('.gameAccessibleContainer')
 const mainContainers      = document.querySelectorAll('.mainContainer')
@@ -60,6 +51,7 @@ const readText = (text) => {
   auxText = text
   elem.textContent = text
 }
+
 const popUpMessage = (message, nxtElem, delay = 2500, isVisible = true, chaining = false) => {   // EXIBE MENSAGEM NO POPUP VISÍVEL
   const popUp = document.getElementById('popUp')
   const popupText = document.querySelector('.popupText')
@@ -90,25 +82,31 @@ const popUpMessage = (message, nxtElem, delay = 2500, isVisible = true, chaining
       setTimeout(() => nextFocusElement.focus(), delay + 100)
 }
 
-const btnsAndClss = []                                                          // para cada botão, suas respectivas classes                                                          
-btns.forEach((elem, i) => btnsAndClss[i] = [elem, elem.className.split(' ')[1]])// armazena para cada botão de controle, uma arrey contendo o elemento e a 2° classe desse elemento(botão)
-
-btnsAndClss.forEach( elemClassArr => {
+const btnsAndClss = []  //matriz bidimencional de botões e classes                                                          
+btns.forEach((elem, i) => btnsAndClss[i] = [elem, elem.className.split(' ')[1]])// armazena para cada botão, o referido botão e suas respectivas 2°classes
+btnsAndClss.forEach( elemClassArr => { // configura os botões baseado em suas classes
   let auxContrl = ''
+
+  // adiciona acessibilidade em libras no evento de "mouseover" aos botões armazenados no array "btnsAndClss"
   elemClassArr[0].addEventListener('mouseover', (e) => {
     if(auxContrl === e.target) return
-    if(gameData.isLibrasActive)
+    if(gameData.isLibrasActive){
       gameData.intro.gameAcessibleDisplay.readWithAccessibility(`${e.target.title}`)
-
+      auxContrl = e.target
+    }
     setTimeout(() => auxContrl =  '', 1000)
   })
+
+  // configura o comportamento do botão mediante sua classe
   switch(elemClassArr[1]){
+    
     case 'mute_btn':
       elemClassArr[0].addEventListener('click', () => {
         gameData.isMute = !gameData.isMute
+
         if(gameData.isScreenReaderActive){
-          let state = elemClassArr[0].classList.contains('active') ? 'ativado' : 'desativado' // o status de ativo ou desativo é referente ao som e não ao mudo
-          readText(`O Som foi ${state} `)
+          let soundState = elemClassArr[0].classList.contains('active') ? 'ativado' : 'desativado'
+          readText(`O Som foi ${soundState} `)
         }
         elemClassArr[0].classList.toggle('active')
         
@@ -204,35 +202,8 @@ btnsAndClss.forEach( elemClassArr => {
       handleOutline(auxEmpty)
       break
 
-    case 'lightMode_btn':
-      elemClassArr[0].addEventListener('click', () => {
-        gameData.isDarkMode =  !gameData.isDarkMode
-        
-        elemClassArr[0].classList.toggle('active')
-        elemClassArr[0].children[0].classList.toggle('fa-sun')
-        elemClassArr[0].children[0].classList.toggle('fa-moon')
-
-        gameData.intro.toggleLight()
-        gameData.intro.gameDisplay.toggleLight()
-        gameData.intro.gameAcessibleDisplay.toggleLight()
-        if(gameData.score){
-          gameData.score.toggleLight()
-        } 
-        
-        if(!elemClassArr[0].classList.contains('active')){
-          document.querySelector('body').style.backgroundColor = colors.body_color_light
-          document.querySelector('#gameBoard').style.backgroundColor = colors.white
-        }else{    
-          document.querySelector('body').style.backgroundColor = colors.body_color_dark
-          document.querySelector('#gameBoard').style.backgroundColor = colors.black
-        }
-        
-        let lightingMode = elemClassArr[0].classList.contains('active') ? 'modo de iluminação escuro' : 'modo de iluminação claro'
-        readText(`${lightingMode} ativado`)
-      })
+    default:
       break
-      default:
-        break
   }
 });
 
@@ -258,6 +229,60 @@ function handleOutline(aux){
     event.target.style.borderRadius = aux
   }
 }
+function updateDarkModeSwitch() {
+  const inputSlider = document.querySelector('input#slider')
+  plataformData.isDarkMode ? inputSlider.setAttribute('checked', '') : inputSlider.removeAttribute('checked')
+  console.log(inputSlider)
+}
+function updateGame3Colors(){
+  gameData.isDarkMode = plataformData.isDarkMode
+
+  const rootStyle = document.documentElement.style
+
+  if(gameData.isDarkMode){
+    rootStyle.setProperty("--bg--", colors.body_color_dark )
+    rootStyle.setProperty("--form-bg--", colors.transparent_a23 )
+    rootStyle.setProperty("--form-boxShadow--", `0 0 .5em ${colors.blue_serius_ac7}`)
+    rootStyle.setProperty("--form-border", `1px solid ${colors.formBorder_dark}`)
+    rootStyle.setProperty("--formContainer-bg--", colors.black)
+    rootStyle.setProperty("--gameDisplay-bg--", colors.black_a87)
+    rootStyle.setProperty("--gameDisplay-border", `1px solid ${colors.blue_baby}`)
+    rootStyle.setProperty("--line-borderBottom", `1px solid ${colors.white_ice_a9f}` )
+    rootStyle.setProperty("--gameDisplayHeader-fontWeight", '200')
+    rootStyle.setProperty("--gameDisplayHeader-color", colors.body_color_light)
+    rootStyle.setProperty("--clock-border", `2px solid ${colors.white_a56}`)
+    rootStyle.setProperty("--clock-bg", colors.body_color_dark)
+    rootStyle.setProperty("--clock-color", colors.white_ice_a9f)
+    rootStyle.setProperty("--headerBar-color", colors.white_ice);
+    rootStyle.setProperty("--accessContainer-bg", colors.transparent_a10);
+    rootStyle.setProperty("--accessContainer-border", `1px solid ${colors.blue_baby}`);
+    rootStyle.setProperty("--scoreBody-bg", colors.black);
+    rootStyle.setProperty('--score-bg', colors.black)
+    rootStyle.setProperty('--gameBoard-bg', colors.black)
+  } else {
+    rootStyle.setProperty("--bg--", colors.body_color_light )
+    rootStyle.setProperty("--form-bg--", colors.blue_baby )
+    rootStyle.setProperty("--form-boxShadow--", 'none')
+    rootStyle.setProperty("--form-border", `2px solid ${colors.blue_dark_theme}`)
+    rootStyle.setProperty("--formContainer-bg--", colors.white)
+    rootStyle.setProperty("--gameDisplay-bg--", colors.white)
+    rootStyle.setProperty("--gameDisplay-border", `3px solid ${colors.blue_baby}`)
+    rootStyle.setProperty("--line-borderBottom", `1px solid ${colors.blue_dark_theme}` )
+    rootStyle.setProperty("--gameDisplayHeader-fontWeight", '400')
+    rootStyle.setProperty("--gameDisplayHeader-color", colors.header_light_color)
+    rootStyle.setProperty("--clock-border", `2px solid ${colors.blue_dark_theme}`)
+    rootStyle.setProperty("--clock-bg", colors.blue_baby)
+    rootStyle.setProperty("--clock-color", colors.header_light_color)
+    rootStyle.setProperty("--headerBar-color", colors.header_light_color);
+    rootStyle.setProperty("--accessContainer-bg", colors.white);
+    rootStyle.setProperty("--accessContainer-border", `3px solid ${colors.blue_baby}`);
+    rootStyle.setProperty("--scoreBody-bg", colors.light_blue_9c);
+    rootStyle.setProperty('--score-bg', colors.body_color_light)
+    rootStyle.setProperty('--gameBoard-bg', colors.white)
+  }
+}
+
 export{
-  gameData
+  gameData,
+  updateGame3Colors
 }

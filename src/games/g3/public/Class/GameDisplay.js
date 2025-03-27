@@ -241,6 +241,7 @@ class DisplayHeader{                // ESSA CLASSE SE DIFERENCIA DAS DEMAIS, REF
     darkMode(){
         this.element.children[1].style.fontWeight = '200'
         this.element.children[1].style.color = '#efefef'
+
         this.clockContainer.style.border = '2px solid #ffffff56'
         this.clockContainer.style.backgroundColor = 'var(--body-color-dark)'
     }
@@ -266,14 +267,16 @@ class DisplayBar{
 
         const userName =  document.createElement('div')
         const userTreasures =  document.createElement('div')
-        const treasure = this.getImage('treasure')
+        // const treasure = this.getImage('treasure')
+        const treasure = document.createElement('img')
         const treasureNumber = document.createElement('span')
         const userLevel = document.createElement('div')
         this.element =  document.createElement('div')
         
         this.element.setAttribute('id', 'gameDisplay_bar')
-        
-        this.element.classList.add('this.element')
+        treasure.setAttribute('src', "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1743020777/DGAS-Plataforma/game3/general/roy5gguau9x7utyszcyb.png")
+        treasure.setAttribute('alt', 'Tesouros')
+        this.element.classList.add('gameDisplay_bar')
         userName.classList.add('userName')
         userTreasures.classList.add('userTreasure')
         userLevel.classList.add('userLevel')

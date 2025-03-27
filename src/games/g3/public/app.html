@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tesouros Históricos</title>
     <script type="module" src="./script.js"></script>
+    <script type="module">
+        import { updateGame3Colors } from './script.js'
+        updateGame3Colors()
+    </script>
     <!-- jquery-3.6.0 -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- FitText.js -->
@@ -18,7 +22,6 @@
     <!-- Vlibras -->
      <script src="./js/librasBeauty.js"></script>
     <!-- <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script> -->
-
     <style>
         .gameAccessibleContainer{
             position: relative!important;
@@ -60,18 +63,18 @@
         <nav id="navEl">
             <button class="logoBtn navBtn" sec_num="2" id="nav_logoBtn" title="logotipo">
                 <a href="./../../../index.html">
-                    <img src="./../../../assets/logos/DG_logo_light.png" alt="logo DG">
+                    <img src="https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615205/DGAS-Plataforma/plataforma/logos/tfvzp42yba2y5wam9ghc.png" alt="logo Desenvolve Guapi">
                 </a>
             </button>
             <div id="navbar"><div class="nb_group nb_group1">
                     <button class="navBtn" sec_num="1">
                     <a href="./../../../index.html">
-                        <i class="fa-solid fa-arrow-left"></i>
+                        <i class="fa-solid fa-home"></i>
                     </a>    
                     </button>
                 </div><div class="nb_group nb_group2">
                     <label class="switch">
-                        <input type="checkbox" id="slider" checked="true">
+                        <input type="checkbox" id="slider" checked accesskey="l">
                         <span class="slider"></span>
                     </label>
                 </div>
@@ -97,9 +100,6 @@
                 </button>
                 <button class="controlBtn screenReader_btn" id="" title="Leitor de tela" tabindex="22" aria-label="leitor de tela">
                     <i class="fa-solid fa-eye"></i>
-                </button>
-                <button class="controlBtn lightMode_btn active" id="lightMode" title="Modo de Iluminação" tabindex="23" aria-label="alternar iluminação">
-                    <i class="fa-solid fa-sun"></i>
                 </button>
             </section>
             <div id="horizontalRuler" class="ruler horizontalRuler">
@@ -135,17 +135,17 @@
     <footer id="footerEl">
         <div class="f_relative_root container">
             <div id="footer_bg">
-                <img src="./../../../assets/imgs/c1.png" alt="nuvem" class="f_cl1 f_cl">
-                <img src="./../../../assets/imgs/c2.png" alt="nuvem" class="f_cl2 f_cl">
-                <img src="./../../../assets/imgs/a1.png" alt="arbusto" class="f_a1 f_a">
-                <img src="./../../../assets/imgs/a2.png" alt="arbusto" class="f_a2 f_a">
+                <img src="https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615193/DGAS-Plataforma/plataforma/imgs/dnd2fmsjnngj0w09qpxr.png" alt="nuvem" class="f_cl1 f_cl">
+                <img src="https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615194/DGAS-Plataforma/plataforma/imgs/u0as8xzlv6hwn2idc6v9.png" alt="nuvem" class="f_cl2 f_cl">
+                <img src="https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615192/DGAS-Plataforma/plataforma/imgs/n33rmitrvkkxonn5rbfk.png" alt="arbusto" class="f_a1 f_a">
+                <img src="https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615192/DGAS-Plataforma/plataforma/imgs/psem4jeotyzvsrxsa6uz.png" alt="arbusto" class="f_a2 f_a">
             </div>
             <div class="footer_rules container">
             <div class="f_r_down container">
-                <img src="./../../../assets/logos/r1.png" alt="régua" class="ruler_pg r1">
-                <img src="./../../../assets/logos/r2.png" alt="régua" class="ruler_pg r2">
-                <img src="./../../../assets/logos/r3.png" alt="régua" class="ruler_pg r3">
-                <img src="./../../../assets/logos/r4.png" alt="régua" class="ruler_pg r4">
+                <img src="https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615206/DGAS-Plataforma/plataforma/logos/eaofwqphe01vazcakhwo.png" alt="régua" class="ruler_pg r1">
+                <img src="https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615207/DGAS-Plataforma/plataforma/logos/jnavwayjrh7bk92skbuz.png" alt="régua" class="ruler_pg r2">
+                <img src="https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615207/DGAS-Plataforma/plataforma/logos/yl44kzzoakshw0xkrecl.png" alt="régua" class="ruler_pg r3">
+                <img src="https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615208/DGAS-Plataforma/plataforma/logos/b3ewy7qsccfvt1saea4o.png" alt="régua" class="ruler_pg r4">
             </div>
             </div>
         </div>

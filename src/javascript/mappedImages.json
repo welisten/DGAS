@@ -348,5 +348,12 @@
     "escope": "plataforma",
     "src_folder": "testimonial",
     "relative_path": "plataforma/testimonial"
+  },
+  "treasure.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1743020777/DGAS-Plataforma/game3/general/roy5gguau9x7utyszcyb.png",
+    "fileName": "treasure.png",
+    "escope": "game3",
+    "src_folder": "general",
+    "relative_path": "game3/general"
   }
 }

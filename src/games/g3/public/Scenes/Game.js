@@ -53,11 +53,6 @@ class MemoryGame {
         board.setAttribute('tabindex', '1')
         board.setAttribute('aria-label', 'tabuleiro')
 
-        const lightBtn = document.querySelector('.lightMode_btn')
-        lightBtn.addEventListener('click', () => {
-            this.toggleLight()
-        })
-
         if(gameData.isScreenReaderActive || gameData.isLibrasActive){
             let controls = document.querySelector('#gameControls')
             controls.style.display = 'none'

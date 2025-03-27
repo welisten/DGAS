@@ -21,9 +21,6 @@ const info = document.querySelector('#info') //container com as informações
 const i_body = document.querySelectorAll('.i-body') // quadros de informação
 const i_navBtns = document.querySelectorAll('.i-navBtn') // botões de navegação das informaçoes
 
-
-
-
 const toggleVolume = () => {
     gameData.isMute = !gameData.isMute
     console.log(currentAudios)
@@ -44,7 +41,6 @@ const toggleVolume = () => {
 
     console.log('Volume alternado')
 }
-
 const updateAccessibility = () =>{
     const rootStyle = document.documentElement.style
 
@@ -191,10 +187,9 @@ function setIcons(){
 function updateGameData(){
     gameData.isAccess = plataformData.isAccess
     gameData.isDarkMode = plataformData.isDarkMode
-    console.log(plataformData.isDarkMode)
     
     const rootStyle = document.documentElement.style
-
+    
     rootStyle.setProperty('--yellow-focus--', gameData.isAccess ? colors.yellowFocus : colors.transparent)
     rootStyle.setProperty('--bg--', gameData.isDarkMode ? colors.bg_dark : colors.bg_light)
 

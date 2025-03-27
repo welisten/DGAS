@@ -8,7 +8,6 @@
 }
 
 :root {
-  /* green theme */
   --main-light--: #3498db;
   --main-deep--: #1a4a70;
   --main-dark--: #18639e;
@@ -36,8 +35,25 @@
   --glow-color: #bfdbff;
   --glow-spread-color: #1d7fffc7;
 
-  --body-color-dark: #070707;
   --body-color-light: #efefef;
+  --form-bg--: #00000023;
+  --form-boxShadow--: 0 0 .5rem #1d7fffc7;
+  --form-border: 1px solid #67c2ff;
+  --formContainer-bg--: #000000;
+  --gameDisplay-bg--: #00000087;
+  --gameDisplay-border: 1px solid #3498db;
+  --line-borderBottom: 1px solid #efefef9f;
+  --gameDisplayHeader-fontWeight: 200;
+  --gameDisplayHeader-color: #efefef;
+  --accessContainer-bg: #ffffff10;
+  --accessContainer-border: 1px solid #3498db;
+  --clock-border: 2px solid #ffffff56;
+  --clock-bg: #303030;
+  --clock-color: #efefef9f;
+  --headerBar-color: #efefef;
+  --scoreBody-bg: none;
+  --score-bg: #000000;
+  --gameBoard-bg: #000000;
   --white-ice-A9f: #efefef9f;
   --blue-dark-theme: #056db3;
   --blue-dark-9c: #056db39c;
@@ -58,7 +74,7 @@ body {
   font-family: "Exo 2", sans-serif;
   height: 100vh;
   width: 100vw;
-  background-color: var(--body-color-dark);
+  background-color: var(--bg--);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -108,7 +124,6 @@ body {
           & button.navBtn {
             display: inline-block;
             font-size: 3rem;
-            color: var(--letter--);
             background-color: transparent;
             text-decoration: none;
             text-transform: capitalize;
@@ -118,6 +133,14 @@ body {
             border: none;
             outline: none;
             filter: drop-shadow(1px 1px 1px var(--shadow--));
+            
+            & a{
+              text-decoration: none;
+              color: white;
+              & i{
+                font-size: 5rem;
+              }
+            }
           }
 
           & button.navBtn:hover,
@@ -136,12 +159,12 @@ body {
           & .switch {
             margin-left: 5%;
             display: inline-block;
-            --width-of-switch: 3.5em;
-            --height-of-switch: 2em;
+            --width-of-switch: 6rem;
+            --height-of-switch: 3rem;
             /* size of sliding icon -- sun and moon */
-            --size-of-icon: 1.4em;
+            --size-of-icon: 2.4rem;
             /* it is like a inline-padding of switch */
-            --slider-offset: 0.3em;
+            --slider-offset: 0.3rem;
             position: relative;
             width: var(--width-of-switch);
             height: var(--height-of-switch);
@@ -182,11 +205,11 @@ body {
           & input:checked + .slider:before {
             left: calc(
               100% - (var(--size-of-icon, 1.4em) + var(--slider-offset, 0.3em))
-            );
+            );  
             background: #303136;
             /* change the value of second inset in box-shadow to change the angle and direction of the moon  */
             box-shadow: inset -3px -2px 5px -2px #8983f7,
-              inset -10px -4px 0 0 #a3dafb;
+              inset -4px -2px 0 0 #a3dafb;
           }
         }
       }
@@ -200,7 +223,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(100% - (12.5v + 12vh));
+    height: calc(100% - (11vh + 11vh));
     width: 100%;
 
     & #popUp {
@@ -293,16 +316,17 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
+        background-color: var(--formContainer-bg--);
 
         & .introForm {
-          background-color: #00000023;
+          background-color: var(--form-bg--);
           backdrop-filter: blur(23px);
           height: 30vh;
           width: 60%;
           padding: 2vh 15px 0;
           border-radius: 15px;
-          border: 1px solid #67c2ff;
-          box-shadow: 0 0 0.5em #1d7fffc7;
+          border: var(--form-border);
+          box-shadow: var(--form-boxShadow--);
           opacity: 0;
           transition: opacity 1s ease;
           animation: formFadeIn 2s ease-in-out 1s 1 normal forwards;
@@ -417,8 +441,7 @@ body {
         justify-content: center;
         align-items: center;
         padding-left: 2%;
-        background-color: black;
-
+        background-color: var(--gameBoard-bg);
         display: flex;
         /* grid-template-columns: repeat(4, 25%); */
 
@@ -484,6 +507,7 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background-color: var(--score-bg);
 
         & .scoreContainer {
           height: 70%;
@@ -520,6 +544,7 @@ body {
             width: 100%;
             border-left: 1px solid #ffffff56;
             border-right: 1px solid #ffffff56;
+            background-color: var(--scoreBody-bg);
 
             & .star1 {
               position: absolute;
@@ -676,11 +701,11 @@ body {
         transform: translateY(-50%);
 
         & .controlBtn {
-          height: 4vh;
-          width: 4vh;
+          height: 6vh;
+          width: 6vh;
           border: 1px solid white;
           color: #fff;
-          font-size: 1.8rem; /*1.5*/
+          font-size: 2.5rem;
           border-radius: 7px;
           transition: 0.5s;
           transition-property: box-shadow;
@@ -712,8 +737,8 @@ body {
           height: 0%;
           width: 100%;
           display: none;
-          border: 1px solid var(--blue-baby);
-          background-color: #ffffff10;
+          border:var(--accessContainer-border);
+          background-color: var(--accessContainer-bg);
           backdrop-filter: blur(50px);
           border-radius: 15px;
           padding: 2vh;
@@ -726,9 +751,9 @@ body {
           height: 100%;
           width: 100%;
           margin: 0;
-          background-color: var(--transparent_a10);
+          background-color: var(--gameDisplay-bg--);
           backdrop-filter: blur(50px);
-          border: 1px solid var(--blue-baby);
+          border: var(--gameDisplay-border);
           border-radius: 15px;
           color: #efefef;
           font-family: "Exo 2", sans-serif;
@@ -740,7 +765,7 @@ body {
             left: 5%;
             width: 90%;
             height: 1px;
-            border-bottom: 1px solid var(--white-ice-A9f);
+            border-bottom: var(--line-borderBottom);
           }
 
           & #gameDisplay_header {
@@ -750,6 +775,8 @@ body {
             display: flex;
             flex-direction: row;
             margin: auto;
+            font-weight: var(--gameDisplayHeader-fontWeight);
+            color: var(--gameDisplayHeader-color);
 
             & .line {
               width: 100%;
@@ -759,8 +786,8 @@ body {
             & .clock {
               width: 40%;
               position: relative;
-              background-color: var(--body-color-dark);
-              border: 2px solid #ffffff56;
+              background-color: var(--clock-bg);
+              border: var(--clock-border);
               border-radius: 10px;
               padding: 5px;
               margin: auto;
@@ -771,6 +798,9 @@ body {
               align-items: center;
               cursor: pointer;
 
+              & p {
+                color: var(--clock-color);
+              }
               & .fa-clock {
                 position: absolute;
                 font-size: 75%;
@@ -805,7 +835,7 @@ body {
                 width: 100%;
                 border-radius: 15px;
                 font-size: 1.8rem;
-                font-weight: inherit;
+                font-weight: var(--gameDisplayHeader-fontWeight);
                 line-height: 2rem;
                 display: flex;
                 text-align: center;
@@ -819,7 +849,7 @@ body {
                 padding-bottom: 5px;
                 border-radius: 15px;
                 font-size: 2rem;
-                font-weight: inherit;
+                font-weight: var(--gameDisplayHeader-fontWeight);
                 line-height: 2rem;
                 text-transform: uppercase;
                 display: flex;
@@ -848,6 +878,7 @@ body {
                 height: 30%;
                 width: 100%;
                 justify-content: space-between;
+                font-weight: var(--gameDisplayHeader-fontWeight);
 
                 & .userName {
                   width: calc(60% + 3vh);
@@ -880,7 +911,8 @@ body {
             height: 10%;
             width: 100%;
             position: relative;
-            font-weight: 200;
+            font-weight: var(--gameDisplayHeader-fontWeight);
+            color: var(--headerBar-color);
 
             & .userName {
               height: 100%;
@@ -888,7 +920,7 @@ body {
               text-align: center;
               align-content: center;
               font-size: 2.5rem;
-              font-weight: inherit;
+              font-weight: var(--gameDisplayHeader-fontWeight);
               text-transform: capitalize;
               overflow: hidden;
               white-space: nowrap;
@@ -907,7 +939,7 @@ body {
             & .userTreasure {
               position: relative;
               width: calc(20%);
-              font-weight: inherit;
+              font-weight: var(--gameDisplayHeader-fontWeight);
               height: 100%;
               align-content: center;
               display: inline-block;
@@ -941,10 +973,11 @@ body {
             padding: 3vh calc(3vh + (0.1 * 100%));
             margin: auto;
             position: relative;
+            color: var(--headerBar-color);
 
             & .bodyImg_Container {
-              border: 2px solid #ffffff56;
-              background-color: var(--body-color-dark);
+              border: var(--clock-border);
+              background-color: var(--clock-bg);
               height: 100%;
               width: 100%;
               border-radius: 15px;
@@ -963,12 +996,13 @@ body {
             height: 23%;
             width: 100%;
             align-content: center;
-            font-weight: 100;
+            font-weight: var(--gameDisplayHeader-fontWeight);
+            color: var(--headerBar-color);
             padding: 0.25rem 0px;
 
             & .description {
               font-size: 2rem;
-              font-weight: inherit;
+              font-weight: var(--gameDisplayHeader-fontWeight);
               text-align: center;
               padding: 0 1rem;
             }
@@ -1219,6 +1253,29 @@ body {
 }
 @media screen and (max-width: 1600px) {
   body {
+    & header{
+      & nav{
+        /* & #navbar{
+          & .nb_group{
+            & button.navBtn{
+              & a{
+                & i{
+                  font-size: 4rem;
+                }
+              }
+            }
+          }
+          & .nb_group2{
+            & .switch{
+              --width-of-switch: 3.5em;
+              --height-of-switch: 2em;
+              --size-of-icon: 1.4em;
+              --slider-offset: 0.3em;
+            }
+          }
+        } */
+      }
+    }
 
     & main {
         top: 9vh;

@@ -33,7 +33,7 @@ class App {
     }
 
     start(){
-        console.clear()
+        // console.clear()
         this.buildContainer()
         this.setContainersElms()
         this.playGameAudio('positiveBlipEffect', 1, false)

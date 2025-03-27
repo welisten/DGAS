@@ -43,12 +43,6 @@ class GameAcessibleDisplay{
             this.element.style.border = `3px solid ${colors.blue_baby}`
         }
     }
-    updateAccessibleContainer(){
-
-    }
-    resetAccessibleContainer(){
-
-    }
     readWithAccessibility(text){
         if(!text || typeof text !== 'string') return
         const accessibleTextContainer = document.querySelector('.accessible_text')
@@ -72,7 +66,6 @@ class GameAcessibleDisplay{
         accessibleTextContainer.dispatchEvent(mouseOverEvent)
         setTimeout(() => accessibleTextContainer.dispatchEvent(clickEvent), 200)
         accessibleTextContainer.dispatchEvent(mouseOutEvent)
-
 
         setTimeout(() => accessibleTextContainer.innerHTML = '', 300)
     }
