@@ -53,15 +53,7 @@ class Preloader {
             this.load.image(`${dataObj.name}_2`, dataObj.src)
 
         }
-        for(let dataObj of generalImagesDataArr){
-            if(dataObj.name === 'golden star' || dataObj.name === 'steel star'){
-                this.load.image(`${dataObj.name} 1`, dataObj.src)
-                this.load.image(`${dataObj.name} 2`, dataObj.src)
-                this.load.image(`${dataObj.name} 3`, dataObj.src)
-            }else{
-                this.load.image(dataObj.name, dataObj.src)
-            }
-        }
+
         audioDataArr.forEach((dataObj) => {
             this.load.audio(dataObj.name, dataObj.src)
         })
@@ -107,16 +99,6 @@ class Preloader {
                 criarObjeto(store, `${dataObj.name}_1`, getImage(`${dataObj.name}_1`))
                 criarObjeto(store, `${dataObj.name}_2`, getImage(`${dataObj.name}_2`))
             }
-            for( let dataObj of generalImagesDataArr){
-                if(dataObj.name === 'golden star' || dataObj.name === 'steel star'){
-                    criarObjeto(store, `${dataObj.name} 1`, getImage(`${dataObj.name} 1`))
-                    criarObjeto(store, `${dataObj.name} 2`, getImage(`${dataObj.name} 2`))
-                    criarObjeto(store, `${dataObj.name} 3`, getImage(`${dataObj.name} 3`))
-                } else{
-                    criarObjeto(store, dataObj.name, getImage(dataObj.name))
-                }
-            }
-
             setTimeout(() => {
                 controls.style.display = 'flex'
                 asideDisplay.style.display = 'flex'

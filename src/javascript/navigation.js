@@ -83,7 +83,7 @@ function setLightModeSlider(updateGameColor){
         let root = document.documentElement
         let urlLastTerm = document.URL.split('/').filter(str => str !== '').pop()
         let isPlatformDoc = urlLastTerm === 'index.html' || urlLastTerm === INITIAL_URL
-        console.log(`isPlatformDoc : ${isPlatformDoc}`)
+
         if(slider.checked){
             plataformData.isDarkMode = true
             localStorage.setItem('isDarkMode', JSON.stringify(plataformData.isDarkMode))
@@ -138,7 +138,6 @@ function setLightModeSlider(updateGameColor){
 
             }
         }
-        console.log(plataformData.isDarkMode)
     })
 }
 

@@ -1,4 +1,5 @@
 import { colors } from "../Consts/Colors.js"
+import { generalImagesDataArr } from "../Consts/Values.js"
 import { gameData } from "../script.js"
 
 class LevelScore{
@@ -118,9 +119,15 @@ class LevelScore{
         timeInfo.setAttribute('tabindex','6')
         timeInfo.setAttribute('aria-label',`em ${timeInMin ? `${timeInMin} minuto ${restInSec ? `e ${restInSec}` : ''}` : timeInSec} segundos`)
 
-        const levelImg = this.getImage('level')
-        const clockImg = this.getImage('clock')
-
+        const levelImg = document.createElement('img')
+        const clockImg = document.createElement('img')
+        const level_OBJ = generalImagesDataArr.find(obj => obj.name === 'level')
+        const clock_OBJ = generalImagesDataArr.find(obj => obj.name === 'clock')
+       
+        levelImg.src = level_OBJ.src
+        clockImg.src = clock_OBJ.src
+        levelImg.alt = level_OBJ.description
+        clockImg.alt = clock_OBJ.description
         
         levelInfo.appendChild(levelImg)
         timeInfo.appendChild(clockImg)
@@ -249,40 +256,35 @@ class LevelScore{
         const maxTime = 100
         const minTime = maxTime - (10 * factor)
 
-        let star1 = null
-        let star2 = null
-        let star3 = null
-        let golden = 3
-        
-        if(!gameData.isScreenReaderActive && !gameData.isLibrasActive){
-            if(userTime < minTime){
-                star1 = this.getImage('golden star 1')
-                star2 = this.getImage('golden star 2')
-                star3 = this.getImage('golden star 3')
-            }else if(userTime < (minTime + 10)){
-                star1 = this.getImage('golden star 1')
-                star2 = this.getImage('golden star 2')
-                star3 = this.getImage('steel star 3')
-                golden = 2
-            } else if(userTime < maxTime){
-                star1 = this.getImage('golden star 1')
-                star2 = this.getImage('steel star 2')
-                star3 = this.getImage('steel star 3')
-                golden = 1
-            }else{
-                star1 = this.getImage('steel star 1')
-                star2 = this.getImage('steel star 2')
-                star3 = this.getImage('steel star 3')
-                golden = 0
-            }
-            return [star1, star2, star3, golden];
-        } else {
-            star1 = this.getImage('golden star 1')
-            star2 = this.getImage('golden star 2')
-            star3 = this.getImage('golden star 3')
-            golden = 3
-            return [star1, star2, star3, golden];
+        let star1 = document.createElement('img')
+        let star2 = document.createElement('img')
+        let star3 = document.createElement('img')
 
+        let goldenStar_src = generalImagesDataArr.find(obj => obj.name === 'golden star').src
+        let steelStar_src = generalImagesDataArr.find(obj => obj.name === 'steel star').src
+        
+        function getstars(userTime, minTime, maxTime){
+            if(userTime <= minTime) return 3
+            if(userTime <= minTime + 10) return 2
+            if(userTime <= maxTime) return 1
+            return 0
+        }
+        let goldenStars = getstars(userTime, minTime, maxTime)
+
+        if(!gameData.isScreenReaderActive && !gameData.isLibrasActive){
+
+            star1.src =  goldenStars >= 1 ? goldenStar_src : steelStar_src
+            star2.src =  goldenStars >= 2 ? goldenStar_src : steelStar_src
+            star3.src =  goldenStars >= 3 ? goldenStar_src : steelStar_src
+
+            return [star1, star2, star3, goldenStars];
+        } else {
+            star1.src =  goldenStar_src
+            star2.src =  goldenStar_src
+            star3.src =  goldenStar_src
+            goldenStars = 3
+
+            return [star1, star2, star3, goldenStars];
         }
     }
     getImage(name){                 // RETORNA A IMAGEM DO OBJ GLOBAL, ARMAZENADA NO PRELOAD (BLOB)

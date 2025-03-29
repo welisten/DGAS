@@ -355,5 +355,40 @@
     "escope": "game3",
     "src_folder": "general",
     "relative_path": "game3/general"
+  },
+  "goldStar.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1743227459/DGAS-Plataforma/game3/general/vpjy7ufstws20rc8hc3i.png",
+    "fileName": "goldStar.png",
+    "escope": "game3",
+    "src_folder": "general",
+    "relative_path": "game3/general"
+  },
+  "steelStar.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1743227459/DGAS-Plataforma/game3/general/r9vm15espvkxgschdba5.png",
+    "fileName": "steelStar.png",
+    "escope": "game3",
+    "src_folder": "general",
+    "relative_path": "game3/general"
+  },
+  "clock.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1743228481/DGAS-Plataforma/game3/general/uw7rl7jpyqyalf0mscd2.png",
+    "fileName": "clock.png",
+    "escope": "game3",
+    "src_folder": "general",
+    "relative_path": "game3/general"
+  },
+  "level.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1743228482/DGAS-Plataforma/game3/general/hznqilgjeyrofjvz4cbm.png",
+    "fileName": "level.png",
+    "escope": "game3",
+    "src_folder": "general",
+    "relative_path": "game3/general"
+  },
+  "trophy.png": {
+    "cloud_path": "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1743229131/DGAS-Plataforma/game3/general/jzhmffkqwazjkytspsxo.png",
+    "fileName": "trophy.png",
+    "escope": "game3",
+    "src_folder": "general",
+    "relative_path": "game3/general"
   }
 }

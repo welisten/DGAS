@@ -22,6 +22,9 @@ const colors = {
     light_blue_9c: '#c8e7fb9c',
     header_light_color: '#3e3e3f',
     formBorder_dark: '#67c2ff',
+    blue_deep: '#1a4a70',
+    blue_deep: '#1a4a70',
+    scoreinfo_light: '#1a4a70'
 }
 
 export {

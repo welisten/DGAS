@@ -259,6 +259,7 @@ function updateGame3Colors(){
     rootStyle.setProperty("--scoreBody-bg", colors.black);
     rootStyle.setProperty('--score-bg', colors.black)
     rootStyle.setProperty('--gameBoard-bg', colors.black)
+    rootStyle.setProperty('--scoreInfo-color', colors.white)
   } else {
     rootStyle.setProperty("--bg--", colors.body_color_light )
     rootStyle.setProperty("--form-bg--", colors.blue_baby )
@@ -279,6 +280,8 @@ function updateGame3Colors(){
     rootStyle.setProperty("--scoreBody-bg", colors.light_blue_9c);
     rootStyle.setProperty('--score-bg', colors.body_color_light)
     rootStyle.setProperty('--gameBoard-bg', colors.white)
+    rootStyle.setProperty('--scoreInfo-color', colors.scoreinfo_light)
+
   }
 }
 

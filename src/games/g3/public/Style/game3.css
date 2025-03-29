@@ -52,6 +52,7 @@
   --clock-color: #efefef9f;
   --headerBar-color: #efefef;
   --scoreBody-bg: none;
+  --scoreInfo-color: white
   --score-bg: #000000;
   --gameBoard-bg: #000000;
   --white-ice-A9f: #efefef9f;
@@ -612,6 +613,7 @@ body {
                 flex-direction: column-reverse;
                 position: relative;
                 justify-content: baseline;
+                color: var(--scoreInfo-color);
 
                 span {
                   position: absolute;
@@ -639,6 +641,7 @@ body {
                 display: flex;
                 flex-direction: row-reverse;
                 font-size: 4rem;
+                color: var(--scoreInfo-color);
 
                 & span {
                   position: absolute;

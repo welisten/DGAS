@@ -1,4 +1,5 @@
 import { colors } from "../Consts/Colors.js"
+import { generalImagesDataArr } from "../Consts/Values.js"
 import { gameData } from "../script.js"
 
 class GameDisplay{
@@ -378,7 +379,8 @@ class DisplayBody{
 
     }
     handleWin(){
-        this.updateDisplayImg('./Assets/imgs/trophy.png', 'trofel', 'trofel')
+        const trophy_OBJ = generalImagesDataArr.find(obj => obj.name === 'trophy')
+        this.updateDisplayImg(trophy_OBJ.src, trophy_OBJ.description, 'trofel')
     }
     reset(){
         this.img.style.display = 'none'

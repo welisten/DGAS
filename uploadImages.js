@@ -62,7 +62,7 @@ function catchFilesFromFolder(dir, base = ''){
                 src_folder: replacedRelativePath.split('/').at(-1),
                 relative_path: replacedRelativePath
             }
-            console.log(`✅ ${relativePath} enviado com sucesso.`)
+            console.log(`✅ - ${relativePath} enviado com sucesso.`)
         } catch(error){
             console.error(`❌ Erro ao enviar ${relativePath}:`, error)
         }

@@ -51,38 +51,38 @@ const cardsImagesDataArr = [
 const generalImagesDataArr = [
     {
         name: 'clock',
-        description: 'clock image',
-        src: './Assets/imgs/clock.png',
+        description: 'relógio',
+        src: "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1743228481/DGAS-Plataforma/game3/general/uw7rl7jpyqyalf0mscd2.png",
         class: 'LevelScore'
     },
     {
         name: 'golden star',
-        description: 'golden star image',
-        src: './Assets/imgs/goldStar.png',
+        description: 'estrela dourada para Pontuação',
+        src: "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1743227459/DGAS-Plataforma/game3/general/vpjy7ufstws20rc8hc3i.png",
         class: 'LevelScore'
     },
     {
         name: 'level',
-        description: 'Levels representation',
-        src: './Assets/imgs/level.png',
+        description: 'level',
+        src: "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1743228482/DGAS-Plataforma/game3/general/hznqilgjeyrofjvz4cbm.png",
         class: 'LevelScore'
     },
     {
         name: 'steel star',
-        description: 'steel star',
-        src: './Assets/imgs/steelStar.png',
+        description: 'estrela de prata para Pontuação',
+        src: "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1743227459/DGAS-Plataforma/game3/general/r9vm15espvkxgschdba5.png",
         class: 'LevelScore'
     },
-    // {
-    //     name: 'treasure',
-    //     description: 'treasure image',
-    //     src: "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1743020777/DGAS-Plataforma/game3/general/roy5gguau9x7utyszcyb.png",
-    //     class: 'LevelScore'
-    // },
+    {
+        name: 'treasure',
+        description: 'tesouro',
+        src: "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1743020777/DGAS-Plataforma/game3/general/roy5gguau9x7utyszcyb.png",
+        class: 'LevelScore'
+    },
     {
         name: 'trophy',
-        description: 'trophy image',
-        src: './Assets/imgs/trophy.png',
+        description: 'trofeu',
+        src: "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1743229131/DGAS-Plataforma/game3/general/jzhmffkqwazjkytspsxo.png",
         class: 'LevelScore'
     },
 ]
