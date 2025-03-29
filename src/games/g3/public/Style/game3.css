@@ -437,7 +437,8 @@ body {
       #gameBoard {
         /* width e height estão definidos no JS; */
         position: absolute;
-        top: 0;
+        top: 50%;
+        transform: translateY(-50%);
         border-radius: 15px;
         justify-content: center;
         align-items: center;
@@ -1058,11 +1059,10 @@ body {
         height: 5vh;
         width: 5vh;
         opacity: 1;
-        color: var(--blue-dark-theme);
         color: white;
         background-color: var(--red-pause);
-        border: 1px solid var(--blue-dark-theme);
         border: 1px solid white;
+        transition: none;
       }
     }
   }

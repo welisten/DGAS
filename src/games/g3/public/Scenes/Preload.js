@@ -13,12 +13,12 @@ class Preloader {
     }
 
     setPreloader(){
-        let containerWidth = getDeviceSice()
+        let [containerWidth, containerHeight] = getDeviceSice()
         const parent = document.querySelector('#gameBoard')
         const config = {
             type: Phaser.AUTO,
-            width: containerWidth,
-            height: containerWidth,
+            width: containerHeight,
+            height: containerHeight,
             parent: parent,
             scene: {
                 preload: this.preload,
@@ -57,8 +57,8 @@ class Preloader {
         audioDataArr.forEach((dataObj) => {
             this.load.audio(dataObj.name, dataObj.src)
         })
-
-        let containerWidth = getDeviceSice()
+        let [width, height] = getDeviceSice()
+        let containerWidth = height
         const progressBar = this.add.graphics();
         const progressBox = this.add.graphics();
         

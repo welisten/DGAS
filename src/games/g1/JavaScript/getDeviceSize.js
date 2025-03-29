@@ -13,10 +13,10 @@ const getDeviceSice = () => {
             break;
 
         case (width >= 600 && width <= 1440 && height < 1080):
-            console.log("medium")                        // Tablets ou telas intermediárias
-            result = Math.floor(width * 0.35)
-            
-            return(result) 
+            console.log("medium screen")                        // Tablets ou telas intermediárias
+            width = Math.floor(width * 0.33)
+            height = Math.floor(height * 0.70)
+            return [width, height] 
 
         case (width > 1440 && height >= 900):
             console.log("large")                         // Desktops e telas grandes

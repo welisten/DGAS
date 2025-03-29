@@ -15,11 +15,11 @@ updateDarkModeSwitch()
 const accessibleContainer = document.querySelector('.gameAccessibleContainer')
 const mainContainers      = document.querySelectorAll('.mainContainer')
 
-let containerWidth        = getDeviceSice()
+let [containerWidth, containerHeight] = getDeviceSice()
 
 mainContainers.forEach(container => {
-  container.style.width = `${containerWidth}px`
-  container.style.height = `${containerWidth}px`  
+  container.style.width = `${containerHeight}px`
+  container.style.height = `${containerHeight}px`  
 })
 
 const popupBtn =  document.querySelector('.popup_btn')

@@ -43,13 +43,13 @@ class MemoryGame {
         rulers.forEach(ruler => ruler.style.display = 'flex')
        
         const board = document.getElementById('gameBoard');
-        let containerWidth  = getDeviceSice()
+        let [containerWidth, containerHeight]  = getDeviceSice()
         
         board.style.display = 'grid'
         board.style.gridTemplateColumns = 'repeat(4, 25%)'
         board.style.border = '3px solid var(--blue-baby)'
-        board.style.height = `${containerWidth}px` 
-        board.style.width = `${containerWidth}px` 
+        board.style.height = `${containerHeight}px` 
+        board.style.width = `${containerHeight}px` 
         board.setAttribute('tabindex', '1')
         board.setAttribute('aria-label', 'tabuleiro')
 
