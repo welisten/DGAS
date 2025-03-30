@@ -1,5 +1,5 @@
 import { Preloader } from './Scenes/Preload.js';
-import { getDeviceSice } from '../../g1/JavaScript/getDeviceSize.js';
+import { getDeviceSize } from '../../g1/JavaScript/getDeviceSize.js';
 import { colors } from './Consts/Colors.js';
 import { gameData } from './Consts/gameData.js';
 import { plataformData } from '../../../constants/plataformData.js';
@@ -15,7 +15,7 @@ updateDarkModeSwitch()
 const accessibleContainer = document.querySelector('.gameAccessibleContainer')
 const mainContainers      = document.querySelectorAll('.mainContainer')
 
-let [containerWidth, containerHeight] = getDeviceSice()
+let [containerWidth, containerHeight] = getDeviceSize()
 
 mainContainers.forEach(container => {
   container.style.width = `${containerHeight}px`
@@ -257,9 +257,10 @@ function updateGame3Colors(){
     rootStyle.setProperty("--accessContainer-bg", colors.transparent_a10);
     rootStyle.setProperty("--accessContainer-border", `1px solid ${colors.blue_baby}`);
     rootStyle.setProperty("--scoreBody-bg", colors.black);
-    rootStyle.setProperty('--score-bg', colors.black)
+    rootStyle.setProperty('--score-bg', colors.score_bg_dark)
     rootStyle.setProperty('--gameBoard-bg', colors.black)
     rootStyle.setProperty('--scoreInfo-color', colors.white)
+    rootStyle.setProperty('--scoreBody-border', `1px solid ${colors.white_a56}`)
   } else {
     rootStyle.setProperty("--bg--", colors.body_color_light )
     rootStyle.setProperty("--form-bg--", colors.blue_baby )
@@ -278,10 +279,10 @@ function updateGame3Colors(){
     rootStyle.setProperty("--accessContainer-bg", colors.white);
     rootStyle.setProperty("--accessContainer-border", `3px solid ${colors.blue_baby}`);
     rootStyle.setProperty("--scoreBody-bg", colors.light_blue_9c);
-    rootStyle.setProperty('--score-bg', colors.body_color_light)
+    rootStyle.setProperty('--score-bg', colors.white)
     rootStyle.setProperty('--gameBoard-bg', colors.white)
     rootStyle.setProperty('--scoreInfo-color', colors.scoreinfo_light)
-
+    rootStyle.setProperty('--scoreBody-border', `1px solid ${colors.blue_baby_a80}`)
   }
 }
 

@@ -2,7 +2,7 @@ import { IntroForm } from "../Scenes/Form.js";
 import { cardsImagesDataArr, generalImagesDataArr, audioDataArr } from "../Consts/Values.js";
 import { colors } from "../Consts/Colors.js";
 import { gameData } from "../script.js";
-import { getDeviceSice } from "../../../g1/JavaScript/getDeviceSize.js";
+import { getDeviceSize } from "../../../g1/JavaScript/getDeviceSize.js";
 
 class Preloader {
     constructor(){
@@ -13,12 +13,13 @@ class Preloader {
     }
 
     setPreloader(){
-        let [containerWidth, containerHeight] = getDeviceSice()
+        let [containerWidth, containerHeight] = getDeviceSize()
         const parent = document.querySelector('#gameBoard')
         const config = {
             type: Phaser.AUTO,
             width: containerHeight,
             height: containerHeight,
+            backgroundColor: gameData.isDarkMode ? colors.black : colors.blue_baby,
             parent: parent,
             scene: {
                 preload: this.preload,
@@ -57,11 +58,16 @@ class Preloader {
         audioDataArr.forEach((dataObj) => {
             this.load.audio(dataObj.name, dataObj.src)
         })
-        let [width, height] = getDeviceSice()
+        let [width, height] = getDeviceSize()
         let containerWidth = height
+        
+        const logoImg =  document.querySelector(".logo")
         const progressBar = this.add.graphics();
         const progressBox = this.add.graphics();
         
+        logoImg.classList.add('active')
+        logoImg.style.height =` ${containerWidth * 0.65}px`
+
         progressBox.fillStyle('0xffffff', 1);
         progressBox.fillRoundedRect((containerWidth - (containerWidth * .8)) / 2 , containerWidth * .85, containerWidth * .8, 20, 15);
         progressBox.lineStyle(5, '0xffffff', 1);
@@ -109,6 +115,9 @@ class Preloader {
                 progressBox.destroy();
                 loadingText.destroy();
                 gameCanvas.remove()
+                logoImg.classList.remove('actvive')
+                logoImg.remove()
+
                 gameData.intro =  new IntroForm()
             }, 500)
         });

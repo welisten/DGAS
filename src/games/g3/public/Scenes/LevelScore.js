@@ -25,7 +25,11 @@ class LevelScore{
 
     }
 
-    generatePainel(){                                                           //CRIA OS ELEMENTOS DOM DO PAINEL DO SCORE (INCLUINDO O HEADER)    
+    generatePainel(){ 
+        const rulers = document.querySelectorAll('.ruler')
+        rulers.forEach(ruler => ruler.style.display = 'none')
+       
+        //CRIA OS ELEMENTOS DOM DO PAINEL DO SCORE (INCLUINDO O HEADER)    
         const container = document.createElement('div')
         const painelHeader = document.createElement('p')
         const title = document.createElement('span')
@@ -102,7 +106,7 @@ class LevelScore{
         levelInfo.classList.add('levelInfo')
         timeInfo.classList.add('timeInfo')
         
-        levelInfo.innerHTML = `Level <span>${this.userLevel}</span>`
+        levelInfo.innerHTML = `<span class="levelSpan">Level</span> <span class="levelNumber">${this.userLevel}</span>`
         timeInfo.innerHTML = `<span>${this.userTime}s</span>`
 
         levelInfo.setAttribute('tabindex','5')

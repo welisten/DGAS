@@ -444,6 +444,7 @@ class DisplayFooter{
     updateFooterText(text, callback = () => {}){
         this.footerText = text.toString()
         this.element.firstChild.innerHTML = this.footerText
+        console.log(callback)
         callback('.description')
     }
     handleWin(){

@@ -1,4 +1,4 @@
-const getDeviceSice = () => {
+const getDeviceSize = () => {
     let height = window.innerHeight
     let width = window.innerWidth
     let result
@@ -14,15 +14,17 @@ const getDeviceSice = () => {
 
         case (width >= 600 && width <= 1440 && height < 1080):
             console.log("medium screen")                        // Tablets ou telas intermediárias
-            width = Math.floor(width * 0.33)
-            height = Math.floor(height * 0.70)
-            return [width, height] 
+            
+            const newWidth = Math.floor(width * 0.33)
+            const newHeight = Math.floor(height * 0.70)
+            return [newWidth, newHeight] 
 
         case (width > 1440 && height >= 900):
             console.log("large")                         // Desktops e telas grandes
-            result = Math.floor(width * 0.26)
+            width = Math.floor(width * 0.26)
+            height = Math.floor(height * 0.68)
             
-            return(result)
+            return [width, height]
 
         default:
             console.log(`screen size unknown : width = ${width} - height = ${height}`)                      
@@ -30,5 +32,5 @@ const getDeviceSice = () => {
 }
 
 export{
-    getDeviceSice
+    getDeviceSize
 }

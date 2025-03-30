@@ -4,7 +4,7 @@ import { colors } from '../Consts/Colors.js';
 import { gameData } from '../script.js';
 import { cardsImagesDataArr } from '../Consts/Values.js';
 import { LevelScore } from './LevelScore.js'
-import { getDeviceSice } from '../../../g1/JavaScript/getDeviceSize.js';
+import { getDeviceSize } from '../../../g1/JavaScript/getDeviceSize.js';
 
 
 class MemoryGame {
@@ -43,7 +43,7 @@ class MemoryGame {
         rulers.forEach(ruler => ruler.style.display = 'flex')
        
         const board = document.getElementById('gameBoard');
-        let [containerWidth, containerHeight]  = getDeviceSice()
+        let [containerWidth, containerHeight]  = getDeviceSize()
         
         board.style.display = 'grid'
         board.style.gridTemplateColumns = 'repeat(4, 25%)'
@@ -253,7 +253,7 @@ class MemoryGame {
         
         if(elem.clientHeight > (parentHeight - 20) ){
             $(document).ready(function(){
-                $(identificador).fitText(2)
+                $(identificador).fitText(2.2)
             })
         }
     }

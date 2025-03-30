@@ -24,7 +24,9 @@ const colors = {
     formBorder_dark: '#67c2ff',
     blue_deep: '#1a4a70',
     blue_deep: '#1a4a70',
-    scoreinfo_light: '#1a4a70'
+    scoreinfo_light: '#1a4a70',
+    score_bg_dark: '#181818',
+    score_bg_light: '#181818',
 }
 
 export {
