@@ -99,16 +99,16 @@ class MemoryGame {
             for(let y = 0; y < 4; y++, aux++){
                 switch (y){
                     case 0:
-                        this.cards.push(new Card(allValues[aux][0], 'A', x + 1, allValues[aux][1], allValues[aux][2], allValues[aux][3]/*, auxArr[aux]*/ )) 
+                        this.cards.push(new Card(allValues[aux][0], 'A', x + 1, allValues[aux][1], allValues[aux][2], allValues[aux][3])) 
                         break
                     case 1:
-                        this.cards.push(new Card(allValues[aux][0], 'B', x + 1, allValues[aux][1], allValues[aux][2], allValues[aux][3]/*, auxArr[aux]*/ )) 
+                        this.cards.push(new Card(allValues[aux][0], 'B', x + 1, allValues[aux][1], allValues[aux][2], allValues[aux][3])) 
                         break
                     case 2:
-                        this.cards.push(new Card(allValues[aux][0], 'C', x + 1, allValues[aux][1], allValues[aux][2], allValues[aux][3]/*, auxArr[aux]*/ )) 
+                        this.cards.push(new Card(allValues[aux][0], 'C', x + 1, allValues[aux][1], allValues[aux][2], allValues[aux][3])) 
                         break
                     case 3:
-                        this.cards.push(new Card(allValues[aux][0], 'D', x + 1, allValues[aux][1], allValues[aux][2], allValues[aux][3]/*, auxArr[aux]*/ )) 
+                        this.cards.push(new Card(allValues[aux][0], 'D', x + 1, allValues[aux][1], allValues[aux][2], allValues[aux][3])) 
                         break
                 }
                 

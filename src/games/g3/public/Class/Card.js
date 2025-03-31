@@ -1,15 +1,16 @@
 
 class Card {
-    constructor(name, collumn, row, element, description, src/*, tabIndex*/) {
+    constructor(name, collumn, row, element, description, src) {
         this.name = name;
         this.description = description,
         this.src = src
         this.element = element,
         this.location = {row: row, collumn: collumn}
-        // this.tabIndex = tabIndex
         this.isFlipped = false;
         this.isMatched = false;
         this.incorrectMatch= false
+
+        this.element.classList.add('cardImage')
     }
     flip() {
         this.isFlipped = !this.isFlipped;
