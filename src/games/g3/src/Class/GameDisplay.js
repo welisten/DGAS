@@ -320,7 +320,7 @@ class DisplayBar{
     toggleDisplayBar(){  // alterna o Display
         if(this.LibrasBtn.classList.contains('active')){
             setTimeout(() => {
-                if(!gameData.isLibrasActive)
+                if(gameData.isLibrasActive)
                     this.element.style.display = 'none'
             }, 10)
         } else {
@@ -444,7 +444,6 @@ class DisplayFooter{
     updateFooterText(text, callback = () => {}){
         this.footerText = text.toString()
         this.element.firstChild.innerHTML = this.footerText
-        console.log(callback)
         callback('.description')
     }
     handleWin(){

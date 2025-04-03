@@ -4,7 +4,7 @@ import { colors } from '../Consts/Colors.js';
 import { gameData } from '../script.js';
 import { cardsImagesDataArr } from '../Consts/Values.js';
 import { LevelScore } from './LevelScore.js'
-import { getDeviceSize } from '../../../g1/JavaScript/getDeviceSize.js';
+import { getDeviceSize } from '../js/getDeviceSize.js';
 
 
 class MemoryGame {

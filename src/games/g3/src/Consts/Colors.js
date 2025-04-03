@@ -27,6 +27,8 @@ const colors = {
     scoreinfo_light: '#1a4a70',
     score_bg_dark: '#181818',
     score_bg_light: '#181818',
+    letter_l :     '#ffffff',
+    letter_d :     '#000000',
 }
 
 export {

@@ -1,8 +1,8 @@
 import { IntroForm } from "../Scenes/Form.js";
-import { cardsImagesDataArr, generalImagesDataArr, audioDataArr } from "../Consts/Values.js";
+import { cardsImagesDataArr, audioDataArr } from "../Consts/Values.js";
 import { colors } from "../Consts/Colors.js";
 import { gameData } from "../script.js";
-import { getDeviceSize } from "../../../g1/JavaScript/getDeviceSize.js";
+import { getDeviceSize } from '../js/getDeviceSize.js';
 
 class Preloader {
     constructor(){
@@ -52,7 +52,6 @@ class Preloader {
         for(let dataObj of cardsImagesDataArr){
             this.load.image(`${dataObj.name}_1`, dataObj.src)
             this.load.image(`${dataObj.name}_2`, dataObj.src)
-
         }
 
         audioDataArr.forEach((dataObj) => {

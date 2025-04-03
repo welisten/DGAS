@@ -11,6 +11,7 @@ const getDeviceSize = () => {
             break;
 
         case (width >= 600 && width <= 1440 && height < 1080):
+            
             const newWidth = Math.floor(width * 0.33)
             const newHeight = Math.floor(height * 0.70)
             return [newWidth, newHeight] 

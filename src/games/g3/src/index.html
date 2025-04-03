@@ -16,7 +16,6 @@
     <!-- font-awesome - 6.5.2 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="./Style/game3.css">
-    <link rel="stylesheet" href="./../../../style/mediaQuery.css">
     <!-- phaser -->
     <script src="https://cdn.jsdelivr.net/npm/phaser@v3.80.1/dist/phaser.min.js"></script>
     <!-- Vlibras -->
@@ -152,8 +151,12 @@
         </div>
     </footer>
     <script>
-        new window.VLibras.Widget('http://localhost:9999/app')
-
+        fetch('/env')
+            .then(response => response.json())
+            .then(data => {
+                const port = data.PORT
+                new window.VLibras.Widget(`http://localhost:${port}/app`)
+            })
     </script>
 </body>
 </html>

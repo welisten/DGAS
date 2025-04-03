@@ -1,11 +1,12 @@
-import { plataformData } from "../../../../constants/plataformData.js"
+// import { plataformData } from "../../../../constants/plataformData.js"
 
+const plataformDarkMode = JSON.parse(localStorage.getItem('isDarkMode')) ?? false 
 const gameData = {
     isPreloadComplete: false,
     intro: undefined, 
     score: undefined,
     isMute: false,
-    isDarkMode: plataformData.isDarkMode,
+    isDarkMode: plataformDarkMode,
     isScreenReaderActive: false,
     isLibrasActive: false,
     lastAccText: '',

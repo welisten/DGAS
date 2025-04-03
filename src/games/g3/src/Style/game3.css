@@ -214,6 +214,7 @@ body {
       left: 15px;
       height: 15vh;
       width: 45vh;
+      max-width: 20vw;
       padding: 0.5rem;
       border: 1px solid var(--blue-baby);
       border-radius: 15px;
@@ -1235,13 +1236,28 @@ body {
 }
 
 @media screen and (max-width: 1600px) {
+  html {
+    font-size: 42.5%;
+}
   body {
     header{
+      height: 9vh;
+
       nav{
+        height: 9vh;
+        .switch{
+          font-size: 150%;
+        }
+        .logoBtn {
+          img {
+            height: 9vh;
+          }
+        }
       }
     }
 
     main {
+      top: 9vh;
       height: calc(100% - (9vh + 9vh));
 
       #popUp {
@@ -1290,6 +1306,17 @@ body {
       }
       }
     }
+    footer{
+      .f_relative_root {
+          .f_pd_owners {
+            width: 400px;
+            #pageDown {
+              font-size: 2rem;
+              line-height: 3rem;
+            }
+          }
+        }
+  }
   }
 }
 @media screen and (min-width: 2560px) {

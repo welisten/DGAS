@@ -1,13 +1,14 @@
 import { Preloader } from './Scenes/Preload.js';
-import { getDeviceSize } from '../../g1/JavaScript/getDeviceSize.js';
+import { getDeviceSize } from './js/getDeviceSize.js';
 import { colors } from './Consts/Colors.js';
 import { gameData } from './Consts/gameData.js';
-import { plataformData } from '../../../constants/plataformData.js';
-import { setLightModeSlider } from '../../../javascript/navigation.js';
+import { loadEnviromentVariables } from './Consts/Values.js';
 
 window.gameData = gameData // RETIRAR DEPOIS arquivo em outro módulo é melhor
 
-new Preloader()
+loadEnviromentVariables()
+  .then(() => new Preloader())
+
 
 setLightModeSlider(updateGame3Colors)
 updateDarkModeSwitch()
@@ -231,11 +232,30 @@ function handleOutline(aux){
 }
 function updateDarkModeSwitch() {
   const inputSlider = document.querySelector('input#slider')
-  plataformData.isDarkMode ? inputSlider.setAttribute('checked', '') : inputSlider.removeAttribute('checked')
-  console.log(inputSlider)
+  gameData.isDarkMode ? inputSlider.setAttribute('checked', '') : inputSlider.removeAttribute('checked')
+}
+function setLightModeSlider(updateGameColor){
+  const slider = document.querySelector('input#slider')
+
+  slider.addEventListener('click', () => {
+      let root = document.documentElement
+
+      if(slider.checked){
+        gameData.isDarkMode = true
+        localStorage.setItem('isDarkMode', JSON.stringify(gameData.isDarkMode))
+        
+        root.style.setProperty('--letter--', colors.letter_l)
+        if(updateGameColor) updateGameColor()
+      }else{
+        gameData.isDarkMode = false
+        localStorage.setItem('isDarkMode', JSON.stringify(gameData.isDarkMode))
+        
+        root.style.setProperty('--letter--', colors.letter_d)
+        if(updateGameColor) updateGameColor()
+      }
+  })
 }
 function updateGame3Colors(){
-  gameData.isDarkMode = plataformData.isDarkMode
 
   const rootStyle = document.documentElement.style
 
