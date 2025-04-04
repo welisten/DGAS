@@ -1,5 +1,5 @@
 /**
- * 📌 Main Route Configuration
+ * Main Route Configuration
  * 
  * Este arquivo define a rota principal da API.
  * Ele inclui:
@@ -20,7 +20,7 @@ const express   =  require("express")
 const route     = express.Router()
 
 const apicache = require("apicache")
-const cacheTime = process.env.NODE_ENV === "production" ? "5 minutes" : "10 minutes"
+const cacheTime = process.env.NODE_ENV === "production" ? "5 minutes" : "10 seconds"
 const cache = apicache.middleware(cacheTime)
 
 route.get('/', cache ,(req, res) => {
