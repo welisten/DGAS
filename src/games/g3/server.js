@@ -4,6 +4,8 @@ const app = express()
 const route = require('./routes/index')
 const cors = require('cors')
 const { createProxyMiddleware } = require('http-proxy-middleware')
+const vLibrasproxyMiddleware = require('./middlewares/vLibrasProxyMiddleware');
+const appProxyMiddleware = require("./middlewares/appProxyMiddleware");
 require('dotenv').config()
 
 app.use(cors())
@@ -28,47 +30,11 @@ app.get('/env', (req, resp) => {
 })
 
 /*--------------------------------------------------------------------------- */
-const proxyMiddleware = createProxyMiddleware({
-    target: 'https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev', // URL do servidor externo
-    changeOrigin: true,
-    pathRewrite: {
-      [`http://localhost:${PORT}/app/target`]: 'https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/target', // Remove o prefixo /api da URL e ajusta o caminho
-    },
-    on:{
-        proxyReq: (proxyReq, req, res) => {
-            proxyReq.setHeader('sec-fetch-mode', 'cors')       
-        },
-    }
-})
-app.use(proxyMiddleware);
+
+app.use(vLibrasproxyMiddleware);
 
 // proxy route
-app.use('/app', createProxyMiddleware({
-    target: 'https://vlibras.gov.br/app',
-    changeOrigin: true,
-    on: {
-        proxyReq: (proxyReq, req, res) => {
-            proxyReq.setHeader('Access-Control-Allow-Origin', '*');
-            proxyReq.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-            proxyReq.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-            proxyReq.setHeader('sec-fetch-mode', 'no-cors')
-            proxyReq.setHeader('Origin', 'https://vlibras.gov.br')
-            proxyReq.setHeader('Referer', 'https://vlibras.gov.br')
-            proxyReq.removeHeader('cache-control');
-
-            console.log(`[Proxy Request] ${req.method} ${req.originalUrl}`)
-        },
-        proxyRes: (proxyRes, req, res) => {
-            res.setHeader('Access-Control-Allow-Origin', '*');
-            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-            res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-            res.setHeader('sec-fetch-mode', 'no-cors')
-            res.removeHeader('cache-control');
-            
-            console.log(`[Proxy Response] ${res.statusCode}`);
-        }
-    }
-}))
+app.use('/app', appProxyMiddleware)
 
 app.use('/plugin', () => console.log("testando plugin"));
 
