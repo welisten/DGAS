@@ -1,17 +1,37 @@
-const express =  require("express")
-const route = express.Router()
-const apicache = require("apicache")
+/**
+ * 📌 Main Route Configuration
+ * 
+ * Este arquivo define a rota principal da API.
+ * Ele inclui:
+ * - Middleware de cache para melhorar a performance.
+ * - Logs de requisição no ambiente de desenvolvimento.
+ * - Tratamento de erros para evitar falhas inesperadas.
+ * 
+ * 🔹 Rota disponível:
+ *   GET /  → Retorna uma mensagem indicando que a API está funcionando.
+ * 
+ * @module routes/mainRoute
+ */
 
-const cache = apicache.middleware("5 minutes")
+
+require('dotenv').config()
+
+const express   =  require("express")
+const route     = express.Router()
+
+const apicache = require("apicache")
+const cacheTime = process.env.NODE_ENV === "production" ? "5 minutes" : "10 minutes"
+const cache = apicache.middleware(cacheTime)
 
 route.get('/', cache ,(req, res) => {
     try{
         if(process.env.NODE_ENV !== 'production'){
-            console.log(`Testando REQUEST: ${req.url}`)
+            console.log(`[${new Date().toISOString()}] ${req.method} ${req.url} - IP: ${req.ip}`)
         }
         
-        res.status(200).json({ message: 'main rote is working' })
+        res.status(200).json({ message: '✅ - Main rote is working' })
     }catch(error){
+        console.log("❌ - Erro na rota '/':", error)
         res.status(500).json({error})
     }
 })

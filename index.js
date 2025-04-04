@@ -1,26 +1,27 @@
-const express   = require('express')
-const cors      = require('cors')
-const path      = require('path')
-const fs        = require('fs')
-const {createProxyMiddleware} = require('http-proxy-middleware')
-const bodyParser = require('body-parser')
-const emailRoute = require('./src/javascript/routes/emailRoutes')
 require('dotenv').config()
+const express                   = require('express')
+const cors                      = require('cors')
+const path                      = require('path')
+const {createProxyMiddleware}   = require('http-proxy-middleware')
+const { urlencoded }            = require('body-parser')
+const emailRoute                = require('./src/javascript/routes/emailRoutes')
+const compression               = require('compression')
+// add helmet
 
 const app = express()
 const PORT = 9999
 
 
-app.use(express.static('src'))
 
+app.use(compression())
+app.use(express.json())
+app.use(urlencoded({extended: true}))
+app.use(express.static('src'))
 app.use('/games/g1', express.static(path.join(__dirname, 'src/games/g1')))
 app.use('/games/g2', express.static(path.join(__dirname, 'src/games/g2')))
 app.use('/games/g3', cors(), express.static(path.join(__dirname, 'src/games/g3')))
 app.use('/games/g4', express.static(path.join(__dirname, 'src/games/g4')))
 app.use('/games/g5', express.static(path.join(__dirname, 'src/games/g5')))
-
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
 
 // Usa as rotas de e-mail
 app.use(emailRoute)
