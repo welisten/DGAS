@@ -1,6 +1,6 @@
 import { colors } from "../Consts/Colors.js"
 import { generalImagesDataArr } from "../Consts/Values.js"
-import { gameData } from "../script.js"
+import { gameData } from '../Consts/gameData.js';
 
 class GameDisplay{
     constructor(father,){

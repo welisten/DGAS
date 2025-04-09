@@ -1,7 +1,7 @@
 import  { Card }  from '../Class/Card.js';
 import  { User }  from '../Class/User.js';
 import { colors } from '../Consts/Colors.js';
-import { gameData } from '../script.js';
+import { gameData } from '../Consts/gameData.js';
 import { cardsImagesDataArr } from '../Consts/Values.js';
 import { LevelScore } from './LevelScore.js'
 import { getDeviceSize } from '../js/getDeviceSize.js';

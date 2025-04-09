@@ -4,7 +4,7 @@ import  { GameDisplay } from '../Class/GameDisplay.js'
 import  { GameAcessibleDisplay} from '../Class/GameAccessible.js'
 // DATA
 import  { colors } from '../Consts/Colors.js';
-import  { gameData } from '../script.js';
+import { gameData } from '../Consts/gameData.js';
 
 class IntroForm {
     constructor(){
