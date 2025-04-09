@@ -1,76 +1,295 @@
+/**
+ * script.js
+ * 
+ * Script principal de configuração e interação inicial do jogo acessível.
+ * Responsável por:
+ * - Carregar variáveis de ambiente e pré-carregamento (Preloader)
+ * - Ajustar tamanhos de containers com base no dispositivo
+ * - Configurar eventos dos botões de controle (áudio, Libras, leitor de tela)
+ * - Gerenciar modos de acessibilidade (VLibras e Leitor de Tela)
+ * - Manter a interface acessível com suporte visual, auditivo e navegabilidade por teclado
+ * 
+ * Dependências:
+ * - ./Scenes/Preload.js            → Inicialização e carregamento inicial
+ * - ./js/getDeviceSize.js          → Obtenção de dimensões responsivas
+ * - ./Consts/Colors.js             → Paleta de cores (modo claro/escuro)
+ * - ./Consts/gameData.js          → Objeto global de dados do jogo
+ * - ./Consts/Values.js            → Variáveis e valores de ambiente
+ * 
+ * Documentação sugerida:
+ * - VLibras: https://www.gov.br/governodigital/pt-br/vlibras
+ * - Acessibilidade na Web: https://developer.mozilla.org/pt-BR/docs/Web/Accessibility
+ * - MutationObserver: https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
+ * - Web Speech API (Screen Reader): https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis
+ * 
+ * Observações:
+ * - O script considera conflitos entre modos de acessibilidade e previne uso simultâneo.
+ * - Adota uma abordagem progressiva para inclusão de acessibilidade visual e auditiva.
+ * - Inclui fallback e mensagens de erro caso ferramentas externas (como VLibras) não carreguem corretamente.
+ * 
+ * Autor: [Wesley Welisten Rocha Santos Vieira]
+ * Última atualização: [09/04/2025]
+ */
+
 import { Preloader } from './Scenes/Preload.js';
 import { getDeviceSize } from './js/getDeviceSize.js';
 import { colors } from './Consts/Colors.js';
 import { gameData } from './Consts/gameData.js';
 import { loadEnviromentVariables } from './Consts/Values.js';
 
-window.gameData = gameData // RETIRAR DEPOIS arquivo em outro módulo é melhor
-
 loadEnviromentVariables()
   .then(() => new Preloader())
+  .then(() => {
+    setLightModeSlider(updateGame3Colors)
+    updateDarkModeSwitch()
+  })
 
-
-setLightModeSlider(updateGame3Colors)
-updateDarkModeSwitch()
 
 const accessibleContainer = document.querySelector('.gameAccessibleContainer')
-const mainContainers      = document.querySelectorAll('.mainContainer')
+const mainContainers      = document.querySelectorAll('.mainContainer') /*Game_container e GameBoard */
+const allControlBtns =  document.querySelectorAll('.controlBtn') 
+const vwBtn = document.querySelector('[vw-access-button]')// Botão de acesso ao vLibras. Opacity 0 por padrão
+const vLibrasContainer = document.getElementById('vLibras_container') 
 
-let [containerWidth, containerHeight] = getDeviceSize()
+let [containerHeight] = getDeviceSize()
 
-mainContainers.forEach(container => {
+mainContainers.forEach( (container) => {
   container.style.width = `${containerHeight}px`
   container.style.height = `${containerHeight}px`  
 })
 
-const popupBtn =  document.querySelector('.popup_btn')
-popupBtn.addEventListener('click', ()=>{
-  popupBtn.parentNode.style.opacity = 0
+handlePopUp()
+
+//matriz bidimencional de botões e classes
+const controlBtnsAndTheirClss = Array.from(allControlBtns).map((btn) =>{
+  return [btn, btn.className.split(' ')[1]]
 })
 
-const btns =  document.querySelectorAll('.controlBtn') 
-btns.forEach(btn => {         // handle hover buttons state
-  btn.addEventListener('click', (e) => {
-    e.preventDefault()
-    btn.classList.remove('hovered');
-  });
+gameData.lastBtnTarget = ''
+controlBtnsAndTheirClss.forEach( elemAndClassNameArr => { // configura os botões baseado em suas classes
+  setControlsBtnsEvents(elemAndClassNameArr[0])
+
+  // configura o comportamento do botão mediante sua classe
+  switch(elemAndClassNameArr[1]){
+    
+    case 'mute_btn':
+      elemAndClassNameArr[0].addEventListener('click', () => {
+        gameData.isMute = !gameData.isMute
+
+        elemAndClassNameArr[0].classList.toggle('active')
+        
+        if(gameData.isScreenReaderActive){
+          let soundState = elemAndClassNameArr[0].classList.contains('active') ? 'desativado' : 'ativado'
+          readText(`O Som foi ${soundState} `)
+        }
+        
+        const icon = elemAndClassNameArr[0].children[0]
+        icon.classList.toggle('fa-volume-xmark')
+        icon.classList.toggle('fa-volume-high')
+      })
+      break
+      
+    case 'libras_btn':  //libras btn
+      if(!vwBtn) {
+        console.error("O botão de acesso do vlibras não foi encontrado.\nNão foi possível ativar o vlibras.")
+        alert("Não foi possível ativar a acessibilidade em Libras\nVerifique o console para mais informações")
+        return
+      }
+
+      elemAndClassNameArr[0].addEventListener('click', (e) => {
+        const vlInterface = document.querySelector('[vw]')
+        
+        if(preventAccessibilityConflict()){
+          announceMessageWithPopUp("Infelizmente, não é possivel ativar 2 modos de acessibilidade ao mesmo tempo", null, 6000)
+          return
+        }
+        
+        elemAndClassNameArr[0].classList.add('active')
+        accessibleContainer.classList.add('active')
+
+        if(!gameData.isLibrasActive){
+          gameData.isLibrasActive = true
+
+          if(gameData.intro.isActive){ 
+            // MUDA O COMPORTAMENTO DO LABEL E DO INPUT NO FORMULARIO DA INTRODUÇÃO
+            gameData.intro.changeToAccessibility()
+          }
+
+          setTimeout(() =>{   // tempo que demora para a transição do design do container pai
+            vlInterface.style.display = "block"
+            vlInterface.style.opacity = "1"
+
+            vwBtn.click();
+                                            // PENSAR SOBRE ISSO
+            /* O vLibras demora um certo tempo para ser carregado, e quando não carregado o botão de fechamento não poderá
+             ser encontrado impedindo o fluxo da aplicação, por isso o uso do multationObserver.
+             Vale-se resaltar que esse tempo é relativo (não preciso)
+            */
+            let closeFound = false
+
+            const observer = new MutationObserver((MutationObserver, obs) => {
+              const closeVl = document.querySelector('.vpw-header-btn-close')
+              if(closeVl) {
+
+                closeFound = true
+
+                closeVl.addEventListener('click', () => {
+                  vlInterface.style.display = "none !important"
+                  vlInterface.style.opacity = "0"
+
+                  gameData.isLibrasActive = false
+                  elemAndClassNameArr[0].classList.remove('active')
+                  accessibleContainer.classList.remove('active')
+
+                  gameData.intro.changeToAccessibility() // toggle
+                
+                  gameData.intro.gameDisplay.toggleDisplay()
+                  gameData.intro.gameAcessibleDisplay.toggleDisplay()
+                })
+                // Botão encontrado, para de observar
+                obs.disconnect()
+              } 
+
+            })
+
+            observer.observe(vLibrasContainer, {
+              childList: true,
+              subtree: true
+            })
+
+            /*  Para garantir que o observador não permaneça escutando indefinidamente 
+                (caso o botão nunca seja carregado por algum erro), um tempo máximo de 
+                15 segundos é definido.
+             */
+            setTimeout(() => {
+              if(!closeFound){
+                observer.disconnect()
+                announceMessageWithPopUp('O botão de fechar não foi carregado. Recarregue a pagina', null, 6000)
+              }
+            },15000)
+
+          }, 1000) // time para a alteração do display no frontEnd
+          gameData.intro.gameDisplay.toggleDisplay()
+          gameData.intro.gameAcessibleDisplay.toggleDisplay()
+        }
+        else
+        {
+          announceMessageWithPopUp("Vlibras ja está ativado, Aperte no Botão de sair do Vlibras para fechar a ferramenta", null, null)
+        }
+    
+      })
+      break
+
+    case 'screenReader_btn':
+
+      elemAndClassNameArr[0].addEventListener('click', () => {
+        if(preventAccessibilityConflict()){
+          announceMessageWithPopUp("Infelizmente, não é possivel ativar 2 modos de acessibilidade ao mesmo tempo", null, 6000)
+          return
+        }
+        gameData.isScreenReaderActive = !gameData.isScreenReaderActive
+        let status = gameData.isScreenReaderActive ? 'ativado' : 'desativado'
+        
+        readText(`O aprimoramento do leitor de tela foi ${status}.\n Para jogar no modo acessível para pessoas com deficiência visual recomendamos mantê-lo ativo.`)
+        
+        elemAndClassNameArr[0].classList.toggle('active')
+        handleOutline()
+        
+        if(!gameData.isPaused && gameData.isScreenReaderActive && gameData.class == 'MemoryGame'){
+          document.querySelector('#gameControls').style.display = 'none'
+        }
+      })
+      handleOutline()
+      break
+    default:
+      break
+  }
+});
+
+
+function handlePopUp(){
+  const popupCloseBtn       =  document.querySelector('.popup_close_btn')
+
+  if(popupCloseBtn){
+    popupCloseBtn.addEventListener('click', ()=>{ popupCloseBtn.parentNode.style.opacity = 0 })
+  } else {
+    console.error("Botão de fechamento do PopUp não encontrado.\nImpossível configurar")
+  }
+}
+function setControlsBtnsEvents(btn){
 
   btn.addEventListener('mouseenter', () => {
     btn.classList.add('hovered');
   });
 
+  btn.addEventListener('click', (e) => {
+    e.preventDefault()
+    btn.classList.remove('hovered');
+  });
+
   btn.addEventListener('mouseleave', () => {
     btn.classList.remove('hovered');
   });
-})
-
-let auxText = ''
-const readText = (text) => {
-  let elem = document.querySelector('.textToReader')
- 
-  if(text === auxText) text += '.'
-  auxText = text
-  elem.textContent = text
+  
+  // adiciona acessibilidade em libras no evento de "mouseover" aos botões armazenados no array "controlBtnsAndTheiClss"
+  btn.addEventListener('mouseover', (e) => {
+    if( gameData.lastBtnTarget === e.target) return
+    if( gameData.isLibrasActive){
+      gameData.intro.gameAcessibleDisplay.readWithAccessibility(`${e.target.title}`)
+      gameData.lastBtnTarget = e.target
+    }
+    setTimeout(() => gameData.lastBtnTarget =  '', 1000)
+  })
 }
+function preventAccessibilityConflict(){
+  return gameData.isLibrasActive && gameData.isScreenReaderActive
+}
+function readText(text){
+  let elem = document.querySelector('.textToReader')
 
-const popUpMessage = (message, nxtElem, delay = 2500, isVisible = true, chaining = false) => {   // EXIBE MENSAGEM NO POPUP VISÍVEL
+  if(!elem) {
+    console.error("Elemento '.textToReader' não encontrado. Leitura de textos não configurada.")
+    return
+  }
+
+  //forçar a atualização em sistemas que só detectam mudança quando o conteúdo de fato muda.
+  if(text === gameData.lastReadText) text += '.' 
+  gameData.lastReadText = text
+
+  setTimeout(() => {
+    // Esse pequeno delay ajuda em alguns casos (Leitores de tela)
+    elem.textContent = text
+  }, 10)
+}
+function announceMessageWithPopUp(message, nxtElem, delay = 2500, isVisible = true, textChaining = false){   // EXIBE MENSAGEM NO POPUP VISÍVEL
+  
   const popUp = document.getElementById('popUp')
   const popupText = document.querySelector('.popupText')
   const nextFocusElement = document.querySelector(nxtElem)
+  
+  if(!popUp ||!popupText){
+    console.error("Pop-up ou texto do pop-up não encontrados.\nPopup não configurado!")
+    return
+  }
   let display = popUp.style.display
   
-  if(display != 'flex')   popUp.style.display = 'flex'
-  if(isVisible)
-      popUp.style.opacity = 1
-  
-  if(!chaining)
-      popupText.textContent = ''
+  if(display !== 'flex')  
+    popUp.style.display = 'flex';
 
-  popupText.setAttribute('tabindex', 1)
-  popupText.textContent = message
+  if(isVisible)
+    popUp.style.opacity = 1;
+  
+  
+  popupText.setAttribute('tabindex', -1)
+  if(!textChaining){
+    popupText.textContent = message;
+  } else {
+    popupText.textContent += message
+  }
   popupText.focus() 
+
   if(gameData.isLibrasActive)
-    gameData.intro.gameAcessibleDisplay.readWithAccessibility(message)
+    gameData.intro.gameAcessibleDisplay.readWithAccessibility(message);
   
   if(isVisible && delay){
       setTimeout(() => {
@@ -82,133 +301,8 @@ const popUpMessage = (message, nxtElem, delay = 2500, isVisible = true, chaining
   if(nxtElem && gameData.isScreenReaderActive)
       setTimeout(() => nextFocusElement.focus(), delay + 100)
 }
-
-const btnsAndClss = []  //matriz bidimencional de botões e classes                                                          
-btns.forEach((elem, i) => btnsAndClss[i] = [elem, elem.className.split(' ')[1]])// armazena para cada botão, o referido botão e suas respectivas 2°classes
-btnsAndClss.forEach( elemClassArr => { // configura os botões baseado em suas classes
-  let auxContrl = ''
-
-  // adiciona acessibilidade em libras no evento de "mouseover" aos botões armazenados no array "btnsAndClss"
-  elemClassArr[0].addEventListener('mouseover', (e) => {
-    if(auxContrl === e.target) return
-    if(gameData.isLibrasActive){
-      gameData.intro.gameAcessibleDisplay.readWithAccessibility(`${e.target.title}`)
-      auxContrl = e.target
-    }
-    setTimeout(() => auxContrl =  '', 1000)
-  })
-
-  // configura o comportamento do botão mediante sua classe
-  switch(elemClassArr[1]){
-    
-    case 'mute_btn':
-      elemClassArr[0].addEventListener('click', () => {
-        gameData.isMute = !gameData.isMute
-
-        if(gameData.isScreenReaderActive){
-          let soundState = elemClassArr[0].classList.contains('active') ? 'ativado' : 'desativado'
-          readText(`O Som foi ${soundState} `)
-        }
-        elemClassArr[0].classList.toggle('active')
-        
-        const icon = elemClassArr[0].children[0]
-        icon.classList.toggle('fa-volume-xmark')
-        icon.classList.toggle('fa-volume-high')
-      })
-      break
-      
-    case 'libras_btn':  //libras btn
-      const vwBtn = document.querySelector('[vw-access-button]')
-
-      elemClassArr[0].addEventListener('click', (e) => {
-        const vlInterface = document.querySelector('[vw]')
-        
-        if(!gameData.isScreenReaderActive)
-        { 
-          elemClassArr[0].classList.add('active')
-          accessibleContainer.classList.add('active')
-
-          if(!gameData.isLibrasActive)
-          {
-            gameData.isLibrasActive = true
-
-            if(gameData.intro.isActive){ // COMPORTAMENTO DO LABEL E DO INPUT NO FORMULARIO DA INTRODUÇÃO
-              gameData.intro.changeToAccessibility()
-            }
-
-            setTimeout(() =>{   // tempo que demora para a transição do container pai
-              vlInterface.style.display = "block"
-              vlInterface.style.opacity = "1"
-
-              vwBtn.click();
-                                              // PENSAR SOBRE ISSO
-              setTimeout(() => {
-                const closeVl = document.querySelector('.vpw-header-btn-close')
-                if(closeVl)
-                {
-                  closeVl.addEventListener('click', () => {
-                    vlInterface.style.display = "none !important"
-                    vlInterface.style.opacity = "0"
-
-                    gameData.isLibrasActive = false
-                    elemClassArr[0].classList.remove('active')
-                    accessibleContainer.classList.remove('active')
-
-                    gameData.intro.changeToAccessibility() // toggle
-                  
-                    gameData.intro.gameDisplay.toggleDisplay()
-                    gameData.intro.gameAcessibleDisplay.toggleDisplay()
-                  })
-                } 
-                else 
-                {
-                  popUpMessage('O botão de fechar não foi carregado. Recarregue a pagina', null, 6000)
-                }
-              }, 8000)
-            }, 1000)
-            gameData.intro.gameDisplay.toggleDisplay()
-            gameData.intro.gameAcessibleDisplay.toggleDisplay()
-          }
-          else
-          {
-            popUpMessage("Vlibras ja está ativado, Aperte no Botão de sair do Vlibras para fechar a ferramenta", null, null)
-          }
-        } 
-        else 
-        {
-          popUpMessage("Infelizmente, não é possivel ativar 2 modos de acessibilidade ao mesmo tempo", null, 6000)
-        }
-      })
-      break
-
-    case 'screenReader_btn':
-      const screenReader_btn = document.querySelector('.screenReader_btn')
-      let auxEmpty = ''
-      elemClassArr[0].addEventListener('click', () => {
-        if(gameData.isLibrasActive){
-          popUpMessage("Infelizmente, não é possivel ativar 2 modos de acessibilidade ao mesmo tempo", null, 6000)
-          return
-        }
-        gameData.isScreenReaderActive = !gameData.isScreenReaderActive
-        let status = gameData.isScreenReaderActive ? 'ativado' : 'desativado'
-        
-        readText(`O aprimoramento do leitor de tela foi ${status}.\n Para jogar no modo acessível para pessoas com deficiência visual recomendamos mantê-lo ativo.`)
-        screenReader_btn.classList.toggle('active')
-        handleOutline(auxEmpty)
-        
-        if(!gameData.isPaused && gameData.isScreenReaderActive && gameData.class == 'MemoryGame'){
-          document.querySelector('#gameControls').style.display = 'none'
-        }
-      })
-      handleOutline(auxEmpty)
-      break
-
-    default:
-      break
-  }
-});
-
-function handleOutline(aux){
+function handleOutline(){
+  let aux = ""
   if(gameData.isScreenReaderActive){
     document.addEventListener('focus', handlerFocus, true)
     document.addEventListener('blur', handleBlur, true)
@@ -307,6 +401,5 @@ function updateGame3Colors(){
 }
 
 export{
-  gameData,
   updateGame3Colors
 }

@@ -137,7 +137,13 @@ class IntroForm {
         startBtn.addEventListener('click', (e) => {
             e.preventDefault()
             if(nameInput.value){
+
+                if(!gameData.isClickable){
+                    return
+                }
+                
                 let delay = gameData.isScreenReaderActive || gameData.isLibrasActive  ? 4500 : 1000
+                gameData.isClickable = false
 
                 if(gameData.isScreenReaderActive || gameData.isLibrasActive){
                     let aux = 3
@@ -168,7 +174,7 @@ class IntroForm {
                     const game = new MemoryGame(16, nameInput.value, this.gameDisplay, this.gainNode, this.audioContext)
                     this.element.style.display = "none"
                     document.querySelector('#popUp').style.opacity = 0
-
+                    gameData.isClickable = true
                     game.startGame()
                 }, delay)
 

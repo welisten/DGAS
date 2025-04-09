@@ -20,7 +20,6 @@
     <script src="https://cdn.jsdelivr.net/npm/phaser@v3.80.1/dist/phaser.min.js"></script>
     <!-- Vlibras -->
      <script src="./js/librasBeauty.js"></script>
-    <!-- <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script> -->
     <style>
         .gameAccessibleContainer{
             position: relative!important;
@@ -82,12 +81,13 @@
     </header>
     <main>
         <div id="popUp">
-            <p class="popupText"></p>
-            <button class="popup_btn"><i class="fa-solid fa-xmark"></i></button>
+            <p class="popupText" aria-live="assertive"></p>
+            <button class="popup_close_btn"><i class="fa-solid fa-xmark"></i></button>
         </div>
         <div id="toTextReader" class="toReader instructions" >
             <p class="textToReader" aria-live="assertive"></p>
         </div>
+
         <div id="game_Container" class="mainContainer">
             <section id="introFormContainer"></section> <!--Pq esse elemento não é da classe maincontainer ?-->
             <section id="gameControls" tabindex="19" aria-label="opções">
@@ -127,7 +127,6 @@
                         
                     </div>
                 </div>
-
             </section>
         </div>
         <img class="logo" src="https://res.cloudinary.com/dqzwqdc0a/image/upload/v1742615199/DGAS-Plataforma/plataforma/imgs/gamesLogo/rkdj6nxjbikoc2g2b3pc.png" alt="logo do Jogo 3">
@@ -156,6 +155,11 @@
             .then(data => {
                 const port = data.PORT
                 new window.VLibras.Widget(`http://localhost:${port}/app`)
+            })
+            .catch(() => {
+                const fallbackScript = document.createElement('script')
+                fallbackScript.src = 'https://vlibras.gov.br/app/vlibras-plugin.js'
+                document.body.appendChild(fallbackScript)
             })
     </script>
 </body>

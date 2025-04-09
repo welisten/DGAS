@@ -13,7 +13,7 @@ class Preloader {
     }
 
     setPreloader(){
-        let [containerWidth, containerHeight] = getDeviceSize()
+        let [containerHeight] = getDeviceSize()
         const parent = document.querySelector('#gameBoard')
         const config = {
             type: Phaser.AUTO,
@@ -122,13 +122,7 @@ class Preloader {
         });
     }
 
-    getIntro(){
-        if (this.intro) {
-            console.log('Starting the game with intro:', this.intro);
-        } else {
-            console.log('Intro is not initialized yet');
-        }
-    }
+
 }
 
 

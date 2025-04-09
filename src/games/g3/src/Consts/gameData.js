@@ -9,10 +9,13 @@ const gameData = {
     isDarkMode: plataformDarkMode,
     isScreenReaderActive: false,
     isLibrasActive: false,
+    isClickable: true,
     lastAccText: '',
     isPaused: false,
     lastLevel: 1,
-    class: 'Preload'
+    class: 'Preload',
+    lastReadText: '',
+    lastBtnTarget: undefined
 }
 
 export{
