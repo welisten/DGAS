@@ -1,7 +1,7 @@
 import { IntroForm } from "../Scenes/Form.js";
 import { cardsImagesDataArr, audioDataArr } from "../Consts/Values.js";
 import { colors } from "../Consts/Colors.js";
-import { getDeviceSize } from '../js/getDeviceSize.js';
+import { getDeviceSize } from '../js/utils/getDeviceSize.js';
 import { gameData } from "../Consts/gameData.js";
 
 class Preloader {

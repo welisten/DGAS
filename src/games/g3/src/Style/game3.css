@@ -237,7 +237,7 @@ body {
         align-self: center;
       }
 
-      .popup_btn {
+      .popup_close_btn {
         position: fixed;
         top: 0.5rem;
         right: 0.5rem;
@@ -1264,7 +1264,7 @@ body {
         .popupText {
           font-size: 2.2rem;
         }
-        .popup_btn {
+        .popup_close_btn {
           font-size: 2.2rem;
         }
       }

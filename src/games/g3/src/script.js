@@ -32,7 +32,7 @@
  */
 
 import { Preloader } from './Scenes/Preload.js';
-import { getDeviceSize } from './js/getDeviceSize.js';
+import { getDeviceSize } from './js/utils/getDeviceSize.js';
 import { colors } from './Consts/Colors.js';
 import { gameData } from './Consts/gameData.js';
 import { loadEnviromentVariables } from './Consts/Values.js';

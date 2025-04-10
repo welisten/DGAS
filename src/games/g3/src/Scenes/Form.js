@@ -1,3 +1,27 @@
+/**
+ * @class IntroForm
+ * @classdesc Responsável pela criação e gerenciamento da cena inicial do jogo da memória.
+ * 
+ * A classe controla a exibição do formulário de introdução, onde o usuário insere seu nome,
+ * e inicia o jogo após validação. Também é responsável por interações de acessibilidade,
+ * efeitos sonoros, e interfaces visuais secundárias (aside displays).
+ * 
+ * Funcionalidades principais:
+ * - Criação do formulário de entrada.
+ * - Configuração da interface lateral com informações e acessibilidade.
+ * - Reproduzir sons de fundo, transições e efeitos de erro.
+ * - Gerenciamento de acessibilidade com foco em leitores de tela e VLibras.
+ * - Exibição de mensagens com efeito de digitação.
+ * - Feedback visual e sonoro para validações.
+ * 
+ * Utiliza elementos externos como:
+ * - `MemoryGame` para iniciar o jogo.
+ * - `GameDisplay` e `GameAcessibleDisplay` para interfaces auxiliares.
+ * - Arquivos de áudio contidos em `gameAssets`.
+ * - Elementos e estilos definidos no DOM.
+ */
+
+
 // CLASES
 import  { MemoryGame } from './Game.js';
 import  { GameDisplay } from '../Class/GameDisplay.js'
@@ -5,127 +29,96 @@ import  { GameAcessibleDisplay} from '../Class/GameAccessible.js'
 // DATA
 import  { colors } from '../Consts/Colors.js';
 import { gameData } from '../Consts/gameData.js';
+// UTIL
+import { createElement } from '../js/utils/createElements.js';
 
 class IntroForm {
     constructor(){
-        this.element = ''                              // SCENE (MAIN CONTAINER)
-        this.gameDisplay   = 'undefined'               // ASIDE GAME DISPLAY iNFO
-        this.gameAcessibleDisplay   = 'undefined'      // ASIDE GAME DISPLAY ACCESSIBILITY
+        this.container = document.getElementById('introFormContainer') // SCENE (MAIN CONTAINER)
+        this.gameDisplay   = undefined               // ASIDE GAME DISPLAY iNFO
+        this.gameAcessibleDisplay   = undefined      // ASIDE GAME DISPLAY ACCESSIBILITY
         this.isActive = false 
 
         this.audioContext = new (window.AudioContext || window.webkitAudioContext)()//rever propriedade do obj          ASIDE GAME ACCESSIBLE CONTAINER
         this.ucarineSong    = gameAssets['ucarine']
         this.transitionSong = gameAssets['transition']
         this.errorSong      = gameAssets['incorrect']
+        this.click          = gameAssets['click']
         this.currentAudio = null
         this.gainNode = this.audioContext.createGain()
 
-        this.generateScene()
-        gameData.class = 'IntroForm'
+        this.init()
+
     }
-
-    generateScene(){                            // CHAMADA DAS FUNÇOES CRIADORAS E CONFIGURADORAS DA CENA
+// ========= INICIALIZAÇÃO =========
+    init(){                            // CHAMADA DAS FUNÇOES CRIADORAS E CONFIGURADORAS DA CENA
         document.getElementById('gameBoard').style.display = 'none'
-
         this.playAudio(this.ucarineSong, 1, true)
         
-        this.generateForm()
-        this.generateAside()
-        this.setControlsBtn()
+        this.createForm()
+        this.createAside()
+        this.setupMuteButton()
         this.isActive = true
+
+        gameData.class = 'IntroForm'
     }
-    generateForm(){                             // CRIA OS ELEMENTOS DO FORMULÁRIO
-        this.element = document.getElementById('introFormContainer')            
-        // LEVAR EM CONSIDERAÇÃO O USO OU NÃO USO DE UM BANCO DE DADOS
-        const introForm = document.createElement('form')
-        const formTitle = document.createElement('p')
-        const formBody = document.createElement('div')
-        const nameLabel = document.createElement('label')
-        const nameInput = document.createElement('input')
-        const startBtn  = document.createElement('button')
-                                                                                // CONFIGURA OS ATRIBUTOS
-        formTitle.setAttribute('tabindex', '2')                                 // Acessibilidade
-        formTitle.setAttribute('aria-label', "Olá, vamos começar digitando o seu nome")
+// ========= CRIAÇÃO DE ELEMENTOS =========
+    createForm(){                      // CRIA OS ELEMENTOS DO FORMULÁRIO
+                                                // LEVAR EM CONSIDERAÇÃO O USO OU NÃO USO DE UM BANCO DE DADOS
+        const introForm = createElement('form', 'introForm',)
+        const formTitle = createElement('p', 'formTitle', {
+            tabindex: '2',
+            'aria-label' : "Olá, vamos começar digitando o seu nome",
+        })
+        const formBody = createElement('div', 'formBody')
+        const nameLabel = createElement('label', 'nameLabel', {
+            for: 'user_name',
+            title: "Digite seu nome"
+        }, 'Nome: ')
 
-        nameInput.setAttribute('tabindex', '2')
-        nameInput.setAttribute('aria-label', 'Digite seu nome')
-        nameInput.setAttribute('aria-required', 'true')
+        const nameInput = createElement('input', 'nameInput', {
+            tabindex: '2',
+            type: 'text',
+            name: 'user_name',
+            placeholder: 'Digite seu nome',
+            id: 'user_name',
+            'aria-label': 'Digite seu nome',
+            'aria-required': 'true'
+        })
+        const startBtn  = createElement('button', 'startBtn', {
+            tabindex: '2',
+            'aria-label': 'Iniciar',
+        }, 'iniciar')
 
-        startBtn.setAttribute('tabindex', '2')
-        startBtn.setAttribute('aria-label', 'Iniciar')
-
-        introForm.classList.add('introForm')                                    // classes
-        formTitle.classList.add('formTitle')
-        nameInput.classList.add('nameInput')
-        nameLabel.classList.add('nameLabel')
-        formBody.classList.add('formBody')
-        startBtn.classList.add('startBtn')
-        nameLabel.setAttribute('for', 'user_name') 
+        formBody.append(nameLabel,nameInput, startBtn)                                         // APPEND OS ELEMENTOS
+        introForm.append(formTitle, formBody)
+        this.container.appendChild(introForm)
         
-        nameLabel.title = "Digite seu nome"                                     // outros
-        nameInput.type = 'text'
-        nameInput.name = 'user_name'
-        nameInput.placeholder = 'Digite seu nome'
-        nameInput.id = 'user_name'
-        
-        formTitle.textContent = ''
-        nameLabel.textContent =  'Nome :'
-        startBtn.textContent = 'iniciar'
-
-        formBody.appendChild(nameLabel)                                         // APPEND OS ELEMENTOS
-        formBody.appendChild(nameInput)
-        formBody.appendChild(startBtn)
-        introForm.appendChild(formTitle)
-        introForm.appendChild(formBody)
-        this.element.appendChild(introForm)
-        
-        this.handleElements()                                                   // CONFIGURA COMPORTAMENTO DINÂMICO DOS ELEMENTOS
+        this.setupFormInteractions(nameInput, nameLabel, startBtn)                                                   // CONFIGURA COMPORTAMENTO DINÂMICO DOS ELEMENTOS
         this.typewriter('Olá ! Vamos começar digitando o seu nome.', formTitle)
-
     }
-    generateAside(){                            // CRIA OS ELEMENTOS DA SEÇÃO AO LADO DO CONTAINER DO JOGO
+    
+    createAside(){                     // CRIA OS ELEMENTOS DA SEÇÃO AO LADO DO CONTAINER DO JOGO
         const gameBoard_aside = document.getElementById('gameBoard_aside')
         
         this.gameDisplay = new GameDisplay(gameBoard_aside)
         this.gameAcessibleDisplay = new GameAcessibleDisplay(gameBoard_aside)
     }
-    setControlsBtn(){                           // CONFIGURA AS AÇOES DOS config_btn PARA COM O ELEMENTOS RECÉM CRIADOS
+
+    setupMuteButton(){                 // CONFIGURA AS AÇOES DOS config_btn PARA COM O ELEMENTOS RECÉM CRIADOS
         const mute_btn = document.querySelector('.mute_btn')
-        mute_btn.addEventListener('click', () => {
-            this.gainNode.gain.value == 1 ? this.gainNode.gain.value = 0 : this.gainNode.gain.value = 1
+        mute_btn?.addEventListener('click', () => {
+            this.gainNode.gain.value = this.gainNode.gain.value === 1 ? 0 : 1
         })
     }
-    changeToAccessibility(){                //  TOGGLEACCESSIBILITY
-        const formBodyEl = document.querySelector('.formBody')
-        const formLabel =  document.querySelector('.nameLabel')
-        const formInput =  document.querySelector('.nameInput')
-
-        formBodyEl.classList.toggle('accessible')
-        if(formBodyEl.classList.contains('accessible')){
-            formLabel.innerHTML = 'Digite seu Nome:'
-            formInput.placeholder = 'Nome'
-            formLabel.style.transform = 'translateY(0)'
-            formLabel.style.color = colors.white
-            formInput.style.color = colors.black
-        }else{
-            formLabel.innerHTML = 'Nome:'
-            formInput.placeholder = 'Digite seu Nome'
-            formLabel.style.transform = 'translateY(5.5vh)'
-            formLabel.style.color = colors.black
-            formInput.style.color = colors.black
-        }
-    }
-
-    handleElements(){                           // CONFIGURA COMPORTAMENTO DINAMICO DOS ELEMENTOS DO FORMULARIO
-        const nameInput = document.querySelector('.nameInput')
-        const nameLabel = document.querySelector('.nameLabel')
-        const startBtn  = document.querySelector('.startBtn')
-        const introForm = document.querySelector('.introForm')
+// ========= CONFIGURAÇÃO DE ELEMENTOS =========
+    setupFormInteractions(nameInput, nameLabel, startBtn){  // CONFIGURA COMPORTAMENTO DINAMICO DOS ELEMENTOS DO FORMULARIO
         
         nameInput.addEventListener('focus', ()=>{
-            if(gameData.isLibrasActive) return
-            nameLabel.style.transform = 'translateY(0)'
-            nameLabel.style.color = colors.white
+            if(!gameData.isLibrasActive) {
+                nameLabel.style.transform = 'translateY(0)'
+                nameLabel.style.color = colors.white
+            }
         })
         nameInput.addEventListener('blur', ()=>{
             if(!nameInput.value && !gameData.isLibrasActive){
@@ -136,113 +129,123 @@ class IntroForm {
         
         startBtn.addEventListener('click', (e) => {
             e.preventDefault()
-            if(nameInput.value){
-
-                if(!gameData.isClickable){
-                    return
-                }
-                
-                let delay = gameData.isScreenReaderActive || gameData.isLibrasActive  ? 4500 : 1000
-                gameData.isClickable = false
-
-                if(gameData.isScreenReaderActive || gameData.isLibrasActive){
-                    let aux = 3
-                    let verb = gameData.isLibrasActive ? 'começou' : 'começa em'
-                    this.readText(`O jogo ${verb}`, false)
-                    setTimeout(() => {
-                        let countdown = setInterval(() => {
-                            console.log(aux)
-                            if(aux <= 0) {
-                                clearInterval(countdown)
-                                
-                                return
-                            }else if(aux == 1){
-                                this.stopCurrentAudio()
-                                this.playAudio(this.transitionSong)
-                            }
-                            this.readText(aux, false)
-                            aux--
-                        }, 1000)
-                    }, 500)
-
-                }else{
-                    this.stopCurrentAudio()
-                    this.playAudio(this.transitionSong)
-                }
-                setTimeout(() => {
-                    this.isActive =  false
-                    const game = new MemoryGame(16, nameInput.value, this.gameDisplay, this.gainNode, this.audioContext)
-                    this.element.style.display = "none"
-                    document.querySelector('#popUp').style.opacity = 0
-                    gameData.isClickable = true
-                    game.startGame()
-                }, delay)
-
-            }else{
-                let delay = gameData.isLibrasActive ? null : 2500
-                let focus = gameData.isLibrasActive ? null : '.nameInput'
-                let popUpEl = document.querySelector('#popUp')
-
-                popUpEl.style.display = 'flex'
-                popUpEl.classList.add('animated')
-                setTimeout(() => popUpEl.classList.remove('animated'), 1000)
-                
-                this.playAudio(this.errorSong)
-
-                this.popUpMessage('Digite um nome válido', focus, delay, true, true)
-            }
+            this.handleStartButton(nameInput)
         })
     }
-    typewriter(text, container){                // EFEITO MAQUINA DE ESCREVER PARA TEXTO SENDO MOSTRADO EM UM CONTAINER
-        let node = 0
-        let titleArr = text
-        let writerDelay = 50
+
+    handleStartButton(nameInput){
+        if(!nameInput.value){
+            this.invalidNameFeedback()
+            return 
+        }
+
+        if(!gameData.isClickable) return
         
+        gameData.isClickable  = false
+        this.playAudio(this.click)
+        
+        const accessibleDelay = gameData.isScreenReaderActive || gameData.isLibrasActive  ? 4500 : 1000
+
+        if(gameData.isScreenReaderActive || gameData.isLibrasActive){
+            this.countdownToStart()
+        }else{
+            this.stopCurrentAudio()
+            this.playAudio(this.transitionSong)
+        }
+
         setTimeout(() => {
-            function tWriter(){//RECURSIVIDADE
-                if(node >= titleArr.length){//PONTO DE PARADA
-                    if(gameData.isScreenReaderActive){
-                        document.querySelector('.formTitle').focus()
+            this.startGame(nameInput.value)
+        }, accessibleDelay)
+    }
+
+    invalidNameFeedback(){
+        const popUpEl = document.querySelector('#popUp')
+        const accessibleDelay = gameData.isLibrasActive ? null : 2500
+        const accessibleFocus = gameData.isLibrasActive ? null : '.nameInput'
+
+        popUpEl.style.display = 'flex'
+        popUpEl.classList.add('animated')
+
+        setTimeout(() => popUpEl.classList.remove('animated'), 1000)
+        
+        this.playAudio(this.errorSong)
+
+        this.popUpMessage('Digite um nome válido', accessibleFocus, accessibleDelay, true, true)
+    }
+    
+    countdownToStart(){
+        let count = 3
+        const verb = gameData.isLibrasActive ? 'começou' : 'começa em'
+        this.readText(`O jogo ${verb}`, false)
+
+        setTimeout(() => {
+            const interval = setInterval(() => {
+                if(count <= 0) {
+                    clearInterval(interval)
+                }else{
+                    if(count == 1){
+                        this.stopCurrentAudio()
+                        this.playAudio(this.transitionSong)
                     }
-                    return
+                    this.readText(count, false)
+                    count--
                 }
-                                                
-                let currentChar = titleArr[node]            // EXECUÇÃO
-                container.textContent += currentChar 
-                node++                                   //ATUALIZAÇÃO DO NÓ
-                
-                let delay = writerDelay                 //ATUALIZAÇÃO DO PARAMETRO
-                if(currentChar == '.' || currentChar == '!' || currentChar == '?' || currentChar == ',')
-                    delay = 500
-                setTimeout(tWriter, delay)           //CHAMADA RECURSIVA
-            }
-        tWriter()
-        }, 2000)
+            }, 1000)
+        }, 500)
     }
-    toggleLight(){                              // ALTERNA COR DOS ELEMENTOS
-        const form = document.querySelector('.introForm')
-        const lightMode_btn = document.querySelector('.lightMode_btn')
 
-        if(lightMode_btn.classList.contains('active')){
-            this.element.style.backgroundColor =  colors.black
-            form.style.backgroundColor =  colors.transparent_a23
-            form.style.boxShadow = `0 0 .5em ${colors.blue_serius_ac7}`
-            // console.log('active')
-        }
-        else
-        {
-            this.element.style.backgroundColor = colors.white
-            form.style.backgroundColor = colors.blue_baby
-            form.style.boxShadow ='none'
-            // console.log('not active')
+    startGame(name){
+        this.isActive =  false
+        this.container.style.display = "none"
+        document.querySelector('#popUp').style.opacity = 0
 
+        const game = new MemoryGame(16, name, this.gameDisplay, this.gainNode, this.audioContext)
+        gameData.isClickable = true
+        game.startGame()
+    }
+// ========= CONFIGURAÇÃO DE AUDIO =========
+    playAudio(audioBuffer, volume = 1.0, loop = false){         //INICIA MÚSICA
+        if(!audioBuffer) return
+        const src = this.audioContext.createBufferSource()
+        src.buffer = audioBuffer
+        src.loop = loop
+        
+        let aux = volume
+
+        volume = gameData.isMute === true ? 0 : aux
+        this.gainNode.gain.value = volume 
+        
+        src.connect(this.gainNode)
+        this.gainNode.connect(this.audioContext.destination)
+        src.start()
+
+        if(loop === true) this.currentAudio = src
+    }
+
+    stopCurrentAudio(){                                         //PAUSA OS AUDIOS QUE ESTÃO SENTO TOCADOS
+        if(this.currentAudio) {
+            this.currentAudio.stop()
+            this.currentAudio = null
         }
     }
+// ========= EVENTOS E INTERAÇÕES =========
+    readText(text, textChaining = false){                                       // LIDA COM TEXTOS DE LEITURA ACESSÍVEL IMEDIATA
+        const textToReaderEl = document.querySelector('.textToReader')
+        const popupText = document.querySelector('.popupText');
+
+        textToReaderEl.textContent = textChaining ? `${popupText.textContent} ${text}` : `${text}`
+
+        if(gameData.isLibrasActive || gameData.isScreenReaderActive){
+            gameData.intro.gameAcessibleDisplay.readWithAccessibility(text)
+        }
+
+    }
+
     popUpMessage(message, nxtElem, delay = 2500, isVisible = true, isDurable = false, chaining = false){   // EXIBE MENSAGEM NO POPUP VISÍVEL
         const popUp = document.getElementById('popUp')
         const popupText = document.querySelector('.popupText')
         const nextFocusElement = document.querySelector(nxtElem)
-        let display = popUp.style.display
+        const display = popUp.style.display
         
         if(display != 'flex')   popUp.style.display = 'flex'
         if(isVisible)
@@ -268,33 +271,54 @@ class IntroForm {
         
         
     }
-    readText(text, textChaining = false){                                       // LIDA COM TEXTOS DE LEITURA ACESSÍVEL IMEDIATA
-        const textToReaderEl = document.querySelector('.textToReader')
 
-        textToReaderEl.textContent = textChaining ? `${popupText.textContent} ${text}` : `${text}`
-        if(gameData.isLibrasActive || gameData.isLibrasActive)
-        gameData.intro.gameAcessibleDisplay.readWithAccessibility(text)
-
-    }
-
-    playAudio(audioBuffer, volume = 1.0, loop = false){         //INICIA MÚSICA
-        const src = this.audioContext.createBufferSource()
-        let aux = volume
-        src.buffer = audioBuffer
-        src.loop = loop
-
-        volume = gameData.isMute === true ? 0 : aux
-        this.gainNode.gain.value = volume 
+    typewriter(text, container){  // EFEITO MAQUINA DE ESCREVER PARA TEXTO SENDO MOSTRADO EM UM CONTAINER
+        let i = 0
+        const speed = 50
         
-        src.connect(this.gainNode)
-        this.gainNode.connect(this.audioContext.destination)
-        src.start()
-        if(loop === true) this.currentAudio = src
+        setTimeout( function tWriter(){//RECURSIVIDADE
+            if(i < text.length){
+                container.textContent += text.charAt(i) 
+                const delay = [".", "!", "?", ","].includes(text.charAt(i)) ? 500 : speed               //ATUALIZAÇÃO DO PARAMETRO
+                i++       
+                setTimeout(tWriter, delay)           //CHAMADA RECURSIVA
+                
+            } else if(gameData.isScreenReaderActive){
+                document.querySelector('.formTitle').focus()
+                return
+            }
+        }, 2000)
     }
-    stopCurrentAudio(){                                         //PAUSA OS AUDIOS QUE ESTÃO SENTO TOCADOS
-        if(this.currentAudio) {
-            this.currentAudio.stop()
-            this.currentAudio = null
+// ========= ACESSIBILIDADE =========
+    changeToAccessibility(){   //  ALTERNA ACCESSIBILITY
+        const formBodyEl = document.querySelector('.formBody')
+        const formLabel =  document.querySelector('.nameLabel')
+        const formInput =  document.querySelector('.nameInput')
+
+        const isAccessible = formBodyEl.classList.toggle('accessible')
+        
+        formLabel.innerHTML = isAccessible ? 'Digite seu Nome:' : 'Nome:'
+        formInput.placeholder = isAccessible ? 'Nome' : 'Digite seu Nome'
+
+        formLabel.style.transform = isAccessible ?  'translateY(0)' : 'translateY(5.5vh)'
+        formLabel.style.color = isAccessible ?  colors.white : colors.black
+        formInput.style.color = isAccessible ?  colors.white : colors.black
+    }
+
+    toggleLight(){   // ALTERNA COR DOS ELEMENTOS
+        const form = document.querySelector('.introForm')
+        const lightMode_btn = document.querySelector('.lightMode_btn')
+
+        if(lightMode_btn.classList.contains('active')){
+            this.container.style.backgroundColor =  colors.black
+            form.style.backgroundColor =  colors.transparent_a23
+            form.style.boxShadow = `0 0 .5em ${colors.blue_serius_ac7}`
+        }
+        else
+        {
+            this.container.style.backgroundColor = colors.white
+            form.style.backgroundColor = colors.blue_baby
+            form.style.boxShadow ='none'
         }
     }
 }
