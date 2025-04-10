@@ -1,51 +1,83 @@
-import { colors } from "../Consts/Colors.js"
+/**
+ * @file GameAcessibleDisplay.js
+ * @description Esta classe gerencia os elementos da interface relacionados à acessibilidade do jogo.
+ * Ela permite a alternância entre modos visuais acessíveis e a integração com leitores de tela
+ * ou ferramentas como o VLibras, além de emitir eventos que facilitam a leitura de textos por tecnologias assistivas.
+ * 
+ * A `GameAcessibleDisplay` atua como um componente complementar à interface principal do jogo,
+ * com foco na inclusão de pessoas com deficiência auditiva ou visual.
+ * 
+ * As principais funcionalidades incluem:
+ * - Alternância de exibição do container acessível com base na ativação do modo Libras.
+ * - Leitura acessível de textos via simulação de eventos do mouse para leitores de tela.
+ * - Estilização dinâmica da área acessível para melhor adaptação visual do usuário.
+ * 
+ * O container de acessibilidade é mostrado ou ocultado com transições visuais suaves e,
+ * quando ativo, reposiciona dinamicamente elementos da interface, como a barra de status.
+ * 
+ * @class GameAcessibleDisplay
+ * @param {Object} father - Referência à instância pai ou componente controlador principal do jogo.
+ * @version 0.9.0
+ * @author [Wesley Welisten Rocha Santos Vieira]
+ * @date [10/04/2025]
+ */
 class GameAcessibleDisplay{
     constructor(father){
         this.father = father
-        this.element = document.querySelector('.gameAccessibleContainer')
+        
+        this.container = document.querySelector('.gameAccessibleContainer')
         this.librasBtn = document.querySelector('.libras_btn')
         this.lightModeBtn = document.querySelector('.lightMode_btn')
-    }
-    setAcessibleDisplay(){
-        this.lightModeBtn.style.display
-    }
-    toggleDisplay(){
-        const dHInfo =  document.querySelector('#info')
-        const DBar = document.querySelector('#gameDisplay_bar')
-        const Dbody = document.querySelector('#gameDisplay_body')
-        const GDisplay = document.querySelector('#gameDisplay')
+        this.accessibleTextEl = document.querySelector('.accessible_text');
 
-        if(this.librasBtn.classList.contains('active')){
-                this.element.style.display = 'block'
-                setTimeout(() => {
-                  this.element.style.height = '73%'
-                  this.element.style.width  = '100%'
-                  this.element.style.opacity  = 1
-                  dHInfo.appendChild(DBar)
-                }, 20)
-        }else{
-            this.element.style.color = 'transparent'
-            this.element.style.height = '0%'
-            this.element.style.width  = '0%'
-            this.element.style.opacity  = 0
-            setTimeout(()=>{
-                GDisplay.insertBefore(DBar, Dbody)
-                this.element.style.display = 'none'
-            }, 1000)
-        }   
+        this.infoHeader = document.querySelector('#info');
+        this.displayBar = document.querySelector('#gameDisplay_bar');
+        this.displayBody = document.querySelector('#gameDisplay_body');
+        this.gameDisplay = document.querySelector('#gameDisplay');
+
+        this.STYLES = {
+            visible: {
+                height: '73%',
+                width: '100%',
+                opacity: 1,
+                display: 'block'
+            },
+            hidden: {
+                height: '0%',
+                width: '0%',
+                opacity: 0,
+                display: 'none',
+                color: 'transparent'
+            }
+        };
     }
-    toggleLight(){
-        if(this.lightModeBtn.classList.contains('active')){
-            this.element.style.background = colors.transparent_a10
-            this.element.style.border = `1px solid ${colors.blue_baby}`
+
+    toggleDisplay(){
+        const isActive = this.librasBtn.classList.contains('active')
+        
+        if(isActive){
+            this.container.style.display = this.STYLES.visible.display
+            setTimeout(() => {
+              this.container.style.height = this.STYLES.visible.height
+              this.container.style.width  = this.STYLES.visible.width
+              this.container.style.opacity  = this.STYLES.visible.opacity
+              this.infoHeader.appendChild(this.displayBar)
+            }, 20)
         }else{
-            this.element.style.background = colors.white
-            this.element.style.border = `3px solid ${colors.blue_baby}`
+            this.container.style.color = this.STYLES.hidden.color
+            this.container.style.height = this.STYLES.hidden.height
+            this.container.style.width  = this.STYLES.hidden.width
+            this.container.style.opacity  = this.STYLES.hidden.opacity
+            setTimeout(()=>{
+                this.gameDisplay.insertBefore(this.displayBar, this.displayBody)
+                this.container.style.display = this.STYLES.hidden.display
+            }, 1000)
         }
     }
+
     readWithAccessibility(text){
         if(!text || typeof text !== 'string') return
-        const accessibleTextContainer = document.querySelector('.accessible_text')
+
         const mouseOverEvent = new MouseEvent('mouseover', {
             bubbles: true,
             cancelable: false,
@@ -62,12 +94,12 @@ class GameAcessibleDisplay{
             view: window
         })
 
-        accessibleTextContainer.innerHTML = text
-        accessibleTextContainer.dispatchEvent(mouseOverEvent)
-        setTimeout(() => accessibleTextContainer.dispatchEvent(clickEvent), 200)
-        accessibleTextContainer.dispatchEvent(mouseOutEvent)
+        this.accessibleTextEl.textContent = text
+        this.accessibleTextEl.dispatchEvent(mouseOverEvent)
+        setTimeout(() => this.accessibleTextEl.dispatchEvent(clickEvent), 200)
+        this.accessibleTextEl.dispatchEvent(mouseOutEvent)
 
-        setTimeout(() => accessibleTextContainer.innerHTML = '', 300)
+        setTimeout(() => this.accessibleTextEl.textContent = '', 300)
     }
 }
 export {

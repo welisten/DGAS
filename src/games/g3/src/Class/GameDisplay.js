@@ -1,3 +1,27 @@
+/**
+ * @file GameDisplay.js
+ * @description Este arquivo define a estrutura principal da interface do jogo,
+ * dividindo-a em quatro componentes visuais: cabeçalho (DisplayHeader), barra de status (DisplayBar),
+ * corpo do jogo (DisplayBody) e rodapé (DisplayFooter). A classe `GameDisplay` é responsável por
+ * inicializar, exibir e atualizar a interface do usuário durante a execução do jogo.
+ * 
+ * A estrutura foi desenvolvida com foco em acessibilidade (compatível com Libras),
+ * alternância entre modos claro e escuro, e feedback visual em tempo real durante o progresso do jogador.
+ * 
+ * As principais funcionalidades incluem:
+ * - Exibição do nome do usuário, nível e número de tesouros.
+ * - Timer com controle de pausa e reinício.
+ * - Alternância de layout para compatibilidade com interpretação em Libras.
+ * - Modo claro/escuro para conforto visual.
+ * 
+ * As classes auxiliares (DisplayHeader, DisplayBar, DisplayBody e DisplayFooter)
+ * são instanciadas dentro da `GameDisplay` e comunicam-se por meio de métodos de atualização e resgate de estado.
+ * 
+ * @author [Wesley Welisten Rocha Santos Vieira]
+ * @date [10/04/2025]
+ * @version 0.9.0
+ */
+
 import { generalImagesDataArr } from "../Consts/Values.js"
 import { gameData } from '../Consts/gameData.js';
 import { createElement } from "../js/utils/createElements.js";

@@ -15,7 +15,7 @@
  *   - Compression: Melhor performance através de compactação de respostas
  *   - CORS: Controle de acesso para diferentes origens
  * 
- * @author  [Wesley Welisten Vieira]
+ * @author  [Wesley Welisten Rocha Santos Vieira]
  * @version 0.9.0
  * @date    [04/04/2025]
  */
