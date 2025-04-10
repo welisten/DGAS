@@ -1,20 +1,22 @@
 const getDeviceSize = () => {
     let height = window.innerHeight
     let width = window.innerWidth
-    let result
-
     switch(true){
         case (width < 600 && height < 800):
             break;
             
-        case (width < 600 && height >= 800):
+        case (width >= 600 && width <= 1020 && height < 1080):
+            const newWidth = Math.floor(width * 0.6)
+            const newHeight = Math.floor(height * 0.70)
+            return [newWidth, newHeight] 
             break;
 
         case (width >= 600 && width <= 1440 && height < 1080):
             
-            const newWidth = Math.floor(width * 0.33)
-            const newHeight = Math.floor(height * 0.70)
-            return [newWidth, newHeight] 
+            width = Math.floor(width * 0.33)
+            height = Math.floor(height * 0.70)
+
+            return [width, height] 
 
         case (width > 1440 && height >= 900):
             width = Math.floor(width * 0.26)

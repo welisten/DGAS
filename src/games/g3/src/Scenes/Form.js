@@ -66,17 +66,17 @@ class IntroForm {
     createForm(){                      // CRIA OS ELEMENTOS DO FORMULÁRIO
                                                 // LEVAR EM CONSIDERAÇÃO O USO OU NÃO USO DE UM BANCO DE DADOS
         const introForm = createElement('form', 'introForm',)
-        const formTitle = createElement('p', 'formTitle', {
+        const formTitle = createElement('p', 'formTitle', '', {
             tabindex: '2',
             'aria-label' : "Olá, vamos começar digitando o seu nome",
         })
         const formBody = createElement('div', 'formBody')
-        const nameLabel = createElement('label', 'nameLabel', {
+        const nameLabel = createElement('label', 'nameLabel', '', {
             for: 'user_name',
             title: "Digite seu nome"
         }, 'Nome: ')
 
-        const nameInput = createElement('input', 'nameInput', {
+        const nameInput = createElement('input', 'nameInput', '', {
             tabindex: '2',
             type: 'text',
             name: 'user_name',
@@ -85,7 +85,7 @@ class IntroForm {
             'aria-label': 'Digite seu nome',
             'aria-required': 'true'
         })
-        const startBtn  = createElement('button', 'startBtn', {
+        const startBtn  = createElement('button', 'startBtn', '', {
             tabindex: '2',
             'aria-label': 'Iniciar',
         }, 'iniciar')

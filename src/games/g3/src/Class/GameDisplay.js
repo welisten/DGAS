@@ -1,6 +1,6 @@
-import { colors } from "../Consts/Colors.js"
 import { generalImagesDataArr } from "../Consts/Values.js"
 import { gameData } from '../Consts/gameData.js';
+import { createElement } from "../js/utils/createElements.js";
 
 class GameDisplay{
     constructor(father,){
@@ -9,110 +9,84 @@ class GameDisplay{
         this.user = ''
         this.LibrasBtn =  document.querySelector('.libras_btn')
         this.LightBtn =  document.querySelector('.lightMode_btn')
+        
         this.header = new DisplayHeader(this.element) 
         this.bar = new DisplayBar(this.element, this) 
         this.body = new DisplayBody(this.element) 
         this.footer = new DisplayFooter(this.element) 
-        this.generateGameDisplay()
+        
+        this.initDisplay()
     }
-    generateGameDisplay(){
+    initDisplay(){
         this.father.appendChild(this.element)
         
-        const GBLine1 = document.createElement('div')
-        const GBLine2 = document.createElement('div')
-        const GBLine3 = document.createElement('div')
-        
-        GBLine1.classList.add('line')
-        GBLine2.classList.add('line')
-        GBLine3.classList.add('line')
-        
-        GBLine1.style.display = 'absolute'
-        GBLine2.style.display = 'absolute'
-        GBLine3.style.display = 'absolute'
-        
-        this.header.element.appendChild(GBLine1)
-        this.bar.element.appendChild(GBLine2)
-        this.body.element.appendChild(GBLine3)
-        
-        this.LibrasBtn.addEventListener('click', (e)=>{
+        Array.from([this.header, this.bar, this.body]).forEach( (component, idx) => {
+            const line = document.createElement('div')
+            line.classList.add('line')
+            line.style.display = 'absolute'
+            component.element.appendChild(line)
+        })
+
+        this.setupLibrasBtn()
+    }
+
+    setupLibrasBtn(){
+        this.LibrasBtn?.addEventListener('click', (e)=>{
             e.preventDefault()
             this.toggleDisplayLines()
         })
     }
+
     handleWin(){
-        this.header.handleWin()
-        this.body.handleWin()
-        this.footer.handleWin()
+        Array.from([this.header, this.body, this.footer]).forEach(component => component.handleWin())
     }
+
     resetDisplay(){
-        this.header.reset()
-        this.bar.reset()
-        this.body.reset()
-        this.footer.reset()
+        [this.header, this.bar, this.body, this.footer].forEach(component => component.reset())
     }
+
     toggleDisplay(){
-        if(this.LibrasBtn.classList.contains('active')){
+        const isLibrasActive = this.LibrasBtn.classList.contains('active')
+        if(isLibrasActive){
             this.element.style.height = '33%' 
             setTimeout(()=>{this.element.style.margin = '12% 0 0 '},50) 
-            this.bar.toggleDisplayBar()
-            this.body.toggleDisplayBody()
-            this.footer.toggleDisplayFooter()
-            this.toggleDisplayLines()
         }else{
             this.header.element.style.transition = 'none'
             setTimeout(()=>{
                 this.element.style.height = '100%'
                 this.element.style.margin = '0'
             }, 1000)
-            this.bar.toggleDisplayBar()
-            this.body.toggleDisplayBody()
-            this.footer.toggleDisplayFooter()
-            this.toggleDisplayLines()
         }   
+
+        Array.from([this.body, this.bar, this.footer]).forEach(component => component.toggleDisplay())
+        this.toggleDisplayLines()    
     }
+
     toggleLight(){
-        if(this.LightBtn.classList.contains('active')){
-            this.header.darkMode()
-            this.bar.darkMode()
-            this.body.darkMode()
-            this.footer.darkMode()
-
-            this.element.style.backgroundColor = '#ffffff10'
-            this.element.style.border = '1px solid #3498db'
-            document.querySelectorAll('.line').forEach((line) => {
-                line.style.borderBottom = '1px solid #ffffff80'
-                // line.style.borderBottom = '1px solid #3498dg10'
-            })
-        }
-        else
-        {
-            this.header.lightMode()
-            this.bar.lightMode()
-            this.body.lightMode()
-            this.footer.lightMode()
-
-            this.element.style.backgroundColor = '#ffffff'
-            this.element.style.border = '3px solid #3498db'
-            document.querySelectorAll('.line').forEach((line) => {
-                line.style.borderBottom = '1px solid #056db3'
-            })
-        }
+        const isLight = this.LightBtn.classList.contains('active')
+            
+        this.element.style.backgroundColor = isLight ?'#ffffff10' : "#ffffff"
+        this.element.style.border = isLight ? '1px solid #3498db' : '3px solid #3498db'
+            
+        document.querySelectorAll('.line').forEach((line) => {
+            line.style.borderBottom = '1px solid #ffffff80'
+        })
+        
+        Array.from([this.header, this.bar, this.body, this.footer]).forEach((component) => {
+            isLight ? component.darkMode() : component.lightMode()
+        })
     }
+
     toggleDisplayLines(){
-        if(this.LibrasBtn.classList.contains('active')){
-            setTimeout(() => {
-                document.querySelectorAll('.line').forEach((line) => {
-                    line.style.display = 'none'
-                })
-            }, 10)
-        }else{   
-            setTimeout(() => {
-                document.querySelectorAll('.line').forEach((line) => {
-                    line.style.display = 'block'
-                })
-            }, 1000)   
-        }
+        const lines = document.querySelectorAll('.line')
+        const isLibrasActive = this.LibrasBtn.classList.contains('active')
+        setTimeout(() => {
+            lines.forEach( line => {
+                line.style.display = isLibrasActive ? 'none' : 'block'
+            })
+        }, isLibrasActive ? 10 : 1000)
     }
+
     update(){
         this.header.updateClockContainer()
         this.header.updateInfoContainer()
@@ -122,83 +96,71 @@ class GameDisplay{
 class DisplayHeader{                // ESSA CLASSE SE DIFERENCIA DAS DEMAIS, REFATORAÇÃO É NECESSARIA
     constructor(father){
         this.father = father
-        this.element = ''
+        this.element = document.createElement("div");
         this.timer = 0
-        this.clockContainer = ''
         this.counter = null
         this.isCounterPaused = null
         this.cardInfo = [] //card name e card location
-        this.generateHeaderDisplay()
+        this.createDisplayHeader()
     }
-    generateHeaderDisplay(){
-                                                        // CRIA
-        this.element = document.createElement('div')
-        this.clockContainer = document.createElement('div')
-        const infoContainer = document.createElement('div')
-        const cardName = document.createElement('div')
-        const cardLocation = document.createElement('div')
+    createDisplayHeader(){
+        // CRIA
+        this.element.id = 'gameDisplay_header'
+        this.element.className = 'gameDisplay_header'
+
+        this.clockContainer = createElement('div', 'clock')
+        this.clockContainer.innerHTML = '<p>--</p><i class = "fa-regular fa-clock"></i>' // ESSA ICONE É ADICIONADO DINAMICAMENTE EM TODO UPDATECLOCK
+        
+        const infoContainer = createElement('div', 'info', 'info')
+        const cardName = createElement('div', 'cardName')
+        const cardLocation = createElement('div', 'cardLocation')
                                                         // ID E CLASSES
-        this.element.setAttribute('id', 'gameDisplay_header')
-        this.element.classList.add('gameDisplay_header')
-        this.clockContainer.classList.add('clock')
-        infoContainer.classList.add('info')
-        infoContainer.setAttribute('id', 'info')
-        cardName.classList.add('cardName')
-        cardLocation.classList.add('cardLocation')
-                                                        // APPEND
-        infoContainer.appendChild(cardName)
-        infoContainer.appendChild( cardLocation)
-        this.element.appendChild(this.clockContainer)
-        this.element.appendChild(infoContainer)
-        this.father.appendChild(this.element)
+
                                                         //ESTILIZA        
         const containerWidth  = Math.floor(window.innerWidth * 0.5) > 760 ? 760 : Math.floor(window.innerWidth * 0.4)
+        this.element.style.height           = `${containerWidth * 0.25}px`
+        this.clockContainer.style.height    = `${containerWidth * 0.21}px`
+        this.clockContainer.style.width     = `${containerWidth * 0.19}px`
+        infoContainer.style.height          = `${containerWidth * 0.23}px`
+        
+        // APPEND
+        infoContainer.append(cardName, cardLocation)
+        this.element.append(this.clockContainer, infoContainer)
+        this.father.appendChild(this.element)
 
-        this.element.style.height = `${containerWidth * 0.25}px`
-        this.clockContainer.style.height = `${containerWidth * 0.21}px`
-        this.clockContainer.style.width = `${containerWidth * 0.19}px`
-        infoContainer.style.height = `${containerWidth * 0.23}px`
-                                                        //ATUALIZA  
+        //ATUALIZA  
         infoContainer.style.fontWeight = '200'     
-        this.clockContainer.innerHTML = '<p>--</p><i class = "fa-regular fa-clock"></i>' // ESSA ICONE É ADICIONADO DINAMICAMENTE EM TODO UPDATECLOCK
         this.cardInfo[0] = 'Precione Iniciar para começar.'
         this.cardInfo[1] = '<3'
 
         this.clockContainer.addEventListener('click', () => {
-            if(gameData.isLibrasActive)
+            if(gameData.isLibrasActive){
                 gameData.intro.gameAcessibleDisplay.readWithAccessibility('tempo do relógio')
+            }
         })
+
         this.updateInfoContainer()
     }
     updateClockContainer(){
-        this.clockContainer = document.querySelector('.clock')
-        if(this.timer == '--'){
+        if(this.timer === '--'){
             this.clockContainer.innerHTML = '<p class="clockNumber">--</p><i class = "fa-regular fa-clock"></i>'
-            return
+        } else {
+            const seconds = this.timer <= 9 ? `0${this.timer}` : this.timer
+            this.clockContainer.innerHTML = `<div class="clockNumber">${seconds}</div><span class= clockSecond>s</span><i class = "fa-regular fa-clock"></i>`
         }
-        this.clockContainer.innerHTML = `<div class="clockNumber">${this.timer <= 9 ? `0${this.timer}` : this.timer}</div><span class= clockSecond>s</span><i class = "fa-regular fa-clock"></i>`
     }
     updateInfoContainer(){
-        let cardName = document.querySelector('.cardName')
-        let cardLocation = document.querySelector('.cardLocation')
-
-        cardName.textContent = this.cardInfo[0]
-        cardLocation.textContent =  this.cardInfo[1]
+        this.element.querySelector('.cardName').textContent = this.cardInfo[0]
+        this.element.querySelector('.cardLocation').textContent =  this.cardInfo[1]
     }
 
     startClock(){   
         this.counter = setInterval(() => {
-            if((typeof this.timer) !== 'number')
-                this.timer = 0
-            updateTimer()
+            if(typeof this.timer !== 'number') this.timer = 0
+            this.timer++
             this.updateClockContainer()
         }, 1000)
         this.isCounterPaused = false
-
-        const updateTimer = () => {
-            this.timer += 1
-        }
-
     }
     pauseClock(){
         if(this.counter){
@@ -208,48 +170,44 @@ class DisplayHeader{                // ESSA CLASSE SE DIFERENCIA DAS DEMAIS, REF
         }
     }
     resumeClock(){
-        if(this.isCounterPaused){
-            this.startClock()
-        }
+        if(this.isCounterPaused) this.startClock()
     }
     stopClock(){
         clearInterval(this.counter)
     }
     setCardsInfo(name, location){
-        this.cardInfo[0] = name
-        this.cardInfo[1] = location
+        this.cardInfo = [name, location]
     }
     getTimer(){
         return this.timer
     }
     handleWin(){
         this.stopClock()
-        this.cardInfo[0] = 'Você Conseguiu'
-        this.cardInfo[1] = '<3'
+        this.setCardsInfo("Voce Conseguiu", "<3")
         this.timer = '--'
         this.updateInfoContainer()
         this.updateClockContainer()
     }
     reset(){
         this.stopClock()
-        this.cardInfo[0] = ''
-        this.cardInfo[1] = ''
-        this.timer = '--'
+        this.setCardsInfo("", "")
+        this.timer = "--"
         this.updateInfoContainer()
         this.updateClockContainer()
     }
 
     darkMode(){
-        this.element.children[1].style.fontWeight = '200'
-        this.element.children[1].style.color = '#efefef'
-
+        const info = this.element.children[1]
+        info.style.fontWeight = '200'
+        info.style.color = '#efefef'
         this.clockContainer.style.border = '2px solid #ffffff56'
         this.clockContainer.style.backgroundColor = 'var(--body-color-dark)'
     }
     lightMode(){
-        this.element.children[1].style.fontWeight = '400'
-        this.element.children[1].style.color = '#3e3e3f'
+        const info = this.element.children[1]
 
+        info.style.fontWeight = '400'
+        info.style.color = '#3e3e3f'
         this.clockContainer.style.border = '2px solid #056db3'
         this.clockContainer.style.backgroundColor = '#3498db'       
     }
@@ -258,90 +216,77 @@ class DisplayHeader{                // ESSA CLASSE SE DIFERENCIA DAS DEMAIS, REF
 class DisplayBar{
     constructor(father, game){
         this.father = father
-        this.element = ''
         this.game = game
+        this.element = null
         this.LibrasBtn =  document.querySelector('.libras_btn')
-        this.userName = '--'
-        this.generateBar()
+
+        this.createDisplayBar()
     }
-    generateBar(){  // constroi a barra
-
-        const userName =  document.createElement('div')
-        const userTreasures =  document.createElement('div')
-        // const treasure = this.getImage('treasure')
-        const treasure = document.createElement('img')
-        const treasureNumber = document.createElement('span')
-        const userLevel = document.createElement('div')
-        this.element =  document.createElement('div')
-        
-        this.element.setAttribute('id', 'gameDisplay_bar')
-        treasure.setAttribute('src', "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1743020777/DGAS-Plataforma/game3/general/roy5gguau9x7utyszcyb.png")
-        treasure.setAttribute('alt', 'Tesouros')
-        this.element.classList.add('gameDisplay_bar')
-        userName.classList.add('userName')
-        userTreasures.classList.add('userTreasure')
-        userLevel.classList.add('userLevel')
-        
-        treasure.alt = 'tesouros coletados' 
-        treasure.title = 'tesouros coletados' 
-        treasureNumber.innerText = this.game.user.treasures ? this.game.user.treasures : 0 
-        treasureNumber.classList.add('treasuresNumber')
-        treasure.classList.add('treasure')
+    createDisplayBar(){  // constroi a barra
+        this.element =  createElement('div', 'gameDisplay_bar', 'gameDisplay_bar')
+        this.element.style.display = 'flex'
         
 
-        userTreasures.appendChild(treasureNumber)
-        userTreasures.appendChild(treasure)
-        this.element.appendChild(userName)
-        this.element.appendChild(userTreasures)
-        this.element.appendChild(userLevel)
+        const userName =  createElement('div', 'userName')
+        userName.classList.add()
+        userName.innerText = this.game.user.name || '--' 
+        
+        const userLevel = createElement('div', 'userLevel')
+        userLevel.innerText = `level ${this.game.user.level || 0}`
+        
+        const treasureImg = createElement('img', 'treasure', '', {
+            src : "https://res.cloudinary.com/dqzwqdc0a/image/upload/v1743020777/DGAS-Plataforma/game3/general/roy5gguau9x7utyszcyb.png",
+            alt: 'tesouros coletados',
+            title: 'tesouros coletados',
+        })
+
+        const treasureNumber = createElement('span', 'treasuresNumber')
+        treasureNumber.innerText = this.game.user.treasures || 0 
+        
+        const userTreasures =  createElement('div', 'userTreasure')
+
+        userTreasures.append(treasureNumber, treasureImg)
+        this.element.append(userName, userTreasures, userLevel)
         this.father.appendChild(this.element)
 
-        this.element.style.display = 'flex'
-        this.setBarLevel(this.game.user.level ? this.game.user.level : 0 )
-        this.setBarName(this.game.user.name ? this.game.user.name : '--' )
     }
     updateBar(){  // atualiza de acordo com os dados do usuario
-        document.querySelector('.treasuresNumber').innerHTML = this.game.user.treasures
-        document.querySelector('.userLevel').innerHTML = `level ${this.game.user.level}`
+        document.querySelector('.treasuresNumber').textContent = this.game.user.treasures
+        document.querySelector('.userLevel').textContent = `level ${this.game.user.level}`
     }
     reset(){  // atualiza de acordo com os dados do usuario
-        document.querySelector('.userName').innerHTML = '--'
-        document.querySelector('.treasuresNumber').innerHTML = '-'
-        document.querySelector('.userLevel').innerHTML = `--`
+        this.setBarName('--')
+        this.setBarLevel(`--`)
+        document.querySelector('.treasuresNumber').textContent = '-'
     }
     setBarLevel(value){ //atualiza para um valor expecífico
-        document.querySelector('.userLevel').innerHTML = `level ${value}`
-
+        const level = value === '--' ? '--' : `level ${value}`
+        document.querySelector('.userLevel').textContent = level
     }
     setBarName(value){  //atualiza para um valor expecífico
-        document.querySelector('.userName').innerHTML = value.toString()
+        document.querySelector('.userName').textContent = value.toString()
     }
 
-    toggleDisplayBar(){  // alterna o Display
-        if(this.LibrasBtn.classList.contains('active')){
-            setTimeout(() => {
-                if(gameData.isLibrasActive)
-                    this.element.style.display = 'none'
-            }, 10)
-        } else {
-            setTimeout(() => {
-                if(!gameData.isLibrasActive)
-                    this.element.style.display = 'flex'
-            }, 1500)
+    toggleDisplay(){  // alterna o Display,
+        const isActive = this.LibrasBtn.classList.contains('active')
+        const toggle = () => {
+            this.element.style.display = gameData.isLibrasActive ? 'none' : 'flex'
         }
+        setTimeout(toggle, isActive  ? 10 : 1500)
+
     }
     darkMode(){
-        this.element.style.fontWeight = '200'
-        this.element.style.color = '#efefef'
+        Object.assign(this.element.style, {
+            fontWeight : '200',
+            color : '#efefef'
+        })
     }
     lightMode(){
-        this.element.style.fontWeight = '400'
-        this.element.style.color = '#3e3e3f'
+        Object.assign(this.element.style,{
+            fontWeight: '400',
+            color: '#3e3e3f'
+        })
     }
-    getImage(name){                 // RETORNA A IMAGEM DO OBJ GLOBAL, ARMAZENADA NO PRELOAD (BLOB)
-        return gameAssets[name]
-    }
-
 }
 
 class DisplayBody{
@@ -351,58 +296,44 @@ class DisplayBody{
         this.LibrasBtn =  document.querySelector('.libras_btn')
         this.img = ''
         this.imgContainer = ''
-        this.generateBody()
+        this.createDisplayBody()
     }
-    generateBody(){   // constroi o Body
-        this.element = document.createElement('div')
-        this.element.classList.add('gameDisplay_body')
-        this.element.setAttribute('id','gameDisplay_body' )  
-        this.imgContainer = document.createElement('div')
-        this.img =  document.createElement('img')
+    createDisplayBody(){   // constroi o Body
+        this.element = createElement('div', 'gameDisplay_body', 'gameDisplay_body')
+        this.element.style.display = 'flex'
+       
+        this.imgContainer = createElement('div', 'bodyImg_Container')
+        this.img =  createElement('img', 'bodyImg')
+        
         this.father.appendChild(this.element)
-        
-        this.imgContainer.classList.add('bodyImg_Container')
-        this.img.classList.add('bodyImg')
-        
         this.element.appendChild(this.imgContainer)
         this.imgContainer.appendChild(this.img)
-        
-        this.element.style.display = 'flex'
     }
+
     updateDisplayImg(src, alt = '', title = ''){   // atualiza a imagem com a URL passada
         if(this.img.style.display == 'none'){
             this.img.style.display = 'block'
         }
-        this.img.setAttribute('src', src)
+        this.img.src = src
         this.img.alt = alt
         this.img.title = title
 
     }
     handleWin(){
         const trophy_OBJ = generalImagesDataArr.find(obj => obj.name === 'trophy')
-        this.updateDisplayImg(trophy_OBJ.src, trophy_OBJ.description, 'trofel')
+        if (trophy_OBJ){
+            this.updateDisplayImg(trophy_OBJ.src, trophy_OBJ.description, 'troféu')
+        }
     }
     reset(){
         this.img.style.display = 'none'
     }
 
-    toggleDisplayBody(){
-        if(this.LibrasBtn.classList.contains('active')){
-            // todos somem
-            setTimeout(() => {
-                this.element.style.display = 'none'
-                // this.imgContainer.style.display = 'none'
-                // this.img.style.display = 'none'
-            }, 10)
-        }else{
-            // todos aparecem
-            setTimeout(() => {
-            this.element.style.display = 'flex'
-            this.element.style.display = 'flex'
-            // this.imgContainer.style.display = 'block'
-            // this.img.style.display = 'block'
-            }, 1500)
-        }
+    toggleDisplay(){
+        const isActive = this.LibrasBtn.classList.contains('active')
+        setTimeout(() => {
+            this.element.style.display =  isActive ? 'none' : 'flex'
+        }, isActive ? 10 : 1500)
     }
     darkMode(){
         this.element.style.color = '#efefef'
@@ -416,36 +347,34 @@ class DisplayBody{
         this.imgContainer.style.backgroundColor = '#3498db80'
 
     }
-
 }
 
 class DisplayFooter{
     constructor(father){
         this.father = father
-        this.element = undefined
+        this.element = null
+        this.paragraf = null
         this.LibrasBtn = document.querySelector('.libras_btn')
         this.footerText = 'Desenvolvido por Wesley Welisten'
+        
         this.generateFooter()
+        this.updateFooterText(this.footerText)
     }
     generateFooter(){
-        this.element = document.createElement('div')
-        const paragraf = document.createElement('p')
-        
-        this.element.appendChild(paragraf)
-        paragraf.classList.add('description')
-        paragraf.classList.add('FIT')
-        this.element.setAttribute('id', 'gameDisplay_footer')
-        this.element.classList.add('gameDisplay_footer')
-
-        this.updateFooterText(this.footerText)
+        this.element = createElement('div', 'gameDisplay_footer', 'gameDisplay_footer')
         this.element.style.display = 'block'
+
+        this.paragraf = createElement('p', 'description FIT')
+        
+        this.element.appendChild(this.paragraf)
         this.father.appendChild(this.element)
     }
     updateFooterText(text, callback = () => {}){
         this.footerText = text.toString()
-        this.element.firstChild.innerHTML = this.footerText
+        this.paragraf.innerHTML = this.footerText
         callback('.description')
     }
+
     handleWin(){
         this.element.firstChild.style.fontSize = '2rem'
         this.updateFooterText(`<p>Obrigado por Jogar !</p><br><p>Desenvolvido por Wesley Welisten</p>`)
@@ -453,14 +382,12 @@ class DisplayFooter{
     reset(){
         this.footerText = ''
         this.element.firstChild.textContent = this.footerText
-
     }
-    toggleDisplayFooter(){
-        if(this.LibrasBtn.classList.contains('active')){
-            setTimeout(() => {this.element.style.display = 'none'}, 10)
-        }else{
-            setTimeout(() => {this.element.style.display = 'block'}, 1500)
-        }
+    toggleDisplay(){
+        const isActive = this.LibrasBtn.classList.contains('active')
+        setTimeout(() => {
+            this.element.style.display = isActive ? 'none' : 'block'
+        }, isActive ? 10 : 1500)
     }
 
     darkMode(){
