@@ -108,7 +108,7 @@ class IntroForm {
     setupMuteButton(){                 // CONFIGURA AS AÇOES DOS config_btn PARA COM O ELEMENTOS RECÉM CRIADOS
         const mute_btn = document.querySelector('.mute_btn')
         mute_btn?.addEventListener('click', () => {
-            this.gainNode.gain.value = this.gainNode.gain.value === 1 ? 0 : 1
+            this.gainNode.gain.value = gameData.isMute ? 0 : 1
         })
     }
 // ========= CONFIGURAÇÃO DE ELEMENTOS =========

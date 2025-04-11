@@ -115,6 +115,12 @@ class GameDisplay{
         this.header.updateClockContainer()
         this.header.updateInfoContainer()
     }
+
+    onMemoryGameConstruction(user){
+        this.user = user
+        this.bar.setBarName(this.user.name.split(' ')[0])
+        this.bar.updateBar()
+    }
 }
 
 class DisplayHeader{                // ESSA CLASSE SE DIFERENCIA DAS DEMAIS, REFATORAÇÃO É NECESSARIA

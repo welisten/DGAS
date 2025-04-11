@@ -96,6 +96,7 @@ class GameAcessibleDisplay{
         })
 
         this.accessibleTextEl.textContent = text
+        
         this.accessibleTextEl.dispatchEvent(mouseOverEvent)
         setTimeout(() => this.accessibleTextEl.dispatchEvent(clickEvent), 200)
         this.accessibleTextEl.dispatchEvent(mouseOutEvent)

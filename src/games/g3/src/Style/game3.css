@@ -437,7 +437,7 @@ body {
           cursor: pointer;
           border: 3px solid var(--blue-baby);
           border-radius: 15px;
-          transition: all 0s ease;
+          transition: none;
 
           img.cardImage {
             visibility: hidden;
@@ -446,6 +446,7 @@ body {
             background-clip: border-box;
             background-position: center;
             background-size: cover;
+            transition: none;
           }
         }
 
@@ -463,6 +464,7 @@ body {
             background-position: center;
             background-size: cover;
             border-radius: 10px;
+            transition: none;
           }
         }
 

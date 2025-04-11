@@ -1,193 +1,244 @@
+
+/**
+ * Classe responsável por exibir a pontuação do jogador ao final de uma fase do jogo.
+ * 
+ * O componente `LevelScore` é instanciado quando o jogador finaliza um nível.
+ * Ele apresenta um painel com:
+ *  - Nome do jogador formatado
+ *  - Estrelas de desempenho com base no tempo
+ *  - Informações da fase e do tempo de conclusão
+ *  - Botões para jogar novamente ou avançar (quando disponível)
+ * 
+ * Também gerencia acessibilidade (Leitor de Tela e Libras), sons de vitória,
+ * e feedback via popup.
+ * 
+ * Utiliza utilitários como `createElement`, `fitTextContent`, e gerenciadores como `AudioManager` e `AccessibilityManager`.
+ */
+
 import { colors } from "../Consts/Colors.js"
 import { generalImagesDataArr } from "../Consts/Values.js"
 import { gameData } from "../Consts/gameData.js"
+import { AudioManager } from "./manegers/Audiomanager.js"
+import { createElement } from "./../js/utils/createElements.js" 
+import { fitTextContent } from "./../js/utils/fitTextContent.js"
+import AccessibilityManager from "./manegers/AccessibilityManager.js"
+
 class LevelScore{
+
+    /**
+     * Cria a instância do painel de pontuação após o fim da fase.
+     * 
+     * @param {HTMLElement} father - Elemento pai onde o painel será anexado.
+     * @param {string} name - Nome do usuário.
+     * @param {number} time - Tempo gasto pelo usuário para completar o nível.
+     * @param {number} level - Número do nível finalizado.
+     * @param {GainNode} gainNode - Nó de ganho de áudio para controle de volume.
+     * @param {AudioContext} audioContext - Contexto de áudio utilizado para reprodução.
+     * @param {object} game - Instância principal do jogo.
+     */
     constructor(father, name, time, level, gainNode, audioContext, game ){
         this.father = father
-        this.element = ''
+        this.container = createElement('div', 'levelScore', 'levelScore')
         this.userName = name[0].toUpperCase() + name.slice(1).toLowerCase()
         this.userTime = time
         this.userLevel = level
         this.game = game
-        this.audioContext = audioContext                             // ASIDE GAME ACCESSIBLE CONTAINER
+        this.audioManager = new AudioManager(audioContext, gainNode)
+        this.accessibilityManager = new AccessibilityManager()
 
-        this.songVictory =  gameAssets['victory']
-        this.songApplause = gameAssets['aplause']
-        this.transitionSong = gameAssets['transition']
-        this.currentAudio = []
-        this.gainNode = gainNode
 
-        this.playAudio( this.songVictory, 1.0, true )
-        this.playAudio( this.songApplause, 1.0, true )
-        this.generatePainel()
+        this.audioManager.playAudio( gameAssets['victory'], 1.0, true )
+        this.audioManager.playAudio( gameAssets['aplause'], 1.0, true )
+        this.createPainel()
         gameData.class = 'LevelScore'
 
     }
 
-    generatePainel(){ 
-        const rulers = document.querySelectorAll('.ruler')
-        rulers.forEach(ruler => ruler.style.display = 'none')
-       
-        //CRIA OS ELEMENTOS DOM DO PAINEL DO SCORE (INCLUINDO O HEADER)    
-        const container = document.createElement('div')
-        const painelHeader = document.createElement('p')
-        const title = document.createElement('span')
-        const painelBody = document.createElement('p')
-        const painelFooter = document.createElement('div')
-        
-        this.element = document.createElement('div')
-        this.element.setAttribute('id', 'levelScore')
-        this.element.classList.add('levelScore')
-        
-        container.classList.add('scoreContainer')
-        painelHeader.classList.add('scoreHeader')
-        title.classList.add('scoreTitle')
-        title.classList.add('FIT')
-        painelBody.classList.add('scoreBody')
-        painelFooter.classList.add('scoreFooter')
-        
-        container.setAttribute('tabindex','2')
-        container.setAttribute('aria-label','Placar')
-        painelHeader.setAttribute('tabindex','3')
-        painelHeader.setAttribute('aria-label',`Parabens ${this.userName} !`)
-        painelBody.setAttribute('tabindex','4')
+    /**
+     * Cria e renderiza todo o painel de pontuação, contendo cabeçalho, corpo e rodapé.
+     * Inclui chamadas para ajuste de texto e construção de partes específicas.
+     */
+    createPainel(){ 
+        this.hideRulers()
 
-        if(gameData.isDarkMode){
-            painelBody.style.background = 'none'
-        }else{
-            painelBody.style.background = colors.light_blue_9c
-        }
+        const scoreContainer = createElement('div', 'scoreContainer', '', {
+            tabindex:'2',
+            'aria-label' :'Placar'
+        })
+        
+        const painelHeader = createElement('p', 'scoreHeader', '', {
+            tabindex:'3',
+            'aria-label':`Parabens ${this.userName} !`
+        })
+        
+        const title = createElement('span', 'scoreTitle FIT', '', {}, `Parabéns ${this.userName}`)
+        const painelBody = createElement('p', 'scoreBody', '', { tabindex:'4' })
+        painelBody.style.background = gameData.isDarkMode ? 'none' : colors.light_blue_9c
+        
+        const painelFooter = createElement('div', 'scoreFooter')
 
         painelHeader.appendChild(title)
-        container.appendChild(painelHeader)
-        container.appendChild(painelBody)
-        container.appendChild(painelFooter)
-        this.element.appendChild(container)
-        this.father.appendChild(this.element)
+        scoreContainer.append(painelHeader, painelBody, painelFooter)
+        this.container.appendChild(scoreContainer)
+        this.father.appendChild(this.container)
 
-        title.textContent = `Parabéns ${this.userName}`
-        this.fitTextContect('.scoreTitle')
+        fitTextContent('.scoreTitle')
         
-        this.generateBody(painelBody)
-        this.generateFooter(painelFooter)
+        this.buildBody(painelBody)
+        this.buildFooter(painelFooter)
     }
-    generateBody(father){               // PREENCHE OS ELEMENTOS DO CORPO DO PAINEL
-        const star1Container = document.createElement('div')
-        const star2Container = document.createElement('div')
-        const star3Container = document.createElement('div')
+
+    hideRulers(){
+        const rulers = document.querySelectorAll('.ruler')
+        rulers.forEach(ruler => ruler.style.display = 'none')
+    }
+
+    /**
+     * Constrói o corpo do painel com base nas estrelas de desempenho.
+     * 
+     * @param {HTMLElement} father - Elemento onde os elementos visuais serão inseridos.
+     */
+    buildBody(father){
+        const star1Container = createElement('div', 'star1')
+        const star2Container = createElement('div', 'star2')
+        const star3Container = createElement('div', 'star3')
 
         let [star1, star2, star3, golden] = this.handleScore(this.userTime, this.userLevel)
-        if(gameData.isScreenReaderActive || gameData.isLibrasActive) golden = 3
-       
-        father.setAttribute('aria-label', `Você conseguiu ${golden} estrelas`)
-       
-        star1Container.classList.add('star1')
-        star2Container.classList.add('star2')
-        star3Container.classList.add('star3')
+        
+        if(gameData.isScreenReaderActive || gameData.isLibrasActive) {
+            golden = 3
+        }
 
+        this.father.setAttribute('aria-label', `Você conseguiu ${golden} estrelas`)
+       
+        
         star1Container.appendChild(star1)
         star2Container.appendChild(star2)
         star3Container.appendChild(star3)
 
-        father.appendChild(star1Container)
-        father.appendChild(star2Container)
-        father.appendChild(star3Container)
-
-    }
-    generateFooter(father){             // PREENCHE OS ELEMENTOS DO RODAPÉ DO PAINEL
-        const btnsContainer = document.createElement('div')
-        const gameInfo = document.createElement('div')
-
-        gameInfo.classList.add('footerInfo')
-        const timeInfo = document.createElement('p')
-        const levelInfo = document.createElement('p')
-
-        levelInfo.classList.add('levelInfo')
-        timeInfo.classList.add('timeInfo')
+        father.append(star1Container, star2Container, star3Container)
         
-        levelInfo.innerHTML = `<span class="levelSpan">Level</span> <span class="levelNumber">${this.userLevel}</span>`
-        timeInfo.innerHTML = `<span>${this.userTime}s</span>`
+    }
 
-        levelInfo.setAttribute('tabindex','5')
-        levelInfo.setAttribute('aria-label', `na fase ${this.userLevel}`)
+    /**
+     * Constrói o rodapé do painel com informações do nível e do tempo de conclusão.
+     * Também insere os botões de controle no rodapé.
+     * 
+     * @param {HTMLElement} father - Container do rodapé.
+     */
+    buildFooter(father){ 
+        const gameInfo = createElement('div', 'footerInfo')
         
         let timeInSec = this.game.gameDisplay.header.getTimer()
-        let timeInMin;
-        let restInSec;
-
+        let timeInMin = null;
+        let restInSec = null;
+        
         if(timeInSec > 60){
             timeInMin = Math.floor(timeInSec / 60)
             restInSec = timeInSec % 60
         }
-        timeInfo.setAttribute('tabindex','6')
-        timeInfo.setAttribute('aria-label',`em ${timeInMin ? `${timeInMin} minuto ${restInSec ? `e ${restInSec}` : ''}` : timeInSec} segundos`)
-
-        const levelImg = document.createElement('img')
-        const clockImg = document.createElement('img')
+        
+        const levelInfo = createElement('p', 'levelInfo', '', {
+            tabindex : '5',
+            'aria-label' : `na fase ${this.userLevel}`
+        })
+        levelInfo.innerHTML = `<span class="levelSpan">Level</span> <span class="levelNumber">${this.userLevel}</span>`
+        
+        const timeInfo = createElement('p','timeInfo', '', {
+            tabindex:'6',
+            'aria-label':`em ${timeInMin
+                ? `${timeInMin} minuto ${restInSec ? `e ${restInSec}` 
+                : ''}` : timeInSec} segundos`
+        })
+        timeInfo.innerHTML = `<span>${this.userTime}s</span>`
+        
         const level_OBJ = generalImagesDataArr.find(obj => obj.name === 'level')
         const clock_OBJ = generalImagesDataArr.find(obj => obj.name === 'clock')
-       
-        levelImg.src = level_OBJ.src
-        clockImg.src = clock_OBJ.src
-        levelImg.alt = level_OBJ.description
-        clockImg.alt = clock_OBJ.description
+        
+        const levelImg = createElement('img' ,'levelImg', '', {
+            src: level_OBJ.src,
+            alt: level_OBJ.description
+        }) 
+
+        const clockImg = createElement('img', 'clockImg', '', {
+            src: clock_OBJ.src,
+            alt: clock_OBJ.description
+        })
         
         levelInfo.appendChild(levelImg)
         timeInfo.appendChild(clockImg)
-
-        gameInfo.appendChild(levelInfo)
-        gameInfo.appendChild(timeInfo)
-
-        btnsContainer.classList.add('btnsContainer')
-        const btnReplay = document.createElement('button')
-        const btnNext = document.createElement('button')
-        
-        btnReplay.classList.add('btnReplay')
-        btnReplay.classList.add('fa-solid')
-        btnReplay.classList.add('fa-repeat')
-
-        btnNext.classList.add('btnNext')
-        btnNext.classList.add('fa-solid')
-        btnNext.classList.add('fa-forward')
-        
-        btnReplay.setAttribute('tabindex', '7')
-        btnReplay.setAttribute('aria-label', `Jogar Novamente`)
-        btnReplay.setAttribute('title', `Novamente jogar`)
-        btnNext.setAttribute('tabindex', '8')
-        btnNext.setAttribute('aria-label', `Jogar próxima fase (momentaneamente indisponível)`)
-        btnNext.setAttribute('title', `Jogar próxima fase (indisponível no momento)`)
-
-        btnsContainer.appendChild(btnReplay)
-        btnsContainer.appendChild(btnNext)
-  
+        gameInfo.append(levelInfo, timeInfo)
         father.appendChild(gameInfo)
-        father.appendChild(btnsContainer)
 
+        this.buildFooterButtons(father)
+    }
+
+    /**
+     * @param {HTMLElement} father - Container do rodapé.
+     */
+    buildFooterButtons(father){
+        const btnsContainer = createElement('div', 'btnsContainer')
+
+        const btnReplay = createElement('button', 'btnReplay fa-solid fa-repeat', '', {
+            tabindex: 7,
+            title: 'Jogar Novamente',
+            'aria-label': 'Jogar Novamente'
+        })
+        
+        const btnNext = createElement('button', 'btnNext fa-solid fa-forward', {
+            tabindex: '8',
+            title: `Jogar próxima fase (indisponível no momento)`,
+            'aria-label': `Jogar próxima fase (momentaneamente indisponível)`
+        })
+
+        btnsContainer.append(btnReplay, btnNext)
+        father.appendChild(btnsContainer)
+        
+        this.setFooterButtons(btnReplay, btnNext, father)
+    }
+
+    /**
+     * Adiciona eventos aos botões de "Jogar Novamente" e "Próxima Fase".
+     * Inclui suporte a Libras e Leitor de Tela com feedback auditivo e visual.
+     * 
+     * @param {HTMLButtonElement} btnReplay - Botão de reinício da fase.
+     * @param {HTMLButtonElement} btnNext - Botão de próxima fase.
+     */
+    setFooterButtons(btnReplay, btnNext){
         let auxContrl = ''
 
+        if(!btnNext || !btnReplay){
+            throw new Error('Impossível configurar botões do score: parâmetros inexistentes')
+        }
+
         btnReplay.addEventListener('mouseover', (e) => {
-          if(auxContrl === e.target) return
-          if(gameData.isLibrasActive)
-            gameData.intro.gameAcessibleDisplay.readWithAccessibility(`${e.target.title}`)
-      
-          setTimeout(() => auxContrl =  '', 1000)
-        })
+            if(auxContrl === e.target) return
+
+            if(gameData.isLibrasActive){
+                this.accessibilityManager.readWithAccessibility(`${e.target.title}`)
+            }
+            setTimeout(() => auxContrl =  '', 1000)
+          })
+  
         btnNext.addEventListener('mouseover', (e) => {
-          if(auxContrl === e.target) return
-          if(gameData.isLibrasActive)
-            gameData.intro.gameAcessibleDisplay.readWithAccessibility(`${e.target.title}`)
-      
-          setTimeout(() => auxContrl =  '', 1000)
-        })
-
+            if(auxContrl === e.target) return
+            if(gameData.isLibrasActive)
+              this.accessibilityManager.readWithAccessibility(`${e.target.title}`)
+        
+            setTimeout(() => auxContrl =  '', 1000)
+          })
+  
         btnReplay.addEventListener('click', (e) => {
-            let delay = gameData.isScreenReaderActive || gameData.isLibrasActive  ? 4500 : 1000
+            const isAccessibilityActive = gameData.isScreenReaderActive || gameData.isLibrasActive
+            let delay =  isAccessibilityActive ? 4500 : 1000
 
-            if(gameData.isScreenReaderActive || gameData.isLibrasActive){
+            if(isAccessibilityActive){
                 let aux = 3
-                let verb = gameData.isLibrasActive ? 'começou' : 'começa em'
-                this.readText(`O jogo ${verb}`, false)
-                gameData.intro.gameAcessibleDisplay.readWithAccessibility(`O jogo ${verb}`)
+                let verb = 'começou'
+
+                this.accessibilityManager.readText(`O jogo ${verb}`, false)
+                this.accessibilityManager.readWithAccessibility(`O jogo ${verb}`)
+                
                 setTimeout(() => {
                     let countdown = setInterval(() => {
                         if(aux <= 0 || gameData.isLibrasActive) {
@@ -195,37 +246,45 @@ class LevelScore{
                             
                             return
                         }else if(aux === 1){
-                            this.stopCurrentAudio()
-                            this.playAudio(this.transitionSong)
+                            this.audioManager.stopCurrentAudio()
+                            this.audioManager.playAudio(gameAssets['transition'])
                         }
-                        this.readText(aux, false)
-                        gameData.intro.gameAcessibleDisplay.readWithAccessibility(aux)
+                        this.accessibilityManager.readText(aux, false)
+                        this.accessibilityManager.readWithAccessibility(aux)
                         aux--
                     }, 1000)
                 }, 500)
-            }else{
-            this.stopCurrentAudio()
-            this.playAudio(this.transitionSong)
+            }
+            else{
+                this.audioManager.stopCurrentAudio()
+                this.audioManager.playAudio(gameAssets['transition'])
             }
 
             setTimeout(() => {
                 const gameBoard = document.getElementById('gameBoard')
             
                 gameBoard.style.display = "grid"
-                this.element.style.display = 'none'
+                this.container.style.display = 'none'
                 
                 this.game.gameDisplay.body.reset()
-                this.game.presetGameElements()
                 this.game.replayGame()
             }, delay)
         })
-
+  
         btnNext.addEventListener('click', () => {
             this.popUpMessage('A fase 2 está momentaneamente indisponível. Aguarde as próximas atualizações', '.btnReplay', 6000)
             if(this.userLevel < gameData.lastLevel) this.game.user.updateUser()
         })
     }
-    popUpMessage(message, nxtElem, delay = 2500, isVisible = true, chaining = false){   // EXIBE MENSAGEM NO POPUP VISÍVEL
+
+    /**
+     * Adiciona eventos aos botões de "Jogar Novamente" e "Próxima Fase".
+     * Inclui suporte a Libras e Leitor de Tela com feedback auditivo e visual.
+     * 
+     * @param {HTMLButtonElement} btnReplay - Botão de reinício da fase.
+     * @param {HTMLButtonElement} btnNext - Botão de próxima fase.
+     */
+    popUpMessage(message, nxtElem, delay = 2500, isVisible = true, chaining = false){
         const popUp = document.getElementById('popUp')
         const popupText = document.querySelector('.popupText')
         const nextFocusElement = document.querySelector(nxtElem)
@@ -253,15 +312,23 @@ class LevelScore{
         
         
     }
-    handleScore(time, level){ //DEFINE AS ESTRELAS NO CORPO DO PAINEL
+
+    /**
+     * Define as estrelas exibidas no painel com base no tempo do jogador.
+     * 
+     * @param {number} time - Tempo usado para concluir o nível.
+     * @param {number} level - Número do nível.
+     * @returns {Array} Um array com os elementos de imagem das estrelas e a quantidade de estrelas douradas.
+     */
+    handleScore(time, level){
         const userTime = time
         const factor = Number(level)
         const maxTime = 100
         const minTime = maxTime - (10 * factor)
 
-        let star1 = document.createElement('img')
-        let star2 = document.createElement('img')
-        let star3 = document.createElement('img')
+        let star1 = createElement('img')
+        let star2 = createElement('img')
+        let star3 = createElement('img')
 
         let goldenStar_src = generalImagesDataArr.find(obj => obj.name === 'golden star').src
         let steelStar_src = generalImagesDataArr.find(obj => obj.name === 'steel star').src
@@ -290,62 +357,14 @@ class LevelScore{
             return [star1, star2, star3, goldenStars];
         }
     }
-    getImage(name){                 // RETORNA A IMAGEM DO OBJ GLOBAL, ARMAZENADA NO PRELOAD (BLOB)
+
+    getImage(name){
         return gameAssets[name]
     }
-    fitTextContect(identificador){ // IDENTIFICA OVERFLOW DE TEXTO EM RELAÇÃO AO SEU PAI E CORRIGE TAMANHO DA FONTE
-        const elem = document.querySelector(identificador)
-        const parent = elem.parentNode
-        const parentHeight = parent.offsetHeight
-        const parentWidth = parent.offsetWidth
-        elem.style.transition = 'none'
-        elem.style.fontSize = `11rem`
-        if((elem.offsetHeight * 1.2) > (parentHeight) || (elem.offsetWidth * 1.2) > parentWidth){
-            $(document).ready(function(){
-                $(identificador).fitText(1.5)
-            })
-        }
-    }
-    destroyScore(){ // ELIMINA ELEMENTO E SEUS FILHOS
-        this.element.style.display = 'none'
-        this.father.remove(this.element)
-    }
-    playAudio(audioBuffer, volume = 1.0, loop = false){
-        const src = this.audioContext.createBufferSource()
-        src.buffer = audioBuffer
-        src.loop = loop
 
-        volume = gameData.isMute === true ? 0 : 1
-        this.gainNode.gain.value = volume 
-        
-        src.connect(this.gainNode)
-        this.gainNode.connect(this.audioContext.destination)
-        src.start()
-        if(loop === true )this.currentAudio.push(src)
-    }
-    stopCurrentAudio(){
-        if(this.currentAudio.length > 0) {
-            this.currentAudio.forEach(audio => audio.stop())
-            this.currentAudio = []
-        }
-    }
-    readText(text, focusEle = null ,textChaining = false){                                       // LIDA COM TEXTOS DE LEITURA ACESSÍVEL IMEDIATA
-        if(gameData.lastAccText === text) text += `.`
-        const textToReaderEl = document.querySelector('.textToReader')
-
-        textToReaderEl.textContent = textChaining ? `${popupText.textContent} ${text}` : `${text}`
-        if(focusEle) focusEle.focus()
-        gameData.lastAccText = text
-    } 
-    toggleLight(){
-        let scoreBody = document.querySelector('.scoreBody')
-        if(!scoreBody) return 
-
-        if(gameData.isDarkMode){
-            scoreBody.style.background = 'none'
-        } else {
-            scoreBody.style.background = colors.light_blue_9c
-        }
+    destroyScore(){
+        this.container.style.display = 'none'
+        this.father.remove(this.container)
     }
 }
 

@@ -16,13 +16,13 @@ class Card {
         this.name = name;
         this.description = description;
         this.src = src;
-        this.element = element;
+        this.imageEl = element;
         this.location = { row: row, column: column};
         this.isFlipped = false;
         this.isMatched = false;
         this.incorrectMatch= false;
 
-        this.element.classList.add('cardImage')
+        this.imageEl.classList.add('cardImage')
     }
 
     /**
@@ -44,7 +44,7 @@ class Card {
      * Marca a carta como incorretamente pareada.
      */
     fail() {
-        this.incorrectMatch = true
+        this.incorrectMatch = !this.incorrectMatch
     }
 
     /**
