@@ -21,6 +21,7 @@
  * @author [Wesley Welisten Rocha Santos Vieira]
  * @date [10/04/2025]
  */
+
 class GameAcessibleDisplay{
     constructor(father){
         this.father = father
