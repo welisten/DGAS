@@ -1,0 +1,3 @@
+[submodule "src/games/g3"]
+	path = src/games/g3
+	url = https://github.com/welisten/TesourosHistoricos_DGAS
