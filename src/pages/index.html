@@ -3,17 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desenvolvendo Guapi</title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
     <!-- font-awesome - 6.5.2 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <!-- textFit -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/textfit/2.4.0/textFit.min.js"></script>
-    <script type="module">
-        import {updatePlataformColors} from './javascript/navigation.js'
-        updatePlataformColors()
-    </script>
-    <link rel="stylesheet" href="./style/style.css">
-    <link rel="stylesheet" href="./style/mediaQuery.css">
 </head>
 <body>
     <header>
@@ -520,12 +514,12 @@
             <div class="footer_rules container">
             <div class="f_r_top container">
                 <ul class="container">
-                    <li><a href="./pages/termsOfService.html">Termos de Uso</a> </li>
-                    <li><a href="./pages/privacyTerms.html">Políticas de Privacidade</a> </li>
-                    <li><a href="./pages/accessibilityPolicy.html">Poliíticas de Acessibilidade</a> </li>
+                    <li><a href="./termsOfService.html">Termos de Uso</a> </li>
+                    <li><a href="./privacyTerms.html">Políticas de Privacidade</a> </li>
+                    <li><a href="./accessibilityPolicy.html">Poliíticas de Acessibilidade</a> </li>
                 </ul> 
                 <ul class="container">
-                    <li><a href="./pages/credits.html">Créditos</a></li>
+                    <li><a href="./credits.html">Créditos</a></li>
                     <li><a href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/vlibras">Vlibras</a></li>
                 </ul>
                 <div class="container f_t_div">
@@ -546,6 +540,6 @@
             </div>
         </div>
     </footer>
-    <script type="module" src="./javascript/plataform.js"></script>
+    <!-- <script type="module" src="./javascript/platform.js"></script> -->
 </body>
 </html>

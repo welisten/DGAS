@@ -5,7 +5,7 @@ async function sendEmail({name, cell, email, subject, message}){
     let newMessage
 
     if(message && typeof message === 'string'){
-        newMessage = `Mensagem de ${name} - Telefone: ${cell}\n\n\n` + message
+        newMessage = `Mensagem de ${name} - Telefone: ${cell}\n\Email para resposta: ${email}n\n` + message
     }
     const transport = nodemailer.createTransport({
         host: 'smtp.gmail.com',
@@ -28,9 +28,10 @@ async function sendEmail({name, cell, email, subject, message}){
         from: email,
         to: 'dgas.contato@gmail.com',
         subject: subject,
-        text: newMessage ? newMessage : message
+        text: newMessage || message
     }
 
     await transport.sendMail(mailOptions)
+    console.log(process.env.EMAIL_PASS)
 }
 module.exports = sendEmail

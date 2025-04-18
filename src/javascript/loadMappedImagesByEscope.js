@@ -2,13 +2,12 @@ async function loadMappedImagesByEscope( escope = "", src_folder = ""){
     if(!escope && !src_folder) return console.error('Essa função necessita de pelo menos um parâmetro')
 
     try{
-        const resposta = await fetch("javascript/mappedImages.json")
+        const resposta = await fetch("data/mappedImages.json")
 
         if(!resposta.ok){
             throw new Error(`Erro ao carregar o arquivo: ${resposta.status}`)
         }
         const imagesObj = await resposta.json();
-        console.log(imagesObj)
         const imagesEscoped = []
         for (let key in imagesObj){
             if(!src_folder){

@@ -45,6 +45,8 @@ function updatePlataformColors(){
         root.style.setProperty('--btn-a-s-4--', general_colors.black)
         root.style.setProperty('--scrollbar-color--', general_colors.scrollbar_general_dark)
         root.style.setProperty('--main-scrollbar-color--', general_colors.white)
+        root.style.setProperty('--p-weight--', 300)
+
 
         plataformData.isDarkMode = true
         localStorage.setItem('isDarkMode', JSON.stringify(plataformData.isDarkMode))
@@ -66,10 +68,10 @@ function updatePlataformColors(){
         root.style.setProperty('--btn-a-s-4--', general_colors.white)
         root.style.setProperty('--scrollbar-color--', general_colors.scrollbar_general_light)
         root.style.setProperty('--main-scrollbar-color--', general_colors.scrollbar_main_light)
+        root.style.setProperty('--p-weight--', 600)
 
         plataformData.isDarkMode = false
         localStorage.setItem('isDarkMode', JSON.stringify(plataformData.isDarkMode))
-
     }
 
 }
@@ -105,8 +107,10 @@ function setLightModeSlider(updateGameColor){
                 root.style.setProperty('--btn-a-s-4--', general_colors.black)
                 root.style.setProperty('--scrollbar-color--', general_colors.scrollbar_general_dark)
                 root.style.setProperty('--main-scrollbar-color--', general_colors.white)
-                console.log('teste')
+                root.style.setProperty('--p-weight--', 300)
+
             }else {
+                root.style.setProperty('--bg--', general_colors.bg_dark)
                 root.style.setProperty('--letter--', general_colors.letter_l)
                 if(updateGameColor) updateGameColor()
             }
@@ -132,7 +136,9 @@ function setLightModeSlider(updateGameColor){
                 root.style.setProperty('--btn-a-s-4--', general_colors.white)
                 root.style.setProperty('--scrollbar-color--', general_colors.scrollbar_general_light)
                 root.style.setProperty('--main-scrollbar-color--', general_colors.scrollbar_main_light)
+                root.style.setProperty('--p-weight--', 600)
             } else {
+                root.style.setProperty('--bg--', general_colors.bg_light)
                 root.style.setProperty('--letter--', general_colors.letter_d)
                 if(updateGameColor) updateGameColor()
 

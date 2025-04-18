@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
     <!-- font-awesome - 6.5.2 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <!-- textFit -->
-    <link rel="stylesheet" href="../style/footerPages.css">
-    <link rel="stylesheet" href="../style/mediaQuery.css">
 </head>
 <body>
     <header>
@@ -19,7 +17,7 @@
                 </a>
             </button>
             <div id="navbar"><div class="nb_group nb_group1">
-                    <button class="navBtn" sec_num="1"><a href="../index.html">
+                    <button class="navBtn" sec_num="1"><a href="./index.html">
                         <i class="fa-solid fa-arrow-left"></i>
                     </a></button>
                 </div><div class="nb_group nb_group2">
@@ -177,14 +175,5 @@
             </div>
         </div>
     </footer>
-    <script type="module">
-        import {setMainScroll} from './../javascript/scroll.js'
-        import {setLightModeSlider} from './../javascript/navigation.js'
-
-        window.addEventListener('DOMContentLoaded', (e) =>{
-            setMainScroll()
-            setLightModeSlider()
-        })
-    </script>
 </body>
 </html>

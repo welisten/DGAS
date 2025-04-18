@@ -1,3 +1,8 @@
+import './../style/index.css'
+// import './../style/style.css'
+// import './../style/mediaQuery.css'
+// import './../style/footerPages.css'
+
 import { palett } from "../constants/colors.js"
 import { setPlataformHeader } from "./navigation.js"
 import { setTheProjectTextScroll, setPhotoScroll, setMainScroll, setFooter } from "./scroll.js"
@@ -5,6 +10,9 @@ import { setGalery, setPhotoScreen } from "./galery.js"
 import { updateTestimonial } from "./automateTestimonials.js"
 import { handleForm } from "./handleForm.js"
 import { loadMappedImagesByEscope } from "./loadMappedImagesByEscope.js"
+import { updatePlataformColors } from './../javascript/navigation.js'
+
+updatePlataformColors()
 
 setGalery()
 setPlataformHeader()

@@ -1,11 +1,14 @@
+/*!***********************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/style/style.css ***!
+  \***********************************************************************/
 @font-face {
   font-family: "Shadows Into Light";
-  src: url("./../assets/fonts/ShadowsIntoLight-Regular.ttf");
+  src: url(ShadowsIntoLight-Regular.ttf);
 }
 
 @font-face {
   font-family: "Special Elite";
-  src: url("./../assets/fonts/SpecialElite-Regular.ttf");
+  src: url(SpecialElite-Regular.ttf);
 }
 
 * {
@@ -1745,3 +1748,366 @@ body {
     transform: rotate(360deg);
   }
 }
+
+/*!****************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/style/mediaQuery.css ***!
+  \****************************************************************************/
+html{
+    font-size: 62.5%;
+}
+
+@media (max-width: 1600px) {
+    html {
+      font-size: 42.5%;
+    }
+    body {
+      & header {
+        height: 9vh;
+        & nav {
+            height: 9vh;
+            & .switch{
+                font-size: 150%;
+            }
+            & .logoBtn {
+              & img {
+                height: 9vh;
+              }
+            }
+        }
+      }
+  
+      & main {
+        top: 9vh;
+        & .main_scrollbar {
+          & .s_container {
+            & .main_scroll_bar {
+              background-color: rgba(255, 255, 255, 0.177);
+            }
+  
+            & .main_scrollThumb {
+              height: 13px;
+              width: 13px;
+              transform: translateX(25%);
+              
+  
+            }
+          }
+        }
+        & #mainPopUp{
+          top: calc(9vh + 20px);
+          & .pp_container{
+            & #pp_closeBtn{
+              height: 2.75rem;
+              width: 3rem;
+              font-size: 2rem;
+              line-height: 3rem;
+            }
+          }
+        }
+        & #background {
+          height: calc(100vh - 13vh);
+          top: 0;
+          & .sphere {
+            top: 25%;
+            right: -36%;
+          }
+        }
+  
+        & #background_img {
+          height: calc(100vh - 13vh);
+          bottom: calc((5 * 80vh) + 36vh);
+  
+          & img {
+            bottom: -3%;
+            right: -5vw;
+          }
+        }
+        & #background_img::after {
+          bottom: calc(-10.9vh);
+          right: 0;
+        }
+  
+        & #theProject {
+          height: calc(100vh - 13vh);
+          top: 0;
+          & .tp_title {
+            font-size: 7.5rem;
+          }
+          & .tp_textArea {
+            & .tp_scrollContent {
+              & h2 {
+                font-size: 5rem;
+              }
+              & .tp_text {
+                line-height: 4.9rem; /*alterar posteriormente*/
+              }
+            }
+            & .tp_scrollbar {
+              & .s_container {
+                & .tp_scrollBar {
+                  background-color: rgba(255, 255, 255, 0.177);
+                }
+  
+                & .tp_scrollThumb {
+                  height: 13px;
+                  width: 13px;
+                  transform: translateX(-5%);
+                  
+  
+                }
+              }
+            }
+          }
+        }
+        & #games {
+          height: calc(100vh - 13vh);
+          bottom: 0;
+          & h2 {
+            top: 1vh;
+          }
+  
+          & .gamesContainer {
+            & .gameBtn {
+              & a {
+              }
+            }
+            & .gameBtn:hover {
+            }
+            & #game1El {
+            }
+            & #game2El {
+            }
+            & #game3El {
+            }
+            & #game4El {
+            }
+            & #game5El {
+            }
+          }
+        }
+        & #photos {
+          height: calc(100vh - 13vh);
+          bottom: 0;
+          /* margin-bottom: 4vh; */
+  
+          & h3 {
+            font-size: 4.5rem;
+          }
+          & .h3_left {
+            left: -10rem;
+          }
+          & .h3_right {
+            right: -10rem;
+            bottom: 6vh;
+          }
+          & .polaroidsColumn {
+            top: 10vh;
+            height: 75%;
+            width: 11%;
+            & .polaroid {
+              padding: 5% 6% 29%;
+            }
+          }
+          & .polaroidsColumn.left {
+            left: -13%;
+          }
+          & .polaroidsColumn.right {
+            right: -13%;
+          }
+  
+          & .photos_bg {
+            width: 80vw;
+          }
+  
+          & .projectPhotos_container {
+            width: 85%;
+            & .photoScreen {
+              height: 85%;
+  
+              & .closeBtn {
+                height: 4vh;
+                width: 4vh;
+                font-size: 3rem;
+                line-height: 4rem;
+              }
+            }
+            & .galery {
+              column-gap: 20%;
+              & .polaroid {
+                height: 31rem;
+                width: 60%;
+                padding: 3% 3% 18%;
+  
+                & .pola_photo {
+                  background-color: #f9f9f9;
+                  /* the size will be shaped by parent padding*/
+                  height: 100%;
+                  width: 100%;
+                  overflow: hidden;
+                  line-height: 100%;
+  
+                  & img {
+                    height: 100%;
+                    cursor: pointer;
+                  }
+                }
+                & p {
+                  height: 25%;
+                  font-size: 1.6rem;
+                }
+              }
+  
+              & .polaroid:nth-child(odd) {
+                transform: translate(32%, 23%) rotate(-25deg);
+              }
+              & .polaroid:nth-child(even) {
+                transform: translate(88%, -23%) rotate(25deg);
+                left: 50%;
+              }
+  
+              & .polaroid:nth-child(odd):hover {
+                transform: translate(30%, 40%) rotate(0) scale(1.1);
+              }
+              & .polaroid:nth-child(even):hover {
+                transform: translate(96%, -51%) rotate(0) scale(1.1);
+              }
+            }
+            & .ph_scrollbar {
+              & .ph_s_container {
+                & .ph_scrollBar {
+                  background-color: rgba(255, 255, 255, 0.177);
+                }
+  
+                & .ph_scrollbarThumb {
+                  height: 13px;
+                  width: 13px;
+                  transform: translateY(-50%);
+  
+                }
+              }
+            }
+          }
+        }
+        & #photos::after {
+          top: -24px;
+          height: 6vh;
+          width: 80vw;
+        }
+        & #testimonials {
+          height: calc(100vh - 13vh);
+          bottom: 0;
+  
+          & .testimonials_container {
+            & .card_container.neon_box {
+              & .t_card {
+                & .c_header {
+                  padding: 15px;
+                  font-weight: 300;
+                }
+                & .c_body {
+                  & .t_img {
+                    height: 70px;
+                    width: 70px;
+                  }
+                }
+              }
+            }
+          }
+          & .testimonials_bg {
+            width: 80vw;
+          }
+        }
+        & #team {
+          height: calc(100vh - 13vh);
+  
+          & .team_container.active {
+            & .tc_c1 {
+              & .perfil {
+                margin-bottom: 15px;
+  
+                & .dev_data {
+                  letter-spacing: 1px;
+  
+                  & p {
+                    font-size: 2.1rem;
+                  }
+                }
+              }
+              & .qualifications {
+                & .label {
+                  font-size: 2.1rem;
+                  line-height: 3.1rem;
+                }
+  
+                & .q_container {
+                  & .skill {
+                    & .q_label {
+                      font-size: 1.8rem;
+                    }
+                  }
+                }
+              }
+              & .links {
+                & .l_container {
+                  & a {
+                    text-decoration: none;
+                    height: 100%;
+                    width: 60px;
+                    font-size: 4.5rem;
+                  }
+                }
+                & p {
+                  font-size: 1.8rem;
+                }
+              }
+            }
+            & .tc_c2 {
+              height: calc(100% - 20px);
+              padding: 20px 10px;
+            }
+          }
+          & .team_container {
+            left: 150%;
+          }
+        }
+        & #contact {
+          height: calc(100vh - 13vh);
+          bottom: 0;
+          /* margin-bottom: 4vh; */
+  
+          & .c_imgBG {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translate(-50%, 0%);
+            height: 100vh;
+            width: 100vw;
+            z-index: -1;
+            overflow: hidden;
+            & img {
+              position: relative;
+              top: 0%;
+            }
+          }
+        }
+      }
+      & footer {
+        & .f_relative_root {
+          & .f_pd_owners {
+            width: 400px;
+            & #pageDown {
+              font-size: 2rem;
+              line-height: 3rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+/*!***********************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/style/index.css ***!
+  \***********************************************************************/
+
+
+/*# sourceMappingURL=bundlec351c7622b9824e481ba.css.map*/

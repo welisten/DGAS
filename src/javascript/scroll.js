@@ -177,10 +177,6 @@ const syncPhContentScroll = (e) => {
     ph_scrollThumb.style.left = `${thumbLeft}%`
 }
 
-// const main_scrollContent = document.querySelector('#mainEl')
-// const main_scroll_bar = document.querySelector('.main_scrollBar')
-// const main_scrollThumb = document.querySelector('.main_scrollThumb')
-// const footer = document.querySelector('#footerEl')
 
 function setMainScroll(){
     // vamos declarar novas variaveis aqui pois.. essa função será chamada para toda pagina.

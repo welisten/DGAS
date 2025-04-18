@@ -4,7 +4,7 @@ const cors                      = require('cors')
 const path                      = require('path')
 const {createProxyMiddleware}   = require('http-proxy-middleware')
 const { urlencoded }            = require('body-parser')
-const emailRoute                = require('./src/javascript/routes/emailRoutes')
+const emailRoute                = require('./routes/emailRoutes')
 const compression               = require('compression')
 // add helmet
 
@@ -16,7 +16,7 @@ const PORT = 9999
 app.use(compression())
 app.use(express.json())
 app.use(urlencoded({extended: true}))
-app.use(express.static('src'))
+app.use(express.static(path.resolve(__dirname, 'public')))
 app.use('/games/g1', express.static(path.join(__dirname, 'src/games/g1')))
 app.use('/games/g2', express.static(path.join(__dirname, 'src/games/g2')))
 app.use('/games/g3', cors(), express.static(path.join(__dirname, 'src/games/g3')))
@@ -31,7 +31,7 @@ app.use(emailRoute)
 
 app.get('/env', (req, resp) => {
     resp.json({
-        ASSETS_PATH: process.env.ASSETS_PATH,
+        ASSETS_PATH: process.env.APP_ASSETS_PATH,
         PORT: PORT
     })
 })

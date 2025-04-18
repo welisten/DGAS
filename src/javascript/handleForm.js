@@ -4,6 +4,7 @@ const formSubmit = document.querySelector('#formSub')
 const form = document.querySelector('#contactForm')
 const popUp  = document.querySelector('#mainPopUp')
 
+let urlOrigin = window.location.origin
 
 function handleForm(){
     formSubmit.addEventListener('click', (e) => {
@@ -22,7 +23,7 @@ function handleForm(){
             return
         }
 
-        fetch('http://localhost:9999/send-email', {
+        fetch(`${urlOrigin}/send-email`, {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
             body:JSON.stringify(data)
@@ -61,13 +62,14 @@ const validatePhone = (cell) => {
     return phoneRegex.test(cell)
 }
 const validateEmail = (email) => {
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
 
     return emailRegex.test(email)
 }
 const validateSubject = (subject) => {
-    const subjectRegex = /^[\w\s]+$/
-
+    if(typeof subject !== 'string') return false
+    
+    const subjectRegex = /^[a-zA-Z0-9\s]+$/    
     return subjectRegex.test(subject) && subject.trim().length >= 3
 }
 const validateMessage = (message) => {
