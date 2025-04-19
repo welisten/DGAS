@@ -1,10 +1,11 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const webpack = require('webpack')
-const path = require('path')
-const { name } = require('file-loader')
+const HtmlWebpackPlugin     = require('html-webpack-plugin')
+const MiniCssExtractPlugin  = require('mini-css-extract-plugin')
+const BundleAnalyzerPlugin  = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const CopyWebpackPlugin     = require('copy-webpack-plugin')
+const TerserWebpackPlugin   =  require('terser-webpack-plugin')
+const webpack               = require('webpack')
+const path                  = require('path')
+const { name }              = require('file-loader')
 require('dotenv').config()
 
 const envKeys = Object.keys(process.env)
@@ -56,6 +57,8 @@ module.exports = {
        
     },
     optimization:{
+        minimize: true,
+        minimizer: [new TerserWebpackPlugin()],
         splitChunks: {
             cacheGroups: {
                 default: false,
