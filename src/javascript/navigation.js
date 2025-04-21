@@ -79,17 +79,16 @@ function updatePlataformColors(){
 
 function setLightModeSlider(updateGameColor){
     const slider = document.querySelector('input#slider')
-    const INITIAL_URL = window.location.origin
+    const INITIAL_PATH = window.location.pathname
 
     slider.addEventListener('click', () => {
         let root = document.documentElement
-        let urlLastTerm = document.URL.split('/').filter(str => str !== '').pop()
-        let isPlatformDoc = urlLastTerm === 'index.html' || urlLastTerm === INITIAL_URL
-        console.log(urlLastTerm)
+        let isRoot = INITIAL_PATH === '/' || INITIAL_PATH === '/index.html'
+
         if(slider.checked){
             plataformData.isDarkMode = true
             localStorage.setItem('isDarkMode', JSON.stringify(plataformData.isDarkMode))
-            if(isPlatformDoc){
+            if(isRoot){
                 root.style.setProperty('--bg--', general_colors.bg_dark)
                 root.style.setProperty('--h3-color', general_colors.h3_color_light)
                 root.style.setProperty('--btn-bg--', general_colors.btn_bg_dark)
@@ -118,7 +117,7 @@ function setLightModeSlider(updateGameColor){
             plataformData.isDarkMode = false
             localStorage.setItem('isDarkMode', JSON.stringify(plataformData.isDarkMode))
 
-            if(isPlatformDoc) {
+            if(isRoot) {
                 root.style.setProperty('--bg--', general_colors.bg_light)  
                 root.style.setProperty('--h3-color', general_colors.h3_color_dark)
                 root.style.setProperty('--btn-bg--', general_colors.btn_bg_light)

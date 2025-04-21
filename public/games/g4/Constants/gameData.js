@@ -1,0 +1,1 @@
+import{plataformData}from"../../../constants/plataformData.js";const gameData={app:void 0,isMute:!1,isDarkMode:plataformData.isDarkMode,isPaused:!1,isAccess:!1,isClickable:!1,isPlayingSound:!1,lastAccText:"",mainScene:"Preload",wereVLibrasActived:!1};window.gameData=gameData;export{gameData};

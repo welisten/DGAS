@@ -1,0 +1,1 @@
+class Letter{constructor(e){if(!(e>=65&&e<=90))throw new Error("Código inválido. Deve estar entre 65 (A) e 90 (Z).");this.code=Number(e),this.name=String.fromCharCode(this.code),this.alt=`letra ${this.name}`,this.element=gameAssets[`${this.name}`]}}export{Letter};

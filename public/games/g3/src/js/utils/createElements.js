@@ -1,0 +1,1 @@
+function createElement(t,e,n=void 0,c={},r=""){const o=document.createElement(t);return e&&e.split(" ").forEach((t=>{o.classList.add(t)})),n&&(o.id=n),Object.entries(c).forEach((([t,e])=>o.setAttribute(t,e))),o.textContent=r,o}export{createElement};

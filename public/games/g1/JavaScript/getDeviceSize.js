@@ -1,0 +1,1 @@
+const getDeviceSize=()=>{let e=window.innerHeight,t=window.innerWidth;switch(!0){case t<600&&e<800:case t<600&&e>=800:break;case t>=600&&t<=1440&&e<1080:return[Math.floor(.33*t),Math.floor(.7*e)];case t>1440&&e>=900:return t=Math.floor(.26*t),e=Math.floor(.68*e),[t,e];default:console.log(`screen size unknown : width = ${t} - height = ${e}`)}};export{getDeviceSize};

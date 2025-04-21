@@ -1,0 +1,1 @@
+const level1_SpeedMapScrolling=1.665,level1_characterSpeed=1.665,character_AnimationFrameRate="8",level1_delayMapScrolling=1e3,character_velocity=120,stemDelay=1e3;export{level1_SpeedMapScrolling,level1_characterSpeed,character_AnimationFrameRate,level1_delayMapScrolling,character_velocity,stemDelay};

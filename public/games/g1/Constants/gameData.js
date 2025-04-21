@@ -1,0 +1,1 @@
+const gameData={isPreloadComplete:!1,app:void 0,isMute:!1,isDarkMode:!0,isPaused:!1,isAccess:!1,isClickable:!1,isPlayingSound:!1,lastAccText:"",mainScene:"Preload",wereVLibrasActived:!1};window.gameData=gameData;export{gameData};

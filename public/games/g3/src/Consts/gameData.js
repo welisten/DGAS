@@ -1,0 +1,1 @@
+const savedDarkMode=(()=>{try{return JSON.parse(localStorage.getItem("isDarkMode"))??!1}catch{return!1}})(),gameData={isPreloadComplete:!1,intro:void 0,score:void 0,class:"Preload",lastLevel:1,isPaused:!1,isMute:!1,isDarkMode:savedDarkMode,isClickable:!0,isScreenReaderActive:!1,isLibrasActive:!1,lastAccText:"",lastReadText:"",lastBtnTarget:void 0};export{gameData};

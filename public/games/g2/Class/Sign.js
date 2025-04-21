@@ -1,0 +1,1 @@
+import{Letter}from"./Letter.js";class Sign{constructor(e){if(!(e>=97&&e<=122))throw new Error("Código inválido. Deve estar entre 97 (a) e 122 (z).");this.code=Number(e),this.name=String.fromCharCode(this.code),this.alt=`Sinal de Libras ${this.name}`,this.element=gameAssets[`${this.name}`]}}export{Sign};

@@ -1,0 +1,1 @@
+const colors={bg_light:"#dddddd",bg_dark:"#303030",redDeep_main:"#850202",blue_main:"#635fd9",red_negative:"#df2121",white:"#ffffff",yellowFocus:"#ffe600",transparent:"transparent"};export{colors};

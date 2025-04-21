@@ -117,6 +117,14 @@ module.exports = {
                         from: 'src/data/*.json',
                         to: './data/[name][ext]',
                         noErrorOnMissing: false
+                    },
+                    {
+                        from: 'src/games',
+                        to: './games',
+                        globOptions: {
+                            dot: true,
+                            ignore: ['**/.git/**']
+                        }
                     }
                 ]
             }),

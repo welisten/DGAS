@@ -1,0 +1,1 @@
+function fitTextContent(t,e=20,n=2.2){const i=document.querySelector(t);if(!i)return;const o=i.parentNode;if(!o)return;const r=o.clientHeight;i.style.fontSize="1.5rem",i.style.transition="none",i.clientHeight>r-e&&$(t).fitText(n)}export{fitTextContent};

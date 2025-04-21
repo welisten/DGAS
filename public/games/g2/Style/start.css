@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@100..900&display=swap');
+
+:root{
+    --bg-light--:       #fdfdfd;
+    --bg-dark--:        #303030;
+    /* --base-color----:        #303030; */
+    /* --base-color----:        #303030; */
+    /* --base-color----:        #303030; */
+    --letter-1-color--: #e54123;
+    --letter-2-color--: #f2dd04;
+    --letter-3-color--: #009551;
+    --letter-4-color--: #56a2b7;
+    --agreement--:      #96cf4d;
+    --denial--:         #ef3b1b;
+    --orange--:           #ec6822;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    font-family: "Moderustic", sans-serif;
+    background-color: var(--bg-dark--);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+html{
+    font-size: 62.5%;
+}
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 2rem;
+    padding: 4vh 4vh;
+
+}
+.button{
+    border: .25em solid var(--orange--);
+    padding: 2.5vh 4vh;
+    background-color: var(--orange--);
+    font-size: clamp(1rem, 1.5rem , 2rem);
+    font-weight: bold;
+    border-radius: 1em;
+    outline: none;
+    box-shadow:  0 0   1em  .25em var(--orange--);
+    position: relative;
+    transition: all 0.3s;
+    text-shadow: 0 0  .5em        var(--orange--);
+    text-transform: uppercase;
+    cursor: pointer;
+}

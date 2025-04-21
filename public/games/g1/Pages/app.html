@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo 4</title>
+    <!-- phaser -->
+    <script src="https://cdn.jsdelivr.net/npm/phaser@v3.80.1/dist/phaser.min.js"></script>
+    <!-- font-awesome - 6.5.2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- textFit -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/textfit/2.4.0/textFit.min.js"></script>
+    <!-- JS -->
+    <script type="module" src="./../JavaScript/pre.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="./../Style/jogo1.css">
+    <link rel="stylesheet" href="./../Style/preload_j1.css">
+    <link rel="stylesheet" href="./../../../style/mediaQuery.css">
+</head>
+<body>
+    <header>
+        <nav id="navEl">
+            <button class="logoBtn navBtn" sec_num="2" id="nav_logoBtn" title="logotipo">
+                <a href="./../../../index.html">
+                    <img src="./../../../assets/logos/DG_logo_light.png" alt="logo DG">
+                </a>
+            </button>
+            <div id="navbar"><div class="nb_group nb_group1">
+                    <button class="navBtn" sec_num="1">
+                        <a href="./../../../index.html">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+                    </button>
+                </div><div class="nb_group nb_group2">
+                    <label class="switch">
+                        <input type="checkbox" id="slider" checked="true">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+        <div class="boundary container">
+            <div class="loading" id="loading">
+                <img src="./../Assets/imgs/general/foreground.svg" class="foreground svg" alt="floresta com arvores, troncos, planices">
+                <!-- <img src="./../Assets/imgs/general/logo.png" class="logo" alt="logo do jogo"> -->
+                <img src="./../Assets/imgs/general/backgroundMountain.svg" class="backgroundMountain svg" alt="montanhas banhadas pelo sol">
+                <img src="./../Assets/imgs/general/monkey_left.gif" class="m_l" alt="macaco pendurado no cipó">
+                <img src="./../Assets/imgs/general/monkey_right.gif" class="m_r" alt="macaco pendurado no galho">
+                <img src="./../Assets/imgs/general/leavesfall.gif" class="leaves" alt="folhas caindo">
+                <img src="./../Assets/imgs/general/frog.gif" class="frog" alt="sapo">
+            </div>
+    
+            <div id="toTextReader" class="toReader" >
+                <p class="textToReader" aria-live="assertive"></p>
+            </div>
+    
+            <div id="game_container" class="inactive">
+                
+                <div id="main" class="container"></div>
+                <div class="gameControls container">
+                    <button class="btn controls" id="muteBtn" title ="Som do jogo" aria-label="alternar som"><i class="fa-solid fa-volume-high"></i></button>
+                    <button class="btn controls" id="lightBtn" title ="Modo de iluminação" aria-label="alternar iluminação"><i class="fa-regular fa-sun"></i></button>
+                    <button class="btn controls" id="infoBtn" title ="Instruções" aria-label="instruções"><i class="fa-solid fa-circle-info"></i></button>
+                    <button class="btn controls" id="accessBtn" title ="Acessibilidade" aria-label="alternar accessibilidade" ><i class="fa-regular fa-eye"></i></button>
+                </div>
+                <div id="j4-bg" class="j4-bg"></div>
+                <div id="info" class="info">
+                    <div class="title container">
+                        <p class="t-text" tabindex="1">Bem-vindo à plataforma: Explorando Guapimirim !</p>
+                        <p class="sub-text" tabindex="2">Nesta plataforma, você vai explorar as riquezas naturais de Guapimirim,<br> visitando lugares especiais e encontrando animais escondidos.<br></p>
+                    </div>
+                    <div class="body-g container i-body">
+                        <p class="i-b0" tabindex="3">Como funciona:</p>
+                        <div class="board i-b1">
+                            <p tabindex="3">
+                                <span>1</span>- Explorando os lugares.<br>Você vai começar escolhendo um local da lista de pontos turísticos de Guapimirim. Cada lugar é único e tem muitas coisas para explorar.
+                            </p>
+                            <p tabindex="4">
+                                <span>2</span>- Encontrando os animais.<br>Dentro de cada local, existem seis animais escondidos. Use o mouse ou a navegação do teclado (TAB) para encontrar esses animais na tela. Se você estiver com accessibilidade ativa, as teclas TAB, ESC e ENTER irão ajudar a navegar melhor entre os animais.
+                            </p>
+                            <p tabindex="5">
+                                <span>3</span>- Interagindo com os animais.<br>Ao encontrar um animal, clique nele para abrir um cartão. Neste cartão, você verá :<br>
+                                <div class="list">
+                                    <p tabindex="6" class="listItems">1º - <strong>Como esse animal se chama</strong>.</p>
+                                    <p tabindex="7" class="listItems">2º - <strong>Uma foto desse animal</strong>.</p>
+                                    <p tabindex="8" class="listItems">3º - <strong>Um botão para ouvir o som que esse animal faz</strong>.</p>
+                                    <p tabindex="9" class="listItems">4º - <strong>Uma descrição desse animal</strong>.</p>
+                                </div>
+                            </p>
+                        </div>
+                        <div class="board i-b2">
+                            <p tabindex="10">
+                                Ao clicar na foto do animal, ela vai aumentar, ocupando toda a tela para que você a perceba com mais detalhes.
+                            </p>
+                            <p tabindex="11">
+                                <span>4</span>- Leitor de tela.<br>
+                                Se você estiver usando um leitor de tela, ou seja, o botão de accessibilidade estiver ativo, o jogo irá se integrar ao leitor proporcionando uma experiência mais divertida e completa
+                            </p>
+                            <p tabindex="12"><span>5</span>- Atalhos.<br>
+                                <div class="list">
+                                    <p tabindex="13" class="listItems">1º - <strong>Para voltar ou sair de uma seção da tela, use o botão "ESC" como atalho rápido</strong>.</p>
+                                    <p tabindex="14" class="listItems">2º - <strong>Para navegar entre os elementos, use o botão “TAB” como atalho rápido</strong>.</p>
+                                    <p tabindex="15" class="listItems last_p">3º - <strong>Para selecionar um elemento em foco, use o botão "ENTER"</strong>.</p>
+                                </div>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="body-p container i-body">
+                        <p class="i-b0" tabindex="3">Sobre o Jogo:</p>
+                        <div class="board i-b1">
+                            <p tabindex="4">
+                                Este jogo foi feito para ajudar todas as crianças a explorarem o mundo da natureza de forma divertida e fácil. Aqui você vai poder conhecer diferentes animais de uma região, aprender sobre eles e escutar os sons que eles fazem!
+                            </p>
+                            <p tabindex="5">
+                                Com sons e descrições simples e muito interessantes, você vai descobrir o que cada animal gosta de fazer, onde eles vivem e outras curiosidades. O jogo foi criado pensando em todo mundo, para que todas as crianças, mesmo aquelas que possuem limitações para enxergar, possam aprender, se conectar, brincar e se divertir muito de maneira especial.
+                            </p>
+                            <p tabindex="6">
+                                Para os usuários que precisam de uma experiência ainda mais acessível, existe um <em>botão de acessibilidade</em>. Quando esse botão está ativado, ele ajusta o volume dos sons para se encaixar bem com o leitor de tela, proporciona orientações e descrições mais detalhadas, e ainda oferece atalhos fáceis para navegar pelo jogo dentre outras funcionalidades. Para aproveitar essas melhorias, basta ativar no início do jogo o botão de acessibilidade que fica a direita da tela, e tudo será ajustado para que você possa explorar o mundo da natureza com toda a ajuda necessária!
+                            </p>
+                        </div>
+                        <div class="board i-b2">
+                            <p tabindex="7">
+                                Na parte à direita da tela do jogo, você encontrará alguns botões que ajudam a controlar diferentes funções do jogo. Aqui está uma explicação de cada um deles:
+                            </p>
+                            <p tabindex="8">
+                                <span class="controls"><i class="fa-solid fa-volume-high"></i></span> - <strong>Som do Jogo.</strong><br>Esse botão permite ativar ou desativar o som do jogo. Se quiser ajustar o nível do volume, será preciso alterar o volume diretamente no seu computador.
+                            </p>
+                            <p tabindex="9">
+                                <span class="controls"><i class="fa-regular fa-sun"></i></span> - <strong>Modo de Iluminação.</strong><br>Com esse botão, você pode mudar a aparência do jogo de modo claro para modo escuro. 
+                            </p>
+                            <p tabindex="10">
+                                <span class="controls"><i class="fa-solid fa-circle-info"></i></span> - <strong>Instruções.</strong><br>Ao clicar nesse botão, você verá informações importantes sobre como jogar e descobrir mais sobre o jogo.
+                            </p>
+                            <p tabindex="11" class="last_p">
+                                <span class="controls"><i class="fa-regular fa-eye"></i></span> - <strong>Modo de Acessibilidade.</strong><br>Esse botão ativa o modo de acessibilidade, que oferece ajustes especiais para tornar o jogo mais fácil de usar, como sons adequados para leitores de tela e descrições detalhadas dos elementos do jogo.
+                            </p>
+                        </div>
+                    </div>
+                    <img src="./../Assets/imgs/general/sttcloud.png" class="static-cloud sc1" alt="nuvem">
+                    <img src="./../Assets/imgs/general/sttcloud.png" class="static-cloud sc2" alt="nuvem">
+                    <img src="./../Assets/imgs/general/sttcloud.png" class="static-cloud sc3" alt="nuvem">
+                    <img src="./../Assets/imgs/general/sttcloud.png" class="static-cloud sc4" alt="nuvem">
+                    <button class="closeBtn btn" id="t-close" tabindex="16" aria-label="Fechar instruções" title="Fechar instruções"><i class="fa-solid fa-xmark"></i></button>
+                    <button class="prevBtn btn i-navBtn" id="i-prev" tabindex="18" aria-label="próximo" title="Instruções anteriores"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button class="nextBtn btn i-navBtn" id="i-next" tabindex="16" aria-label="anterior" title="Próximas instruções"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer id="footerEl">
+        <div class="f_relative_root container">
+            <div id="footer_bg">
+                <img src="./../../../assets/imgs/c1.png" alt="nuvem" class="f_cl1 f_cl">
+                <img src="./../../../assets/imgs/c2.png" alt="nuvem" class="f_cl2 f_cl">
+                <img src="./../../../assets/imgs/a1.png" alt="arbusto" class="f_a1 f_a">
+                <img src="./../../../assets/imgs/a2.png" alt="arbusto" class="f_a2 f_a">
+            </div>
+            <div class="footer_rules container">
+            <div class="f_r_down container">
+                <img src="./../../../assets/logos/r1.png" alt="" class="ruler_pg r1">
+                <img src="./../../../assets/logos/r2.png" alt="" class="ruler_pg r2">
+                <img src="./../../../assets/logos/r3.png" alt="" class="ruler_pg r3">
+                <img src="./../../../assets/logos/r4.png" alt="" class="ruler_pg r4">
+            </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
