@@ -79,7 +79,7 @@ function updatePlataformColors(){
 
 function setLightModeSlider(updateGameColor){
     const slider = document.querySelector('input#slider')
-    const INITIAL_URL = 'localhost:9999'
+    const INITIAL_URL = window.location.origin
 
     slider.addEventListener('click', () => {
         let root = document.documentElement
