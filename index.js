@@ -9,7 +9,7 @@ const compression               = require('compression')
 // add helmet
 
 const app = express()
-const PORT = 9999
+const PORT = process.env.APP_PORT || 9999
 
 
 
