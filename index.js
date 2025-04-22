@@ -53,7 +53,7 @@ app.get('/env', (req, resp) => {
 //     }
 // })
 
-app.use(vLibrasProxyMiddleware);
+app.use('/app/target', vLibrasProxyMiddleware);
 app.use('/app', appProxyMiddleware)
 
 // app.use(proxyMiddleware);
