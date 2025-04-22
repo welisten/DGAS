@@ -7,9 +7,11 @@ const { urlencoded }            = require('body-parser')
 const emailRoute                = require('./routes/emailRoutes')
 const compression               = require('compression')
 // add helmet
+const appProxyMiddleware        = require('./src/games/g3/middlewares/appProxyMiddleware')
+const vLibrasProxyMiddleware        = require('./src/games/g3/middlewares/vLibrasProxyMiddleware')
 
 const app = express()
-const PORT = process.env.APP_PORT || 9999
+const PORT = process.env.PORT || 9999
 
 
 
@@ -37,48 +39,51 @@ app.get('/env', (req, resp) => {
 })
 
 /*--------------------------------------------------------------------------- */
-const proxyMiddleware = createProxyMiddleware({
-    target: 'https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev', // URL do servidor externo
-    changeOrigin: true,
-    pathFilter: '**/*.unityweb',
-    pathRewrite: {
-      [`http://localhost:${PORT}/app/target`] : 'https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/target', // Remove o prefixo /api da URL e ajusta o caminho
-    },
-    on:{
-        proxyReq: (proxyReq, req, res) => {
-            proxyReq.setHeader('sec-fetch-mode', 'no-cors')            
-        },
-    }
-})
+// const proxyMiddleware = createProxyMiddleware({
+//     target: 'https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev', // URL do servidor externo
+//     changeOrigin: true,
+//     pathFilter: '**/*.unityweb',
+//     pathRewrite: {
+//       [`http://localhost:${PORT}/app/target`] : 'https://cdn.jsdelivr.net/gh/spbgovbr-vlibras/vlibras-portal@dev/app/target', // Remove o prefixo /api da URL e ajusta o caminho
+//     },
+//     on:{
+//         proxyReq: (proxyReq, req, res) => {
+//             proxyReq.setHeader('sec-fetch-mode', 'no-cors')            
+//         },
+//     }
+// })
 
-app.use(proxyMiddleware);
+app.use(vLibrasProxyMiddleware);
+app.use('/app', appProxyMiddleware)
 
-// proxy route
-app.use('/app', createProxyMiddleware({
-    target: 'https://vlibras.gov.br/app',
-    changeOrigin: true,
-    on: {
-        proxyReq: (proxyReq, req, res) => {
-            proxyReq.setHeader('Access-Control-Allow-Origin', '*');
-            proxyReq.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-            proxyReq.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-            proxyReq.setHeader('Origin', 'https://vlibras.gov.br')
-            proxyReq.setHeader('Referer', 'https://vlibras.gov.br')
-            proxyReq.setHeader('sec-fetch-mode', 'no-cors')
-            proxyReq.removeHeader('cache-control');
+// app.use(proxyMiddleware);
 
-            console.log(`[Proxy Request] ${req.method} ${req.originalUrl}`)
-        },
-        proxyRes: (proxyRes, req, res) => {
-            res.setHeader('Access-Control-Allow-Origin', '*');
-            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-            res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-            res.setHeader('sec-fetch-mode', 'no-cors')
-            res.removeHeader('cache-control');
+// // proxy route
+// app.use('/app', createProxyMiddleware({
+//     target: 'https://vlibras.gov.br/app',
+//     changeOrigin: true,
+//     on: {
+//         proxyReq: (proxyReq, req, res) => {
+//             proxyReq.setHeader('Access-Control-Allow-Origin', '*');
+//             proxyReq.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+//             proxyReq.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//             proxyReq.setHeader('Origin', 'https://vlibras.gov.br')
+//             proxyReq.setHeader('Referer', 'https://vlibras.gov.br')
+//             proxyReq.setHeader('sec-fetch-mode', 'no-cors')
+//             proxyReq.removeHeader('cache-control');
+
+//             console.log(`[Proxy Request] ${req.method} ${req.originalUrl}`)
+//         },
+//         proxyRes: (proxyRes, req, res) => {
+//             res.setHeader('Access-Control-Allow-Origin', '*');
+//             res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+//             res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+//             res.setHeader('sec-fetch-mode', 'no-cors')
+//             res.removeHeader('cache-control');
             
-            console.log(`[Proxy Response] ${res.statusCode}`);
-        }
-    }
-}))
+//             console.log(`[Proxy Response] ${res.statusCode}`);
+//         }
+//     }
+// }))
 
 app.listen(PORT, () => console.log(`PLATAFORMA-DGAS RODANDO NA PORTA ${PORT}  \n`))
