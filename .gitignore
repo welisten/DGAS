@@ -2,9 +2,6 @@
 # Ignorar todos os node_modules em subprojetos
 node_modules/
 
-# Ignorar diretórios de build em todos os jogos
-src/games/*/dist/
-
 # Ignorar pacotes específicos em subprojetos, se necessário
 src/games/g3/package.json
 src/games/g4/package.json
