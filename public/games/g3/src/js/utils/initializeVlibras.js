@@ -1,1 +1,0 @@
-import vLibras from"../librasBeauty.js";document.addEventListener("DOMContentLoaded",(()=>{const i=window.location.origin;try{const o=new vLibras.Widget(`${i}/app`);console.log("vlibras widget initialized",o)}catch(i){return void console.error("vlibras widget not initialized: ",i)}}));
