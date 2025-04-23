@@ -9,7 +9,7 @@
 
 #loading{
     position: relative;
-    border-radius: 50%px;
+    border-radius: 50%;
 
     & img{
         display: none;
