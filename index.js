@@ -54,7 +54,13 @@ app.get('/env', (req, resp) => {
 // })
 
 app.use('/app/target', vLibrasProxyMiddleware);
-app.use('/app', appProxyMiddleware)
+app.use('/app', (req, res, next) => {
+    console.log("entrou no middleware para o path '/app'.")
+    next()
+},appProxyMiddleware)
+app.get('/app', (req, res)=> {
+    res.send('Response to /app: OK')
+})
 
 // app.use(proxyMiddleware);
 
