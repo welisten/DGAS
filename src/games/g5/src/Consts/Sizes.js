@@ -1,4 +1,4 @@
-import { getDeviceWidth } from "../../../../javascript/getDeviceWidth.js";
+import { getDeviceWidth } from "./../javascript/getDeviceWidth.js";
 
 // Aqui serão colocadas as variaveis que controlaram tamanhos importantes e que
 //  São usados constatementes no Jogo

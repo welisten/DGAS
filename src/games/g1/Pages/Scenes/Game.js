@@ -235,7 +235,6 @@ class Game {
             this.frogTimer = setInterval(() => this.playAudio(gameAssets['frog_croaking'], 'frog_croaking', .1), 6000)
             gameData.isClickable = true
         }, 1000)
-        console.log(gameData)
     }
     buildContainer(){
         this.setMainContainer()

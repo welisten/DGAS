@@ -86,7 +86,7 @@ body {
     
               & button.navBtn {
                 display: inline-block;
-                font-size: 3rem;
+                font-size: 2rem;
                 color: var(--letter--);
                 background-color: transparent;
                 text-decoration: none;
@@ -97,6 +97,11 @@ body {
                 border: none;
                 outline: none;
                 filter: drop-shadow(1px 1px 1px var(--shadow--));
+
+                a{
+                  text-decoration: none;
+                  color: var(--letter--);
+                };
               }
     
               & button.navBtn:hover,
@@ -186,7 +191,7 @@ body {
             & #gameControls{
                 position: absolute;
                 top: 0;
-                left: -8vh;
+                left: -11vh;
                 height: 100%;
                 width:  7vh;
             
@@ -207,8 +212,8 @@ body {
     
                 & .btn{
                     padding: 5px;
-                    width: 5vh;
-                    height: 5vh;
+                    width: 7vh;
+                    height: 7vh;
                 
                     background-color: var(--white--);
                     border: 1px solid var(--main-color-);
@@ -263,6 +268,7 @@ body {
                 justify-content: center;
     
                 & #acessibleText{
+                    display: none;
                     font-size: 1.5rem;
                     color: var(--main-color-);
     
@@ -408,12 +414,28 @@ body {
 
 @media screen and (max-width: 1600px ) {
     body{
+      & header{
+        height: 9vh;
+
+        & nav {
+            height: 9vh;
+            .switch{
+                font-size: 150%;
+            }
+
+            .logoBtn{
+                img{
+                    height: 9vh;
+                }
+            }
+        }
+    }
         & main{
             & #gameContainer{
                 & #gameControls{        
                     & .btn{
-                        width: 5vh;
-                        height: 5vh;
+                        width: 7vh;
+                        height: 7vh;
                         & i{
                             font-size: 1.8rem;
                         }
@@ -432,4 +454,15 @@ body {
             }
         }
     }
+    footer {
+      & .f_relative_root {
+        & .f_pd_owners {
+          width: 400px;
+          & #pageDown {
+            font-size: 2rem;
+            line-height: 3rem;
+          }
+        }
+      }
     }
+}
