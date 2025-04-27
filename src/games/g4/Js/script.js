@@ -1,7 +1,7 @@
 // configurar os controles  aqui!
 import { platformData } from "../../../constants/platformData.js"
 import { gameData } from "../Constants/gameData.js"
-import  colors  from "../Constants/colors.js"
+import { colors } from "./../Constants/colors.js"
 import { setLightModeSlider } from "../../../util/navigation.js"
 
 
