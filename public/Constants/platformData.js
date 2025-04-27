@@ -1,1 +1,0 @@
-const platformData={isDarkMode:JSON.parse(localStorage.getItem("isDarkMode"))??!0,colorTheme:1,isAccess:JSON.parse(localStorage.getItem("isAccess"))??!1};export{platformData};
