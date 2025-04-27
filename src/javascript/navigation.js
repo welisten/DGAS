@@ -1,5 +1,5 @@
 import { general_colors } from "../constants/colors.js"
-import { plataformData } from "../constants/plataformData.js"
+import { platformData } from "../constants/platformData.js"
 
 function setNavigationClick(){
     const anySection = document.querySelector('#theProject')
@@ -24,7 +24,7 @@ function updatePlataformColors(){
     let root = document.documentElement
     
     let isDarkMode = JSON.parse(localStorage.getItem('isDarkMode')) ?? true
-    plataformData.isDarkMode = isDarkMode
+    platformData.isDarkMode = isDarkMode
     slider.checked = isDarkMode
 
     if(slider.checked){
@@ -48,8 +48,8 @@ function updatePlataformColors(){
         root.style.setProperty('--p-weight--', 300)
 
 
-        plataformData.isDarkMode = true
-        localStorage.setItem('isDarkMode', JSON.stringify(plataformData.isDarkMode))
+        platformData.isDarkMode = true
+        localStorage.setItem('isDarkMode', JSON.stringify(platformData.isDarkMode))
     }else{
         root.style.setProperty('--bg--', general_colors.bg_light)  
         root.style.setProperty('--h3-color', general_colors.h3_color_dark)
@@ -70,8 +70,8 @@ function updatePlataformColors(){
         root.style.setProperty('--main-scrollbar-color--', general_colors.scrollbar_main_light)
         root.style.setProperty('--p-weight--', 600)
 
-        plataformData.isDarkMode = false
-        localStorage.setItem('isDarkMode', JSON.stringify(plataformData.isDarkMode))
+        platformData.isDarkMode = false
+        localStorage.setItem('isDarkMode', JSON.stringify(platformData.isDarkMode))
     }
 
 }
@@ -86,8 +86,8 @@ function setLightModeSlider(updateGameColor){
         let isRoot = INITIAL_PATH === '/' || INITIAL_PATH === '/index.html'
 
         if(slider.checked){
-            plataformData.isDarkMode = true
-            localStorage.setItem('isDarkMode', JSON.stringify(plataformData.isDarkMode))
+            platformData.isDarkMode = true
+            localStorage.setItem('isDarkMode', JSON.stringify(platformData.isDarkMode))
             if(isRoot){
                 root.style.setProperty('--bg--', general_colors.bg_dark)
                 root.style.setProperty('--h3-color', general_colors.h3_color_light)
@@ -114,8 +114,8 @@ function setLightModeSlider(updateGameColor){
                 if(updateGameColor) updateGameColor()
             }
         }else{
-            plataformData.isDarkMode = false
-            localStorage.setItem('isDarkMode', JSON.stringify(plataformData.isDarkMode))
+            platformData.isDarkMode = false
+            localStorage.setItem('isDarkMode', JSON.stringify(platformData.isDarkMode))
 
             if(isRoot) {
                 root.style.setProperty('--bg--', general_colors.bg_light)  

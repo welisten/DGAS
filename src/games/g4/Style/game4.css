@@ -141,12 +141,12 @@ body{
               & .switch {
                 margin-left: 5%;
                 display: inline-block;
-                --width-of-switch: 5rem;
-                --height-of-switch: 3rem;
+                --width-of-switch: 4.2rem;
+                --height-of-switch: 2rem;
                 /* size of sliding icon -- sun and moon */
-                --size-of-icon: 2.4rem;
+                --size-of-icon: 1.8rem;
                 /* it is like a inline-padding of switch */
-                --slider-offset: 1.8rem;
+                --slider-offset: 0.2rem;
                 position: relative;
                 width: var(--width-of-switch);
                 height: var(--height-of-switch);
@@ -1904,340 +1904,367 @@ body{
 }
 @media (max-width: 1600px){
     html{
-        font-size: 62.5%;
+        font-size: 42.5%;
     }
-    & header{
-        height: 10vh;
-    }
+    body {
+        & header{
+            height: 9vh;
 
-    & main{
-        justify-content: center;
+            & nav {
+                height: 9vh;
+                .switch{
+                    font-size: 150%;
+                }
 
-        #game_container{
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            border: 10px solid var(--main-dark--);
-            border-radius: 20px;
-            background: var(--black-var--);
-            margin: 0 2rem;
-            transition: all 1s ease;
-        
-            & #main{
-                /*ACESSIBILIDADE FEITA*/
-                & .hm_initialMessage{
-                    & .hm_h1{
-                        padding: 0 0 5px;
-                    }
-                    & .hm_message{
-                        font-size: 2.49rem;
-                    }
-                    & .hm_msg_skip{
-                        bottom: 1.2rem;
-                        padding: 2px 9px;
-                        font-size: 2.6rem;
-                    }
-                } 
-            }
-
-            & #main.skipped{
-                & .hm_sampleTable{
-                    & .hm_menu {
-                        height: 76%;
-                        max-height: 76%;
-
-                        & .menuTitle {
-                            font-size: 2.4rem;
-                            line-height: 4rem;
-                        }
-                        & .menuBody {
-                            & .mn_row {
-                                & .mn_opt_icon {
-                                    & .options_kitty_iMG {
-                                        height: 160%;
-                                    }
-                                }
-                            }
-                        }
+                .logoBtn{
+                    img{
+                        height: 9vh;
                     }
                 }
             }
-
-            & .Rio_Soberbo#main, .Centro#main{
-                position: relative;
-                background-position: right;
-                background-repeat: no-repeat;
-                background-size: cover;
-                justify-content: flex-start;
-        
-        
-                & #sgh_bg{
-                    position: absolute; 
-                    height: 100%;
-                    width: 100%;
-        
-                    & .preguica{
-                        position: absolute;
-                        top: -5px;
-                        height: 40%;
-                        z-index: 3;
-                    }
-                    & .preguica.left{
-                        left: 0;
-                    }
-                    & .preguica.right{
-                        right: 0;
-                        transform: rotateY(180deg);
-                    }
-                }
-                & #sgh_menu{
-                    height: 100%;
-                    width: 45%;
-                    background-image: linear-gradient(90deg, 
-                                        var(--shadow--) 10%, 
-                                        var(--main-sec--) 78%, 
-                                        var(--main-sec-t4-), 
-                                        var(--main-sec-t5-), 
-                                        transparent);
-                    flex-direction: column;
-                    padding: 0 7rem 0 23px;
-                    position: relative;
-                    
-                    & .setting_board_img{
-                        display: inline-block;
-                        height: 10%;
-                        margin-left: auto;
-                        margin-top: 20%;
-                    }
-        
-                    & .sgh_menu_list{ /* OK*/
-                        height: 44%;
-                        border-radius: 0;
-                        top: 44%;
-                        right: 7rem;
-        
-                        & .sgh_menu_head_wrapper{
-                            padding: 5px;
-                            border-radius: 0;
-                            
-                            & .sgh_menu_head{
-                                height: calc(4.7vh + 10px);
-                                display: block;
-                                background-color: var(--main-light--);
-                                width: 100%;
-                                color: white;
-                                font-size: 2rem;
-                                text-align: center;
-                                padding: 5px;
-                                font-weight: 600;
-                            }
-                        }
-                        & .sgh_menu_body_wrapper{
-                            overflow-y: auto;
-                            overflow-x: hidden;
-                            scrollbar-width: none;
-                            height: calc(100% - 7.7vh);
-                            padding: 5px;
-        
-                            & .sgh_menu_body{
-                                display: block;
-                                height: calc(100% - 2px);
-                                width: 100%;
-                                overflow-x: visible;
-                                scrollbar-width: none;
-            
-                                & .sgh_menu_row{
-                                    height: calc(5vh + 1px);
-                                    width: 100%;
-                                    display: flex;
-                                    align-items: center;
-                                    border-bottom: 1px solid #ffffff3b;
-            
-                                    & .sgh_menu_opt{
-                                        width: 100%;
-                                        color: white;
-                                        font-size: 1.6rem;
-                                        filter: drop-shadow(2px 4px 6px var(--shadow--));
-                                        cursor: pointer;
-                                        direction: rtl;
-                                        list-style: none;
-                                    }
-                                    & .sgh_menu_opt_img{
-                                        height: 100%;
-                                        padding: 2%;
-                                        margin-left: 5%;
-                                    }
-                                }
-                            }
-                        }
-        
-                        & .sgh_menu_row:nth-child(1):focus ~ .sgh_menu_body{
-                            background-color: #1dacff;
-                        }
-                        & .sgh_menu_row:focus{ /*.selectedOpt*/
-                            background-color: var(--main-light--);
-                            outline-color: var(--yellow-focus--);
-                        }
-                        .sgh_menu_row:hover { 
-                            /* background-color: var(--main-light--); */
-                            background-color: var(--main-sec--);
-                        }
-                    }
-                    & .setting_board_img_control{
-                        height: 42%;
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                    }
-                    & .sgh_choices_control{
-                        position: absolute;
-                        bottom: 0px;
-                        right: 25%;
-                        color: white;
-                        font-weight: bold;
-                        font-size: 3.5rem;
-                        letter-spacing: 3px;
-                        
-                        & .sgh_choices_made{
-        
-                        }
-                        & .sgh_choices_amount{
-        
-                            color: var(--red-negative);
-                        }
-                    }
-        
-        
-                }
-                & .sgh_menu::before{
-                    content: '';
-                    position: absolute;
-                    z-index: 2;
-                    top: 0;
-                    left: 0;
-                    height: 100%;
-                    width: 23%;
-                    background-image: linear-gradient(91deg, var(--shadow--) 4%, transparent);
-                }
-                & .sgh_sounds_board_wrapper{
-                    height: 100%;
-                    width: 70%;
-                    flex-direction: column;
-        
-                    & .sgh_sounds_board{
-                        height: 85%;
-                        width: 100%;
-                        display: grid;
-                        grid-template-columns: repeat(5, 20%);
-                        grid-template-rows: repeat(4, 24.5%);
-                        
-                        & .sample_img_wrapper{
-                            justify-content: center;
-                            align-items: center;
-                            color: white;
-                            font-size: 4rem;
-                            & .sample_img{
-                                height: 100%;
-                                filter: drop-shadow(2px 4px 6px var(--shadow--));
-                            }
-                        }
-                    }            
-                    & .sgh_soundControl_wrapper{
-                        position: relative;
-                        height: 15%;
-                        width: 100%;
-                        align-items: center;
-                        justify-content: center;
-                        & button{
-                            background: white;
-                            border-radius: 50%;
-                            align-items: center;
-                            justify-content: center;
-                            cursor: pointer;
-                            display: flex;
-                            outline: none;
-                        }
-                        & #home_btn{
-                            height: 6rem;
-                            width: 6rem;
-                            border: 1px solid var(--main-light--);
-        
-                            & i{
-                                color: var(--main-light--);
-                                font-size: 2rem;
-                            }
-                        }
-                        & #play_pause_btn{
-                            height: 8rem;
-                            width: 8rem;
-                            margin: 0 20px;
-                            border: 1px solid var(--main-sec--);
-                           
-                            & i {
-                                color: var(--main-sec--);
-                                font-size: 3rem;
-                            }
-                        }
-                        & #trash_btn{
-                            height: 6rem;
-                            width: 6rem;
-                            border: 1px solid var(--main-light--);
-                            & i{
-                                color: var(--main-light--);
-                                font-size: 2rem;
-                            }
-                        }
-        
-                        & #play_pause_btn:focus, #play_pause_btn:hover{
-                            background-color: var(--main-sec--);
-                            transform: scale(1.05);
-                            & i {
-                                color: white;
-                            }
-                        }
-                        & #home_btn:focus, #trash_btn:focus, #home_btn:hover, #trash_btn:hover{
-                            background-color: var(--main-light--);
-                            transform: scale(1.05);
-                            & i {
-                                color: white;
-                            }
-                        }
-                    }
-                }
-            }
-            
         }
-        & #popUpMessage {
-            top: 12%;
-            left: 15px;
-            height: 15vh;
-            width: 37vh;
-            padding: 0.5rem;
-      
-            & .popupText {
-              width: 100%;
-              font-size: 2rem;
+    
+        & main{
+            justify-content: center;
+    
+            & #game_container{
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                border: 10px solid var(--main-dark--);
+                border-radius: 20px;
+                background: var(--black-var--);
+                margin: 0 2rem;
+                transition: all 1s ease;
+            
+                & #main{
+                    /*ACESSIBILIDADE FEITA*/
+                    & .hm_initialMessage{
+                        & .hm_h1{
+                            padding: 0 0 5px;
+                        }
+                        & .hm_message{
+                            font-size: 2.49rem;
+                        }
+                        & .hm_msg_skip{
+                            bottom: 1.2rem;
+                            padding: 2px 9px;
+                            font-size: 2.6rem;
+                        }
+                    } 
+                }
+    
+                & #main.skipped{
+                    & .hm_sampleTable{
+                        & .hm_menu {
+                            height: 76%;
+                            max-height: 76%;
+    
+                            & .menuTitle {
+                                font-size: 2.4rem;
+                                line-height: 4rem;
+                            }
+                            & .menuBody {
+                                & .mn_row {
+                                    & .mn_opt_icon {
+                                        & .options_kitty_iMG {
+                                            height: 160%;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+    
+                & .Rio_Soberbo#main, .Centro#main{
+                    position: relative;
+                    background-position: right;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    justify-content: flex-start;
+            
+            
+                    & #sgh_bg{
+                        position: absolute; 
+                        height: 100%;
+                        width: 100%;
+            
+                        & .preguica{
+                            position: absolute;
+                            top: -5px;
+                            height: 40%;
+                            z-index: 3;
+                        }
+                        & .preguica.left{
+                            left: 0;
+                        }
+                        & .preguica.right{
+                            right: 0;
+                            transform: rotateY(180deg);
+                        }
+                    }
+                    & #sgh_menu{
+                        height: 100%;
+                        width: 45%;
+                        background-image: linear-gradient(90deg, 
+                                            var(--shadow--) 10%, 
+                                            var(--main-sec--) 78%, 
+                                            var(--main-sec-t4-), 
+                                            var(--main-sec-t5-), 
+                                            transparent);
+                        flex-direction: column;
+                        padding: 0 7rem 0 23px;
+                        position: relative;
+                        
+                        & .setting_board_img{
+                            display: inline-block;
+                            height: 10%;
+                            margin-left: auto;
+                            margin-top: 20%;
+                        }
+            
+                        & .sgh_menu_list{ /* OK*/
+                            height: 44%;
+                            border-radius: 0;
+                            top: 44%;
+                            right: 7rem;
+            
+                            & .sgh_menu_head_wrapper{
+                                padding: 5px;
+                                border-radius: 0;
+                                
+                                & .sgh_menu_head{
+                                    height: calc(4.7vh + 10px);
+                                    display: block;
+                                    background-color: var(--main-light--);
+                                    width: 100%;
+                                    color: white;
+                                    font-size: 2rem;
+                                    text-align: center;
+                                    padding: 5px;
+                                    font-weight: 600;
+                                }
+                            }
+                            & .sgh_menu_body_wrapper{
+                                overflow-y: auto;
+                                overflow-x: hidden;
+                                scrollbar-width: none;
+                                height: calc(100% - 7.7vh);
+                                padding: 5px;
+            
+                                & .sgh_menu_body{
+                                    display: block;
+                                    height: calc(100% - 2px);
+                                    width: 100%;
+                                    overflow-x: visible;
+                                    scrollbar-width: none;
+                
+                                    & .sgh_menu_row{
+                                        height: calc(5vh + 1px);
+                                        width: 100%;
+                                        display: flex;
+                                        align-items: center;
+                                        border-bottom: 1px solid #ffffff3b;
+                
+                                        & .sgh_menu_opt{
+                                            width: 100%;
+                                            color: white;
+                                            font-size: 1.6rem;
+                                            filter: drop-shadow(2px 4px 6px var(--shadow--));
+                                            cursor: pointer;
+                                            direction: rtl;
+                                            list-style: none;
+                                        }
+                                        & .sgh_menu_opt_img{
+                                            height: 100%;
+                                            padding: 2%;
+                                            margin-left: 5%;
+                                        }
+                                    }
+                                }
+                            }
+            
+                            & .sgh_menu_row:nth-child(1):focus ~ .sgh_menu_body{
+                                background-color: #1dacff;
+                            }
+                            & .sgh_menu_row:focus{ /*.selectedOpt*/
+                                background-color: var(--main-light--);
+                                outline-color: var(--yellow-focus--);
+                            }
+                            .sgh_menu_row:hover { 
+                                /* background-color: var(--main-light--); */
+                                background-color: var(--main-sec--);
+                            }
+                        }
+                        & .setting_board_img_control{
+                            height: 42%;
+                            position: absolute;
+                            bottom: 0;
+                            left: 0;
+                        }
+                        & .sgh_choices_control{
+                            position: absolute;
+                            bottom: 0px;
+                            right: 25%;
+                            color: white;
+                            font-weight: bold;
+                            font-size: 3.5rem;
+                            letter-spacing: 3px;
+                            
+                            & .sgh_choices_made{
+            
+                            }
+                            & .sgh_choices_amount{
+            
+                                color: var(--red-negative);
+                            }
+                        }
+            
+            
+                    }
+                    & .sgh_menu::before{
+                        content: '';
+                        position: absolute;
+                        z-index: 2;
+                        top: 0;
+                        left: 0;
+                        height: 100%;
+                        width: 23%;
+                        background-image: linear-gradient(91deg, var(--shadow--) 4%, transparent);
+                    }
+                    & .sgh_sounds_board_wrapper{
+                        height: 100%;
+                        width: 70%;
+                        flex-direction: column;
+            
+                        & .sgh_sounds_board{
+                            height: 85%;
+                            width: 100%;
+                            display: grid;
+                            grid-template-columns: repeat(5, 20%);
+                            grid-template-rows: repeat(4, 24.5%);
+                            
+                            & .sample_img_wrapper{
+                                justify-content: center;
+                                align-items: center;
+                                color: white;
+                                font-size: 4rem;
+                                & .sample_img{
+                                    height: 100%;
+                                    filter: drop-shadow(2px 4px 6px var(--shadow--));
+                                }
+                            }
+                        }            
+                        & .sgh_soundControl_wrapper{
+                            position: relative;
+                            height: 15%;
+                            width: 100%;
+                            align-items: center;
+                            justify-content: center;
+                            & button{
+                                background: white;
+                                border-radius: 50%;
+                                align-items: center;
+                                justify-content: center;
+                                cursor: pointer;
+                                display: flex;
+                                outline: none;
+                            }
+                            & #home_btn{
+                                height: 6rem;
+                                width: 6rem;
+                                border: 1px solid var(--main-light--);
+            
+                                & i{
+                                    color: var(--main-light--);
+                                    font-size: 2rem;
+                                }
+                            }
+                            & #play_pause_btn{
+                                height: 8rem;
+                                width: 8rem;
+                                margin: 0 20px;
+                                border: 1px solid var(--main-sec--);
+                               
+                                & i {
+                                    color: var(--main-sec--);
+                                    font-size: 3rem;
+                                }
+                            }
+                            & #trash_btn{
+                                height: 6rem;
+                                width: 6rem;
+                                border: 1px solid var(--main-light--);
+                                & i{
+                                    color: var(--main-light--);
+                                    font-size: 2rem;
+                                }
+                            }
+            
+                            & #play_pause_btn:focus, #play_pause_btn:hover{
+                                background-color: var(--main-sec--);
+                                transform: scale(1.05);
+                                & i {
+                                    color: white;
+                                }
+                            }
+                            & #home_btn:focus, #trash_btn:focus, #home_btn:hover, #trash_btn:hover{
+                                background-color: var(--main-light--);
+                                transform: scale(1.05);
+                                & i {
+                                    color: white;
+                                }
+                            }
+                        }
+                    }
+                }
+                
             }
-      
-            & .popup_btn {
-                top: 1rem;
-                right: 1rem;
-                height: 23px;
-                width: 23px;
-                font-size: 1.6rem;
-
-              & i {
-                line-height: 3vh;
+            & #popUpMessage {
+                top: 12%;
+                left: 15px;
+                height: 15vh;
+                width: 37vh;
+                padding: 0.5rem;
+          
+                & .popupText {
+                  width: 100%;
+                  font-size: 2rem;
+                }
+          
+                & .popup_btn {
+                    top: 1rem;
+                    right: 1rem;
+                    height: 23px;
+                    width: 23px;
+                    font-size: 1.6rem;
+    
+                  & i {
+                    line-height: 3vh;
+                  }
+                }
               }
-            }
-          }
-      
-          & #popUpMessage.animated {
-            animation: popupShake 0.15s ease 0s 5 normal forwards;
-          }
+          
+              & #popUpMessage.animated {
+                animation: popupShake 0.15s ease 0s 5 normal forwards;
+              }
+        }
+        & footer{
+            height: 5vh;
+        }
     }
-    & footer{
-        height: 5vh;
+
+    footer {
+        & .f_relative_root {
+            & .f_pd_owners {
+                width: 400px;
+                & #pageDown {
+                  font-size: 2rem;
+                  line-height: 3rem;
+                }
+            }
+        }
     }
 }
 

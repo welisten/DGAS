@@ -8,8 +8,8 @@ import { generalImageDataArray } from "../../Constants/ImagesData.js";
 import { audioDataArray } from "../../Constants/songsData.js";
 
 // CONSTANTS
-import { general_colors, palett } from "../../../../constants/colors.js";
-import { plataformData } from "../../../../constants/plataformData.js";
+import { general_colors, palett } from "../../../../Constants/colors.js";
+import { platformData } from "../../../../Constants/platformData.js";
 
 let store, gameCanvas;
 
@@ -21,7 +21,7 @@ class Preloader{
         this.setPreloader()
 
         document.title = 'Página de carregamento'
-        if(!plataformData.isDarkMode) document.documentElement.setProperti('--bg--', general_colors.bg_light)
+        if(!platformData.isDarkMode) document.documentElement.setProperti('--bg--', general_colors.bg_light)
     }
 
     setPreloader(){

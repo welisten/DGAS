@@ -1,8 +1,8 @@
 // configurar os controles  aqui!
-import { plataformData } from "../../../constants/plataformData.js"
+import { platformData } from "../../../Constants/platformData.js"
 import { gameData } from "../Constants/gameData.js"
-import { colors } from "../Constants/Colors.js"
-import { setLightModeSlider } from "../../../javascript/navigation.js"
+import { colors } from "../Constants/colors.js"
+import { setLightModeSlider } from "../../../util/navigation.js"
 
 
 const muteBtn = document.querySelector('#muteBtn')
@@ -185,8 +185,8 @@ function setIcons(){
 }
 
 function updateGameData(){
-    gameData.isAccess = plataformData.isAccess
-    gameData.isDarkMode = plataformData.isDarkMode
+    gameData.isAccess = platformData.isAccess
+    gameData.isDarkMode = platformData.isDarkMode
     
     const rootStyle = document.documentElement.style
     

@@ -125,6 +125,21 @@ module.exports = {
                             dot: true,
                             ignore: ['**/.git/**']
                         }
+                    },
+                    {
+                        from: 'src/constants/platformData.js',
+                        to: './Constants/[name][ext]',
+                        noErrorOnMissing: false
+                    },
+                    {
+                        from: 'src/javascript/navigation.js',
+                        to: './util/[name][ext]',
+                        noErrorOnMissing: false
+                    },
+                    {
+                        from: 'src/constants/colors.js',
+                        to: './Constants/[name][ext]',
+                        noErrorOnMissing: false
                     }
                 ]
             }),
