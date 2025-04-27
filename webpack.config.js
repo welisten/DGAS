@@ -128,7 +128,7 @@ module.exports = {
                     },
                     {
                         from: 'src/constants/platformData.js',
-                        to: './Constants/[name][ext]',
+                        to: './constants/[name][ext]',
                         noErrorOnMissing: false
                     },
                     {
@@ -138,7 +138,7 @@ module.exports = {
                     },
                     {
                         from: 'src/constants/colors.js',
-                        to: './Constants/[name][ext]',
+                        to: './constants/[name][ext]',
                         noErrorOnMissing: false
                     }
                 ]

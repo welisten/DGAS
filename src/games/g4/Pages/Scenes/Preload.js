@@ -8,8 +8,8 @@ import { generalImageDataArray } from "../../Constants/ImagesData.js";
 import { audioDataArray } from "../../Constants/songsData.js";
 
 // CONSTANTS
-import { general_colors, palett } from "../../../../Constants/colors.js";
-import { platformData } from "../../../../Constants/platformData.js";
+import { general_colors, palett } from "../../../../constants/colors.js";
+import { platformData } from "../../../../constants/platformData.js";
 
 let store, gameCanvas;
 

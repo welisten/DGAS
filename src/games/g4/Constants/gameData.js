@@ -1,4 +1,4 @@
-import { platformData } from "../../../Constants/platformData.js"
+import { platformData } from "../../../constants/platformData.js"
 
 const gameData = {
     app: undefined, 
