@@ -1,5 +1,4 @@
 import { gameData } from "../../Constants/gameData.js";
-import { colors } from "../../Constants/Colors.js";
 import { Sights } from "./Sights.js";
 import { gainNode, audioContext, currentAudios } from "./../../Js/script.js"
 import { audioDataArray } from "../../Constants/songsData.js";
