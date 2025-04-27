@@ -1,4 +1,4 @@
-import { colors } from "../../Constants/Colors.js";
+import { colors } from "../../Constants/colors.js";
 import { gameData } from "../../Constants/gameData.js";
 import { sightsData } from "../../Constants/sightsData.js";
 import { App } from "./Game.js";
