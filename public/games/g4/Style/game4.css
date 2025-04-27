@@ -141,11 +141,9 @@ body{
               & .switch {
                 margin-left: 5%;
                 display: inline-block;
-                --width-of-switch: 4.2rem;
-                --height-of-switch: 2rem;
-                /* size of sliding icon -- sun and moon */
-                --size-of-icon: 1.8rem;
-                /* it is like a inline-padding of switch */
+                --width-of-switch: 5.2rem;
+                --height-of-switch: 2.6rem;
+                --size-of-icon: 2rem;
                 --slider-offset: 0.2rem;
                 position: relative;
                 width: var(--width-of-switch);

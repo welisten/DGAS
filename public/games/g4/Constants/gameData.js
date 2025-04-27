@@ -1,1 +1,1 @@
-import{platformData}from"../../../Constants/platformData.js";const gameData={app:void 0,isMute:!1,isDarkMode:platformData.isDarkMode,isPaused:!1,isAccess:!1,isClickable:!1,isPlayingSound:!1,lastAccText:"",mainScene:"Preload",wereVLibrasActived:!1};window.gameData=gameData;export{gameData};
+import{platformData}from"../../../constants/platformData.js";const gameData={app:void 0,isMute:!1,isDarkMode:platformData.isDarkMode,isPaused:!1,isAccess:!1,isClickable:!1,isPlayingSound:!1,lastAccText:"",mainScene:"Preload",wereVLibrasActived:!1};window.gameData=gameData;export{gameData};
